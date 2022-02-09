@@ -18,6 +18,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<link rel="stylesheet" href="../wp-content/themes/oceanwp/assets/bootstrap-4.4.1-dist/css/bootstrap-grid.css">
 
 	<?php wp_head(); ?>
 </head>
@@ -70,11 +71,12 @@
 				$the_query = new WP_Query($args);
 
 			?>
-
+			 <div class="row">
 			<?php if($the_query->have_posts()){
 				 while($the_query->have_posts()) {
 					 $the_query->the_post(); ?>
-					<div style="background-color:#fff;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);margin-bottom:15px;border-radius:5px;padding:15px; width:48%; margin-left:10px; display:inline-block">
+					<div class="col-lg-6 col-md-6 col-sm-12">
+					<div style="background-color:#fff;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);margin-bottom:15px;border-radius:5px;padding:15px;">
 					<h2><?php the_title(); ?></h2> 
 					<?php 
 					$the_post_id = get_the_ID();
@@ -115,8 +117,11 @@
 					?>
 					
 				</div>
+				</div>
 			<?php } ?>
 			<?php } ?>
+
+			</div>
 
 			<?php
 
