@@ -80,23 +80,16 @@
 					<h2><?php the_title(); ?></h2> 
 					<?php 
 					$the_post_id = get_the_ID();
-					$news_agency = wp_get_post_terms($the_post_id, 'news_agencies', ['']);
+					$news_agencies = get_post_meta($the_post_id, 'news');
 					$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
-					
-					if(empty($news_agency) || ! is_array($news_agency)){
+					if(empty($news_agencies) || ! is_array($news_agencies)){
 						echo "No news agency";
 					}else{
-						$count = 1;
-						foreach($news_agency as $key => $newsagency){
-							
-
-							$link = "news_agency_link_" . $count;
-							
+						foreach($news_agencies[0] as $newsagency){
 							?>
-							<a href="<?php echo the_field($link) ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency->term_id); ?>" width="10%" /></a>
+							<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
 							
 						<?php 
-							$count++;
 						}
 					} ?> <br><br> <?php
 
