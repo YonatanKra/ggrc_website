@@ -23,6 +23,52 @@
 	<link rel="stylesheet" href="../wp-content/themes/oceanwp/assets/fontawesome-free-6.0.0-web/css/all.css">
 
 	<?php wp_head(); ?>
+
+	<style>
+		
+		.widget-area.sidebar-primary {
+			float: left !important;
+			padding-right: 20px !important;
+			padding-left:0 !important;
+			width:25%;
+		}
+
+		.searchandfilter ul{
+			display:grid;
+		}
+
+		.wp-block-search.wp-block-search__button-inside .wp-block-search__inside-wrapper{
+			border-radius :5px;
+		}
+		input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button, 
+		body div.wpforms-container-full .wpforms-form input[type=submit], body div.wpforms-container-full .wpforms-form button[type=submit], 
+		body div.wpforms-container-full .wpforms-form .wpforms-page-button {
+			background-color : #fff !important;
+			color : #000 !important;
+		}
+
+		ul, ol {
+			 margin: 0px;
+		}
+
+		form input[type="text"]{
+			border-radius :5px !important;
+			padding: 8px 8px !important;
+			border-width: 1px 1px 1px 1px;
+			border-color: #f1f1f1
+		}
+
+		input[type="submit"]{
+			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
+			box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
+			border: none;
+			border-radius: 30px;
+			padding: 10px;
+			color: #fff !important;
+			margin-top:10px;
+		}
+	</style>
+
 </head>
 
 <body <?php body_class(); ?> <?php oceanwp_schema_markup( 'html' ); ?>>
@@ -51,14 +97,15 @@
 				<div style="height:250px; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg); background-size:cover;">
 					<div class="row" style="padding-top: 12.5rem; padding-left:7%">
 						<div class="col-lg-7 col-md-7 col-sm-12">
-							<h6 style="margin-bottom:0">Suggest Initiatives</h6>
-							<p style="margin:0px;font-size:12px"><b>Do you know of any interesting action around you promoting green recovery? Are you involved with an intervention? We want to know </b></p>
+							<h5 style="margin-bottom:0;font-size:22px !important">Suggest Initiatives</h5>
+							<p style="margin:0px;font-size:14px"><b>Do you know of any interesting action around you promoting green recovery? Are you involved with an intervention? We want to know </b></p>
 						</div>
 						<div class="col-lg-2 col-md-2 col-sm-12">
 							
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-12">
-							<button style="background-image: linear-gradient(to right, #023162 , #6292c5);border: none;border-radius: 30px;padding: 10px;color: #fff;"><b>Suggest an initiative</b></button>
+							<a href="http://localhost/ggrc_website/suggest-an-initiative/" target="_blank"><button style="background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
+							border: none;border-radius: 30px;padding: 10px;color: #fff;"><b>Suggest an initiative</b></button></a>
 						</div>
 					</div>
 				
@@ -68,10 +115,14 @@
 	<?php do_action( 'ocean_before_content_wrap' ); ?>
 
 	<div id="content-wrap" class="container clr">
+		<div class="widget-area sidebar-primary">
+		<?php echo do_shortcode( '[searchandfilter fields="search,initiative_type,initiative_tags" types=" 
+		,checkbox,checkbox" headings=" ,Types,Related Tags"]' ); ?>
+		</div>
 
 		<?php do_action( 'ocean_before_primary' ); ?>
 
-		<div id="primary" class="content-area clr">
+		<div id="primary" class="content-area clr" style="padding-left: 30px; border-left-width: 1px;float:left;padding-right: 0px;border-right-width: none;">
 
 			<?php do_action( 'ocean_before_content' ); ?>
 
@@ -111,14 +162,14 @@
 								foreach($action as $key => $takeaction){
 									
 									?>
-									<p style="margin-bottom:0px; display:inline;font-size:12px; color:#fff; background-color:orange;border-radius:10px;margin-top:-9rem;position:absolute;padding:0 4px "> 
+									<p style="margin-bottom:0px; display:inline;font-size:12px; color:#fff; background-color:#EF8607;border-radius:10px;margin-top:-9rem;position:absolute;padding:0 4px "> 
 									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($takeaction->name); ?></p>
 								<?php 
 									
 								}
 							}?>
-							<p style="color:orange;font-size:10px;margin-bottom:0px"><b>30 Supporters</b></p>
-								<p style="margin-bottom:5px"><b><?php the_title(); ?></b></p> 
+							<p style="color:#DC9C05;font-size:10px;margin-bottom:0px"><b>30 Supporters</b></p>
+								<p style="margin-bottom:5px;"><b><?php the_title(); ?></b></p> 
 								<?php the_excerpt(); ?>
 								<hr style="margin:0px"/>
 								<i class="fa-solid fa-map-location-dot"></i> <?php the_field('venue') ?><br>
@@ -158,7 +209,7 @@
 
 		</div><!-- #primary -->
 
-		<?php do_action( 'ocean_after_primary' ); ?>
+		
 
 	</div><!-- #content-wrap -->
 

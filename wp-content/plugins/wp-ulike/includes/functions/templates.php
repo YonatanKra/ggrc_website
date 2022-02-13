@@ -5,8 +5,12 @@
  * @package    wp-ulike
  * @author     TechnoWich 2022
  * @link       https://wpulike.com
+ * 
+ * 
  */
 
+ //$formatted_total_likes
+ 
  // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
     die('No Naughty Business Please !');
@@ -87,7 +91,7 @@ if( ! function_exists( 'wp_ulike_set_default_template' ) ){
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box wp_ulike_counter_up" data-ulike-counter-value="%s"></span>', esc_attr( $formatted_total_likes ) ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box wp_ulike_counter_up" data-ulike-counter-value="%s"></span>', esc_attr( 'like' ) ) : '';
 					do_action( 'wp_ulike_after_up_vote_button', $wp_ulike_template );
 				?>
 			</div>
@@ -136,7 +140,7 @@ if( ! function_exists( 'wp_ulike_set_simple_heart_template' ) ){
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box wp_ulike_counter_up" data-ulike-counter-value="%s"></span>', esc_attr( $formatted_total_likes ) ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box wp_ulike_counter_up" data-ulike-counter-value="%s"></span>', esc_attr( 'like' ) ) : '';
 					do_action( 'wp_ulike_after_up_vote_button', $wp_ulike_template );
 				?>
 			</div>
@@ -182,7 +186,7 @@ if( ! function_exists( 'wp_ulike_set_robeen_template' ) ){
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box wp_ulike_counter_up" data-ulike-counter-value="%s"></span>', esc_attr( $formatted_total_likes ) ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box wp_ulike_counter_up" data-ulike-counter-value="%s"></span>', esc_attr( 'like' ) ) : '';
 					do_action( 'wp_ulike_after_up_vote_button', $wp_ulike_template );
 				?>
 			</div>
@@ -234,7 +238,7 @@ if( ! function_exists( 'wp_ulike_set_animated_heart_template' ) ){
 					</svg>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box wp_ulike_counter_up" data-ulike-counter-value="%s"></span>', esc_attr( $formatted_total_likes ) ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box wp_ulike_counter_up" data-ulike-counter-value="%s"></span>', esc_attr( 'like' ) ) : '';
 					do_action( 'wp_ulike_after_up_vote_button', $wp_ulike_template );
 				?>
 			</div>

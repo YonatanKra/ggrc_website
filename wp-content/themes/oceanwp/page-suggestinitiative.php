@@ -16,13 +16,54 @@
 		}
 		label[for=venue], input#fep-venue, label[for=region], textarea#fep-ggrc-priorities, select#fep-region, label[for=ggrc-priorities],
 		textarea#fep-initiative-goal, label[for=initiative-goal], input#initiative_custom_fieldsadditional_resources, label[for=additional-resources], 
-		a#upload_additional-resources_button, p.description, input#fep-types-of-action_join-the-campaign, input#fep-types-of-action_sign-the-petition,
-		input#fep-types-of-action_sign-the-letter, label[for=types-of-action]
+		a#upload_additional-resources_button, p.description
 		{
 			display:none !important;
 		}
 
+		.fep-container .mb-right-column {
+			width: 100% !important;
+			float: none !important;
+		}
+
+		.fep-container label{
+			width:fit-content !important;
+
+		}
+
+		.wck-checkboxes{
+			display:inline-flex !important;
+			float: right;
+		}
+
+		/* #fep-contact-mode{
+			width:40% !important
+		} */
+		
+		.wck-checkboxes > div:first-of-type{
+			margin-right:20px
+		}
+
+		input, select, textarea{
+			border-radius :5px !important;
+		}
+
+		#submit_suggest-an-initiative{
+			
+			padding: 16px 46px;
+			margin-left:auto;
+			width: 160px;
+			height: 56px;
+			margin-right:auto;
+			position:relative;
+			display:block;
+			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
+			box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
+			border-radius: 30px !important;
+		}
 	</style>
+
+	
 	<?php wp_head(); ?>
 </head>
 
@@ -107,3 +148,17 @@
 	<?php do_action( 'ocean_after_content_wrap' ); ?>
 
 <?php get_footer(); ?>
+
+<script src="../wp-includes/js/jquery/jquery.js" type="text/javascript"></script>
+<script>
+	
+	jQuery(document).ready(function() {
+
+		document.querySelector('#fep-post-title input').setAttribute('placeholder','$');
+		// window.onload = function () {
+		// 	document.getElementById("fep-post-title").placeholder = "Type name here..";
+        // }
+		
+	});
+		
+</script>

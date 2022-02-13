@@ -13,11 +13,28 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
+	<link rel="stylesheet" href="../wp-content/themes/oceanwp/assets/fontawesome-free-6.0.0-web/css/all.css">
+
 	<?php wp_head(); ?>
 
 	<style>
 		.single .entry-title{
 			display:none;
+		}
+		.wpulike-heart .wp_ulike_general_class{
+			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
+			box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
+			border-radius: 30px !important;
+		}
+
+		.wpulike-heart .count-box{
+			color: #fff !important
+		}
+
+		.ess-all-networks-button, #ess-main-wrapper .ess-total-share{
+			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
+			box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
+			border-radius: 30px !important;
 		}
 	</style>
 </head>
@@ -46,13 +63,13 @@
 
 				<?php //do_action( 'ocean_page_header' ); ?>
 
-				<div style="height:300px; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg); background-size:cover; border-bottom:2px solid orange"></div>
+				<div style="height:300px; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg); background-size:cover; border-bottom:2px solid #EF8607"></div>
 
 	<?php do_action( 'ocean_before_content_wrap' ); ?>
 	<?php while ( have_posts() ) :
 						the_post(); ?>
 	<div style="margin-top:-10.8rem; height:108px; background-color:#fff; z-index:10; position:relative; width:65%; margin-left:5%;
-	border:2px solid orange;border-bottom:none;border-radius:4px 4px 0px 0px; padding:5px">
+	border:2px solid #EF8607;border-bottom:none;border-radius:4px 4px 0px 0px; padding:5px">
 	<p><?php 
 	$the_post_id = get_the_ID();
 	$blogcat = wp_get_post_terms($the_post_id, 'blog-category', ['']);
@@ -62,18 +79,29 @@
 	}else{
 		
 		foreach($blogcat as $key => $blogcategory){
-						
+				if($blogcategory->name == "Blog")	{	
 			?>
-			<p style="text-align:center;color:orange;font-weight:bold"><?php echo esc_html($blogcategory->name); ?></p>
+			<p style="text-align:center;color:#EF8607;font-weight:bold"><?php echo esc_html($blogcategory->name); ?></p>
 			
 		<?php 
+				} elseif ($blogcategory->name == "Testimonials"){
+					?>
+			<p style="text-align:center;color:#789B18;font-weight:bold"><?php echo esc_html($blogcategory->name); ?></p>
+			
+		<?php
+				} else{
+					?>
+			<p style="text-align:center;color:#0B4F6D;font-weight:bold"><?php echo esc_html($blogcategory->name); ?></p>
+			
+		<?php
+				}
 		}
 	} ?>
 	</p>
 	<h2 style="text-align:center"><?php the_title(); ?></h2>
 	<hr style="margin:5px 0px"/>
 	<div style="text-align:center">
-		<p style="display:inline; margin-right:20px">Published : <?php the_time('F j, Y'); ?></p> <p style="display:inline;margin-right:20px"> 2 Likes</p> <p style="display:inline"> 5 Shares</p>
+		<p style="display:inline; margin-right:20px">Published : <?php the_time('F j, Y'); ?></p> <p style="display:inline;margin-right:20px"> <i class="fa fa-heart"></i> 2 Likes</p> <p style="display:inline"><i class="fa fa-share-alt"></i> 5 Shares</p>
 	</div>
 	<hr style="margin:5px 0px"/>
 	</div>
