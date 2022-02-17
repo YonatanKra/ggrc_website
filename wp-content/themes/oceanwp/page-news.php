@@ -101,7 +101,7 @@
 							
 							
 							?>
-							<b><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" style="border: 1px solid #ccc; border-radius: 8px; padding:8px; margin-left:5px; background-color:#5ba3bb94; color:#275f87"><?php echo esc_html($posttags->name); ?></a></b>
+							<p style="display:inline;font-weight:bold"><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" style="border: 1px solid #ccc; border-radius: 8px; padding:8px; margin-right:5px; background-color:#5ba3bb94; color:#275f87"><?php echo esc_html($posttags->name); ?></a></p>
 							
 						<?php 
 							
