@@ -48,7 +48,7 @@ $social_networks = ess_get_core_supported_social_networks();
 <div id="ess-main-wrapper">
 	<div id="ess-wrap-inline-networks" class="ess-inline-networks-container ess-clear <?php echo esc_attr( implode( ' ', $visbility_class ) ); ?>">
 		<ul class="ess-social-network-lists" style="display:flex">
-			<li style="width:12%;">
+			<li style="width:fit-content;margin-right:10px">
 				<div class="ess-social-network-link" >
 					<?php echo do_shortcode('[wp_ulike]'); ?>
 				</div>

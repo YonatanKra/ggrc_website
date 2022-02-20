@@ -13,7 +13,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<link rel="stylesheet" href="../wp-content/themes/oceanwp/assets/fontawesome-free-6.0.0-web/css/all.css">
+	<link rel="stylesheet" href="../../wp-content/themes/oceanwp/assets/fontawesome-free-6.0.0-web/css/all.css">
 
 	<?php wp_head(); ?>
 
@@ -35,6 +35,15 @@
 			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
 			box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
 			border-radius: 30px !important;
+		}
+
+		@media only screen and (min-width: 960px){
+			.content-area, .content-left-sidebar .content-area{
+				width:75%
+			}
+			.widget-area.sidebar-primary {
+				width: 25%;
+			}
 		}
 	</style>
 </head>
