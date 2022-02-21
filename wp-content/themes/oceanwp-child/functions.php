@@ -152,5 +152,5 @@ function theme_assets() {
 	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
 
     wp_enqueue_style( 'bootstrap' );
-    wp_enqueue_script( 'font-awesome' );
+    wp_enqueue_style( 'font-awesome' );
 }

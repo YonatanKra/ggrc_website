@@ -13,8 +13,6 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<link rel="stylesheet" href="../../wp-content/themes/oceanwp/assets/fontawesome-free-6.0.0-web/css/all.css">
-
 	<?php wp_head(); ?>
 
 	<style>
