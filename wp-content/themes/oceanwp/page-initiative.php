@@ -14,11 +14,11 @@
 
 get_header("initiatives");
 ?>
-				<div style="height:250px; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg); background-size:cover;">
+				<div class="small_header">
 					<div class="row" style="padding-top: 12.5rem; padding-left:7%">
 						<div class="col-lg-7 col-md-7 col-sm-12">
-							<h5 style="margin-bottom:0;font-size:22px !important">Suggest Initiatives</h5>
-							<p style="margin:0px;font-size:14px"><b>Do you know of any interesting action around you promoting green recovery? Are you involved with an intervention? We want to know </b></p>
+							<h3>Suggest Initiatives</h5>
+							<p>Do you know of any interesting action around you promoting green recovery? Are you involved with an intervention? We want to know</p>
 						</div>
 						<div class="col-lg-2 col-md-2 col-sm-12">
 							
