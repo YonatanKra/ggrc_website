@@ -15,12 +15,6 @@
 	<?php wp_head(); ?>
 
 	<style>
-		.small_header {
-			height:250px; 
-			background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg); 
-			background-size:cover;
-		}
-		
 		.widget-area.sidebar-primary {
 			float: left !important;
 			padding-right: 20px !important;
