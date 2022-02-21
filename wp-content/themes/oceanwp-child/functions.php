@@ -150,7 +150,113 @@ add_action( 'wp_enqueue_scripts', 'theme_assets' );
 function theme_assets() {
     wp_register_style( 'bootstrap', get_stylesheet_directory_uri() . '/assets/bootstrap-4.4.1-dist/css/bootstrap-grid.css' );
 	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
+	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
 
     wp_enqueue_style( 'bootstrap' );
     wp_enqueue_style( 'font-awesome' );
+	wp_enqueue_style( 'template-styling');
+}
+
+add_action( 'get_related_news', 'add_related_news_to_initiative_pages' );
+function add_related_news_to_initiative_pages() {
+     
+    // check if we're in the initiative post type
+    if( is_singular( 'initiative' ) ) {       
+         
+        $postid= get_the_ID();
+        // fetch taxonomy terms for current initiative
+        $initiativeterms = get_the_terms( get_the_ID(), 'initiative_tags'  );
+
+         
+        if( $initiativeterms ) {
+             
+            // $initiativetermnames[] = 0;
+                     
+            foreach( $initiativeterms as $initiativeterm ) {  
+                 
+                $initiativetermnames[] = $initiativeterm->slug;
+             
+            }
+           
+                         
+            // set up the query arguments
+            $args = array (
+                'post_type' => 'news',
+                //'tag_slug__in'  => $initiativetermnames,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'post_tag',
+                        'field'    => 'slug',
+                        'terms'    => $initiativetermnames,
+                        'operator' => 'IN',
+                        
+                    ),
+                ),
+                'post__not_in' => array($postid),
+                'posts_per_page' => 3, 
+                'nopaging' => true,
+            );
+
+           
+
+            // get news post 
+             
+            // run the query
+            $query = new WP_Query( $args ); 
+
+            ?>
+            <p><b>Related News:</b></p>
+            <div class="row">
+               
+			<?php if($query->have_posts()){
+				 while($query->have_posts()) {
+					 $query->the_post(); ?>
+					<div class="col-lg-4 col-md-4 col-sm-12">
+					<div class="news-box">
+					<h3><?php the_title(); ?></h3> 
+					<?php 
+					$the_post_id = get_the_ID();
+					$news_agencies = get_post_meta($the_post_id, 'news');
+					$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
+					if(empty($news_agencies) || ! is_array($news_agencies)){
+						echo "No news agency";
+					}else{
+						foreach($news_agencies[0] as $newsagency){
+							?>
+							<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
+							
+						<?php 
+						}
+					} ?> <br><br> <?php
+
+					if(empty($tags) || ! is_array($tags)){
+						echo "No Tags";
+					}else{
+						
+						foreach($tags as $key => $posttags){
+							
+							
+							?>
+							<p style="display:inline;font-weight:bold"><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="news-tag"><?php echo esc_html($posttags->name); ?></a></p>
+							
+						<?php 
+							
+						}
+					}
+					?>
+					
+				</div>
+				</div>
+			<?php } ?>
+            <?php wp_reset_postdata(); ?>
+			<?php } ?>
+
+			</div>
+        <?php
+             
+         
+        }
+         
+    }
+ 
 }

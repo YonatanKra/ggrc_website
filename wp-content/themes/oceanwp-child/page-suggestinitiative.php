@@ -16,7 +16,7 @@ get_header("suggest-initiative");
 
 		<div id="primary" class="content-area clr" style="max-width:100%; border:none">
 			<div >
-					<div class="row" style="padding-top: 8rem;margin-bottom:4rem; width:65%; position:relative; display:block; margin-left:auto; margin-right:auto">
+					<div class="row suggest-titlearea">
 						<div class="col-lg-12 col-md-12 col-sm-12">
 							<h6 style="margin-bottom:0;font-size:30px">Suggest an Initiative</h6>
 							<p style="margin:0px;font-size:14px"><b>We encourage you to help us reach initiatives that we wouldn’t know of. We at the GGRC aim to connect as many people as we can and we need help with that. Feel free to suggest any initiative that follow our community guidelines, we’ll review it and be in touch.</b></p>
@@ -28,8 +28,7 @@ get_header("suggest-initiative");
 
 			<?php do_action( 'ocean_before_content' ); ?>
 		
-			<div id="content" class="site-content clr" style="width:65%; position:relative; display:block; margin-left:auto; margin-right:auto;padding-right: 15px;
-    padding-left: 15px;">
+			<div id="content" class="site-content clr initiative-form">
 
 				<?php do_action( 'ocean_before_content_inner' ); ?>
 
@@ -62,7 +61,7 @@ get_header("suggest-initiative");
 
 	<?php do_action( 'ocean_after_content_wrap' ); ?>
 
-	<input type="text" id="hirnesh" value="">
+	
 
 <?php get_footer(); ?>
 

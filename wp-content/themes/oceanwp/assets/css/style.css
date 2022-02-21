@@ -1393,6 +1393,14 @@ body.separate-blog.separate-layout .blog-entry.grid-entry .thumbnail {
   }
 }
 
+@media only screen and (min-width: 1400px) {
+  .container {
+    width: 1500px;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
 /*------------------------------------*
 	Phone Landscape
 *------------------------------------*/
@@ -1502,21 +1510,21 @@ body.page.content-max-width .entry .alignwide {
 
 body.single-post.content-max-width .entry-content .alignfull,
 body.page.content-max-width .entry .alignfull {
-  width: 100vw !important;
+  width: 100vw;
   max-width: 100vw !important;
-  margin-left: calc(50% - 50vw) !important;
+  margin-left: calc(50% - 50vw);
 }
 
 @media screen and (max-width: 959px) {
   .entry-content .alignfull {
-    margin-left: -5.5% !important;
+    margin-left: -5.5%;
     width: calc(100% + 11%) !important;
-    max-width: calc(100% + 11%) !important;
+    max-width: calc(100% + 11%);
   }
   .page .entry .alignfull {
-    margin-left: -5.5% !important;
+    margin-left: -5.5%;
     width: calc(100% + 11%) !important;
-    max-width: calc(100% + 11%) !important;
+    max-width: calc(100% + 11%);
   }
 }
 

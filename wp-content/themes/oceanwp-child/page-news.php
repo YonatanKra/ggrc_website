@@ -75,7 +75,7 @@
 				 while($the_query->have_posts()) {
 					 $the_query->the_post(); ?>
 					<div class="col-lg-6 col-md-6 col-sm-12">
-					<div style="background-color:#fff;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);margin-bottom:15px;border-radius:5px;padding:15px;">
+					<div class="news-box">
 					<h2><?php the_title(); ?></h2> 
 					<?php 
 					$the_post_id = get_the_ID();
@@ -100,7 +100,7 @@
 							
 							
 							?>
-							<p style="display:inline;font-weight:bold"><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" style="border: 1px solid #ccc; border-radius: 8px; padding:8px; margin-right:5px; background-color:#5ba3bb94; color:#275f87"><?php echo esc_html($posttags->name); ?></a></p>
+							<p style="display:inline;font-weight:bold"><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="news-tag"><?php echo esc_html($posttags->name); ?></a></p>
 							
 						<?php 
 							

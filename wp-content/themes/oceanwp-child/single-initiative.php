@@ -6,6 +6,9 @@
  * @package OceanWP WordPress theme
  */
 
+//include 'features/related_posts.php';
+//include 'features/follow_posts.php';
+
 ?>
 <!DOCTYPE html>
 <html class="<?php echo esc_attr( oceanwp_html_classes() ); ?>" <?php language_attributes(); ?>>
@@ -14,32 +17,7 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
-
-	<style>
-		.single .entry-title{
-			display:none;
-		}
-		.wpulike-heart .wp_ulike_general_class{
-			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
-			box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
-			border-radius: 30px !important;
-		}
-
-		.wpulike-heart .count-box{
-			color: #fff !important
-		}
-
-		.ess-all-networks-button, #ess-main-wrapper .ess-total-share{
-			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
-			box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
-			border-radius: 30px !important;
-		}
-
-		#initiative-contact img{
-			border-radius: 50% !important;
-			float:left;
-		}
-	</style>
+]
 </head>
 
 <body <?php body_class(); ?> <?php oceanwp_schema_markup( 'html' ); ?>>
@@ -81,36 +59,35 @@
 
 								?>
 					
-								<div style="height:auto; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg); 
-								background-size:cover; border-bottom:1px solid #f1f1f1; padding:10rem 9rem 4rem 9rem">
+								<div class="action-subheader">
 								<a href="../../initiative">back to explore initiatives</a>
 									<div class="row" style="margin-top:3rem">
 										
 										<div class="col-md-2 col-lg-2 col-sm-4">
-											<p style="font-size:12px"><i class="fa fa-users"></i> <?php the_field('venue') ?></p>
+											<p><i class="fa fa-users"></i> <?php the_field('venue') ?></p>
 										</div>
 										<div class="col-md-2 col-lg-2 col-sm-4">
-											<p style="font-size:12px"><i class="fa fa-map-marker-alt"></i> <?php the_field('region') ?></p>
+											<p><i class="fa fa-map-marker-alt"></i> <?php the_field('region') ?></p>
 										</div>
-										<div class="col-md-3 col-lg-3 col-sm-4">
-											<p style="font-size:12px"><i class="fa fa-clock"></i> last updated <?php the_modified_time('F jS, Y') ?></p>
+										<div class="col-md-2 col-lg-2 col-sm-4">
+											<p><i class="fa fa-clock"></i> last updated <?php the_modified_time('F jS, Y') ?></p>
+										</div>
+										<div class="col-md-1 col-lg-1 col-sm-1">
 										</div>
 										<div class="col-md-5 col-lg-5 col-sm-6" style="text-align:right;margin-bottom:30px">
-											<a href="<?php the_field('website') ?>" target="_blank" style="color:#0B4F6D !important;font-size:12px;text-decoration:underline;margin-right:10px">View site</a>
-											<a href="" target="_blank" style="background: transparent;box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);border-radius: 30px;
-											color:#0B4F6D;padding:8px;margin-right:10px; border:2px solid #0B4F6D"><i class="fa-solid fa-share-alt"></i> share initiative
-											</a>
-											<a href="" target="_blank" style="background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
-											box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);border-radius: 30px;color:#fff;padding:10px;margin-right:10px"> follow initiative
-											</a>
+											<a href="<?php the_field('website') ?>" target="_blank" class="initiative-website">View site</a>
+											<button class="share-initiative"><i class="fa-solid fa-share-alt"></i> share initiative
+											</button>
+											<button id="follow" class="template-btn"> follow initiative
+											</button>
 										</div>
 										
 									</div>
 									<div class="row">
 										<div class="col-md-6 col-lg-6 col-sm-12">
 									
-										<h1><?php the_title(); ?></h1>
-										<span style="text-align:justify;font-family: Lato; font-size:14px;line-height:150%"><?php the_content(); ?></span>
+										<h2><?php the_title(); ?></h2>
+										<span style="line-height:150%"><?php the_content(); ?></span>
 										<?php 
 										$the_post_id = get_the_ID();
 										$tags = wp_get_post_terms($the_post_id, 'initiative_tags', ['']);
@@ -121,17 +98,16 @@
 
 											foreach($tags as $key => $posttags){
 												?>
-												<a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" 
-												style="background: #EFF3F5;border: 1px solid #D8E3E8;box-sizing: border-box;border-radius: 8px; color:#0B4F6D;padding:8px"><?php echo esc_html($posttags->name); ?></a>
+												<p style="display:inline"><a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" class="initiative-tags"><?php echo esc_html($posttags->name); ?></a></p>
 												
 											<?php 
 												
 											}
 										} ?>
 										<br><br>
-										<hr style="border: 1px solid #BEC5CC; height:0;margin-bottom:7px"/>
-										<p style="line-height:20px;font-size:14px;margin-bottom:0"><span><b>GGRC priorities: </b></span> <?php the_field('ggrc-priorities'); ?></p>
-										<hr style="border: 1px solid #BEC5CC; height:0;margin-top:7px"/>
+										<hr/>
+										<p class="ggrc-priorities"><span><b>GGRC priorities: </b></span> <?php the_field('ggrc-priorities'); ?></p>
+										<hr/>
 										<br><br>
 										</div>
 										<div class="col-md-6 col-lg-6 col-sm-12">
@@ -144,8 +120,7 @@
 								<?php } 
 							} else { ?>
 
-								<div style="height:200px; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg); 
-								background-size:cover; border-bottom:1px solid #f1f1f1;">					
+								<div class="learn-subheader">					
 								
 								</div>
 								
@@ -159,7 +134,7 @@
 		<?php do_action( 'ocean_before_primary' ); ?>
 
 		
-		<div id="primary" class="content-area clr" style="border-right-width: 0;padding-right:0">
+		<div id="primary" class="content-area clr no-border">
 
 			<?php do_action( 'ocean_before_content' ); ?>
 
@@ -183,16 +158,16 @@
 								if($type[0]->name == "Take Action"){								
 
 								?>
-						<div style="height:auto; background: #FFD670;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06), 4px 4px 24px 3px rgba(0, 0, 0, 0.1);padding:35px 15px 15px 15px;border-radius:2px;margin-top:-14rem">
+						<div class="how-to-take-action">
 							<div class="row">
-								<div class="col-md-3 col-lg-3 col-sm-12">
+								<div class="col-md-4 col-lg-4 col-sm-12">
 									<div class="row">
 										<div class="col-md-12 col-lg-12 col-sm-12" style="text-align:center">
-											<h1>How to Take Action:</h1>
+											<h2>How to Take Action:</h2>
 										</div>
 									</div>
 								</div>
-								<div class="col-md-9 col-lg-9 col-sm-12">
+								<div class="col-md-8 col-lg-8 col-sm-12">
 									<div class="row">
 						<?php 
 							$the_post_id = get_the_ID();
@@ -206,9 +181,7 @@
 									
 									?>
 									<div class="col-md-6 col-lg-4 col-sm-6" style="text-align:center">
-										<p><a href="<?php echo get_term_link($postaction->term_id, 'actiontype'); ?>" target="_blank" 
-										style="background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
-										box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);border-radius: 30px;color:#fff;padding:12px">
+										<p><a href="<?php echo get_term_link($postaction->term_id, 'actiontype'); ?>" target="_blank" class="action-btn">
 										<?php echo esc_html($postaction->name); ?></a></p>
 									</div>
 								<?php 
@@ -224,32 +197,15 @@
 							} else { ?>
 
 								<a href="../../initiative" >back to explore initiatives</a>
-								<div class="row" style="margin-top:3rem">
-									<div class="col-md-2 col-lg-2 col-sm-4">
-										<p style="font-size:12px"><i class="fa fa-users"></i> <?php the_field('venue') ?></p>
-									</div>
-									<div class="col-md-2 col-lg-2 col-sm-4">
-										<p style="font-size:12px"><i class="fa fa-map-marker-alt"></i> <?php the_field('region') ?></p>
-									</div>
-									<div class="col-md-3 col-lg-3 col-sm-4">
-										<p style="font-size:12px"><i class="fa fa-clock"></i> last updated <?php the_modified_time('F jS, Y') ?></p>
-									</div>
-									<div class="col-md-5 col-lg-5 col-sm-6" style="text-align:right">
-										<a href="<?php the_field('website') ?>" target="_blank" style="color:#0B4F6D !important;font-size:12px;text-decoration:underline;margin-right:10px">View site</a>
-										<a href="" target="_blank" style="background: transparent;box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);border-radius: 30px;
-										color:#0B4F6D;padding:8px;margin-right:10px; border:2px solid #0B4F6D"><i class="fa-solid fa-share-alt"></i> share initiative
-										</a>
-										<a href="" target="_blank" style="background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
-										box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);border-radius: 30px;color:#fff;padding:10px;margin-right:10px"> follow initiative
-										</a>
-									</div>
-									
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-6 col-sm-12">
 								
-									<h1><?php the_title(); ?></h1>
-									<span style="text-align:justify;font-family: Lato; font-size:14px;line-height:150%"><?php the_content(); ?></span>
+								<div class="row" style="margin-top:3rem">
+									<div class="col-md-7 col-lg-7 col-sm-12">
+								
+									<h2><?php the_title(); ?></h2>
+									<span style="line-height:150%"><b>Description:</b> <br><?php the_content(); ?></span>
+									
+									<p class="initiative-goal"><span><b>Goal: </b></span><br> <?php the_field('initiative-goal'); ?></p>
+									
 									<?php 
 									$the_post_id = get_the_ID();
 									$tags = wp_get_post_terms($the_post_id, 'initiative_tags', ['']);
@@ -260,30 +216,45 @@
 
 										foreach($tags as $key => $posttags){
 											?>
-											<a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" 
-											style="background: #EFF3F5;border: 1px solid #D8E3E8;box-sizing: border-box;border-radius: 8px; color:#0B4F6D;padding:8px"><?php echo esc_html($posttags->name); ?></a>
+											<p style="display:inline"><a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" class="initiative-tags"><?php echo esc_html($posttags->name); ?></a></p>
 											
 										<?php 
 											
 										}
 									} ?>
-									<br><br>
-									<hr style="border: 1px solid #BEC5CC; height:0;margin-bottom:7px"/>
-									<p style="line-height:20px;font-size:14px;margin-bottom:0"><span><b>GGRC priorities: </b></span> <?php the_field('ggrc-priorities'); ?></p>
-									<hr style="border: 1px solid #BEC5CC; height:0;margin-top:7px"/>
+									
 									<br><br>
 									</div>
-									<div class="col-md-6 col-lg-6 col-sm-12">
-										<img src="<?php echo get_the_post_thumbnail_url(); ?>" />
+									<div class="col-md-1 col-lg-1 col-sm-12">
+
+									</div>
+									<div class="col-md-4 col-lg-4 col-sm-12 learn-rightside">
+										<p><i class="fa fa-users"></i> <?php the_field('venue') ?></p>
+										<p><i class="fa fa-map-marker-alt"></i> <?php the_field('region') ?></p>
+										<p><i class="fa fa-clock"></i> <?php the_field('initiative-duration') ?></p>
+										<p><i class="fa fa-globe"></i> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
+										<p style="line-height:20px;margin-bottom:0"><span><b>GGRC priorities: </b></span> <?php the_field('ggrc-priorities'); ?></p>
 									</div>
 								</div>
+								<div class="row" style="margin-top:3rem">
+									<div class="col-md-12 col-lg-12 col-sm-12">
+										<h4><b>Additional Resources</b></h4>
+										<div class="row">
+											<div class="col-md-3 col-lg-3 col-sm-12 add-res">
+												<p><i class="fa fa-file"></i></p>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+
 																
 						<?php } ?>
 
 						<div class="row" style="margin-top:60px">	
 												
 							<div class="col-md-3 col-lg-3 col-sm-12" id="initiative-contact">
-								<h5>People for Initiative</h5>
+								<h3>People for Initiative</h3>
 								<p><b>Contacts for initiative</b></p>
 								<?php $post_id = get_the_ID();
 										$author_id = get_post_field( 'post_author', $post_id );
@@ -292,14 +263,13 @@
 										echo get_avatar( get_the_author_meta('ID'), 60);										
 								?>
 								<div style="float:left;margin-left:8px;line-height:18px">
-									<p style="margin-bottom:0;"><b><?php echo $author_name ?></b></p>
-									<p style="margin-bottom:0;">title</p>
-									<p style="margin-bottom:0;">organisation</p>
+									<h4 class="no-margin"><b><?php echo $author_name ?></b></h4>
+									<p class="no-margin">title</p>
+									<p class="no-margin">organisation</p>
 								</div>
 								<div style="float:left;margin-top:20px">									
-									<a href="#" target="_blank" style="color:#0B4F6D !important;font-size:12px;margin-right:18px">view profile</a>
-									<a href="#" target="_blank" style="background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
-									box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);border-radius: 30px;color:#fff;padding:7px;"> send message</a>
+									<a href="#" target="_blank" class="profile">view profile</a>
+									<a href="#" target="_blank" class="template-btn"> send message</a>
 								</div>
 							</div>
 							<div class="col-md-9 col-lg-9 col-sm-12" style="margin-top:42px;border-left:1px solid #BEC5CC;">
@@ -318,6 +288,13 @@
 						<?php
 						//get_template_part( 'partials/single/related-posts' );
 						comments_template();
+
+						
+						//add_posts_to_initiative_pages();
+						do_action('get_related_news');
+						//follow_initiative();
+
+						//add_action( 'plugin/related_posts', 'add_posts_to_initiative_pages' );
 
 					endwhile;
 
@@ -339,3 +316,19 @@
 	<?php do_action( 'ocean_after_content_wrap' ); ?>
 
 <?php get_footer(); ?>
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+	
+	$(function(){
+		$('#follow').click(function(){
+			$.ajax({
+				url:'../../wp-content/themes/oceanwp/features/follow_posts.php',
+				success:function(response){ alert(response); }
+			}); // this will alert the code generated in example.php
+		});
+	});
+		
+	
+		
+</script> -->

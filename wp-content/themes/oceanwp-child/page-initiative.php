@@ -41,7 +41,7 @@ get_header("initiatives");
 
 		<?php do_action( 'ocean_before_primary' ); ?>
 
-		<div id="primary" class="content-area clr" style="padding-left: 30px; border-left-width: 1px;float:left;padding-right: 0px;border-right-width: 0;">
+		<div id="primary" class="content-area clr" class="initiative-listarea">
 
 			<?php do_action( 'ocean_before_content' ); ?>
 
@@ -64,8 +64,8 @@ get_header("initiatives");
 				 while($the_query->have_posts()) {
 					 $the_query->the_post(); ?>
 					<div class="col-lg-4 col-md-6 col-sm-12">
-						<div style="background-color:#fff;margin-bottom:15px;border-radius:5px;border:1px solid #ddd">
-						<img src="<?php echo get_the_post_thumbnail_url(); ?>" width="100%" style="height:90px !important; object-fit:cover"/>
+						<div class="initiative-list">
+						<img src="<?php echo get_the_post_thumbnail_url(); ?>" width="100%" class="ini-cover"/>
 							
 						<div style="padding:8px;line-height:150%">
 						<?php 
@@ -81,14 +81,14 @@ get_header("initiatives");
 								foreach($action as $key => $takeaction){
 									
 									?>
-									<p style="margin-bottom:0px; display:inline;font-size:12px; color:#fff; background-color:#EF8607;border-radius:10px;margin-top:-9rem;position:absolute;padding:0 4px "> 
+									<p class="action-type"> 
 									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($takeaction->name); ?></p>
 								<?php 
 									
 								}
 							}?>
-							<p style="color:#DC9C05;font-size:11px;margin-bottom:0px"><b>30 Supporters</b></p>
-								<a href="<?php the_permalink(); ?>"><p style="font-family:'Lato';margin-bottom:10px"><b><?php the_title(); ?></b></p></a>
+							<p class="ini-supporters"><b>30 Supporters</b></p>
+								<a href="<?php the_permalink(); ?>"><h4 style="margin-bottom:10px"><b><?php the_title(); ?></b></h4></a>
 								<?php the_excerpt(); ?>
 								<hr style="margin:0px"/>
 								<i class="fa-solid fa-map-location-dot"></i> <?php the_field('venue') ?><br>
