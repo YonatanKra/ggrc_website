@@ -9,3 +9,54 @@ Version: 1.0
 */
 
 /* Parent stylesheet should be loaded from functions.php not using @import */
+
+@import url('https://fonts.googleapis.com/css?family=Arvo&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+body {
+    color: #333333;
+}
+
+p {
+    font-family: Lato;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+p.small_header {
+    font-weight: bold;
+}
+
+h3 {
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 32px;
+
+    text-shadow: 2px 3px 12px rgba(0, 0, 0, 0.13);
+}
+
+.small_header {
+    padding-top: 31px;
+    padding-left: 70px;
+    height: 184px;
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
+    background-size: cover;
+}
+
+button {
+    background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
+    box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
+    border-radius: 30px;
+    padding: 16px 46px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+    white-space: nowrap;
+    border: 0;
+}
