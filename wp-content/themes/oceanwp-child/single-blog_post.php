@@ -17,32 +17,32 @@
 
 	<style>
 		.single .entry-title{
-    display:none;
-}
-.wpulike-heart .wp_ulike_general_class{
-    background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
-    box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
-    border-radius: 30px !important;
-}
+			display:none;
+		}
+		.wpulike-heart .wp_ulike_general_class{
+			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
+			box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
+			border-radius: 30px !important;
+		}
 
-.wpulike-heart .count-box{
-    color: #fff !important
-}
+		.wpulike-heart .count-box{
+			color: #fff !important
+		}
 
-.ess-all-networks-button, #ess-main-wrapper .ess-total-share{
-    background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
-    box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
-    border-radius: 30px !important;
-}
+		.ess-all-networks-button, #ess-main-wrapper .ess-total-share{
+			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%) !important;
+			box-shadow: 2px 3px 9px rgba(0, 0, 0, 0.2) !important;
+			border-radius: 30px !important;
+		}
 
-@media only screen and (min-width: 960px){
-    .content-area, .content-left-sidebar .content-area{
-        width:75%
-    }
-    .widget-area.sidebar-primary {
-        width: 25%;
-    }
-}
+		@media only screen and (min-width: 960px){
+			.content-area, .content-left-sidebar .content-area{
+				width:75%
+			}
+			.widget-area.sidebar-primary {
+				width: 25%;
+			}
+		}
 	</style>
 
 </head>
@@ -71,7 +71,7 @@
 
 				<?php //do_action( 'ocean_page_header' ); ?>
 
-				<div class="blog-subheader"></div>
+				<div class="blog-sub-header"></div>
 
 	<?php do_action( 'ocean_before_content_wrap' ); ?>
 	<?php while ( have_posts() ) :

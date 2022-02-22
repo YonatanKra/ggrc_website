@@ -6,7 +6,7 @@
  * @package OceanWP WordPress theme
  */
 
-global $wpdb;
+include 'social_share/share.php';
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +16,21 @@ global $wpdb;
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
-]
+
+	<style>
+		div.wp_ulike_general_class.wp_ulike_is_not_liked, li.ess-total-share.ess-social-networks{
+			display:none !important;
+		}
+		li.ess-all-networks.ess-social-networks{
+			background: transparent !important;
+		}
+		span.ess-all-networks-button{
+			color: transparent !important;
+		}
+		#ess-main-wrapper #ess-wrap-inline-networks.ess-inline-networks-container{
+			margin-bottom:0px
+		}		
+	</style>
 </head>
 
 <body <?php body_class(); ?> <?php oceanwp_schema_markup( 'html' ); ?>>
@@ -75,11 +89,20 @@ global $wpdb;
 										</div>
 										<div class="col-md-5 col-lg-5 col-sm-6" style="text-align:right;margin-bottom:30px">
 											<a href="<?php the_field('website') ?>" target="_blank" class="initiative-website">View site</a>
-											<button class="share-initiative"><i class="fa-solid fa-share-alt"></i> share initiative
-											</button>
+											
+											<?php if ( 'yes' === get_option( 'easy_social_sharing_inline_enable_all_networks' ) ) : ?>
+												<li class="ess-all-networks ess-social-networks ess-list">
+													<div class="ess-social-network-link">
+														
+														<span class="ess-all-networks-button share-initiative" style="color:#0B4F6D !important"><i aria-hidden="true" class="fa fa-share-alt"></i> <b>share initiative</b></span>
+													</div>
+												</li>
+											<?php endif; ?>
+											<!-- <button class="share-initiative"><i class="fa-solid fa-share-alt"></i> share initiative
+											</button> -->
 											<?php 
 												$count = check_following();
-												//echo $count;
+												
 												if ($count >= 1){
 													?>
 													<button id="unfollow" class="template-btn"> following initiative </button>
@@ -94,7 +117,7 @@ global $wpdb;
 										<div class="col-md-6 col-lg-6 col-sm-12">
 									
 										<h2><?php the_title(); ?></h2>
-										<span style="line-height:150%"><?php the_content(); ?></span>
+										<span class="initiative-content"><?php the_content(); ?></span>
 										<?php 
 										$the_post_id = get_the_ID();
 										$tags = wp_get_post_terms($the_post_id, 'initiative_tags', ['']);
@@ -136,7 +159,7 @@ global $wpdb;
 	
 					
 					<?php endwhile; ?>
-	<div id="content-wrap" class="container clr" style="padding-top:100px">
+		<div id="content-wrap" class="container clr" style="padding-top:100px">
 
 		<?php do_action( 'ocean_before_primary' ); ?>
 
@@ -294,15 +317,11 @@ global $wpdb;
 						</div>
 											
 						<?php
-						//get_template_part( 'partials/single/related-posts' );
+						
 						comments_template();
 
-						
-						//add_posts_to_initiative_pages();
 						do_action('get_related_news');
-						//follow_initiative();
-
-						//add_action( 'plugin/related_posts', 'add_posts_to_initiative_pages' );
+						
 
 					endwhile;
 
@@ -325,7 +344,7 @@ global $wpdb;
 
 <?php get_footer(); ?>
 
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+
 <script>
 	jQuery(document).ready(function($) {
 		

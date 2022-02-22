@@ -49,8 +49,7 @@ h4{
     background: transparent;
     box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
     border-radius: 30px;
-	color:#0B4F6D;
-    padding:6px 22px;
+    padding:8px 22px;
     margin-right:10px;
     border:2px solid #0B4F6D;
     font-size:16px;
@@ -96,7 +95,8 @@ h4{
     box-sizing: border-box;
     border-radius: 8px;
     color:#0B4F6D;
-    padding:8px
+    padding:8px;
+    
 }
 
 hr{
@@ -124,6 +124,11 @@ hr{
     padding:35px 15px 15px 15px;
     border-radius:2px;
     margin-top:-14rem;
+}
+
+.initiative-content p{
+    line-height:150%;
+    margin-bottom:0px;
 }
 
 .initiative-goal{
@@ -171,8 +176,6 @@ hr{
     background-color:#5ba3bb94;
     color:#275f87
 }
-
-
 
 .blog-sub-header{
     height:300px;
@@ -273,4 +276,10 @@ hr{
 .ini-supporters{
     color:#DC9C05;
     margin-bottom:0px
+}
+
+.ess-list{
+    list-style: none;
+    width: fit-content;
+    display: inline-block;
 }
