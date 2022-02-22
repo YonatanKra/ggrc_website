@@ -6,8 +6,7 @@
  * @package OceanWP WordPress theme
  */
 
-//include 'features/related_posts.php';
-//include 'features/follow_posts.php';
+global $wpdb;
 
 ?>
 <!DOCTYPE html>
@@ -78,8 +77,16 @@
 											<a href="<?php the_field('website') ?>" target="_blank" class="initiative-website">View site</a>
 											<button class="share-initiative"><i class="fa-solid fa-share-alt"></i> share initiative
 											</button>
-											<button id="follow" class="template-btn"> follow initiative
-											</button>
+											<?php 
+												$count = check_following();
+												//echo $count;
+												if ($count >= 1){
+													?>
+													<button id="unfollow" class="template-btn"> following initiative </button>
+													<?php } else{ ?>
+													<button id="follow" class="template-btn"> follow initiative</button>
+													<?php }  
+											?>
 										</div>
 										
 									</div>
@@ -151,6 +158,7 @@
 						the_post(); 
 
 							$the_post_id = get_the_ID();
+							//echo $the_post_id;
 							$type = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
 							
 							if(!empty($type) && is_array($type)){
@@ -317,18 +325,51 @@
 
 <?php get_footer(); ?>
 
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
 <script>
-	
-	$(function(){
+	jQuery(document).ready(function($) {
+		
 		$('#follow').click(function(){
-			$.ajax({
-				url:'../../wp-content/themes/oceanwp/features/follow_posts.php',
-				success:function(response){ alert(response); }
-			}); // this will alert the code generated in example.php
+			ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ) ?>'; // get ajaxurl
+
+			var data = {
+				'action': 'follow_post', // your action name 
+				'postid': '<?php echo get_the_ID(); ?>' // some additional data to send
+			};
+
+			jQuery.ajax({
+				url: ajaxurl, // this will point to admin-ajax.php
+				type: 'POST',
+				data: data,
+				success: function (response) {
+					console.log(response); 
+					$("#follow").html("following initiative");
+					$('#follow').attr('id','unfollow'); 					               
+				}
+			});
 		});
+
+		$('#unfollow').click(function(){
+			ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ) ?>'; // get ajaxurl
+
+			var data = {
+				'action': 'unfollow_post', // your action name 
+				'postid': '<?php echo get_the_ID(); ?>' // some additional data to send
+			};
+
+			jQuery.ajax({
+				url: ajaxurl, // this will point to admin-ajax.php
+				type: 'POST',
+				data: data,
+				success: function (response) {
+					console.log(response); 
+					$("#unfollow").html("follow initiative");
+					$('#unfollow').attr('id','follow'); 
+					//document.getElementById("follow").innerHTML="<button id=\"unfollow\" class=\"template-btn\">unfollow</button>";               
+				}
+			});
+		});
+		
+		
 	});
-		
-	
-		
-</script> -->
+</script>

@@ -14,6 +14,7 @@
  *
  */
 
+
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);
 
@@ -259,4 +260,70 @@ function add_related_news_to_initiative_pages() {
          
     }
  
+}
+
+
+add_action( 'wp_ajax_follow_post', 'follow_initiative' );
+function follow_initiative() {
+	global $wpdb; 
+    
+        
+	if ( !is_user_logged_in() ) {
+
+		wp_redirect('http://localhost/ggrc_website/'); 
+		
+		exit;
+	}
+	else{
+	
+		$current_user_id = get_current_user_id();
+		$postid = $_POST['postid'];
+
+		//echo $current_user_id;
+
+			
+		$table_name = $wpdb->prefix . 'follow_posts';     
+		$wpdb->insert($table_name, array('userID' => $current_user_id, 'postID' => $postid)); 
+		
+		
+	}
+
+}
+
+add_action( 'wp_ajax_unfollow_post', 'unfollow_initiative' );
+function unfollow_initiative() {
+	global $wpdb;     
+        
+	if ( !is_user_logged_in() ) {
+
+		wp_redirect('http://localhost/ggrc_website/'); 
+		
+		exit;
+	}
+	else{
+	
+		$current_user_id = get_current_user_id();
+		$postid = $_POST['postid'];
+
+		//echo $current_user_id;
+			
+		$table_name = $wpdb->prefix . 'follow_posts';     
+		 
+		$wpdb->query($wpdb->prepare("UPDATE $table_name SET isFollowing = '0' WHERE userID = '$current_user_id' and postID = '$postid'"));		
+		
+	}
+
+}
+
+//add_action( 'check_follow', 'check_following' );
+
+function check_following() {
+	global $wpdb;
+
+	$current_user_id = get_current_user_id();
+	$postid= get_the_ID();
+	$posts = $wpdb->get_results("SELECT * FROM ggrc_follow_posts WHERE `userID` = '$current_user_id' and `postID` = '$postid' and `isFollowing` = 1");
+	
+	//var_dump($posts);
+	return count($posts);
 }
