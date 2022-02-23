@@ -21,7 +21,7 @@ h4{
     font-family: 'Lato' !important;
 }
 
-#initiative-contact img{
+#initiative-contact img, #initiative-followers img{
     border-radius: 50% !important;
     float:left;
 }
@@ -251,7 +251,7 @@ hr{
     border-right-width: 0;
 }
 
-.initiative-contact-details{
+.initiative-contact-details, .initiative-followers{
     float:left;
     margin-left:8px;
     line-height:18px

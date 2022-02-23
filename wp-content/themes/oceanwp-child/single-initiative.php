@@ -310,10 +310,32 @@
 								} ?>
 							</div>
 							<div class="col-md-9 col-lg-9 col-sm-12" style="margin-top:42px;border-left:1px solid #BEC5CC;">
+							<p><b>Following this initiative</b></p>
 								<div class="row" style="padding-left:20px">									
-									<p><b>Following this initiative</b></p>
-									<div class="col-md-3 col-lg-3 col-sm-12">
-									</div>
+									
+									<?php 
+										
+										$followersid = getFollowersByPostId($post_id);
+
+										foreach($followersid as $key => $followerid){
+
+											$user_id = $followerid->userID;
+											$contact_name = get_the_author_meta( 'display_name', $user_id );
+										?>
+										<div class="col-md-3 col-lg-3 col-sm-12" id="initiative-followers">
+											<?php
+											echo get_avatar($user_id, 60);										
+									?>
+											<div class="initiative-followers">
+												<p class="no-margin"><b><?php echo $contact_name ?></b></p>
+												<p class="no-margin">title, org</p>
+												<p class="no-margin">country</p>
+											</div>
+										</div>
+									<?php
+										}									
+									?>
+									
 									<div class="col-md-3 col-lg-3 col-sm-12">
 									</div>
 									<div class="col-md-3 col-lg-3 col-sm-12">

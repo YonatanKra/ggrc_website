@@ -227,8 +227,7 @@ function initiative_meta_boxes() {
 		if ( !empty( $new ) && $new != $old )
 			update_post_meta( $post_id, 'initiative', $new );
 		elseif ( empty($new) && $old )
-			delete_post_meta( $post_id, 'initiative', $old );	
-	
+			delete_post_meta( $post_id, 'initiative', $old );		
 	}
 }
 
@@ -264,6 +263,15 @@ function theme_assets() {
     wp_enqueue_style( 'bootstrap' );
     wp_enqueue_style( 'font-awesome' );
 	wp_enqueue_style( 'template-styling');
+}
+
+function getFollowersByPostId($postid){
+
+	global $wpdb;
+
+	$posts = $wpdb->get_results("SELECT DISTINCT userID FROM ggrc_follow_posts WHERE `postID` = '$postid' and `isFollowing` = 1");
+
+	return $posts;
 }
 
 add_action( 'get_related_news', 'add_related_news_to_initiative_pages' );
