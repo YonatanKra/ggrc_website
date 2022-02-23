@@ -410,7 +410,9 @@
 				}
 			});
 		});
-		
+
+		$("#comment-submit").val("comment");	
+		$("#reply-title").html("Comments");		
 		
 	});
 </script>

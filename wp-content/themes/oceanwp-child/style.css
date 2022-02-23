@@ -46,7 +46,10 @@ h3 {
     background-size: cover;
 }
 
-button {
+button, input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button, 
+body div.wpforms-container-full .wpforms-form input[type=submit], 
+body div.wpforms-container-full .wpforms-form button[type=submit], 
+body div.wpforms-container-full .wpforms-form .wpforms-page-button {
     background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
     box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
     border-radius: 30px;
@@ -59,4 +62,11 @@ button {
     color: #ffffff;
     white-space: nowrap;
     border: 0;
+}
+
+form textarea#comment.textarea-comment{
+    border-radius:5px;
+    border: 1px solid rgba(11, 79, 109, 0.6);
+    box-sizing: border-box;
+    min-height:77px;
 }
