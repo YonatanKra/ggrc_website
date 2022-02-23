@@ -125,8 +125,116 @@ function news_meta_boxes() {
 	}
 }
 
+function initiative_meta_boxes() {
+	add_action('admin_init', 'ggrc_add_initiative_meta_boxes', 2);
+
+	function ggrc_add_initiative_meta_boxes() {
+		add_meta_box( 'ggrc_initiative_updates', 'Initiative Updates', 'Repeat_meta_box_display', 'initiative', 'normal', 'default');
+	}
+
+	function updates_row_template($updates, $field = null) {
+		?>
+			<tr>
+				<td> 
+					<input required type="text" placeholder="Title" name="UpdateTitle[]" <?php if ($field) echo 'value="' . $field['UpdateTitle'] . '"' ?>/>
+				</td>
+				<td> 
+					<input required type="date" placeholder="Date" name="UpdateDate[]" <?php if ($field) echo 'value="' . $field['UpdateDate'] . '"' ?>/>
+				</td>
+				<td> 
+                    <textarea rows="3" placeholder="Initiative Updates" name="Update[]"><?php if ($field) echo $field['Update'] ?></textarea>
+					
+				</td>
+				<td>
+					<a class="button cmb-remove-row-button remove-row <?php if ($field === null) echo 'button-disabled'; ?>" href="#">Remove</a>
+				</td>
+			</tr>
+		<?php
+	}
+
+	function Repeat_meta_box_display() {
+		
+		global $post;
+
+		$ggrc_initiative_updates = get_terms( array(
+			//'taxonomy' => 'initiative_updates',
+			'hide_empty' => false,
+		) );
+		$ggrc_initiative = get_post_meta($post->ID, 'initiative', true);
+		
+		 wp_nonce_field( 'ggrc_repeat_meta_box_nonce', 'ggrc_repeat_meta_box_nonce' );
+		?>
+		<script type="text/javascript">
+		jQuery(document).ready(function( $ ){
+			const tbody = document.querySelector("#repeatable-fieldset-one tbody");
+
+			$( '#add-row' ).on('click', function() {
+				const rowWrapper = document.createElement('tbody');
+				rowWrapper.innerHTML = `<?php updates_row_template($ggrc_initiative_updates); ?>`;
+				const row = rowWrapper.children[0];
+				const lastChild = tbody.children[tbody.children.length - 1];
+				tbody.insertBefore( row, lastChild );
+				return false;
+			});
+	
+			$( '.remove-row' ).on('click', function() {
+				$(this).parents('tr').remove();
+				return false;
+			});
+		});
+		</script>
+		<table id="repeatable-fieldset-one" width="100%">
+		<tbody>
+			<?php
+			if ( $ggrc_initiative ) :
+				foreach ( $ggrc_initiative as $field ) {
+					updates_row_template($ggrc_initiative_updates, $field);
+				}
+			else :
+				// show a blank one
+				updates_row_template($ggrc_initiative_updates);
+			endif; ?>
+		</tbody>
+		</table>
+		<p><a id="add-row" class="button" href="#">Add another</a></p>
+		<?php
+	}
+	add_action('save_post', 'custom_repeat_meta_box_save');
+	function custom_repeat_meta_box_save($post_id) {
+		if ( ! isset( $_POST['ggrc_repeat_meta_box_nonce'] ) ||
+		! wp_verify_nonce( $_POST['ggrc_repeat_meta_box_nonce'], 'ggrc_repeat_meta_box_nonce' ) )
+			return;
+	
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+			return;
+	
+		if (!current_user_can('edit_post', $post_id))
+			return;
+	
+		$old = get_post_meta($post_id, 'initiative', true);
+		$new = array();
+		$title = $_POST['UpdateTitle'];
+		$date = $_POST['UpdateDate'];
+		$updates = $_POST['Update'];
+		 $count = count( $updates );
+		 for ( $i = 0; $i < $count; $i++ ) {
+			if ( $updates[$i] != '' ) :
+				$new[$i]['UpdateDate'] = $date[$i];
+				$new[$i]['UpdateTitle'] = stripslashes( strip_tags( $title[$i] ));
+				$new[$i]['Update'] = stripslashes( strip_tags( $updates[$i] )); // and however you want to sanitize
+			endif;
+		}
+		if ( !empty( $new ) && $new != $old )
+			update_post_meta( $post_id, 'initiative', $new );
+		elseif ( empty($new) && $old )
+			delete_post_meta( $post_id, 'initiative', $old );	
+	
+	}
+}
+
 if (is_admin()) {
 	news_meta_boxes();
+	initiative_meta_boxes();
 }
 
 /**
@@ -197,7 +305,7 @@ function add_related_news_to_initiative_pages() {
             $query = new WP_Query( $args ); 
 
             ?>
-            <p><b>Related News:</b></p>
+            <h4><b>Related News:</b></h4>
             <div class="row">
                
 			<?php if($query->have_posts()){

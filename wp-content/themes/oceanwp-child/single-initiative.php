@@ -316,6 +316,32 @@
 						<?php
 						
 						comments_template();
+						?>
+						<h3>Updates</h3>
+						<br>
+						<?php
+						$initiative_updates = get_post_meta($the_post_id, 'initiative');
+						if(empty($initiative_updates) || ! is_array($initiative_updates)){
+							echo "No Updates";
+						}else{
+							?> 
+							<div class="row">
+								<div class="col-md-12 col-lg-12 col-sm-12">
+								<?php
+								foreach($initiative_updates[0] as $initiative_update){
+									?>
+									<p class="no-margin" style="font-weight:300"><?php echo date('F j, Y', strtotime($initiative_update['UpdateDate'])); ?></p>
+									<h3 class="no-margin"><?php echo $initiative_update['UpdateTitle']; ?></h3>								
+									<p><?php echo $initiative_update['Update']; ?></p>
+									
+								<?php 
+								}
+								?>
+								</div>
+							</div>	
+							<br>
+							<?php
+						} 
 
 						do_action('get_related_news');						
 

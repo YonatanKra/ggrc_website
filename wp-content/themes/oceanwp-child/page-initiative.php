@@ -126,9 +126,7 @@ get_header("initiatives");
 
 			<?php do_action( 'ocean_after_content' ); ?>
 
-		</div><!-- #primary -->
-
-		
+		</div><!-- #primary -->		
 
 	</div><!-- #content-wrap -->
 
