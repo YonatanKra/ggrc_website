@@ -6,8 +6,6 @@
  * @package OceanWP WordPress theme
  */
 
-include 'social_share/share.php';
-
 ?>
 <!DOCTYPE html>
 <html class="<?php echo esc_attr( oceanwp_html_classes() ); ?>" <?php language_attributes(); ?>>
@@ -56,8 +54,7 @@ include 'social_share/share.php';
 			<main id="main" class="site-main clr"<?php oceanwp_schema_markup( 'main' ); ?> role="main">
 
 				<?php //do_action( 'ocean_page_header' ); ?>
-
-				
+			
 
 				<?php do_action( 'ocean_before_content_wrap' ); ?>
 				<?php while ( have_posts() ) :
@@ -98,12 +95,12 @@ include 'social_share/share.php';
 													</div>
 												</li>
 											<?php endif; ?>
-											<!-- <button class="share-initiative"><i class="fa-solid fa-share-alt"></i> share initiative
-											</button> -->
+											
 											<?php 
-												$count = check_following();
 												
-												if ($count >= 1){
+												$count = checkIsFollowing();
+												
+												if ($count == 1){
 													?>
 													<button id="unfollow" class="template-btn"> following initiative </button>
 													<?php } else{ ?>
@@ -320,8 +317,7 @@ include 'social_share/share.php';
 						
 						comments_template();
 
-						do_action('get_related_news');
-						
+						do_action('get_related_news');						
 
 					endwhile;
 
@@ -349,6 +345,7 @@ include 'social_share/share.php';
 	jQuery(document).ready(function($) {
 		
 		$('#follow').click(function(){
+			
 			ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ) ?>'; // get ajaxurl
 
 			var data = {
@@ -383,8 +380,7 @@ include 'social_share/share.php';
 				success: function (response) {
 					console.log(response); 
 					$("#unfollow").html("follow initiative");
-					$('#unfollow').attr('id','follow'); 
-					//document.getElementById("follow").innerHTML="<button id=\"unfollow\" class=\"template-btn\">unfollow</button>";               
+					$('#unfollow').attr('id','follow');                
 				}
 			});
 		});

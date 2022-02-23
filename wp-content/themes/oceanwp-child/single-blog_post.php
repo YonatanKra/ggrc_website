@@ -71,7 +71,7 @@
 
 				<?php //do_action( 'ocean_page_header' ); ?>
 
-				<div class="blog-sub-header"></div>
+				<div class="blog-subheader"></div>
 
 	<?php do_action( 'ocean_before_content_wrap' ); ?>
 	<?php while ( have_posts() ) :

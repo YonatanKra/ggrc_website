@@ -167,23 +167,18 @@ function add_related_news_to_initiative_pages() {
         $postid= get_the_ID();
         // fetch taxonomy terms for current initiative
         $initiativeterms = get_the_terms( get_the_ID(), 'initiative_tags'  );
-
          
         if( $initiativeterms ) {
-             
-            // $initiativetermnames[] = 0;
                      
             foreach( $initiativeterms as $initiativeterm ) {  
                  
                 $initiativetermnames[] = $initiativeterm->slug;
              
-            }
-           
+            }           
                          
             // set up the query arguments
             $args = array (
                 'post_type' => 'news',
-                //'tag_slug__in'  => $initiativetermnames,
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'post_tag',
@@ -198,10 +193,6 @@ function add_related_news_to_initiative_pages() {
                 'nopaging' => true,
             );
 
-           
-
-            // get news post 
-             
             // run the query
             $query = new WP_Query( $args ); 
 
@@ -234,8 +225,7 @@ function add_related_news_to_initiative_pages() {
 						echo "No Tags";
 					}else{
 						
-						foreach($tags as $key => $posttags){
-							
+						foreach($tags as $key => $posttags){							
 							
 							?>
 							<p style="display:inline;font-weight:bold"><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="news-tag"><?php echo esc_html($posttags->name); ?></a></p>
@@ -253,77 +243,55 @@ function add_related_news_to_initiative_pages() {
 			<?php } ?>
 
 			</div>
-        <?php
-             
+        <?php            
          
-        }
-         
-    }
- 
+        }         
+    } 
 }
 
-
-add_action( 'wp_ajax_follow_post', 'follow_initiative' );
-function follow_initiative() {
-	global $wpdb; 
-    
-        
+function isUserLoggedIn() {
 	if ( !is_user_logged_in() ) {
 
 		wp_redirect('http://localhost/ggrc_website/'); 
 		
 		exit;
 	}
-	else{
+}
+
+add_action( 'wp_ajax_follow_post', 'follow_initiative' );
+function follow_initiative() {
+	global $wpdb;
+
+	isUserLoggedIn();
+
+	$current_user_id = get_current_user_id();
+	$postid = $_POST['postid'];
+
+	$table_name = $wpdb->prefix . 'follow_posts';     
+	$wpdb->insert($table_name, array('userID' => $current_user_id, 'postID' => $postid)); 		
 	
-		$current_user_id = get_current_user_id();
-		$postid = $_POST['postid'];
-
-		//echo $current_user_id;
-
-			
-		$table_name = $wpdb->prefix . 'follow_posts';     
-		$wpdb->insert($table_name, array('userID' => $current_user_id, 'postID' => $postid)); 
-		
-		
-	}
-
 }
 
 add_action( 'wp_ajax_unfollow_post', 'unfollow_initiative' );
 function unfollow_initiative() {
 	global $wpdb;     
         
-	if ( !is_user_logged_in() ) {
+	isUserLoggedIn();
 
-		wp_redirect('http://localhost/ggrc_website/'); 
+	$current_user_id = get_current_user_id();
+	$postid = $_POST['postid'];			
+	$table_name = $wpdb->prefix . 'follow_posts';     
 		
-		exit;
-	}
-	else{
-	
-		$current_user_id = get_current_user_id();
-		$postid = $_POST['postid'];
-
-		//echo $current_user_id;
-			
-		$table_name = $wpdb->prefix . 'follow_posts';     
-		 
-		$wpdb->query($wpdb->prepare("UPDATE $table_name SET isFollowing = '0' WHERE userID = '$current_user_id' and postID = '$postid'"));		
+	$wpdb->query($wpdb->prepare("UPDATE $table_name SET isFollowing = '0' WHERE userID = '$current_user_id' and postID = '$postid'"));		
 		
-	}
-
 }
 
-//add_action( 'check_follow', 'check_following' );
-
-function check_following() {
+function checkIsFollowing() {
 	global $wpdb;
 
 	$current_user_id = get_current_user_id();
 	$postid= get_the_ID();
-	$posts = $wpdb->get_results("SELECT * FROM ggrc_follow_posts WHERE `userID` = '$current_user_id' and `postID` = '$postid' and `isFollowing` = 1");
-	
-	//var_dump($posts);
+	$posts = $wpdb->get_results("SELECT DISTINCT userID, postID FROM ggrc_follow_posts WHERE `userID` = '$current_user_id' and `postID` = '$postid' and `isFollowing` = 1");
+
 	return count($posts);
 }
