@@ -251,6 +251,18 @@ hr{
     border-right-width: 0;
 }
 
+.initiative-contact-details{
+    float:left;
+    margin-left:8px;
+    line-height:18px
+}
+
+.initiative-contact-profile{
+    float:left;
+    margin-top:20px;
+    margin-bottom:30px
+}
+
 .initiative-list{
     background-color:#fff;
     margin-bottom:15px;

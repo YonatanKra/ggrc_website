@@ -284,21 +284,30 @@
 							<div class="col-md-3 col-lg-3 col-sm-12" id="initiative-contact">
 								<h3>People for Initiative</h3>
 								<p><b>Contacts for initiative</b></p>
-								<?php $post_id = get_the_ID();
-										$author_id = get_post_field( 'post_author', $post_id );
-										$author_name = get_the_author_meta( 'display_name', $author_id );
-											
-										echo get_avatar( get_the_author_meta('ID'), 60);										
+								<?php 
+									$post_id = get_the_ID();
+									for ( $i = 1; $i <= 3; $i++ ){
+									
+										$id= get_post_custom_values('initiative-contact-'. $i, $post_id);
+										if (!empty($id[0])){
+										
+											$user_id = intval($id[0]);
+											$contact_name = get_the_author_meta( 'display_name', $user_id );
+												
+											echo get_avatar($user_id, 60);										
 								?>
-								<div style="float:left;margin-left:8px;line-height:18px">
-									<h4 class="no-margin"><b><?php echo $author_name ?></b></h4>
+								<div class="initiative-contact-details">
+									<h4 class="no-margin"><b><?php echo $contact_name ?></b></h4>
 									<p class="no-margin">title</p>
 									<p class="no-margin">organisation</p>
 								</div>
-								<div style="float:left;margin-top:20px">									
+								<div class="initiative-contact-profile">									
 									<a href="#" target="_blank" class="profile">view profile</a>
 									<a href="#" target="_blank" class="template-btn"> send message</a>
 								</div>
+								
+								<?php }
+								} ?>
 							</div>
 							<div class="col-md-9 col-lg-9 col-sm-12" style="margin-top:42px;border-left:1px solid #BEC5CC;">
 								<div class="row" style="padding-left:20px">									
