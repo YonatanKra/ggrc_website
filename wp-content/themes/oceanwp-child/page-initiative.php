@@ -65,7 +65,7 @@ get_header("initiatives");
 					 $the_query->the_post(); ?>
 					<div class="col-lg-4 col-md-6 col-sm-12">
 						<div class="initiative-list">
-						<img src="<?php echo get_the_post_thumbnail_url(); ?>" width="100%" class="ini-cover"/>
+						<img src="<?php echo get_the_post_thumbnail_url(); ?>" width="100%" class="initiative-cover"/>
 							
 						<div style="padding:8px;line-height:150%">
 						<?php 
@@ -87,7 +87,7 @@ get_header("initiatives");
 									
 								}
 							}?>
-							<p class="ini-supporters"><b>30 Supporters</b></p>
+							<p class="initiative-supporters"><b>30 Supporters</b></p>
 								<a href="<?php the_permalink(); ?>"><h4 style="margin-bottom:10px"><b><?php the_title(); ?></b></h4></a>
 								<?php the_excerpt(); ?>
 								<hr style="margin:0px"/>

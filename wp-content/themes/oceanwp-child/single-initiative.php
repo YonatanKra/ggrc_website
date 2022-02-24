@@ -51,10 +51,7 @@
 
 			<?php do_action( 'ocean_before_main' ); ?>
 
-			<main id="main" class="site-main clr"<?php oceanwp_schema_markup( 'main' ); ?> role="main">
-
-				<?php //do_action( 'ocean_page_header' ); ?>
-			
+			<main id="main" class="site-main clr"<?php oceanwp_schema_markup( 'main' ); ?> role="main">			
 
 				<?php do_action( 'ocean_before_content_wrap' ); ?>
 				<?php while ( have_posts() ) :
@@ -97,10 +94,8 @@
 											<?php endif; ?>
 											
 											<?php 
-												
-												$count = checkIsFollowing();
-												
-												if ($count == 1){
+												$userfollowing =isCurrentUserFollowing();											
+												if (!empty($userfollowing)){
 													?>
 													<button id="unfollow" class="template-btn"> following initiative </button>
 													<?php } else{ ?>
@@ -178,11 +173,11 @@
 						the_post(); 
 
 							$the_post_id = get_the_ID();
-							//echo $the_post_id;
+					
 							$type = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
 							
 							if(!empty($type) && is_array($type)){
-								//echo "No type";
+								
 								if($type[0]->name == "Take Action"){								
 
 								?>
@@ -361,7 +356,7 @@
 								<?php
 								foreach($initiative_updates[0] as $initiative_update){
 									?>
-									<p class="no-margin" style="font-weight:300"><?php echo date('F j, Y', strtotime($initiative_update['UpdateDate'])); ?></p>
+									<p class="no-margin links"><?php echo date('F j, Y', strtotime($initiative_update['UpdateDate'])); ?></p>
 									<h3 class="no-margin"><?php echo $initiative_update['UpdateTitle']; ?></h3>								
 									<p><?php echo $initiative_update['Update']; ?></p>
 									
@@ -374,7 +369,8 @@
 							<?php
 						} 
 
-						do_action('get_related_news');						
+						do_action('get_related_news');	
+						do_action('get_action_initiatives_by_region');					
 
 					endwhile;
 

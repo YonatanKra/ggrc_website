@@ -270,7 +270,7 @@ hr{
     border:1px solid #ddd;
 }
 
-.ini-cover{
+.initiative-cover{
     height:90px !important;
     object-fit:cover
 }
@@ -287,7 +287,7 @@ hr{
     padding:0 4px;
 }
 
-.ini-supporters{
+.initiative-supporters{
     color:#DC9C05;
     margin-bottom:0px
 }
@@ -296,4 +296,12 @@ hr{
     list-style: none;
     width: fit-content;
     display: inline-block;
+}
+
+.links{
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    font-size:16px;
+    line-height: 19px;
 }
