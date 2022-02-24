@@ -200,6 +200,7 @@ function initiative_meta_boxes() {
 		<?php
 	}
 	add_action('save_post', 'custom_repeat_meta_box_save');
+
 	function custom_repeat_meta_box_save($post_id) {
 		if ( ! isset( $_POST['ggrc_repeat_meta_box_nonce'] ) ||
 		! wp_verify_nonce( $_POST['ggrc_repeat_meta_box_nonce'], 'ggrc_repeat_meta_box_nonce' ) )
@@ -411,3 +412,12 @@ function checkIsFollowing() {
 
 	return count($posts);
 }
+
+/* Blog Functions */
+function add_blog_Category($classes) {
+	$blogcat = wp_get_post_terms(get_the_ID(), 'blog-category', ['']);
+	$classes[] = strtolower($blogcat[0]->name);
+
+	return $classes;
+}
+add_filter('body_class', 'add_blog_category');

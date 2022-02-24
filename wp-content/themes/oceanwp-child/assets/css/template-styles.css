@@ -9,7 +9,11 @@ h1{
 }
 
 h2{
-    font-size:35px
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 40px;
 }
 
 h3{
@@ -179,6 +183,8 @@ hr{
     color:#275f87
 }
 
+/* Blog Styles Start */
+
 .blog-subheader{
     height:300px;
     background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
@@ -186,42 +192,83 @@ hr{
     border-bottom:2px solid #EF8607;
 }
 
-.blog-detail-style{
-    margin-top:-10.8rem;
-    height:108px;
+.single-blog_post #primary{
+    border: none;
+}
+
+#content-wrap .saboxplugin-wrap {
+    border: none;
+}
+
+#content-wrap .saboxplugin-wrap img {
+    border-radius: 50px;
+    filter: drop-shadow(0px 4px 18px rgba(253, 186, 26, 0.1));
+}
+
+.blog-details{
+    --blog-color: #EF8607;
+    --testimonials-color: #789B18;
+    --stories-color: #0B4F6D;
+    top: calc(-144px - 50px);
     background-color:#fff;
     z-index:10;
     position:relative;
-    width:65%;
-    margin-left:5%;
-	border:2px solid #EF8607;
-    border-bottom:none;
-    border-radius:4px 4px 0px 0px;
-    padding:5px
+    text-align: center;
 }
+
+.blog-details hr {
+    margin: 5px 0;
+}
+
+.blog-details-border {
+    width: 100%;
+    height: 144px;
+    border: 2px solid var(--blog-color);
+    border-bottom: 0;
+    border-radius: 4px 4px 0px 0px;
+    padding-top: 14px;
+    margin-bottom: 60px;
+}
+
+
+
+.testimonials .blog-details-border {
+    border-color: var(--testimonials-color);
+}
+
+.stories .blog-details-border {
+    border-color: var(--stories-color);
+}
+
+.single-blog_post #content{
+    position: relative;
+    top: -144px;
+}
+
+.blog .blog-category-title{
+    text-align:center;
+    color: var(--blog-color);
+    font-weight:bold
+}
+
+.testimonials .blog-category-title{
+    text-align:center;
+    color: var(--testimonials-color);
+    font-weight:bold
+}
+
+.stories .blog-category-title{
+    text-align:center;
+    color: var(--stories-color);
+    font-weight:bold
+}
+
 
 .like-share{
     display:inline;
     margin-right:20px
 }
-
-.cat-blog{
-    text-align:center;
-    color:#EF8607;
-    font-weight:bold
-}
-
-.cat-testimonials{
-    text-align:center;
-    color:#789B18;
-    font-weight:bold
-}
-
-.cat-stories{
-    text-align:center;
-    color:#0B4F6D;
-    font-weight:bold
-}
+/* Blog Styles End */
 
 .suggest-titlearea{
     padding-top: 8rem;
