@@ -87,7 +87,7 @@
 											<li class="ess-all-networks ess-social-networks ess-list">
 												<div class="ess-social-network-link">
 													
-													<span class="ess-all-networks-button share-initiative" style="color:#0B4F6D !important"><i aria-hidden="true" class="fa fa-share-alt"></i> share initiative</span>
+													<span class="ess-all-networks-button initiative-share" style="color:#0B4F6D !important"><i aria-hidden="true" class="fa fa-share-alt"></i> share initiative</span>
 												</div>
 											</li>
 											
@@ -126,7 +126,7 @@
 										} ?>
 										
 										<hr class="mt-60"/>
-										<p class="ggrc-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
+										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
 										<hr class="mb-60"/>
 										
 										</div>
@@ -179,7 +179,7 @@
 								if($type[0]->name == "Take Action"){								
 
 								?>
-						<div class="how-to-take-action">
+						<div class="initiative-take-action-bar">
 							<div class="row">
 								<div class="col-md-4 col-lg-4 col-sm-12">
 									<div class="row">
@@ -256,7 +256,7 @@
 										<p><i class="fa fa-map-marker-alt"></i> <?php the_field('region') ?></p>
 										<p><i class="fa fa-clock"></i> <?php the_field('initiative-duration') ?></p>
 										<p><i class="fa fa-globe"></i> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
-										<p style="line-height:20px;margin-bottom:0"><span><b>GGRC priorities: </b></span> <?php the_field('ggrc-priorities'); ?></p>
+										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
 									</div>
 								</div>
 								<div class="row mt-30">
