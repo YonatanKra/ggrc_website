@@ -14,6 +14,85 @@
  *
  */
 
+function initiative_actiontype_meta_boxes() {
+	add_action('admin_init', 'ggrc_add_initiative_actiontype_meta_boxes', 2);
+
+	function ggrc_add_initiative_actiontype_meta_boxes() {
+		add_meta_box( 'ggrc_initiative_actiontype', 'Action Type Link', 'Repeating_meta_box_display', 'initiative', 'normal', 'default');
+	}
+
+	function actiontype_row_template($actiontypes, $field = null) {
+		?>
+			<tr>
+				<td> 
+					<select required type="text" placeholder="Action Type" title="Action Type" name="ActionType[]">
+					<option value="" disabled selected>Select a Action Type</option>
+						<?php
+							foreach ( $actiontypes as $actiontype ) {
+								?>
+									<option value="<?php echo $actiontype->name; ?>" <?php if (!empty($field['ActionType']) && $actiontype->name == $field['ActionType']) echo 'selected="selected"';?>> <?php echo $actiontype->name; ?></option>
+								<?php
+							}
+						?>
+					</select></td>
+				<td> 
+					<input required type="text" placeholder="Action Link" name="ActionLink[]" <?php if (!empty($field['ActionLink'])) { echo 'value="' . $field['ActionLink'] . '"';} ?>/>
+					</td>
+				<td>
+					<a class="button cmb-remove-row-button remove-row <?php if ($field === null) echo 'button-disabled'; ?>" href="#">Remove</a>
+				</td>
+			</tr>
+		<?php 
+	}
+
+	function Repeating_meta_box_display() {
+		
+		global $post;
+
+		$ggrc_initiative_actiontype = get_terms( array(
+			'taxonomy' => 'actiontype',
+			'hide_empty' => false,
+		) );
+		$ggrc_actiontype = get_post_meta($post->ID, 'initiative', true);
+		
+		 wp_nonce_field( 'ggrc_repeating_meta_box_nonce', 'ggrc_repeating_meta_box_nonce' );
+		?>
+		<script type="text/javascript">
+		jQuery(document).ready(function( $ ){
+			const tbody = document.querySelector("#repeatable-fieldset-three tbody");
+
+			$( '#add-rows' ).on('click', function() {
+				const rowWrapper = document.createElement('tbody');
+				rowWrapper.innerHTML = `<?php actiontype_row_template($ggrc_initiative_actiontype); ?>`;
+				const row = rowWrapper.children[0];
+				const lastChild = tbody.children[tbody.children.length - 1];
+				tbody.insertBefore( row, lastChild );
+				return false;
+			});
+	
+			$( '.remove-row' ).on('click', function() {
+				$(this).parents('tr').remove();
+				return false;
+			});
+		});
+		</script>
+		<table id="repeatable-fieldset-three" width="100%">
+		<tbody>
+			<?php
+			if ( $ggrc_actiontype ) :
+				foreach ( $ggrc_actiontype as $field ) {
+					actiontype_row_template($ggrc_initiative_actiontype, $field);
+				}
+			else :
+				// show a blank one
+				actiontype_row_template($ggrc_initiative_actiontype);
+			endif; ?>
+		</tbody>
+		</table>
+		<p><a id="add-rows" class="button" href="#">Add another</a></p>
+		<?php
+	}
+}
 
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);
@@ -136,15 +215,15 @@ function initiative_meta_boxes() {
 		?>
 			<tr>
                 <td>
-                <input required type="text" placeholder="Update Title" name="UpdateTitle[]" <?php if ($field) echo 'value="' . $field['UpdateTitle'] . '"' ?>/>
+                <input required type="text" placeholder="Update Title" name="UpdateTitle[]" <?php if (!empty($field['UpdateTitle'])) echo 'value="' . $field['UpdateTitle'] . '"' ?>/>
 					
 				</td>
                 <td> 
-                <input required type="date" placeholder="Date" name="UpdateDate[]" <?php if ($field) echo 'value="' . $field['UpdateDate'] . '"' ?>/>
+                <input required type="date" placeholder="Date" name="UpdateDate[]" <?php if (!empty($field['UpdateDate'])) echo 'value="' . $field['UpdateDate'] . '"' ?>/>
 					
 				</td>
 				<td> 
-                    <textarea rows="3" placeholder="Initiative Updates" name="Update[]"><?php if ($field) echo $field['Update'] ;?></textarea>
+                    <textarea rows="3" placeholder="Initiative Updates" name="Update[]"><?php if (!empty($field['Update'])) echo $field['Update'] ;?></textarea>
 					
 				</td>
 				<td>
@@ -217,15 +296,27 @@ function initiative_meta_boxes() {
 		$new = array();
 		$title = $_POST['UpdateTitle'];
         $date = $_POST['UpdateDate'];
-		$updates = $_POST['Update'];
-		 $count = count( $updates );
-		 for ( $i = 0; $i < $count; $i++ ) {
+		$updates = $_POST['Update'];		
+		$actiontype = $_POST['ActionType'];
+		$links = $_POST['ActionLink'];
+
+		$countaction = count( $actiontype );
+		for ( $i = 0; $i < $countaction; $i++ ) {
+			if ( $actiontype[$i] != '' ) :
+				$new[$i]['ActionType'] = stripslashes( strip_tags( $actiontype[$i] ) );
+				$new[$i]['ActionLink'] = stripslashes( $links[$i] ); // and however you want to sanitize
+			endif;
+		}
+
+		$count = count( $updates );
+		for ( $i = 0; $i < $count; $i++ ) {
 			if ( $updates[$i] != '' ) :
 				$new[$i]['UpdateTitle'] = stripslashes( strip_tags( $title[$i] )); 
                 $new[$i]['UpdateDate'] = $date[$i]; 
 				$new[$i]['Update'] = stripslashes( strip_tags( $updates[$i] )); // and however you want to sanitize
 			endif;
 		}
+
 		if ( !empty( $new ) && $new != $old )
 			update_post_meta( $post_id, 'initiative', $new );
 		elseif ( empty($new) && $old )
@@ -237,6 +328,7 @@ function initiative_meta_boxes() {
 if (is_admin()) {
 	news_meta_boxes();
 	initiative_meta_boxes();
+	initiative_actiontype_meta_boxes();
 }
 
 /**

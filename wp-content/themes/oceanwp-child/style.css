@@ -70,3 +70,19 @@ body div.wpforms-container-full .wpforms-form .wpforms-page-button {
     box-sizing: border-box;
     min-height:77px;
 }
+
+.align-center{
+    text-align:center;
+}
+
+@media (min-width: 1400px){
+    .container, .container-sm, .container-md, .container-lg, .container-xl {
+        max-width: 1300px !important;
+    }
+}
+
+@media (min-width: 1700px){
+    .container, .container-sm, .container-md, .container-lg, .container-xl {
+        max-width: 1550px !important;
+    }
+}

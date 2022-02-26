@@ -61,7 +61,7 @@
 							$type = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
 							
 							if(!empty($type) && is_array($type)){
-								//echo "No type";
+								
 								if($type[0]->name == "Take Action"){								
 
 								?>
@@ -84,14 +84,12 @@
 										<div class="col-md-5 col-lg-5 col-sm-6" style="text-align:right;margin-bottom:30px">
 											<a href="<?php the_field('website') ?>" target="_blank" class="initiative-website">View site</a>
 											
-											<?php if ( 'yes' === get_option( 'easy_social_sharing_inline_enable_all_networks' ) ) : ?>
 												<li class="ess-all-networks ess-social-networks ess-list">
 													<div class="ess-social-network-link">
 														
 														<span class="ess-all-networks-button share-initiative" style="color:#0B4F6D !important"><i aria-hidden="true" class="fa fa-share-alt"></i> <b>share initiative</b></span>
 													</div>
 												</li>
-											<?php endif; ?>
 											
 											<?php 
 												$userfollowing =isCurrentUserFollowing();											
@@ -193,22 +191,22 @@
 								<div class="col-md-8 col-lg-8 col-sm-12">
 									<div class="row">
 						<?php 
-							$the_post_id = get_the_ID();
-							$actions = wp_get_post_terms($the_post_id, 'actiontype', ['']);
-							
-							if(empty($actions) || ! is_array($actions)){
-								echo "No Actions";
+							$initiative_actiontypes = get_post_meta($the_post_id, 'initiative');
+
+							if(empty($initiative_actiontypes) || ! is_array($initiative_actiontypes)){
+								echo "No Action";
 							}else{
-								
-								foreach($actions as $key => $postaction){									
+
+								foreach($initiative_actiontypes[0] as $initiative_actiontype){
+									if(!empty($initiative_actiontype['ActionType'])){
 									
 									?>
-									<div class="col-md-6 col-lg-4 col-sm-6" style="text-align:center">
-										<p><a href="<?php echo get_term_link($postaction->term_id, 'actiontype'); ?>" target="_blank" class="action-btn">
-										<?php echo esc_html($postaction->name); ?></a></p>
+									<div class="col-md-6 col-lg-4 col-sm-6 align-center">
+										<a href="<?php echo $initiative_actiontype['ActionLink']; ?>" target="_blank" class="action-btn">
+										<?php echo $initiative_actiontype['ActionType'] ; ?></a>
 									</div>
 								<?php 
-									
+									}	
 								}
 							} ?>
 									</div>
@@ -263,9 +261,33 @@
 									<div class="col-md-12 col-lg-12 col-sm-12">
 										<h4><b>Additional Resources</b></h4>
 										<div class="row">
-											<div class="col-md-3 col-lg-3 col-sm-12 add-res">
-												<p><i class="fa fa-file"></i></p>
-											</div>
+											<?php 
+												$attachmentID = get_post_custom_values('additional-resources-1');
+												if(!empty($attachmentID)){ ?>
+												<div class="col-md-4 col-lg-4 col-sm-12 add-res">
+													<i class="fa fa-file"></i> 
+													<?php 
+
+													$attachedFile=get_attached_file($attachmentID[0]);
+
+													?><a href="../../../<?php echo trim($attachedFile, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-1'); ?></a>
+
+												</div>
+											<?php } 
+
+												$attachmentID1 = get_post_custom_values('additional-resources-2');
+												if(!empty($attachmentID1)){ 
+											?>
+												<div class="col-md-4 col-lg-4 col-sm-12 add-res">
+														<i class="fa fa-file"></i> 
+														<?php 
+
+														$attachedFile1=get_attached_file($attachmentID1[0]);
+
+														?><a href="../../../<?php echo trim($attachedFile1, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-2'); ?></a>
+
+													</div>
+												<?php } ?>
 											
 										</div>
 									</div>
@@ -355,13 +377,14 @@
 								<div class="col-md-12 col-lg-12 col-sm-12">
 								<?php
 								foreach($initiative_updates[0] as $initiative_update){
+									if(!empty($initiative_update['UpdateDate'])){
 									?>
 									<p class="no-margin links"><?php echo date('F j, Y', strtotime($initiative_update['UpdateDate'])); ?></p>
 									<h3 class="no-margin"><?php echo $initiative_update['UpdateTitle']; ?></h3>								
 									<p><?php echo $initiative_update['Update']; ?></p>
 									
 								<?php 
-								}
+								} }
 								?>
 								</div>
 							</div>	
@@ -440,7 +463,6 @@
 
 		$("#wpd-field-submit-0_0").val("comment");	
 		$("#reply-title").html("Comments");		
-		$('.ql-editor').attr('placeholder', 'Write your comment...');
 		
 	});
 </script>
