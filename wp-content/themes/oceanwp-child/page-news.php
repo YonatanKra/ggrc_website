@@ -74,43 +74,48 @@
 			<?php if($the_query->have_posts()){
 				 while($the_query->have_posts()) {
 					 $the_query->the_post(); ?>
-					<div class="col-lg-6 col-md-6 col-sm-12">
-					<div class="news-box">
-					<h2><?php the_title(); ?></h2> 
-					<?php 
-					$the_post_id = get_the_ID();
-					$news_agencies = get_post_meta($the_post_id, 'news');
-					$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
-					if(empty($news_agencies) || ! is_array($news_agencies)){
-						echo "No news agency";
-					}else{
-						foreach($news_agencies[0] as $newsagency){
-							?>
-							<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
-							
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="news-box">
+						<h3><?php the_title(); ?></h3> 
 						<?php 
-						}
-					} ?> <br><br> <?php
-
-					if(empty($tags) || ! is_array($tags)){
-						echo "No Tags";
-					}else{
-						
-						foreach($tags as $key => $posttags){
-							
-							
+						$the_post_id = get_the_ID();
+						$news_agencies = get_post_meta($the_post_id, 'news');
+						$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
+						?>
+							<div class="mb-20">
+							<?php
+							if(empty($news_agencies) || ! is_array($news_agencies)){
+								echo "No news agency";
+							}else{
+								foreach($news_agencies[0] as $newsagency){
+									?>
+									<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
+									
+								<?php 
+								}
+							}
 							?>
-							<p style="display:inline;font-weight:bold"><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="news-tag"><?php echo esc_html($posttags->name); ?></a></p>
-							
-						<?php 
-							
-						}
-					}
-					?>
-					
-				</div>
-				</div>
-			<?php } ?>
+							</div>
+							<div>
+							<?php
+							if(empty($tags) || ! is_array($tags)){
+								echo "No Tags";
+							}else{
+								
+								foreach($tags as $key => $posttags){							
+									
+									?>
+									<a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="tags"><?php echo esc_html($posttags->name); ?></a>
+									
+								<?php 
+									
+								}
+							}
+							?>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
 			<?php } ?>
 
 			</div>

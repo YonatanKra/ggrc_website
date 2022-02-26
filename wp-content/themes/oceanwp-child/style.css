@@ -63,10 +63,3 @@ body div.wpforms-container-full .wpforms-form .wpforms-page-button {
     white-space: nowrap;
     border: 0;
 }
-
-#comment{
-    border-radius:5px;
-    border: 1px solid rgba(11, 79, 109, 0.6);
-    box-sizing: border-box;
-    min-height:77px;
-}

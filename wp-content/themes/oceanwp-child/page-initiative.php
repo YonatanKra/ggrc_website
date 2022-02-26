@@ -41,7 +41,7 @@ get_header("initiatives");
 
 		<?php do_action( 'ocean_before_primary' ); ?>
 
-		<div id="primary" class="content-area clr" class="initiative-listarea">
+		<div id="primary" class="content-area clr initiative-list-area">
 
 			<?php do_action( 'ocean_before_content' ); ?>
 
@@ -65,33 +65,32 @@ get_header("initiatives");
 					 $the_query->the_post(); ?>
 					<div class="col-lg-4 col-md-6 col-sm-12">
 						<div class="initiative-list">
-						<img src="<?php echo get_the_post_thumbnail_url(); ?>" width="100%" class="initiative-cover"/>
+						<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
 							
-						<div style="padding:8px;line-height:150%">
+						<div class="initiative-list-detail">
 						<?php 
 							
 							$the_post_id = get_the_ID();
 							$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-							// $tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
 							
 							if(empty($action) || ! is_array($action)){
 								echo "";
 							}else{
 								
-								foreach($action as $key => $takeaction){
+								foreach($action as $key => $take_action){
 									
 									?>
 									<p class="action-type"> 
-									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($takeaction->name); ?></p>
+									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($take_action->name); ?></p>
 								<?php 
 									
 								}
 							}?>
-							<p class="initiative-supporters"><b>30 Supporters</b></p>
-								<a href="<?php the_permalink(); ?>"><h4 style="margin-bottom:10px"><b><?php the_title(); ?></b></h4></a>
+							<p class="initiative-supporters">30 Supporters</p>
+								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 								<?php the_excerpt(); ?>
-								<hr style="margin:0px"/>
-								<i class="fa-solid fa-map-location-dot"></i> <?php the_field('venue') ?><br>
+								<hr class="no-margin"/>
+								<i class="fa-solid fa-map-location"></i> <?php the_field('venue') ?><br>
 								<i class="fa-solid fa-anchor"></i> <?php the_field('region') ?><br>
 								
 							</div>
