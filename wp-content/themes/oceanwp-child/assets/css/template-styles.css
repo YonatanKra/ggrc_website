@@ -168,6 +168,7 @@ hr{
 	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.13);
     border-radius: 10px;
     margin-left:15px;
+    padding: 20px;
 }
 
 .no-margin-bottom{
@@ -211,14 +212,6 @@ hr{
     padding:15px;
 }
 
-.news-tag{
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding:8px;
-    margin-right:5px;
-    background-color:#5ba3bb94;
-    color:#275f87
-}
 
 .blog-subheader{
     height:300px;

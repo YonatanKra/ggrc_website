@@ -191,19 +191,19 @@
 								<div class="col-md-8 col-lg-8 col-sm-12">
 									<div class="row">
 						<?php 
-							$initiative_actiontypes = get_post_meta($the_post_id, 'initiative');
+							$initiative_action_types = get_post_meta($the_post_id, 'initiative');
 
-							if(empty($initiative_actiontypes) || ! is_array($initiative_actiontypes)){
+							if(empty($initiative_action_types) || ! is_array($initiative_action_types)){
 								echo "No Action";
 							}else{
 
-								foreach($initiative_actiontypes[0] as $initiative_actiontype){
-									if(!empty($initiative_actiontype['ActionType'])){
+								foreach($initiative_action_types[0] as $initiative_action_type){
+									if(!empty($initiative_action_type['ActionType'])){
 									
 									?>
 									<div class="col-md-6 col-lg-4 col-sm-6 align-center">
-										<a href="<?php echo $initiative_actiontype['ActionLink']; ?>" target="_blank" class="action-btn">
-										<?php echo $initiative_actiontype['ActionType'] ; ?></a>
+										<a href="<?php echo $initiative_action_type['ActionLink']; ?>" target="_blank" class="action-btn">
+										<?php echo $initiative_action_type['ActionType'] ; ?></a>
 									</div>
 								<?php 
 									}	
@@ -266,7 +266,7 @@
 											<?php 
 												$attachmentID = get_post_custom_values('additional-resources-1');
 												if(!empty($attachmentID)){ ?>
-												<div class="col-md-4 col-lg-4 col-sm-12 add-res">
+												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
 													<i class="fa fa-file"></i> 
 													<?php 
 
@@ -280,7 +280,7 @@
 												$attachmentID1 = get_post_custom_values('additional-resources-2');
 												if(!empty($attachmentID1)){ 
 											?>
-												<div class="col-md-4 col-lg-4 col-sm-12 add-res">
+												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
 														<i class="fa fa-file"></i> 
 														<?php 
 
