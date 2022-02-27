@@ -61,7 +61,7 @@
 							$type = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
 							
 							if(!empty($type) && is_array($type)){
-								//echo "No type";
+								
 								if($type[0]->name == "Take Action"){								
 
 								?>
@@ -191,22 +191,22 @@
 								<div class="col-md-8 col-lg-8 col-sm-12">
 									<div class="row">
 						<?php 
-							$the_post_id = get_the_ID();
-							$actions = wp_get_post_terms($the_post_id, 'actiontype', ['']);
-							
-							if(empty($actions) || ! is_array($actions)){
-								echo "No Actions";
+							$initiative_action_types = get_post_meta($the_post_id, 'initiative');
+
+							if(empty($initiative_action_types) || ! is_array($initiative_action_types)){
+								echo "No Action";
 							}else{
-								
-								foreach($actions as $key => $post_action){									
+
+								foreach($initiative_action_types[0] as $initiative_action_type){
+									if(!empty($initiative_action_type['ActionType'])){
 									
 									?>
 									<div class="col-md-6 col-lg-4 col-sm-6 align-center">
-										<p><a href="<?php echo get_term_link($post_action->term_id, 'actiontype'); ?>" target="_blank" class="action-btn">
-										<?php echo esc_html($post_action->name); ?></a></p>
+										<a href="<?php echo $initiative_action_type['ActionLink']; ?>" target="_blank" class="action-btn">
+										<?php echo $initiative_action_type['ActionType'] ; ?></a>
 									</div>
 								<?php 
-									
+									}	
 								}
 							} ?>
 									</div>
@@ -261,11 +261,36 @@
 								</div>
 								<div class="row mt-30">
 									<div class="col-md-12 col-lg-12 col-sm-12">
-										<h4><b>Additional Resources</b></h4>
+										<h4>Additional Resources</h4>
 										<div class="row">
-											<div class="col-md-3 col-lg-3 col-sm-12 add-resources">
-												<p><i class="fa fa-file"></i></p>
-											</div>											
+											<?php 
+												$attachmentID = get_post_custom_values('additional-resources-1');
+												if(!empty($attachmentID)){ ?>
+												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
+													<i class="fa fa-file"></i> 
+													<?php 
+
+													$attachedFile=get_attached_file($attachmentID[0]);
+
+													?><a href="../../../<?php echo trim($attachedFile, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-1'); ?></a>
+
+												</div>
+											<?php } 
+
+												$attachmentID1 = get_post_custom_values('additional-resources-2');
+												if(!empty($attachmentID1)){ 
+											?>
+												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
+														<i class="fa fa-file"></i> 
+														<?php 
+
+														$attachedFile1=get_attached_file($attachmentID1[0]);
+
+														?><a href="../../../<?php echo trim($attachedFile1, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-2'); ?></a>
+
+													</div>
+												<?php } ?>
+											
 										</div>
 									</div>
 								</div>

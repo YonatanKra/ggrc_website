@@ -168,6 +168,7 @@ hr{
 	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.13);
     border-radius: 10px;
     margin-left:15px;
+    padding: 20px;
 }
 
 .no-margin-bottom{
