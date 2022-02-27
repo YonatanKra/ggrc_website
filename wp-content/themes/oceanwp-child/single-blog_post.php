@@ -5,7 +5,6 @@
  *
  * @package OceanWP WordPress theme
  */
-
 ?>
 <!DOCTYPE html>
 <html class="<?php echo esc_attr( oceanwp_html_classes() ); ?>" <?php language_attributes(); ?>>
@@ -45,6 +44,7 @@
 		}
 	</style>
 
+		
 </head>
 
 <body <?php body_class(); ?> <?php oceanwp_schema_markup( 'html' ); ?>>
@@ -76,52 +76,40 @@
 	<?php do_action( 'ocean_before_content_wrap' ); ?>
 	<?php while ( have_posts() ) :
 						the_post(); ?>
-	<div class="blog-detail-style">
-	<p><?php 
-	$the_post_id = get_the_ID();
-	$blogcat = wp_get_post_terms($the_post_id, 'blog-category', ['']);
-	
-	if(empty($blogcat) || ! is_array($blogcat)){
-		echo "No blog category";
-	}else{
-		
-		foreach($blogcat as $key => $blogcategory){
-				if($blogcategory->name == "Blog")	{	
-			?>
-			<p class="cat-blog"><?php echo esc_html($blogcategory->name); ?></p>
-			
-		<?php 
-				} elseif ($blogcategory->name == "Testimonials"){
-					?>
-			<p class="cat-testimonials"><?php echo esc_html($blogcategory->name); ?></p>
-			
-		<?php
-				} else{
-					?>
-			<p class="cat-stories"><?php echo esc_html($blogcategory->name); ?></p>
-			
-		<?php
-				}
-		}
-	} ?>
-	</p>
-	<h2 style="text-align:center"><?php the_title(); ?></h2>
-	<hr style="margin:5px 0px"/>
-	<div style="text-align:center">
-		<p class="like-share">Published : <?php the_time('F j, Y'); ?></p> <p class="like-share"> <i class="fa fa-heart"></i> 2 Likes</p> <p style="display:inline"><i class="fa fa-share-alt"></i> 5 Shares</p>
-	</div>
-	<hr style="margin:5px 0px"/>
-	</div>
-	
 
 	<?php endwhile; ?>
-	<div id="content-wrap" class="container clr" style="padding-top:100px">
+	<div id="content-wrap" class="container clr">
 
+		
 		<?php do_action( 'ocean_before_primary' ); ?>
 
 		
 		<div id="primary" class="content-area clr" >
 
+			<div class="blog-details">
+				<div class="blog-details-border">
+				
+					<?php
+
+						$blogcat = wp_get_post_terms(get_the_ID(), 'blog-category', ['']);
+
+						if( empty($blogcat) || !is_array($blogcat) ) {
+							echo "<p>No blog category</p>";
+						} else {
+							?>
+								<p class="blog-category-title"><?php echo esc_html($blogcat[0]->name); ?></p>
+							<?php
+						} 
+					?>
+				</p>
+				<h2><?php the_title(); ?></h2>
+				</div>
+				<hr/>
+				<div>
+					<p class="like-share">Published : <?php the_time('F j, Y'); ?></p> <p class="like-share"> <i class="fa fa-heart"></i> 2 Likes</p> <p style="display:inline"><i class="fa fa-share-alt"></i> 5 Shares</p>
+				</div>
+				<hr/>
+			</div>
 			<?php do_action( 'ocean_before_content' ); ?>
 
 			<div id="content" class="site-content clr">
@@ -136,27 +124,7 @@
 					while ( have_posts() ) :
 						the_post();
 
-						if ( is_singular( 'download' ) ) {
-
-							// EDD Page.
-							get_template_part( 'partials/edd/single' );
-
-						} elseif ( is_singular( 'page' ) ) {
-
-							// Single post.
-							//get_template_part( 'partials/page/layout' );
-
-						} elseif ( is_singular( 'oceanwp_library' ) || is_singular( 'elementor_library' ) ) {
-
-							// Library post types.
-							//get_template_part( 'partials/library/layout' );
-
-						} else {
-
-							// All other post types.
-							get_template_part( 'partials/single/layout', get_post_type() );
-
-						}
+						get_template_part( 'partials/single/layout', get_post_type() );
 
 					endwhile;
 
