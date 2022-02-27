@@ -24,7 +24,7 @@ function initiative_actiontype_meta_boxes() {
 	function actiontype_row_template($actiontypes, $field = null) {
 		?>
 			<tr>
-				<td> 
+				<td>
 					<select required type="text" placeholder="Action Type" title="Action Type" name="ActionType[]">
 					<option value="" disabled selected>Select a Action Type</option>
 						<?php
@@ -35,18 +35,18 @@ function initiative_actiontype_meta_boxes() {
 							}
 						?>
 					</select></td>
-				<td> 
+				<td>
 					<input required type="text" placeholder="Action Link" name="ActionLink[]" <?php if (!empty($field['ActionLink'])) { echo 'value="' . $field['ActionLink'] . '"';} ?>/>
 					</td>
 				<td>
 					<a class="button cmb-remove-row-button remove-row <?php if ($field === null) echo 'button-disabled'; ?>" href="#">Remove</a>
 				</td>
 			</tr>
-		<?php 
+		<?php
 	}
 
 	function Repeating_meta_box_display() {
-		
+
 		global $post;
 
 		$ggrc_initiative_actiontype = get_terms( array(
@@ -54,7 +54,7 @@ function initiative_actiontype_meta_boxes() {
 			'hide_empty' => false,
 		) );
 		$ggrc_actiontype = get_post_meta($post->ID, 'initiative', true);
-		
+
 		 wp_nonce_field( 'ggrc_repeating_meta_box_nonce', 'ggrc_repeating_meta_box_nonce' );
 		?>
 		<script type="text/javascript">
@@ -69,7 +69,7 @@ function initiative_actiontype_meta_boxes() {
 				tbody.insertBefore( row, lastChild );
 				return false;
 			});
-	
+
 			$( '.remove-row' ).on('click', function() {
 				$(this).parents('tr').remove();
 				return false;
@@ -216,13 +216,13 @@ function initiative_meta_boxes() {
 			<tr>
                 <td>
                 <input required type="text" placeholder="Update Title" name="UpdateTitle[]" <?php if (!empty($field['UpdateTitle'])) echo 'value="' . $field['UpdateTitle'] . '"' ?>/>
-					
+
 				</td>
-                <td> 
+                <td>
                 <input required type="date" placeholder="Date" name="UpdateDate[]" <?php if (!empty($field['UpdateDate'])) echo 'value="' . $field['UpdateDate'] . '"' ?>/>
-					
+
 				</td>
-				<td> 
+				<td>
                     <textarea rows="3" placeholder="Initiative Updates" name="Update[]"><?php if (!empty($field['Update'])) echo $field['Update'] ;?></textarea>
 				</td>
 				<td>
@@ -295,7 +295,7 @@ function initiative_meta_boxes() {
 		$new = array();
 		$title = $_POST['UpdateTitle'];
         $date = $_POST['UpdateDate'];
-		$updates = $_POST['Update'];		
+		$updates = $_POST['Update'];
 		$actiontype = $_POST['ActionType'];
 		$links = $_POST['ActionLink'];
 
@@ -597,6 +597,9 @@ function is_current_user_following() {
 /* Blog Functions */
 function add_blog_category($classes) {
 	$blogcat = wp_get_post_terms(get_the_ID(), 'blog-category', ['']);
+	if (empty($blogcat)) {
+        return $classes;
+    }
 	$classes[] = strtolower($blogcat[0]->name);
 
 	return $classes;
