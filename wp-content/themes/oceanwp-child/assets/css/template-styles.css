@@ -1,32 +1,43 @@
-p{
-    font-size:16px !important;
+body {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
     line-height: 150%;
-    font-family:'Lato';
+}
+
+h1, h2, h3 {
+    font-family: 'Arvo';
+}
+
+h1, h2, h3, h4{
+    font-style: normal;
+    font-weight: bold;
 }
 
 h1{
-    font-size: 80px
+    font-size: 80px;
+    line-height: 100%;
 }
 
 h2{
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
     font-size: 35px;
     line-height: 40px;
 }
 
 h3{
-    font-size:22px
+    font-size: 22px;
+    line-height: 32px;
 }
 
 h4{
-    font-size:20px;
     font-family: 'Lato' !important;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 #initiative-contact img, #initiative-followers img{
-    border-radius: 50% !important;
+    border-radius: 50%;
     float:left;
 }
 
@@ -51,7 +62,7 @@ h4{
     margin-right:10px;
 }
 
-.share-initiative{
+.initiative-share{
     background: transparent;
     box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
     border-radius: 30px;
@@ -59,6 +70,7 @@ h4{
     margin-right:10px;
     border:2px solid #0B4F6D;
     font-size:16px;
+    font-weight: bold;
 }
 
 .template-btn{
@@ -95,14 +107,16 @@ h4{
     
 }
 
-.initiative-tags{
+.tags{
     background: #EFF3F5;
     border: 1px solid #D8E3E8;
     box-sizing: border-box;
     border-radius: 8px;
     color:#0B4F6D;
     padding:8px;
-    
+    display:inline;
+    font-weight:bold;
+    margin-right: 5px;
 }
 
 hr{
@@ -111,7 +125,7 @@ hr{
     margin-bottom:7px;
 }
 
-.ggrc-priorities{
+.ggrc-initiative-priorities{
     line-height:20px;
     margin-bottom:0
 }
@@ -121,10 +135,8 @@ hr{
     padding-right:0
 }
 
-.how-to-take-action{
+.initiative-take-action-bar{
     height:auto;
-    /* width: 1872px;
-    height: 168px; */
     background: #FFD670;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06), 4px 4px 24px 3px rgba(0, 0, 0, 0.1);
     padding:35px 15px 15px 15px;
@@ -139,7 +151,8 @@ hr{
 
 .initiative-goal{
     line-height:20px;
-    margin-bottom:30px
+    margin-bottom:0px;
+    font-weight: bold;
 }
 
 .learn-rightside{
@@ -148,7 +161,7 @@ hr{
     margin-top:10rem;
 }
 
-.add-res{
+.add-resources{
     background: #ECEEF0;
     border: 1px solid #D8DCE0;
     box-sizing: border-box;
@@ -157,8 +170,32 @@ hr{
     margin-left:15px;
 }
 
-.no-margin{
+.no-margin-bottom{
     margin-bottom:0;
+}
+
+.no-margin{
+    margin: 0;
+}
+
+.mb-20{
+    margin-bottom: 20px;
+}
+
+.mb-30{
+    margin-bottom: 30px;
+}
+
+.mb-60{
+    margin-bottom: 60px;
+}
+
+.mt-30{
+    margin-top: 30px;
+}
+
+.mt-60{
+    margin-top: 60px;
 }
 
 .profile{
@@ -174,17 +211,7 @@ hr{
     padding:15px;
 }
 
-.news-tag{
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding:8px;
-    margin-right:5px;
-    background-color:#5ba3bb94;
-    color:#275f87
-}
-
 /* Blog Styles Start */
-
 .blog-subheader{
     height:300px;
     background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
@@ -290,7 +317,7 @@ hr{
     padding-left: 15px
 }
 
-.initiative-listarea{
+.initiative-list-area{
     padding-left: 30px;
     border-left-width: 1px;
     float:left;
@@ -317,9 +344,15 @@ hr{
     border:1px solid #ddd;
 }
 
-.ini-cover{
+.initiative-list-detail{
+    padding:8px;
+    line-height:150%
+}
+
+.initiative-cover{
     height:90px !important;
-    object-fit:cover
+    object-fit:cover;
+    width: 100%;
 }
 
 .action-type{
@@ -334,13 +367,31 @@ hr{
     padding:0 4px;
 }
 
-.ini-supporters{
+.initiative-supporters{
     color:#DC9C05;
-    margin-bottom:0px
+    margin-bottom:0px;
+    font-weight: bold;
 }
 
 .ess-list{
     list-style: none;
     width: fit-content;
     display: inline-block;
+}
+
+.links{
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    font-size:16px;
+    line-height: 19px;
+}
+
+.following-section{
+    margin-top:42px;
+    border-left:1px solid #BEC5CC;
+}
+
+.align-center{
+    text-align: center;
 }

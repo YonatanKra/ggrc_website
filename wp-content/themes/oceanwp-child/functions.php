@@ -135,14 +135,16 @@ function initiative_meta_boxes() {
 	function updates_row_template($updates, $field = null) {
 		?>
 			<tr>
-				<td> 
-					<input required type="text" placeholder="Title" name="UpdateTitle[]" <?php if ($field) echo 'value="' . $field['UpdateTitle'] . '"' ?>/>
+                <td>
+                <input required type="text" placeholder="Update Title" name="UpdateTitle[]" <?php if ($field) echo 'value="' . $field['UpdateTitle'] . '"' ?>/>
+					
+				</td>
+                <td> 
+                <input required type="date" placeholder="Date" name="UpdateDate[]" <?php if ($field) echo 'value="' . $field['UpdateDate'] . '"' ?>/>
+					
 				</td>
 				<td> 
-					<input required type="date" placeholder="Date" name="UpdateDate[]" <?php if ($field) echo 'value="' . $field['UpdateDate'] . '"' ?>/>
-				</td>
-				<td> 
-                    <textarea rows="3" placeholder="Initiative Updates" name="Update[]"><?php if ($field) echo $field['Update'] ?></textarea>
+                    <textarea rows="3" placeholder="Initiative Updates" name="Update[]"><?php if ($field) echo $field['Update'] ;?></textarea>
 					
 				</td>
 				<td>
@@ -166,7 +168,7 @@ function initiative_meta_boxes() {
 		?>
 		<script type="text/javascript">
 		jQuery(document).ready(function( $ ){
-			const tbody = document.querySelector("#repeatable-fieldset-one tbody");
+			const tbody = document.querySelector("#repeatable-fieldset-two tbody");
 
 			$( '#add-row' ).on('click', function() {
 				const rowWrapper = document.createElement('tbody');
@@ -183,7 +185,7 @@ function initiative_meta_boxes() {
 			});
 		});
 		</script>
-		<table id="repeatable-fieldset-one" width="100%">
+		<table id="repeatable-fieldset-two" width="100%">
 		<tbody>
 			<?php
 			if ( $ggrc_initiative ) :
@@ -200,7 +202,6 @@ function initiative_meta_boxes() {
 		<?php
 	}
 	add_action('save_post', 'custom_repeat_meta_box_save');
-
 	function custom_repeat_meta_box_save($post_id) {
 		if ( ! isset( $_POST['ggrc_repeat_meta_box_nonce'] ) ||
 		! wp_verify_nonce( $_POST['ggrc_repeat_meta_box_nonce'], 'ggrc_repeat_meta_box_nonce' ) )
@@ -215,20 +216,21 @@ function initiative_meta_boxes() {
 		$old = get_post_meta($post_id, 'initiative', true);
 		$new = array();
 		$title = $_POST['UpdateTitle'];
-		$date = $_POST['UpdateDate'];
+        $date = $_POST['UpdateDate'];
 		$updates = $_POST['Update'];
 		 $count = count( $updates );
 		 for ( $i = 0; $i < $count; $i++ ) {
 			if ( $updates[$i] != '' ) :
-				$new[$i]['UpdateDate'] = $date[$i];
-				$new[$i]['UpdateTitle'] = stripslashes( strip_tags( $title[$i] ));
+				$new[$i]['UpdateTitle'] = stripslashes( strip_tags( $title[$i] )); 
+                $new[$i]['UpdateDate'] = $date[$i]; 
 				$new[$i]['Update'] = stripslashes( strip_tags( $updates[$i] )); // and however you want to sanitize
 			endif;
 		}
 		if ( !empty( $new ) && $new != $old )
 			update_post_meta( $post_id, 'initiative', $new );
 		elseif ( empty($new) && $old )
-			delete_post_meta( $post_id, 'initiative', $old );		
+			delete_post_meta( $post_id, 'initiative', $old );	
+	
 	}
 }
 
@@ -266,7 +268,89 @@ function theme_assets() {
 	wp_enqueue_style( 'template-styling');
 }
 
-function getFollowersByPostId($postid){
+add_action( 'get_action_initiatives_by_region', 'add_action_initiatives_by_region' );
+function add_action_initiatives_by_region() {
+     
+    // check if we're in the initiative post type
+    if( is_singular( 'initiative' ) ) {       
+         
+        $postid= get_the_ID();
+        // fetch taxonomy terms for current initiative
+        $initiative_region = get_post_custom_values('region', $postid );
+         
+        if( $initiative_region ) {
+
+            // set up the query arguments
+            $args = array (
+                'post_type' => 'initiative',
+				'meta_value' => $initiative_region[0],
+                'post__not_in' => array($postid),
+                'posts_per_page' => 4, 
+                'nopaging' => true,
+				'tax_query' => array(                     
+						array(
+						'taxonomy' => 'initiative_type',                
+						'field' => 'slug',                    
+						'terms' => array( 'take-action' ),  
+						)),
+            );
+
+            // run the query
+            $query = new WP_Query( $args ); 
+
+            ?>
+                          
+			<?php if($query->have_posts()){
+				?>
+				<h4 class="mt-60">Take action on <?php echo $initiative_region[0]; ?> related initiatives</h4>
+            	<div class="row">
+				<?php
+				 while($query->have_posts()) {
+					 $query->the_post(); ?>
+					<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="initiative-list">
+						<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
+							
+						<div class="initiative-list-detail">
+						<?php 
+							
+							$the_post_id = get_the_ID();
+							$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
+							
+							if(empty($action) || ! is_array($action)){
+								echo "";
+							}else{
+								
+								foreach($action as $key => $take_action){
+									
+									?>
+									<p class="action-type"> 
+									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($take_action->name); ?></p>
+								<?php 
+									
+								}
+							}?>
+							<p class="initiative-supporters">30 Supporters</p>
+								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
+								<?php the_excerpt(); ?>
+								<hr class="no-margin"/>
+								<i class="fa-solid fa-map-location"></i> <?php the_field('venue') ?><br>
+								<i class="fa-solid fa-anchor"></i> <?php the_field('region') ?><br>
+								
+							</div>
+					</div>
+			<?php } ?>
+            <?php wp_reset_postdata(); ?>
+			<?php } ?>
+
+			</div>
+        <?php            
+         
+        }         
+    } 
+}
+
+function get_followers_by_post_id($postid){
 
 	global $wpdb;
 
@@ -314,46 +398,52 @@ function add_related_news_to_initiative_pages() {
             $query = new WP_Query( $args ); 
 
             ?>
-            <h4><b>Related News:</b></h4>
+            <h4>Related News:</h4>
             <div class="row">
                
 			<?php if($query->have_posts()){
 				 while($query->have_posts()) {
 					 $query->the_post(); ?>
 					<div class="col-lg-4 col-md-4 col-sm-12">
-					<div class="news-box">
-					<h3><?php the_title(); ?></h3> 
-					<?php 
-					$the_post_id = get_the_ID();
-					$news_agencies = get_post_meta($the_post_id, 'news');
-					$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
-					if(empty($news_agencies) || ! is_array($news_agencies)){
-						echo "No news agency";
-					}else{
-						foreach($news_agencies[0] as $newsagency){
-							?>
-							<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
-							
+						<div class="news-box">
+						<h3><?php the_title(); ?></h3> 
 						<?php 
-						}
-					} ?> <br><br> <?php
-
-					if(empty($tags) || ! is_array($tags)){
-						echo "No Tags";
-					}else{
-						
-						foreach($tags as $key => $posttags){							
-							
+						$the_post_id = get_the_ID();
+						$news_agencies = get_post_meta($the_post_id, 'news');
+						$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
+						?>
+							<div class="mb-20">
+							<?php
+							if(empty($news_agencies) || ! is_array($news_agencies)){
+								echo "No news agency";
+							}else{
+								foreach($news_agencies[0] as $newsagency){
+									?>
+									<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
+									
+								<?php 
+								}
+							}
 							?>
-							<p style="display:inline;font-weight:bold"><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="news-tag"><?php echo esc_html($posttags->name); ?></a></p>
-							
-						<?php 
-							
-						}
-					}
-					?>
-					
-				</div>
+							</div>
+							<div>
+							<?php
+							if(empty($tags) || ! is_array($tags)){
+								echo "No Tags";
+							}else{
+								
+								foreach($tags as $key => $posttags){							
+									
+									?>
+									<a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="tags"><?php echo esc_html($posttags->name); ?></a>
+									
+								<?php 
+									
+								}
+							}
+							?>
+							</div>
+					</div>
 				</div>
 			<?php } ?>
             <?php wp_reset_postdata(); ?>
@@ -366,7 +456,7 @@ function add_related_news_to_initiative_pages() {
     } 
 }
 
-function isUserLoggedIn() {
+function check_if_user_logged_in() {
 	if ( !is_user_logged_in() ) {
 
 		wp_redirect('http://localhost/ggrc_website/'); 
@@ -379,7 +469,7 @@ add_action( 'wp_ajax_follow_post', 'follow_initiative' );
 function follow_initiative() {
 	global $wpdb;
 
-	isUserLoggedIn();
+	check_if_user_logged_in();
 
 	$current_user_id = get_current_user_id();
 	$postid = $_POST['postid'];
@@ -393,7 +483,7 @@ add_action( 'wp_ajax_unfollow_post', 'unfollow_initiative' );
 function unfollow_initiative() {
 	global $wpdb;     
         
-	isUserLoggedIn();
+	check_if_user_logged_in();
 
 	$current_user_id = get_current_user_id();
 	$postid = $_POST['postid'];			
@@ -403,14 +493,14 @@ function unfollow_initiative() {
 		
 }
 
-function checkIsFollowing() {
+function is_current_user_following() {
 	global $wpdb;
 
 	$current_user_id = get_current_user_id();
 	$postid= get_the_ID();
-	$posts = $wpdb->get_results("SELECT DISTINCT userID, postID FROM ggrc_follow_posts WHERE `userID` = '$current_user_id' and `postID` = '$postid' and `isFollowing` = 1");
+	$isfollowing = $wpdb->get_results("SELECT DISTINCT userID, postID FROM ggrc_follow_posts WHERE `userID` = '$current_user_id' and `postID` = '$postid' and `isFollowing` = 1");
 
-	return count($posts);
+	return $isfollowing;
 }
 
 /* Blog Functions */
@@ -421,3 +511,4 @@ function add_blog_Category($classes) {
 	return $classes;
 }
 add_filter('body_class', 'add_blog_category');
+?>

@@ -26,7 +26,7 @@
 			color: transparent !important;
 		}
 		#ess-main-wrapper #ess-wrap-inline-networks.ess-inline-networks-container{
-			margin-bottom:0px
+			margin-top:-70px;
 		}		
 	</style>
 </head>
@@ -51,10 +51,7 @@
 
 			<?php do_action( 'ocean_before_main' ); ?>
 
-			<main id="main" class="site-main clr"<?php oceanwp_schema_markup( 'main' ); ?> role="main">
-
-				<?php //do_action( 'ocean_page_header' ); ?>
-			
+			<main id="main" class="site-main clr"<?php oceanwp_schema_markup( 'main' ); ?> role="main">			
 
 				<?php do_action( 'ocean_before_content_wrap' ); ?>
 				<?php while ( have_posts() ) :
@@ -71,7 +68,7 @@
 					
 								<div class="action-subheader">
 								<a href="../../initiative">back to explore initiatives</a>
-									<div class="row" style="margin-top:3rem">
+									<div class="row mt-30">
 										
 										<div class="col-md-2 col-lg-2 col-sm-4">
 											<p><i class="fa fa-users"></i> <?php the_field('venue') ?></p>
@@ -84,23 +81,19 @@
 										</div>
 										<div class="col-md-1 col-lg-1 col-sm-1">
 										</div>
-										<div class="col-md-5 col-lg-5 col-sm-6" style="text-align:right;margin-bottom:30px">
+										<div class="col-md-5 col-lg-5 col-sm-6 align-center mb-30">
 											<a href="<?php the_field('website') ?>" target="_blank" class="initiative-website">View site</a>
 											
-											<?php if ( 'yes' === get_option( 'easy_social_sharing_inline_enable_all_networks' ) ) : ?>
-												<li class="ess-all-networks ess-social-networks ess-list">
-													<div class="ess-social-network-link">
-														
-														<span class="ess-all-networks-button share-initiative" style="color:#0B4F6D !important"><i aria-hidden="true" class="fa fa-share-alt"></i> <b>share initiative</b></span>
-													</div>
-												</li>
-											<?php endif; ?>
+											<li class="ess-all-networks ess-social-networks ess-list">
+												<div class="ess-social-network-link">
+													
+													<span class="ess-all-networks-button initiative-share" style="color:#0B4F6D !important"><i aria-hidden="true" class="fa fa-share-alt"></i> share initiative</span>
+												</div>
+											</li>
 											
 											<?php 
-												
-												$count = checkIsFollowing();
-												
-												if ($count == 1){
+												$user_following =is_current_user_following();											
+												if (!empty($user_following)){
 													?>
 													<button id="unfollow" class="template-btn"> following initiative </button>
 													<?php } else{ ?>
@@ -125,17 +118,17 @@
 
 											foreach($tags as $key => $posttags){
 												?>
-												<p style="display:inline"><a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" class="initiative-tags"><?php echo esc_html($posttags->name); ?></a></p>
+												<a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" class="tags mt-30"><?php echo esc_html($posttags->name); ?></a>
 												
 											<?php 
 												
 											}
 										} ?>
-										<br><br>
-										<hr/>
-										<p class="ggrc-priorities"><span><b>GGRC priorities: </b></span> <?php the_field('ggrc-priorities'); ?></p>
-										<hr/>
-										<br><br>
+										
+										<hr class="mt-60"/>
+										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
+										<hr class="mb-60"/>
+										
 										</div>
 										<div class="col-md-6 col-lg-6 col-sm-12">
 											<img src="<?php echo get_the_post_thumbnail_url(); ?>" />
@@ -178,19 +171,19 @@
 						the_post(); 
 
 							$the_post_id = get_the_ID();
-							//echo $the_post_id;
+					
 							$type = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
 							
 							if(!empty($type) && is_array($type)){
-								//echo "No type";
+								
 								if($type[0]->name == "Take Action"){								
 
 								?>
-						<div class="how-to-take-action">
+						<div class="initiative-take-action-bar">
 							<div class="row">
 								<div class="col-md-4 col-lg-4 col-sm-12">
 									<div class="row">
-										<div class="col-md-12 col-lg-12 col-sm-12" style="text-align:center">
+										<div class="col-md-12 col-lg-12 col-sm-12 align-center">
 											<h2>How to Take Action:</h2>
 										</div>
 									</div>
@@ -205,12 +198,12 @@
 								echo "No Actions";
 							}else{
 								
-								foreach($actions as $key => $postaction){									
+								foreach($actions as $key => $post_action){									
 									
 									?>
-									<div class="col-md-6 col-lg-4 col-sm-6" style="text-align:center">
-										<p><a href="<?php echo get_term_link($postaction->term_id, 'actiontype'); ?>" target="_blank" class="action-btn">
-										<?php echo esc_html($postaction->name); ?></a></p>
+									<div class="col-md-6 col-lg-4 col-sm-6 align-center">
+										<p><a href="<?php echo get_term_link($post_action->term_id, 'actiontype'); ?>" target="_blank" class="action-btn">
+										<?php echo esc_html($post_action->name); ?></a></p>
 									</div>
 								<?php 
 									
@@ -226,13 +219,15 @@
 
 								<a href="../../initiative" >back to explore initiatives</a>
 								
-								<div class="row" style="margin-top:3rem">
+								<div class="row mt-30">
 									<div class="col-md-7 col-lg-7 col-sm-12">
 								
 									<h2><?php the_title(); ?></h2>
-									<span style="line-height:150%"><b>Description:</b> <br><?php the_content(); ?></span>
+									<p class="no-margin-bottom"><b>Description:</b></p>
+									<?php the_content(); ?>
 									
-									<p class="initiative-goal"><span><b>Goal: </b></span><br> <?php the_field('initiative-goal'); ?></p>
+									<p class="initiative-goal">Goal: </p>
+									<p class="mb-30"><?php the_field('initiative-goal'); ?></p>
 									
 									<?php 
 									$the_post_id = get_the_ID();
@@ -244,7 +239,7 @@
 
 										foreach($tags as $key => $posttags){
 											?>
-											<p style="display:inline"><a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" class="initiative-tags"><?php echo esc_html($posttags->name); ?></a></p>
+											<a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" class="tags"><?php echo esc_html($posttags->name); ?></a>
 											
 										<?php 
 											
@@ -261,17 +256,16 @@
 										<p><i class="fa fa-map-marker-alt"></i> <?php the_field('region') ?></p>
 										<p><i class="fa fa-clock"></i> <?php the_field('initiative-duration') ?></p>
 										<p><i class="fa fa-globe"></i> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
-										<p style="line-height:20px;margin-bottom:0"><span><b>GGRC priorities: </b></span> <?php the_field('ggrc-priorities'); ?></p>
+										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
 									</div>
 								</div>
-								<div class="row" style="margin-top:3rem">
+								<div class="row mt-30">
 									<div class="col-md-12 col-lg-12 col-sm-12">
 										<h4><b>Additional Resources</b></h4>
 										<div class="row">
-											<div class="col-md-3 col-lg-3 col-sm-12 add-res">
+											<div class="col-md-3 col-lg-3 col-sm-12 add-resources">
 												<p><i class="fa fa-file"></i></p>
-											</div>
-											
+											</div>											
 										</div>
 									</div>
 								</div>
@@ -279,7 +273,7 @@
 																
 						<?php } ?>
 
-						<div class="row" style="margin-top:60px">	
+						<div class="row mt-60">	
 												
 							<div class="col-md-3 col-lg-3 col-sm-12" id="initiative-contact">
 								<h3>People for Initiative</h3>
@@ -297,9 +291,9 @@
 											echo get_avatar($user_id, 60);										
 								?>
 								<div class="initiative-contact-details">
-									<h4 class="no-margin"><b><?php echo $contact_name ?></b></h4>
-									<p class="no-margin">title</p>
-									<p class="no-margin">organisation</p>
+									<h4 class="no-margin-bottom"><?php echo $contact_name ?></h4>
+									<p class="no-margin-bottom">title</p>
+									<p class="no-margin-bottom">organisation</p>
 								</div>
 								<div class="initiative-contact-profile">									
 									<a href="#" target="_blank" class="profile">view profile</a>
@@ -309,17 +303,17 @@
 								<?php }
 								} ?>
 							</div>
-							<div class="col-md-9 col-lg-9 col-sm-12" style="margin-top:42px;border-left:1px solid #BEC5CC;">
+							<div class="col-md-9 col-lg-9 col-sm-12 following-section">
 							<p><b>Following this initiative</b></p>
-								<div class="row" style="padding-left:20px">									
+								<div class="row">									
 									
 									<?php 
 										
-										$followersid = getFollowersByPostId($post_id);
+										$followers_id = get_followers_by_post_id($post_id);
 
-										foreach($followersid as $key => $followerid){
+										foreach($followers_id as $key => $follower_id){
 
-											$user_id = $followerid->userID;
+											$user_id = $follower_id->userID;
 											$contact_name = get_the_author_meta( 'display_name', $user_id );
 										?>
 										<div class="col-md-3 col-lg-3 col-sm-12" id="initiative-followers">
@@ -327,9 +321,9 @@
 											echo get_avatar($user_id, 60);										
 									?>
 											<div class="initiative-followers">
-												<p class="no-margin"><b><?php echo $contact_name ?></b></p>
-												<p class="no-margin">title, org</p>
-												<p class="no-margin">country</p>
+												<p class="no-margin-bottom"><b><?php echo $contact_name ?></b></p>
+												<p class="no-margin-bottom">title, org</p>
+												<p class="no-margin-bottom">country</p>
 											</div>
 										</div>
 									<?php
@@ -360,12 +354,14 @@
 								<div class="col-md-12 col-lg-12 col-sm-12">
 								<?php
 								foreach($initiative_updates[0] as $initiative_update){
+									if(!empty($initiative_update['UpdateTitle'])){
 									?>
-									<p class="no-margin" style="font-weight:300"><?php echo date('F j, Y', strtotime($initiative_update['UpdateDate'])); ?></p>
-									<h3 class="no-margin"><?php echo $initiative_update['UpdateTitle']; ?></h3>								
+									<p class="no-margin-bottom links"><?php echo date('F j, Y', strtotime($initiative_update['UpdateDate'])); ?></p>
+									<h3 class="no-margin-bottom"><?php echo $initiative_update['UpdateTitle']; ?></h3>								
 									<p><?php echo $initiative_update['Update']; ?></p>
 									
-								<?php 
+									<?php 
+									}
 								}
 								?>
 								</div>
@@ -374,7 +370,8 @@
 							<?php
 						} 
 
-						do_action('get_related_news');						
+						do_action('get_related_news');	
+						do_action('get_action_initiatives_by_region');					
 
 					endwhile;
 
@@ -442,8 +439,9 @@
 			});
 		});
 
-		$("#comment-submit").val("comment");	
+		$("#wpd-field-submit-0_0").val("comment");	
 		$("#reply-title").html("Comments");		
+		$('.ql-editor').attr('placeholder', 'Write your comment...');
 		
 	});
 </script>
