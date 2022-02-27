@@ -261,7 +261,7 @@
 								</div>
 								<div class="row mt-30">
 									<div class="col-md-12 col-lg-12 col-sm-12">
-										<h4><b>Additional Resources</b></h4>
+										<h4>Additional Resources</h4>
 										<div class="row">
 											<?php 
 												$attachmentID = get_post_custom_values('additional-resources-1');
