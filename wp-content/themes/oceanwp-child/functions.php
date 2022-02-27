@@ -368,14 +368,14 @@ function add_action_initiatives_by_region() {
          
         $postid= get_the_ID();
         // fetch taxonomy terms for current initiative
-        $initiativeregion = get_post_custom_values('region', $postid );
+        $initiative_region = get_post_custom_values('region', $postid );
          
-        if( $initiativeregion ) {
+        if( $initiative_region ) {
 
             // set up the query arguments
             $args = array (
                 'post_type' => 'initiative',
-				'meta_value' => $initiativeregion[0],
+				'meta_value' => $initiative_region[0],
                 'post__not_in' => array($postid),
                 'posts_per_page' => 4, 
                 'nopaging' => true,
@@ -391,43 +391,41 @@ function add_action_initiatives_by_region() {
             $query = new WP_Query( $args ); 
 
             ?>
-			<br><br>
                           
 			<?php if($query->have_posts()){
 				?>
-				<h4>Take action on <?php echo $initiativeregion[0]; ?> related initiatives</h4>
+				<h4 class="mt-60">Take action on <?php echo $initiative_region[0]; ?> related initiatives</h4>
             	<div class="row">
 				<?php
 				 while($query->have_posts()) {
 					 $query->the_post(); ?>
 					<div class="col-lg-3 col-md-6 col-sm-12">
 						<div class="initiative-list">
-						<img src="<?php echo get_the_post_thumbnail_url(); ?>" width="100%" class="initiative-cover"/>
+						<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
 							
-						<div style="padding:8px;line-height:150%">
+						<div class="initiative-list-detail">
 						<?php 
 							
 							$the_post_id = get_the_ID();
 							$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-							// $tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
 							
 							if(empty($action) || ! is_array($action)){
 								echo "";
 							}else{
 								
-								foreach($action as $key => $takeaction){
+								foreach($action as $key => $take_action){
 									
 									?>
 									<p class="action-type"> 
-									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($takeaction->name); ?></p>
+									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($take_action->name); ?></p>
 								<?php 
 									
 								}
 							}?>
-							<p class="initiative-supporters"><b>30 Supporters</b></p>
-								<a href="<?php the_permalink(); ?>"><h4 style="margin-bottom:10px"><b><?php the_title(); ?></b></h4></a>
+							<p class="initiative-supporters">30 Supporters</p>
+								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 								<?php the_excerpt(); ?>
-								<hr style="margin:0px"/>
+								<hr class="no-margin"/>
 								<i class="fa-solid fa-map-location"></i> <?php the_field('venue') ?><br>
 								<i class="fa-solid fa-anchor"></i> <?php the_field('region') ?><br>
 								
@@ -444,7 +442,7 @@ function add_action_initiatives_by_region() {
     } 
 }
 
-function getFollowersByPostId($postid){
+function get_followers_by_post_id($postid){
 
 	global $wpdb;
 
@@ -499,39 +497,45 @@ function add_related_news_to_initiative_pages() {
 				 while($query->have_posts()) {
 					 $query->the_post(); ?>
 					<div class="col-lg-4 col-md-4 col-sm-12">
-					<div class="news-box">
-					<h3><?php the_title(); ?></h3> 
-					<?php 
-					$the_post_id = get_the_ID();
-					$news_agencies = get_post_meta($the_post_id, 'news');
-					$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
-					if(empty($news_agencies) || ! is_array($news_agencies)){
-						echo "No news agency";
-					}else{
-						foreach($news_agencies[0] as $newsagency){
-							?>
-							<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
-							
+						<div class="news-box">
+						<h3><?php the_title(); ?></h3> 
 						<?php 
-						}
-					} ?> <br><br> <?php
-
-					if(empty($tags) || ! is_array($tags)){
-						echo "No Tags";
-					}else{
-						
-						foreach($tags as $key => $posttags){							
-							
+						$the_post_id = get_the_ID();
+						$news_agencies = get_post_meta($the_post_id, 'news');
+						$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
+						?>
+							<div class="mb-20">
+							<?php
+							if(empty($news_agencies) || ! is_array($news_agencies)){
+								echo "No news agency";
+							}else{
+								foreach($news_agencies[0] as $newsagency){
+									?>
+									<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
+									
+								<?php 
+								}
+							}
 							?>
-							<p style="display:inline;font-weight:bold"><a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="news-tag"><?php echo esc_html($posttags->name); ?></a></p>
-							
-						<?php 
-							
-						}
-					}
-					?>
-					
-				</div>
+							</div>
+							<div>
+							<?php
+							if(empty($tags) || ! is_array($tags)){
+								echo "No Tags";
+							}else{
+								
+								foreach($tags as $key => $posttags){							
+									
+									?>
+									<a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="tags"><?php echo esc_html($posttags->name); ?></a>
+									
+								<?php 
+									
+								}
+							}
+							?>
+							</div>
+					</div>
 				</div>
 			<?php } ?>
             <?php wp_reset_postdata(); ?>
@@ -544,7 +548,7 @@ function add_related_news_to_initiative_pages() {
     } 
 }
 
-function isUserLoggedIn() {
+function check_if_user_logged_in() {
 	if ( !is_user_logged_in() ) {
 
 		wp_redirect('http://localhost/ggrc_website/'); 
@@ -557,7 +561,7 @@ add_action( 'wp_ajax_follow_post', 'follow_initiative' );
 function follow_initiative() {
 	global $wpdb;
 
-	isUserLoggedIn();
+	check_if_user_logged_in();
 
 	$current_user_id = get_current_user_id();
 	$postid = $_POST['postid'];
@@ -571,7 +575,7 @@ add_action( 'wp_ajax_unfollow_post', 'unfollow_initiative' );
 function unfollow_initiative() {
 	global $wpdb;     
         
-	isUserLoggedIn();
+	check_if_user_logged_in();
 
 	$current_user_id = get_current_user_id();
 	$postid = $_POST['postid'];			
@@ -581,7 +585,7 @@ function unfollow_initiative() {
 		
 }
 
-function isCurrentUserFollowing() {
+function is_current_user_following() {
 	global $wpdb;
 
 	$current_user_id = get_current_user_id();
