@@ -365,10 +365,11 @@ hr{
     font-size:12px;
     color:#fff;
     background-color:#EF8607;
-    border-radius:10px;
+    border-radius:44px;
     margin-top:-9rem;
     position:absolute;
-    padding:0 4px;
+    padding: 1px 4px;
+    text-transform: uppercase;
 }
 
 .initiative-supporters{
@@ -399,3 +400,9 @@ hr{
 .align-center{
     text-align: center;
 }
+
+.icons{
+    width:18px;
+}
+
+

@@ -81,7 +81,7 @@ get_header("initiatives");
 									
 									?>
 									<p class="action-type"> 
-									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($take_action->name); ?></p>
+									<img src="../wp-content/uploads/icons/exclamationmark.svg" class="icons"/>	<?php echo esc_html($take_action->name); ?></p>
 								<?php 
 									
 								}
@@ -90,8 +90,8 @@ get_header("initiatives");
 								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 								<?php the_excerpt(); ?>
 								<hr class="no-margin"/>
-								<i class="fa-solid fa-map-location"></i> <?php the_field('venue') ?><br>
-								<i class="fa-solid fa-anchor"></i> <?php the_field('region') ?><br>
+								<img src="../wp-content/uploads/icons/map.svg" class="icons"/> <?php the_field('venue') ?><br>
+								<img src="../wp-content/uploads/icons/users.svg" class="icons"/> <?php the_field('region') ?><br>
 								
 							</div>
 					</div>
