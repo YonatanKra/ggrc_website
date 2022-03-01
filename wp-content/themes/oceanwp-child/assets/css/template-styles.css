@@ -437,6 +437,13 @@ hr{
     content: url('../../../../uploads/icons/attachment.svg');
 }
 
+.heart::after {
+    content: url('../../../../uploads/icons/heart.svg');
+}
+
+.share-1::after {
+    content: url('../../../../uploads/icons/share-1.svg');
+}
 .share-2::after {
     content: url('../../../../uploads/icons/share-2.svg');
 }
