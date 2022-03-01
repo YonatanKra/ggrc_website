@@ -254,7 +254,12 @@
 									<div class="col-md-4 col-lg-4 col-sm-12 learn-rightside">
 										<p><img src="../../wp-content/uploads/icons/users.svg" class="icons"/>  <?php the_field('venue') ?></p>
 										<p><img src="../../wp-content/uploads/icons/map-pin.svg" class="icons"/> <?php the_field('region') ?></p>
+										<?php
+											$duration=get_post_custom_values('initiative-duration');
+											if(!empty($duration[0])){
+										?>
 										<p><img src="../../wp-content/uploads/icons/clock.svg" class="icons"/> <?php the_field('initiative-duration') ?></p>
+										<?php } ?>
 										<p><img src="../../wp-content/uploads/icons/home.svg" class="icons"/> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
 										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
 									</div>
@@ -266,7 +271,7 @@
 											<?php 
 												$attachmentID = get_post_custom_values('additional-resources-1');
 												
-												if(!empty($attachmentID)){ ?>
+												if(!empty($attachmentID[0])){ ?>
 												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
 												<img src="../../wp-content/uploads/icons/attachment.svg" class="icons"/> 
 													<?php 
@@ -279,7 +284,7 @@
 											<?php } 
 
 												$attachmentID1 = get_post_custom_values('additional-resources-2');
-												if(!empty($attachmentID1)){ 
+												if(!empty($attachmentID1[0])){ 
 											?>
 												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
 														<img src="../../wp-content/uploads/icons/attachment.svg" class="icons"/> 
