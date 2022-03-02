@@ -16,31 +16,27 @@
 		.fep-container input[type="text"], .fep-container textarea,.fep-container select{
 			width:100% !important;
 		}
-		label[for=venue], input#fep-venue, label[for=region], textarea#fep-ggrc-priorities, select#fep-region, label[for=ggrc-priorities],
-		textarea#fep-initiative-goal, label[for=initiative-goal], input#initiative_custom_fieldsadditional_resources, label[for=additional-resources], 
-		a#upload_additional-resources_button, p.description
+		label[for=venue], #fep-venue, label[for=region], #fep-ggrc-priorities, #fep-region, label[for=ggrc-priorities],
+		#fep-initiative-goal, label[for=initiative-goal], #fep-additional-resources-name-1, label[for=additional-resources-name-1], label[for=additional-resources-1],
+		#upload_additional-resources-1_button, #fep-additional-resources-name-2, label[for=additional-resources-name-2], label[for=additional-resources-2], #upload_additional-resources-2_button, 
+		#fep-initiative-duration, label[for=initiative-duration], #fep-initiative-contact-1, label[for=initiative-contact-1], #fep-initiative-contact-2, label[for=initiative-contact-2],
+		#fep-initiative-contact-3, label[for=initiative-contact-3], p.description
 		{
 			display:none !important;
 		}
 
 		.fep-container .mb-right-column {
 			width: 100% !important;
-			float: none !important;
 		}
 
 		.fep-container label{
-			width:fit-content !important;
-
+			width:fit-content !important
 		}
 
 		.wck-checkboxes{
 			display:inline-flex !important;
-			float: right;
+			float: right;			
 		}
-
-		/* #fep-contact-mode{
-			width:40% !important
-		} */
 		
 		.wck-checkboxes > div:first-of-type{
 			margin-right:20px
@@ -62,6 +58,7 @@
 			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
 			box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
 			border-radius: 30px !important;
+			top : -70px;
 		}
 	</style>
 
