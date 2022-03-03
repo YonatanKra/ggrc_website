@@ -365,10 +365,11 @@ hr{
     font-size:12px;
     color:#fff;
     background-color:#EF8607;
-    border-radius:10px;
+    border-radius:44px;
     margin-top:-9rem;
     position:absolute;
-    padding:0 4px;
+    padding: 1px 4px;
+    text-transform: uppercase;
 }
 
 .initiative-supporters{
@@ -399,3 +400,55 @@ hr{
 .align-center{
     text-align: center;
 }
+
+/* GGRC Icons */
+
+.ggrc-icon{
+    font-size:18px;
+    vertical-align: middle;
+}
+
+.ggrc-icon-exclamation-mark::after {
+    content: url('../../../../uploads/icons/exclamationmark.svg');
+    vertical-align: middle;
+}
+
+.ggrc-icon-map::after {
+    content: url('../../../../uploads/icons/map.svg');    
+}
+
+.ggrc-icon-users::after {
+    content: url('../../../../uploads/icons/users.svg');
+}
+
+.ggrc-icon-map-pin::after {
+    content: url('../../../../uploads/icons/map-pin.svg');
+}
+
+.ggrc-icon-clock::after {
+    content: url('../../../../uploads/icons/clock.svg');
+}
+
+.ggrc-icon-home::after {
+    content: url('../../../../uploads/icons/home.svg');
+}
+
+.ggrc-icon-attachment::after {
+    content: url('../../../../uploads/icons/attachment.svg');
+}
+
+.ggrc-icon-heart::after {
+    content: url('../../../../uploads/icons/heart.svg');
+}
+
+.ggrc-icon-share-1::after {
+    content: url('../../../../uploads/icons/share-1.svg');
+}
+.ggrc-icon-share-2::after {
+    content: url('../../../../uploads/icons/share-2.svg');
+}
+
+
+
+
+
