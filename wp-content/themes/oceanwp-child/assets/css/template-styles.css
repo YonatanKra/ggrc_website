@@ -408,43 +408,44 @@ hr{
     vertical-align: middle;
 }
 
-.exclamation-mark::after {
+
+.ggrc-icon-exclamation-mark::after {
     content: url('../../../../uploads/icons/exclamationmark.svg');
     vertical-align: middle;
 }
 
-.map::after {
+.ggrc-icon-map::after {
     content: url('../../../../uploads/icons/map.svg');    
 }
 
-.users::after {
+.ggrc-icon-users::after {
     content: url('../../../../uploads/icons/users.svg');
 }
 
-.map-pin::after {
+.ggrc-icon-map-pin::after {
     content: url('../../../../uploads/icons/map-pin.svg');
 }
 
-.clock::after {
+.ggrc-icon-clock::after {
     content: url('../../../../uploads/icons/clock.svg');
 }
 
-.home::after {
+.ggrc-icon-home::after {
     content: url('../../../../uploads/icons/home.svg');
 }
 
-.attachment::after {
+.ggrc-icon-attachment::after {
     content: url('../../../../uploads/icons/attachment.svg');
 }
 
-.heart::after {
+.ggrc-icon-heart::after {
     content: url('../../../../uploads/icons/heart.svg');
 }
 
-.share-1::after {
+.ggrc-icon-share-1::after {
     content: url('../../../../uploads/icons/share-1.svg');
 }
-.share-2::after {
+.ggrc-icon-share-2::after {
     content: url('../../../../uploads/icons/share-2.svg');
 }
 
