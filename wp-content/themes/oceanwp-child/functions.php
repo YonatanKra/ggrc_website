@@ -413,21 +413,21 @@ function add_action_initiatives_by_region() {
 							}else{
 
 								foreach($action as $key => $take_action){
-
+									
 									?>
-									<p class="action-type">
-									<i class="fa-solid fa-circle-exclamation"></i>	<?php echo esc_html($take_action->name); ?></p>
-								<?php
-
+									<p class="action-type"> 
+									<i class="ggrc-icon exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
+								<?php 
+									
 								}
 							}?>
 							<p class="initiative-supporters">30 Supporters</p>
 								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 								<?php the_excerpt(); ?>
 								<hr class="no-margin"/>
-								<i class="fa-solid fa-map-location"></i> <?php the_field('venue') ?><br>
-								<i class="fa-solid fa-anchor"></i> <?php the_field('region') ?><br>
-
+								<i class="ggrc-icon map"></i> <?php the_field('venue') ?><br>
+								<i class="ggrc-icon users"></i> <?php the_field('region') ?><br>
+								
 							</div>
 					</div>
 			<?php } ?>

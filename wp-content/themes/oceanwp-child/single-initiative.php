@@ -71,13 +71,13 @@
 									<div class="row mt-30">
 										
 										<div class="col-md-2 col-lg-2 col-sm-4">
-											<p><i class="fa fa-users"></i> <?php the_field('venue') ?></p>
+										<i class="ggrc-icon users"></i>  <?php the_field('venue') ?>
 										</div>
 										<div class="col-md-2 col-lg-2 col-sm-4">
-											<p><i class="fa fa-map-marker-alt"></i> <?php the_field('region') ?></p>
+										<i class="ggrc-icon map-pin"></i> <?php the_field('region') ?>
 										</div>
 										<div class="col-md-2 col-lg-2 col-sm-4">
-											<p><i class="fa fa-clock"></i> last updated <?php the_modified_time('F jS, Y') ?></p>
+										<i class="ggrc-icon clock"></i> last updated <?php the_modified_time('F jS, Y') ?>
 										</div>
 										<div class="col-md-1 col-lg-1 col-sm-1">
 										</div>
@@ -87,7 +87,7 @@
 											<li class="ess-all-networks ess-social-networks ess-list">
 												<div class="ess-social-network-link">
 													
-													<span class="ess-all-networks-button initiative-share" style="color:#0B4F6D !important"><i aria-hidden="true" class="fa fa-share-alt"></i> share initiative</span>
+													<span class="ess-all-networks-button initiative-share" style="color:#0B4F6D !important"><i class="ggrc-icon share-2"></i> share initiative</span>
 												</div>
 											</li>
 											
@@ -252,10 +252,10 @@
 
 									</div>
 									<div class="col-md-4 col-lg-4 col-sm-12 learn-rightside">
-										<p><i class="fa fa-users"></i> <?php the_field('venue') ?></p>
-										<p><i class="fa fa-map-marker-alt"></i> <?php the_field('region') ?></p>
-										<p><i class="fa fa-clock"></i> <?php the_field('initiative-duration') ?></p>
-										<p><i class="fa fa-globe"></i> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
+										<p><i class="ggrc-icon users"></i>  <?php the_field('venue') ?></p>
+										<p><i class="ggrc-icon map-pin"></i> <?php the_field('region') ?></p>
+										<p><i class="ggrc-icon clock"></i> <?php the_field('initiative-duration') ?></p>
+										<p><i class="ggrc-icon home"></i> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
 										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
 									</div>
 								</div>
@@ -265,9 +265,10 @@
 										<div class="row">
 											<?php 
 												$attachmentID = get_post_custom_values('additional-resources-1');
+												
 												if(!empty($attachmentID)){ ?>
 												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
-													<i class="fa fa-file"></i> 
+												<i class="ggrc-icon attachment"></i>
 													<?php 
 
 													$attachedFile=get_attached_file($attachmentID[0]);
@@ -281,7 +282,7 @@
 												if(!empty($attachmentID1)){ 
 											?>
 												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
-														<i class="fa fa-file"></i> 
+												<i class="ggrc-icon attachment"></i> 
 														<?php 
 
 														$attachedFile1=get_attached_file($attachmentID1[0]);

@@ -18,8 +18,8 @@ get_header("suggest-initiative");
 			<div >
 					<div class="row suggest-titlearea">
 						<div class="col-lg-12 col-md-12 col-sm-12">
-							<h6 style="margin-bottom:0;font-size:30px">Suggest an Initiative</h6>
-							<p style="margin:0px;font-size:14px"><b>We encourage you to help us reach initiatives that we wouldn’t know of. We at the GGRC aim to connect as many people as we can and we need help with that. Feel free to suggest any initiative that follow our community guidelines, we’ll review it and be in touch.</b></p>
+							<h2>Suggest an Initiative</h2>
+							<p><b>We encourage you to help us reach initiatives that we wouldn’t know of. We at the GGRC aim to connect as many people as we can and we need help with that. Feel free to suggest any initiative that follow our community guidelines, we’ll review it and be in touch.</b></p>
 						</div>
 						
 					</div>
@@ -64,18 +64,3 @@ get_header("suggest-initiative");
 	
 
 <?php get_footer(); ?>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-	
-	$(document).ready(function() {
-		// console.log(156);
-		// document.querySelector('#fep-post-title input').setAttribute('placeholder','$');
-		// $("#hirnesh").val("hggjg");
-		// window.onload = function () {
-		// document.getElementById("fep-post-title").placeholder = "Type name here..";
-        // }
-		
-	});
-		
-</script>
