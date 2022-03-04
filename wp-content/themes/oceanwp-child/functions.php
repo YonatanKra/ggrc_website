@@ -425,6 +425,7 @@ function add_action_initiatives_by_region() {
 								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 								<?php the_excerpt(); ?>
 								<hr class="no-margin"/>
+
 								<i class="ggrc-icon ggrc-icon-map"></i> <?php the_field('venue') ?><br>
 								<i class="ggrc-icon ggrc-icon-users"></i> <?php the_field('region') ?><br>
 								

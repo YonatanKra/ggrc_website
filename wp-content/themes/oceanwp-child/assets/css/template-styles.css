@@ -408,6 +408,7 @@ hr{
     vertical-align: middle;
 }
 
+
 .ggrc-icon-exclamation-mark::after {
     content: url('../../../../uploads/icons/exclamationmark.svg');
     vertical-align: middle;
