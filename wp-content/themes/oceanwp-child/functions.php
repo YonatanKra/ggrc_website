@@ -353,10 +353,12 @@ function theme_assets() {
     wp_register_style( 'bootstrap', get_stylesheet_directory_uri() . '/assets/bootstrap-4.4.1-dist/css/bootstrap-grid.css' );
 	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
 	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
+	wp_register_style( 'bbpress', get_stylesheet_directory_uri() . '/assets/css/third/bbpress.min.css' );
 
     wp_enqueue_style( 'bootstrap' );
     wp_enqueue_style( 'font-awesome' );
 	wp_enqueue_style( 'template-styling');
+	wp_enqueue_style( 'bbpress' );
 }
 
 add_action( 'get_action_initiatives_by_region', 'add_action_initiatives_by_region' );
@@ -605,4 +607,6 @@ function add_blog_category($classes) {
 	return $classes;
 }
 add_filter('body_class', 'add_blog_category');
+
+add_post_type_support('topic', array('thumbnail'));
 ?>

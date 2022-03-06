@@ -59,6 +59,13 @@ h4{
     border-bottom:1px solid #f1f1f1;
 }
 
+.suggest-discussion{
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
+	background-size:cover;
+    padding: 24px 48px;
+    border-radius: 10px;
+}
+
 .initiative-website{
     color:#0B4F6D !important;
     font-size:16px;
@@ -109,6 +116,35 @@ h4{
     white-space: nowrap;
     border: 0;
 
+}
+
+.ggrc-btn-white-lg{
+    background: #FFFFFF;
+    border: 5px solid #0B4F6D;
+    box-sizing: border-box;
+    border-radius: 50px;
+    padding: 26.5px 67px;
+    font-size: 22px;
+    color: #0B4F6D;
+    ;
+}
+
+.ggrc-btn-blue-sm{
+    background: linear-gradient(83.21deg, #0B4F6D 18.7%, #1087AD 94.49%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06), 4px 4px 24px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 8px 22px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.ggrc-btn-blue-md{
+    background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
+    box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
+    border-radius: 30px;
+    padding: 16px 46px;
+    font-size: 20px;
+    color: #fff;
 }
 
 .tags{
@@ -201,6 +237,10 @@ hr{
 
 .mt-60{
     margin-top: 60px;
+}
+
+.mt-80{
+    margin-top: 80px;
 }
 
 .profile{
