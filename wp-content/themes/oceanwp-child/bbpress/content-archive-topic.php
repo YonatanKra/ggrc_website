@@ -12,7 +12,18 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<div class="row">
+<style>
+	.page-header{
+		display:none;
+	}
+
+	.content-area{
+		padding-right: 0px;
+    	border-right-width: 0px;
+	}
+</style>
+
+<div class="row mt-60">
 	<div class="col-md-4 col-lg-4 col-sm-12">
 		<h2>Discuss</h2>
 		<p>The Global Green Recovery Collaborative invites members to share ideas for a green recovery and working together, 
@@ -44,17 +55,37 @@ defined( 'ABSPATH' ) || exit;
 		
 	</div>
 	<div class="col-md-8 col-lg-8 col-sm-12">
+		<div class="row mb-20">
+			<div class="col-md-4 col-lg-4 col-sm-12">
+				<select name="topic">
+					<option>Topic</option>
+					<option>Test</option>
+				</select>
+			</div>
+			<div class="col-md-4 col-lg-4 col-sm-12">
+				<select name="concept">
+					<option>Concept</option>
+					<option>Test</option>
+				</select>
+			</div>
+			<div class="col-md-4 col-lg-4 col-sm-12">
+				<select name="publish_date">
+					<option>Date Published</option>
+					<option>Test</option>
+				</select>
+			</div>
+		</div>
 		<div id="bbpress-forums" class="bbpress-wrapper">
 
-			<?php if ( bbp_allow_search() ) : ?>
+			<!-- <?php //if ( bbp_allow_search() ) : ?>
 
 				<div class="bbp-search-form">
 
-					<?php bbp_get_template_part( 'form', 'search' ); ?>
+					<?php //bbp_get_template_part( 'form', 'search' ); ?>
 
 				</div>
 
-			<?php endif; ?>
+			<?php //endif; ?> -->
 
 			<?php //bbp_breadcrumb(); ?>
 

@@ -11,16 +11,10 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
-<?php
-/**
- * The Header for our theme.
- *
- * @package OceanWP WordPress theme
- */
 
+<?php 
+$backgroundimg = get_the_post_thumbnail_url(get_the_ID(), 'full'); 
 ?>
-
-<div style="background-image:url('')"></div>
 
 <div id="bbpress-forums" class="bbpress-wrapper">
 
@@ -28,8 +22,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php //bbp_topic_subscription_link(); ?>
 
-	<?php //bbp_topic_favorite_link(); ?>
-	<?php echo get_the_post_thumbnail(get_the_ID(), 'full'); ?>
+	<?php //bbp_topic_favorite_link(); ?>	
 
 	<?php do_action( 'bbp_template_before_single_topic' ); ?>
 
