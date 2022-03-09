@@ -1,11 +1,9 @@
 <?php
 
-/* Template Name: SuggestInitiative */ 
+/* Template Name: SuggestDiscussion */ 
 
-get_header("suggest-initiative");
+get_header("suggest-discussion");
 ?>
-
-
 				
 
 	<?php do_action( 'ocean_before_content_wrap' ); ?>
@@ -18,7 +16,7 @@ get_header("suggest-initiative");
 			<div >
 					<div class="row suggest-titlearea">
 						<div class="col-lg-12 col-md-12 col-sm-12">
-							<h2>Suggest an Initiative</h2>
+							<h2>Suggest a discussion board</h2>
 							<p><b>We encourage you to help us reach initiatives that we wouldn’t know of. We at the GGRC aim to connect as many people as we can and we need help with that. Feel free to suggest any initiative that follow our community guidelines, we’ll review it and be in touch.</b></p>
 						</div>
 						
@@ -28,7 +26,7 @@ get_header("suggest-initiative");
 
 			<?php do_action( 'ocean_before_content' ); ?>
 		
-			<div id="content" class="site-content clr initiative-form">
+			<div id="content" class="site-content clr discussion-form">
 
 				<?php do_action( 'ocean_before_content_inner' ); ?>
 

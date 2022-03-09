@@ -53,7 +53,7 @@ defined( 'ABSPATH' ) || exit;
 					suspendisse hendrerit eget vulputate integer nulla blandit lacus, diam nunc, vitae</p>
 			</div>
 			<div class="col-md-12 col-lg-12 col-sm-12">
-			<a><button class="ggrc-btn-blue-sm">send a message</button></a>
+			<a href="../suggest-a-discussion-board" target="_blank"><button class="ggrc-btn-blue-sm">Suggest</button></a>
 			</div>
 		</div>
 		

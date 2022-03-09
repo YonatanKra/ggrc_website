@@ -87,12 +87,16 @@ $post_id = get_the_ID();
 		margin-left:92px
 	}
 
+	.avatar-14{
+		display:none;
+	}
+
 </style>
 
 <div id="single-forum" class="bbp-topic-subheader">
 	<p class="links no-margin-bottom"><a href="../../../discuss">back to discussions</a></p>
-	<hr/>
-	<p class="no-margin-bottom">last active: <?php bbp_topic_freshness_link(); ?></p>
+	<hr class="no-margin-top" width="50%"/>
+	<p class="no-margin-bottom mt-20">last active: <?php bbp_topic_freshness_link(); ?></p>
 	<h2 class="no-margin-bottom"><?php bbp_topic_title(); ?></h2>
 
 	<?php do_action( 'bbp_theme_before_topic_started_by' ); ?>

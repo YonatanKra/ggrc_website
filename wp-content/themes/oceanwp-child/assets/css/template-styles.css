@@ -219,6 +219,10 @@ hr{
     margin-bottom:0;
 }
 
+.no-margin-top{
+    margin-top:0;
+}
+
 .no-margin{
     margin: 0;
 }
@@ -233,6 +237,10 @@ hr{
 
 .mb-60{
     margin-bottom: 60px;
+}
+
+.mt-20{
+    margin-top: 20px;
 }
 
 .mt-30{
@@ -355,7 +363,7 @@ hr{
     margin-right:auto
 }
 
-.initiative-form{
+.initiative-form, .discussion-form{
     width:65%;
     position:relative;
     display:block;
