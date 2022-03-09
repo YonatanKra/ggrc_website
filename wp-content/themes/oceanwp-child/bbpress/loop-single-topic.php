@@ -11,6 +11,11 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
+<style>
+	.bbp-body a{
+		text-decoration: none !important;
+	}
+</style>
 
 <ul id="bbp-topic-<?php bbp_topic_id(); ?>" <?php bbp_topic_class(); ?>>
 	<li class="bbp-topic-title">
@@ -66,11 +71,6 @@ defined( 'ABSPATH' ) || exit;
 			<?php do_action( 'bbp_theme_before_topic_started_by' ); ?>
 
 			<span class="bbp-topic-started-by">Community manager: <?php printf( bbp_get_topic_author_link( array( 'size' => '14' ) ) ); ?></span>
-			<?php do_action( 'bbp_theme_before_topic_content' ); ?>
-
-			<?php bbp_topic_content(); ?>
-
-			<?php do_action( 'bbp_theme_after_topic_content' ); ?>
 
 			<?php do_action( 'bbp_theme_after_topic_started_by' ); ?>
 
@@ -86,6 +86,12 @@ defined( 'ABSPATH' ) || exit;
 		</p>
 
 		<?php do_action( 'bbp_theme_after_topic_meta' ); ?>
+
+		<?php do_action( 'bbp_theme_before_topic_content' ); ?>
+
+		<?php bbp_topic_content(); ?>
+
+		<?php do_action( 'bbp_theme_after_topic_content' ); ?>
 
 		<?php bbp_topic_row_actions(); ?>
 

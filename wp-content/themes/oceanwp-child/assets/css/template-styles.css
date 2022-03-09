@@ -445,6 +445,10 @@ hr{
     text-align: center;
 }
 
+.bbp-topic-started-by{
+    font-weight: bold;
+}
+
 /* GGRC Icons */
 
 .ggrc-icon{

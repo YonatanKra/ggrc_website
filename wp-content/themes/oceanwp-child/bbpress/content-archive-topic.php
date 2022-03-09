@@ -21,6 +21,10 @@ defined( 'ABSPATH' ) || exit;
 		padding-right: 0px;
     	border-right-width: 0px;
 	}
+
+	.bbp-author-avatar{
+		display:none;
+	}
 </style>
 
 <div class="row mt-60">
@@ -56,19 +60,25 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 	<div class="col-md-8 col-lg-8 col-sm-12">
 		<div class="row mb-20">
-			<div class="col-md-4 col-lg-4 col-sm-12">
+		<div class="col-md-6 col-lg-3 col-sm-12">
+				<select name="region">
+					<option>Region</option>
+					<option>Test</option>
+				</select>
+			</div>
+			<div class="col-md-6 col-lg-3 col-sm-12">
 				<select name="topic">
 					<option>Topic</option>
 					<option>Test</option>
 				</select>
 			</div>
-			<div class="col-md-4 col-lg-4 col-sm-12">
+			<div class="col-md-6 col-lg-3 col-sm-12">
 				<select name="concept">
 					<option>Concept</option>
 					<option>Test</option>
 				</select>
 			</div>
-			<div class="col-md-4 col-lg-4 col-sm-12">
+			<div class="col-md-6 col-lg-3 col-sm-12">
 				<select name="publish_date">
 					<option>Date Published</option>
 					<option>Test</option>
