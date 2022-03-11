@@ -13,17 +13,6 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'bbp_template_before_topics_loop' ); ?>
 
 <ul id="bbp-forum-<?php bbp_forum_id(); ?>" class="bbp-topics">
-	<!-- <li class="bbp-header">
-		<ul class="forum-titles">
-			<li class="bbp-topic-title"><?php //esc_html_e( 'Topic', 'bbpress' ); ?></li>
-			<li class="bbp-topic-voice-count"><?php //esc_html_e( 'Voices', 'bbpress' ); ?></li>
-			<li class="bbp-topic-reply-count"><?php //bbp_show_lead_topic()
-				//? esc_html_e( 'Replies', 'bbpress' )
-				//s: esc_html_e( 'Posts',   'bbpress' );
-			?></li>
-			<li class="bbp-topic-freshness"><?php //esc_html_e( 'Last Post', 'bbpress' ); ?></li>
-		</ul>
-	</li> -->
 
 	<li class="bbp-body">
 

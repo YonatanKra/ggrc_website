@@ -74,15 +74,6 @@ defined( 'ABSPATH' ) || exit;
 
 			<?php do_action( 'bbp_theme_after_topic_started_by' ); ?>
 
-			<?php if ( ! bbp_is_single_forum() || ( bbp_get_topic_forum_id() !== bbp_get_forum_id() ) ) : ?>
-
-				<?php do_action( 'bbp_theme_before_topic_started_in' ); ?>
-
-				<!-- <span class="bbp-topic-started-in"><?php // printf( esc_html__( 'in: %1$s', 'bbpress' ), '<a href="' . bbp_get_forum_permalink( bbp_get_topic_forum_id() ) . '">' . bbp_get_forum_title( bbp_get_topic_forum_id() ) . '</a>' ); ?></span> -->
-				<?php do_action( 'bbp_theme_after_topic_started_in' ); ?>
-
-			<?php endif; ?>
-
 		</p>
 
 		<?php do_action( 'bbp_theme_after_topic_meta' ); ?>
@@ -91,27 +82,10 @@ defined( 'ABSPATH' ) || exit;
 
 	</li>
 
-	<!-- <li class="bbp-topic-voice-count"><?php //bbp_topic_voice_count(); ?></li>
-
-	<li class="bbp-topic-reply-count"><?php //bbp_show_lead_topic() ? bbp_topic_reply_count() : bbp_topic_post_count(); ?></li> -->
-
 	<li class="bbp-topic-freshness">
-
-		<?php //do_action( 'bbp_theme_before_topic_freshness_link' ); ?>
-
-		<?php //bbp_topic_freshness_link(); ?>
-
-		<?php //do_action( 'bbp_theme_after_topic_freshness_link' ); ?>
 
 		<p class="bbp-topic-meta">
 			<a class="bbp-topic-permalink" href="<?php bbp_topic_permalink(); ?>"><button class="ggrc-btn-blue-md">Comment</button></a>
-
-			<?php //( 'bbp_theme_before_topic_freshness_author' ); ?>
-
-			<!-- <span class="bbp-topic-freshness-author"><?php //bbp_author_link( array( 'post_id' => bbp_get_topic_last_active_id(), 'size' => 16 ) ); ?></span> -->
-
-			<?php //do_action( 'bbp_theme_after_topic_freshness_author' ); ?>
-
 		</p>
 	</li>
 </ul><!-- #bbp-topic-<?php bbp_topic_id(); ?> -->
