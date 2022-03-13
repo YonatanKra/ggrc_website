@@ -13,9 +13,11 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <?php 
-$backgroundimg = get_the_post_thumbnail_url(get_the_ID(), 'full'); 
+$background_img = get_the_post_thumbnail_url(get_the_ID(), 'full'); 
 $post_id = get_the_ID();
+$discussion_url = get_site_url(null, '/discuss', null); 
 ?>
+
 
 <style>
 	.page-header, #qt_bbp_reply_content_toolbar, .loop-item-0, .bbp-admin-links a:not(:last-child), #post-<?php echo $post_id; ?> {
@@ -56,7 +58,7 @@ $post_id = get_the_ID();
 	}
 
 	.bbp-topic-subheader{
-		background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(<?php echo $backgroundimg; ?>); 
+		background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(<?php echo $background_img; ?>); 
 		height:auto;
 		padding-top:100px;
 		padding-bottom:30px;
@@ -90,7 +92,7 @@ $post_id = get_the_ID();
 </style>
 
 <div id="single-forum" class="bbp-topic-subheader">
-	<p class="links no-margin-bottom"><a href="../../../discuss">back to discussions</a></p>
+	<p class="links no-margin-bottom"><a href="<?php echo $discussion_url; ?>">back to discussions</a></p>
 	<hr/>
 	<p class="no-margin-bottom">last active: <?php bbp_topic_freshness_link(); ?></p>
 	<h2 class="no-margin-bottom"><?php bbp_topic_title(); ?></h2>
@@ -114,12 +116,6 @@ $post_id = get_the_ID();
 
 <div id="bbpress-forums" class="bbpress-wrapper">
 
-	<?php //bbp_breadcrumb(); ?>
-
-	<?php //bbp_topic_subscription_link(); ?>
-
-	<?php //bbp_topic_favorite_link(); ?>	
-
 	<?php do_action( 'bbp_template_before_single_topic' ); ?>
 
 	<?php if ( post_password_required() ) : ?>
@@ -127,10 +123,6 @@ $post_id = get_the_ID();
 		<?php bbp_get_template_part( 'form', 'protected' ); ?>
 
 	<?php else : ?>
-
-		<?php //bbp_topic_tag_list(); ?>
-
-		<?php //bbp_single_topic_description(); ?>
 
 		<?php if ( bbp_show_lead_topic() ) : ?>
 
@@ -141,8 +133,6 @@ $post_id = get_the_ID();
 		<?php bbp_get_template_part( 'form', 'reply' ); ?>
 
 		<?php if ( bbp_has_replies() ) : ?>
-
-			<?php //bbp_get_template_part( 'pagination', 'replies' ); ?>
 
 			<?php bbp_get_template_part( 'loop',       'replies' ); ?>
 
@@ -160,8 +150,7 @@ $post_id = get_the_ID();
 
 <script>
 	jQuery(document).ready(function($) {
-		$("#bbp_reply_submit").html("comment");	
-		// $("#reply-title").html("Comments");		
+		$("#bbp_reply_submit").html("comment");		
 		$('#bbp_reply_content').attr('placeholder', 'Write your comment...');
 
 	});

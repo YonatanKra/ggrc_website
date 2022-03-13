@@ -27,8 +27,7 @@ if ( bbp_is_reply_edit() ) : ?>
 			<?php do_action( 'bbp_theme_before_reply_form' ); ?>
 
 			<fieldset class="bbp-form">
-				<legend><?php //printf( esc_html__( 'Reply To: %s', 'bbpress' ), ( bbp_get_form_reply_to() ) ? sprintf( esc_html__( 'Reply #%1$s in %2$s', 'bbpress' ), bbp_get_form_reply_to(), bbp_get_topic_title() ) : bbp_get_topic_title() ); ?></legend>
-
+			
 				<?php do_action( 'bbp_theme_before_reply_form_notices' ); ?>
 
 				<?php if ( ! bbp_is_topic_open() && ! bbp_is_reply_edit() ) : ?>
@@ -81,43 +80,6 @@ if ( bbp_is_reply_edit() ) : ?>
 						</p>
 
 					<?php endif; ?>
-
-					<!-- <?php //if ( bbp_allow_topic_tags() && current_user_can( 'assign_topic_tags', bbp_get_topic_id() ) ) : ?>
-
-						<?php //do_action( 'bbp_theme_before_reply_form_tags' ); ?>
-
-						<p>
-							<label for="bbp_topic_tags"><?php //esc_html_e( 'Tags:', 'bbpress' ); ?></label><br />
-							<input type="text" value="<?php //bbp_form_topic_tags(); ?>" size="40" name="bbp_topic_tags" id="bbp_topic_tags" <?php //disabled( bbp_is_topic_spam() ); ?> />
-						</p>
-
-						<?php //do_action( 'bbp_theme_after_reply_form_tags' ); ?>
-
-					<?php //endif; ?> -->
-
-					<!-- <?php //if ( bbp_is_subscriptions_active() && ! bbp_is_anonymous() && ( ! bbp_is_reply_edit() || ( bbp_is_reply_edit() && ! bbp_is_reply_anonymous() ) ) ) : ?>
-
-						<?php //do_action( 'bbp_theme_before_reply_form_subscription' ); ?>
-
-						<p>
-
-							<input name="bbp_topic_subscription" id="bbp_topic_subscription" type="checkbox" value="bbp_subscribe"<?php //bbp_form_topic_subscribed(); ?> />
-
-							<?php //if ( bbp_is_reply_edit() && ( bbp_get_reply_author_id() !== bbp_get_current_user_id() ) ) : ?>
-
-								<label for="bbp_topic_subscription"><?php //esc_html_e( 'Notify the author of follow-up replies via email', 'bbpress' ); ?></label>
-
-							<?php //else : ?>
-
-								<label for="bbp_topic_subscription"><?php //esc_html_e( 'Notify me of follow-up replies via email', 'bbpress' ); ?></label>
-
-							<?php //endif; ?>
-
-						</p>
-
-						<?php //do_action( 'bbp_theme_after_reply_form_subscription' ); ?>
-
-					<?php //endif; ?> -->
 
 					<?php if ( bbp_is_reply_edit() ) : ?>
 
