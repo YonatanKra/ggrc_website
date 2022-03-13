@@ -401,12 +401,56 @@ hr{
     text-align: center;
 }
 
-.icons{
-    width:18px;
-}
-
 a:hover{
    color: #0b4f6d
+}
+
+/* GGRC Icons */
+
+.ggrc-icon{
+    font-size:18px;
+    vertical-align: middle;
+}
+
+
+.ggrc-icon-exclamation-mark::after {
+    content: url('../../../../uploads/icons/exclamationmark.svg');
+    vertical-align: middle;
+}
+
+.ggrc-icon-map::after {
+    content: url('../../../../uploads/icons/map.svg');    
+}
+
+.ggrc-icon-users::after {
+    content: url('../../../../uploads/icons/users.svg');
+}
+
+.ggrc-icon-map-pin::after {
+    content: url('../../../../uploads/icons/map-pin.svg');
+}
+
+.ggrc-icon-clock::after {
+    content: url('../../../../uploads/icons/clock.svg');
+}
+
+.ggrc-icon-home::after {
+    content: url('../../../../uploads/icons/home.svg');
+}
+
+.ggrc-icon-attachment::after {
+    content: url('../../../../uploads/icons/attachment.svg');
+}
+
+.ggrc-icon-heart::after {
+    content: url('../../../../uploads/icons/heart.svg');
+}
+
+.ggrc-icon-share-1::after {
+    content: url('../../../../uploads/icons/share-1.svg');
+}
+.ggrc-icon-share-2::after {
+    content: url('../../../../uploads/icons/share-2.svg');
 }
 
 

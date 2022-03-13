@@ -417,7 +417,9 @@ function add_action_initiatives_by_region() {
 									
 									?>
 									<p class="action-type"> 
-									<img src="../../wp-content/uploads/icons/exclamationmark.svg" class="icons"/>	<?php echo esc_html($take_action->name); ?></p>
+
+									<i class="ggrc-icon ggrc-icon-exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
+
 								<?php 
 									
 								}
@@ -426,8 +428,10 @@ function add_action_initiatives_by_region() {
 								<h4><?php the_title(); ?></h4>
 								<?php the_excerpt(); ?>
 								<hr class="no-margin"/>
-								<img src="../../wp-content/uploads/icons/map.svg" class="icons"/> <?php the_field('venue') ?><br>
-								<img src="../../wp-content/uploads/icons/users.svg" class="icons"/> <?php the_field('region') ?><br>
+
+								<i class="ggrc-icon ggrc-icon-map"></i> <?php the_field('venue') ?><br>
+								<i class="ggrc-icon ggrc-icon-users"></i> <?php the_field('region') ?><br>
+
 								
 							</div>
 					</div></a>

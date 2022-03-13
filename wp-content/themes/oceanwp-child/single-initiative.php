@@ -71,13 +71,15 @@
 									<div class="row mt-30">
 										
 										<div class="col-md-2 col-lg-2 col-sm-4">
-											<img src="../../wp-content/uploads/icons/users.svg" class="icons"/>  <?php the_field('venue') ?>
+
+										<i class="ggrc-icon ggrc-icon-users"></i>  <?php the_field('venue') ?>
 										</div>
 										<div class="col-md-2 col-lg-2 col-sm-4">
-											<img src="../../wp-content/uploads/icons/map-pin.svg" class="icons"/> <?php the_field('region') ?>
+										<i class="ggrc-icon ggrc-icon-map-pin"></i> <?php the_field('region') ?>
 										</div>
 										<div class="col-md-2 col-lg-2 col-sm-4">
-											<img src="../../wp-content/uploads/icons/clock.svg" class="icons"/> last updated <?php the_modified_time('F jS, Y') ?>
+										<i class="ggrc-icon ggrc-icon-clock"></i> last updated <?php the_modified_time('F jS, Y') ?>
+
 										</div>
 										<div class="col-md-1 col-lg-1 col-sm-1">
 										</div>
@@ -86,8 +88,9 @@
 											
 											<li class="ess-all-networks ess-social-networks ess-list">
 												<div class="ess-social-network-link">
-													
-													<span class="ess-all-networks-button initiative-share" style="color:#0B4F6D !important"><img src="../../wp-content/uploads/icons/share-2.svg" class="icons"/> share initiative</span>
+
+													<span class="ess-all-networks-button initiative-share" style="color:#0B4F6D !important"><i class="ggrc-icon ggrc-icon-share-2"></i> share initiative</span>
+
 												</div>
 											</li>
 											
@@ -252,15 +255,17 @@
 
 									</div>
 									<div class="col-md-4 col-lg-4 col-sm-12 learn-rightside">
-										<p><img src="../../wp-content/uploads/icons/users.svg" class="icons"/>  <?php the_field('venue') ?></p>
-										<p><img src="../../wp-content/uploads/icons/map-pin.svg" class="icons"/> <?php the_field('region') ?></p>
-										<?php
+
+										<p><i class="ggrc-icon ggrc-icon-users"></i>  <?php the_field('venue') ?></p>
+										<p><i class="ggrc-icon ggrc-icon-map-pin"></i> <?php the_field('region') ?></p>
+                    <?php
 											$duration=get_post_custom_values('initiative-duration');
 											if(!empty($duration[0])){
 										?>
-										<p><img src="../../wp-content/uploads/icons/clock.svg" class="icons"/> <?php the_field('initiative-duration') ?></p>
-										<?php } ?>
-										<p><img src="../../wp-content/uploads/icons/home.svg" class="icons"/> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
+										<p><i class="ggrc-icon ggrc-icon-clock"></i> <?php the_field('initiative-duration') ?></p>
+                    <?php } ?>
+										<p><i class="ggrc-icon ggrc-icon-home"></i> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
+
 										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
 									</div>
 								</div>
@@ -273,7 +278,9 @@
 												
 												if(!empty($attachmentID[0])){ ?>
 												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
-												<img src="../../wp-content/uploads/icons/attachment.svg" class="icons"/> 
+
+												<i class="ggrc-icon ggrc-icon-attachment"></i>
+
 													<?php 
 
 													$attachedFile=get_attached_file($attachmentID[0]);
@@ -287,7 +294,9 @@
 												if(!empty($attachmentID1[0])){ 
 											?>
 												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
-														<img src="../../wp-content/uploads/icons/attachment.svg" class="icons"/> 
+
+												<i class="ggrc-icon ggrc-icon-attachment"></i> 
+
 														<?php 
 
 														$attachedFile1=get_attached_file($attachmentID1[0]);
