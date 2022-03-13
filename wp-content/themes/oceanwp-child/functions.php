@@ -399,6 +399,7 @@ function add_action_initiatives_by_region() {
 				 while($query->have_posts()) {
 					 $query->the_post(); ?>
 					<div class="col-lg-3 col-md-6 col-sm-12">
+					<a href="<?php the_permalink(); ?>">
 						<div class="initiative-list">
 						<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
 
@@ -416,21 +417,24 @@ function add_action_initiatives_by_region() {
 									
 									?>
 									<p class="action-type"> 
+
 									<i class="ggrc-icon ggrc-icon-exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
+
 								<?php 
 									
 								}
 							}?>
 							<p class="initiative-supporters">30 Supporters</p>
-								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
+								<h4><?php the_title(); ?></h4>
 								<?php the_excerpt(); ?>
 								<hr class="no-margin"/>
 
 								<i class="ggrc-icon ggrc-icon-map"></i> <?php the_field('venue') ?><br>
 								<i class="ggrc-icon ggrc-icon-users"></i> <?php the_field('region') ?><br>
+
 								
 							</div>
-					</div>
+					</div></a>
 			<?php } ?>
             <?php wp_reset_postdata(); ?>
 			<?php } ?>

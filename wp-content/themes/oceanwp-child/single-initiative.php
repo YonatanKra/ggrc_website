@@ -88,7 +88,7 @@
 											
 											<li class="ess-all-networks ess-social-networks ess-list">
 												<div class="ess-social-network-link">
-													
+
 													<span class="ess-all-networks-button initiative-share" style="color:#0B4F6D !important"><i class="ggrc-icon ggrc-icon-share-2"></i> share initiative</span>
 
 												</div>
@@ -258,7 +258,12 @@
 
 										<p><i class="ggrc-icon ggrc-icon-users"></i>  <?php the_field('venue') ?></p>
 										<p><i class="ggrc-icon ggrc-icon-map-pin"></i> <?php the_field('region') ?></p>
+                    <?php
+											$duration=get_post_custom_values('initiative-duration');
+											if(!empty($duration[0])){
+										?>
 										<p><i class="ggrc-icon ggrc-icon-clock"></i> <?php the_field('initiative-duration') ?></p>
+                    <?php } ?>
 										<p><i class="ggrc-icon ggrc-icon-home"></i> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
 
 										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
@@ -271,7 +276,7 @@
 											<?php 
 												$attachmentID = get_post_custom_values('additional-resources-1');
 												
-												if(!empty($attachmentID)){ ?>
+												if(!empty($attachmentID[0])){ ?>
 												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
 
 												<i class="ggrc-icon ggrc-icon-attachment"></i>
@@ -286,7 +291,7 @@
 											<?php } 
 
 												$attachmentID1 = get_post_custom_values('additional-resources-2');
-												if(!empty($attachmentID1)){ 
+												if(!empty($attachmentID1[0])){ 
 											?>
 												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
 
