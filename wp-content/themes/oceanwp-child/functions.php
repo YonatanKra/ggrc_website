@@ -402,35 +402,35 @@ function add_action_initiatives_by_region() {
 					 $query->the_post(); ?>
 					<div class="col-lg-3 col-md-6 col-sm-12">
 						<div class="initiative-list">
-						<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
-
-						<div class="initiative-list-detail">
-						<?php
-
-							$the_post_id = get_the_ID();
-							$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-
-							if(empty($action) || ! is_array($action)){
-								echo "";
-							}else{
-
-								foreach($action as $key => $take_action){
-									
-									?>
-									<p class="action-type"> 
-									<i class="ggrc-icon exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
-								<?php 
-									
-								}
-							}?>
-							<p class="initiative-supporters">30 Supporters</p>
-								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
-								<?php the_excerpt(); ?>
-								<hr class="no-margin"/>
-								<i class="ggrc-icon map"></i> <?php the_field('venue') ?><br>
-								<i class="ggrc-icon users"></i> <?php the_field('region') ?><br>
+							<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
 								
+							<div class="initiative-list-detail">
+							<?php 
+								
+								$the_post_id = get_the_ID();
+								$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
+								
+								if(empty($action) || ! is_array($action)){
+									echo "";
+								}else{
+									
+									foreach($action as $key => $take_action){
+										
+										?>
+										<p class="action-type"> 
+										<i class="ggrc-icon exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
+									<?php 
+										
+									}
+								}?>
+									<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
+									<?php the_excerpt(); ?>
+									<hr/>
+									<p class="no-margin"><i class="ggrc-icon map margin-right"></i> <?php the_field('venue') ?></p>
+									<p class="no-margin"><i class="ggrc-icon users margin-right"></i> <?php the_field('region') ?></p>
+									
 							</div>
+						</div>
 					</div>
 			<?php } ?>
             <?php wp_reset_postdata(); ?>
@@ -569,7 +569,7 @@ function follow_initiative() {
 
 	$table_name = $wpdb->prefix . 'follow_posts';
 	$wpdb->insert($table_name, array('userID' => $current_user_id, 'postID' => $postid));
-
+	
 }
 
 add_action( 'wp_ajax_unfollow_post', 'unfollow_initiative' );
@@ -577,12 +577,13 @@ function unfollow_initiative() {
 	global $wpdb;
 
 	check_if_user_logged_in();
-
+	
 	$current_user_id = get_current_user_id();
 	$postid = $_POST['postid'];
 	$table_name = $wpdb->prefix . 'follow_posts';
 
 	$wpdb->query($wpdb->prepare("UPDATE $table_name SET isFollowing = '0' WHERE userID = '$current_user_id' and postID = '$postid'"));
+	
 
 }
 

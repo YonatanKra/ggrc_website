@@ -57,28 +57,38 @@
 				<?php while ( have_posts() ) :
 							the_post(); 
 
-							$the_post_id = get_the_ID();
-							$type = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-							
-							if(!empty($type) && is_array($type)){
-								
-								if($type[0]->name == "Take Action"){								
-
 								?>
 					
 								<div class="action-subheader">
-								<a href="../../initiative">back to explore initiatives</a>
+								<?php $initiative_url = get_site_url(null, '/initiative', null); ?>
+								<a href="<?php echo $initiative_url; ?>">back to explore initiatives</a>
+								<hr width="40%"/>
 									<div class="row mt-30">
 										
 										<div class="col-md-2 col-lg-2 col-sm-4">
-										<i class="ggrc-icon users"></i>  <?php the_field('venue') ?>
+										<i class="ggrc-icon users margin-right"></i>  <?php the_field('venue') ?>
 										</div>
 										<div class="col-md-2 col-lg-2 col-sm-4">
-										<i class="ggrc-icon map-pin"></i> <?php the_field('region') ?>
+										<i class="ggrc-icon map-pin margin-right"></i> <?php the_field('region') ?>
 										</div>
-										<div class="col-md-2 col-lg-2 col-sm-4">
-										<i class="ggrc-icon clock"></i> last updated <?php the_modified_time('F jS, Y') ?>
-										</div>
+										<?php
+											$the_post_id = get_the_ID();
+						
+											$type = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
+											
+											if(!empty($type) && is_array($type)){
+												
+												if($type[0]->name == "Take Action"){ ?>
+													<div class="col-md-2 col-lg-2 col-sm-4">
+													<i class="ggrc-icon clock margin-right"></i> last updated <?php the_modified_time('F jS, Y') ?>
+													</div>
+												<?php } 
+											} else{ ?>
+												<div class="col-md-2 col-lg-2 col-sm-4">
+												<i class="ggrc-icon clock margin-right"></i> <?php the_field('initiative-duration') ?>
+												</div>
+											<?php }  ?>
+													
 										<div class="col-md-1 col-lg-1 col-sm-1">
 										</div>
 										<div class="col-md-5 col-lg-5 col-sm-6 align-center mb-30">
@@ -104,7 +114,7 @@
 										
 									</div>
 									<div class="row">
-										<div class="col-md-6 col-lg-6 col-sm-12">
+										<div class="col-md-5 col-lg-5 col-sm-12">
 									
 										<h2><?php the_title(); ?></h2>
 										<span class="initiative-content"><?php the_content(); ?></span>
@@ -124,29 +134,55 @@
 												
 											}
 										} ?>
+
+									<div class="row mt-30">
+									<div class="col-md-12 col-lg-12 col-sm-12">
+										<p><b>Additional Resources</b></p>
+										<div class="row">
+											<?php 
+												$attachmentID = get_post_custom_values('additional-resources-1');
+												
+												if(!empty($attachmentID[0])){ ?>
+												<div class="col-md-12 col-lg-5 col-sm-12 add-resources">
+												<i class="ggrc-icon attachment"></i>
+													<?php 
+
+													$attachedFile=get_attached_file($attachmentID[0]);
+
+													?><a href="../../../<?php echo trim($attachedFile, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-1'); ?></a>
+
+												</div>
+											<?php } 
+
+												$attachmentID1 = get_post_custom_values('additional-resources-2');
+												if(!empty($attachmentID1[0])){ 
+											?>
+												<div class="col-md-12 col-lg-5 col-sm-12 add-resources">
+												<i class="ggrc-icon attachment"></i> 
+														<?php 
+
+														$attachedFile1=get_attached_file($attachmentID1[0]);
+
+														?><a href="../../../<?php echo trim($attachedFile1, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-2'); ?></a>
+
+													</div>
+												<?php } ?>
+											
+										</div>
+									</div>
+								</div>
 										
 										<hr class="mt-60"/>
 										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
 										<hr class="mb-60"/>
 										
 										</div>
-										<div class="col-md-6 col-lg-6 col-sm-12">
+										<div class="col-md-7 col-lg-7 col-sm-12">
 											<img src="<?php echo get_the_post_thumbnail_url(); ?>" />
 										</div>
 									</div>
 
-								</div>
-
-								<?php } 
-							} else { ?>
-
-								<div class="learn-subheader">					
-								
-								</div>
-								
-
-							<?php } ?>
-	
+								</div>	
 					
 					<?php endwhile; ?>
 		<div id="content-wrap" class="container clr" style="padding-top:100px">
@@ -181,14 +217,14 @@
 								?>
 						<div class="initiative-take-action-bar">
 							<div class="row">
-								<div class="col-md-4 col-lg-4 col-sm-12">
+								<div class="col-md-5 col-lg-5 col-sm-12">
 									<div class="row">
 										<div class="col-md-12 col-lg-12 col-sm-12 align-center">
-											<h2>How to Take Action:</h2>
+											<h2 class="no-margin-bottom">How to Take Action:</h2>
 										</div>
 									</div>
 								</div>
-								<div class="col-md-8 col-lg-8 col-sm-12">
+								<div class="col-md-7 col-lg-7 col-sm-12 center-element">
 									<div class="row">
 						<?php 
 							$initiative_action_types = get_post_meta($the_post_id, 'initiative');
@@ -215,153 +251,40 @@
 						</div>
 
 						<?php } 
-							} else { ?>
-
-								<a href="../../initiative" >back to explore initiatives</a>
-								
-								<div class="row mt-30">
-									<div class="col-md-7 col-lg-7 col-sm-12">
-								
-									<h2><?php the_title(); ?></h2>
-									<p class="no-margin-bottom"><b>Description:</b></p>
-									<?php the_content(); ?>
-									
-									<p class="initiative-goal">Goal: </p>
-									<p class="mb-30"><?php the_field('initiative-goal'); ?></p>
-									
-									<?php 
-									$the_post_id = get_the_ID();
-									$tags = wp_get_post_terms($the_post_id, 'initiative_tags', ['']);
-									
-									if(empty($tags) || ! is_array($tags)){
-										echo "No Tags";
-									}else{
-
-										foreach($tags as $key => $posttags){
-											?>
-											<a href="<?php echo get_term_link($posttags->term_id, 'initiative_tags'); ?>" target="_blank" class="tags"><?php echo esc_html($posttags->name); ?></a>
-											
-										<?php 
-											
-										}
-									} ?>
-									
-									<br><br>
-									</div>
-									<div class="col-md-1 col-lg-1 col-sm-12">
-
-									</div>
-									<div class="col-md-4 col-lg-4 col-sm-12 learn-rightside">
-										<p><i class="ggrc-icon users"></i>  <?php the_field('venue') ?></p>
-										<p><i class="ggrc-icon map-pin"></i> <?php the_field('region') ?></p>
-										<p><i class="ggrc-icon clock"></i> <?php the_field('initiative-duration') ?></p>
-										<p><i class="ggrc-icon home"></i> <a href="<?php the_field('website') ?>" target="_blank" class="initiative-website"><?php the_field('website') ?></a></p>
-										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
-									</div>
-								</div>
-								<div class="row mt-30">
-									<div class="col-md-12 col-lg-12 col-sm-12">
-										<h4>Additional Resources</h4>
-										<div class="row">
-											<?php 
-												$attachmentID = get_post_custom_values('additional-resources-1');
-												
-												if(!empty($attachmentID)){ ?>
-												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
-												<i class="ggrc-icon attachment"></i>
-													<?php 
-
-													$attachedFile=get_attached_file($attachmentID[0]);
-
-													?><a href="../../../<?php echo trim($attachedFile, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-1'); ?></a>
-
-												</div>
-											<?php } 
-
-												$attachmentID1 = get_post_custom_values('additional-resources-2');
-												if(!empty($attachmentID1)){ 
-											?>
-												<div class="col-md-4 col-lg-4 col-sm-12 add-resources">
-												<i class="ggrc-icon attachment"></i> 
-														<?php 
-
-														$attachedFile1=get_attached_file($attachmentID1[0]);
-
-														?><a href="../../../<?php echo trim($attachedFile1, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-2'); ?></a>
-
-													</div>
-												<?php } ?>
-											
-										</div>
-									</div>
-								</div>
-
-																
-						<?php } ?>
+							} ?>
 
 						<div class="row mt-60">	
-												
-							<div class="col-md-3 col-lg-3 col-sm-12" id="initiative-contact">
-								<h3>People for Initiative</h3>
-								<p><b>Contacts for initiative</b></p>
+						<div class="col-md-12 col-lg-12 col-sm-12" id="initiative-contact">
+							<h3>People for Initiative</h3>
+						</div>
 								<?php 
 									$post_id = get_the_ID();
 									for ( $i = 1; $i <= 3; $i++ ){
 									
 										$id= get_post_custom_values('initiative-contact-'. $i, $post_id);
-										if (!empty($id[0])){
-										
+										if (!empty($id[0])){ ?>
+									<div class="col-md-4 col-lg-4 col-sm-12" id="initiative-contact">
+									<?php	
 											$user_id = intval($id[0]);
 											$contact_name = get_the_author_meta( 'display_name', $user_id );
 												
 											echo get_avatar($user_id, 60);										
 								?>
-								<div class="initiative-contact-details">
-									<h4 class="no-margin-bottom"><?php echo $contact_name ?></h4>
-									<p class="no-margin-bottom">title</p>
-									<p class="no-margin-bottom">organisation</p>
-								</div>
-								<div class="initiative-contact-profile">									
-									<a href="#" target="_blank" class="profile">view profile</a>
-									<a href="#" target="_blank" class="template-btn"> send message</a>
-								</div>
 								
+									<div class="initiative-contact-details">
+										<h4 class="no-margin-bottom"><?php echo $contact_name ?></h4>
+										<p class="no-margin-bottom">title</p>
+										<p class="no-margin-bottom">organisation</p>
+									</div>
+									<div class="initiative-contact-profile">									
+										<a href="#" target="_blank" class="profile">view profile</a>
+										<a href="#" target="_blank" class="template-btn"> send message</a>
+									</div>
+								</div>
 								<?php }
 								} ?>
-							</div>
-							<div class="col-md-9 col-lg-9 col-sm-12 following-section">
-							<p><b>Following this initiative</b></p>
-								<div class="row">									
-									
-									<?php 
-										
-										$followers_id = get_followers_by_post_id($post_id);
-
-										foreach($followers_id as $key => $follower_id){
-
-											$user_id = $follower_id->userID;
-											$contact_name = get_the_author_meta( 'display_name', $user_id );
-										?>
-										<div class="col-md-3 col-lg-3 col-sm-12" id="initiative-followers">
-											<?php
-											echo get_avatar($user_id, 60);										
-									?>
-											<div class="initiative-followers">
-												<p class="no-margin-bottom"><b><?php echo $contact_name ?></b></p>
-												<p class="no-margin-bottom">title, org</p>
-												<p class="no-margin-bottom">country</p>
-											</div>
-										</div>
-									<?php
-										}									
-									?>
-									
-									<div class="col-md-3 col-lg-3 col-sm-12">
-									</div>
-									<div class="col-md-3 col-lg-3 col-sm-12">
-									</div>
-								</div>
-							</div>
+							
+							
 						</div>
 											
 						<?php

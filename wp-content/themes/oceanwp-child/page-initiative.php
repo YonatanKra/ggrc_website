@@ -86,16 +86,15 @@ get_header("initiatives");
 									
 								}
 							}?>
-							<p class="initiative-supporters">30 Supporters</p>
 								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 								<?php the_excerpt(); ?>
-								<hr class="no-margin"/>
-								<i class="ggrc-icon map"></i> <?php the_field('venue') ?><br>
-								<i class="ggrc-icon users"></i> <?php the_field('region') ?><br>
+								<hr/>
+								<p class="no-margin"><i class="ggrc-icon map margin-right"></i> <?php the_field('venue') ?></p>
+								<p class="no-margin"><i class="ggrc-icon users margin-right"></i> <?php the_field('region') ?></p>
 								
-							</div>
+						</div>
+						</div>
 					</div>
-				</div>
 			<?php } ?>
 			<?php } ?>
 
