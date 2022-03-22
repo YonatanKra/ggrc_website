@@ -264,23 +264,23 @@
 										$id= get_post_custom_values('initiative-contact-'. $i, $post_id);
 										if (!empty($id[0])){ ?>
 									<div class="col-md-4 col-lg-4 col-sm-12" id="initiative-contact">
-									<?php	
-											$user_id = intval($id[0]);
-											$contact_name = get_the_author_meta( 'display_name', $user_id );
-												
-											echo get_avatar($user_id, 60);										
-								?>
-								
-									<div class="initiative-contact-details">
-										<h4 class="no-margin-bottom"><?php echo $contact_name ?></h4>
-										<p class="no-margin-bottom">title</p>
-										<p class="no-margin-bottom">organisation</p>
+										<?php	
+												$user_id = intval($id[0]);
+												$contact_name = get_the_author_meta( 'display_name', $user_id );
+													
+												echo get_avatar($user_id, 60);										
+										?>
+									
+										<div class="initiative-contact-details">
+											<h4 class="no-margin-bottom"><?php echo $contact_name ?></h4>
+											<p class="no-margin-bottom">title</p>
+											<p class="no-margin-bottom">organisation</p>
+										</div>
+										<div class="initiative-contact-profile">									
+											<a href="#" target="_blank" class="profile">view profile</a>
+											<a href="#" target="_blank" class="template-btn"> send message</a>
+										</div>
 									</div>
-									<div class="initiative-contact-profile">									
-										<a href="#" target="_blank" class="profile">view profile</a>
-										<a href="#" target="_blank" class="template-btn"> send message</a>
-									</div>
-								</div>
 								<?php }
 								} ?>
 							

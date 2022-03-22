@@ -57,46 +57,46 @@ get_header("initiatives");
 
 				$the_query = new WP_Query($args);
 
-			?>
+				?>
 
-		<div class="row">
-			<?php if($the_query->have_posts()){
-				 while($the_query->have_posts()) {
-					 $the_query->the_post(); ?>
-					<div class="col-lg-4 col-md-6 col-sm-12">
-						<div class="initiative-list">
-						<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
-							
-						<div class="initiative-list-detail">
-						<?php 
-							
-							$the_post_id = get_the_ID();
-							$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-							
-							if(empty($action) || ! is_array($action)){
-								echo "";
-							}else{
+			<div class="row">
+				<?php if($the_query->have_posts()){
+					while($the_query->have_posts()) {
+						$the_query->the_post(); ?>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<div class="initiative-list">
+							<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
 								
-								foreach($action as $key => $take_action){
-									
-									?>
-									<p class="action-type"> 
-									<i class="ggrc-icon exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
-								<?php 
-									
-								}
-							}?>
-								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
-								<?php the_excerpt(); ?>
-								<hr/>
-								<p class="no-margin"><i class="ggrc-icon map margin-right"></i> <?php the_field('venue') ?></p>
-								<p class="no-margin"><i class="ggrc-icon users margin-right"></i> <?php the_field('region') ?></p>
+							<div class="initiative-list-detail">
+							<?php 
 								
+								$the_post_id = get_the_ID();
+								$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
+								
+								if(empty($action) || ! is_array($action)){
+									echo "";
+								}else{
+									
+									foreach($action as $key => $take_action){
+										
+										?>
+										<p class="action-type"> 
+										<i class="ggrc-icon exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
+									<?php 
+										
+									}
+								}?>
+									<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
+									<?php the_excerpt(); ?>
+									<hr/>
+									<p class="no-margin"><i class="ggrc-icon map margin-right"></i> <?php the_field('venue') ?></p>
+									<p class="no-margin"><i class="ggrc-icon users margin-right"></i> <?php the_field('region') ?></p>
+									
+							</div>
+							</div>
 						</div>
-						</div>
-					</div>
-			<?php } ?>
-			<?php } ?>
+				<?php } ?>
+				<?php } ?>
 
 			</div>
 

@@ -70,6 +70,15 @@ select{
     border-radius: 10px;
 }
 
+.suggest-content{
+    height:auto; 
+    background: linear-gradient(89.48deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url('../../../../uploads/2022/03/suggestbg.jpg');
+    background-position-y : bottom;
+    box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.13);
+    border-radius: 3px;
+    padding: 10px 20px
+}
+
 .initiative-website{
     color:#0B4F6D !important;
     font-size:16px;
@@ -130,8 +139,18 @@ select{
     padding: 26.5px 67px;
     font-size: 22px;
     color: #0B4F6D;
-    ;
 }
+
+.ggrc-btn-white-sm{
+    background: #FFFFFF;
+    border: 2px solid #0B4F6D;
+    box-sizing: border-box;
+    border-radius: 30px;
+    padding: 8px 22px;
+    font-size: 16px;
+    color: #0B4F6D;
+}
+
 
 .ggrc-btn-blue-sm{
     background: linear-gradient(83.21deg, #0B4F6D 18.7%, #1087AD 94.49%);
@@ -223,12 +242,20 @@ hr{
     margin-top:0;
 }
 
+.no-margin-left{
+    margin-left:0;
+}
+
 .no-margin{
     margin: 0;
 }
 
 .margin-right{
     margin-right:5px
+}
+
+.mb-10{
+    margin-bottom: 10px;
 }
 
 .mb-20{
