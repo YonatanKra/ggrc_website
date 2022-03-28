@@ -300,9 +300,9 @@ hr{
 }
 
 .center-element{
-    display: block;
+    display: block !important;
     position:relative;
-    margin:auto;
+    margin:auto !important;
 }
 
 /* Blog Styles Start */
@@ -382,7 +382,6 @@ hr{
     color: var(--stories-color);
     font-weight:bold
 }
-
 
 .like-share{
     display:inline;
@@ -541,6 +540,64 @@ hr{
     content: url('../../../../uploads/icons/share-2.svg');
 }
 
+/* Modal Popup */
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+	z-index: 10000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(89.48deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url('../../../../uploads/2022/03/login-bg.jpg');
+    padding: 2rem 5rem;
+    width:60%;
+    border-radius: 0.5rem;
+	z-index: 10001;
+    background-size: cover;
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+#user_lname, #user_fname, #user_login, #user_email, #title, #country, #organisation, #bio, #user_pass{
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid #ACB4BD;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: #000;
+}
 
 
 

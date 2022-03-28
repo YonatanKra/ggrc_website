@@ -84,13 +84,13 @@ defined( 'ABSPATH' ) || exit;
 						<p>We are always happy to hear from our members about things that interest them! </p>
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
-						<a href=""><button class="ggrc-btn-blue-sm mb-10">suggest initiative</button></a>
+						<a href="<?php echo site_url( '/suggest-an-initiative/', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest initiative</button></a>
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
-						<a href=""><button class="ggrc-btn-blue-sm mb-10">suggest event</button></a>
+						<a href="<?php echo site_url( '/suggest-event/', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest event</button></a>
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
-						<a href=""><button class="ggrc-btn-blue-sm mb-10">suggest discussion board</button></a>
+						<a href="<?php echo site_url( '/suggest-a-discussion-board/', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest discussion board</button></a>
 					</div>
 				</div>
 				<div class="row">
@@ -134,13 +134,7 @@ defined( 'ABSPATH' ) || exit;
 							<?php } ?>
 
 						</div>
-						<?php //if ( bbp_is_favorites()               ) bbp_get_template_part( 'user', 'favorites'       ); ?>
-						<?php //if ( bbp_is_subscriptions()           ) bbp_get_template_part( 'user', 'subscriptions'   ); ?>
-						<?php //if ( bbp_is_single_user_engagements() ) bbp_get_template_part( 'user', 'engagements'     ); ?>
-						<?php //if ( bbp_is_single_user_topics()      ) bbp_get_template_part( 'user', 'topics-created'  ); ?>
-						<?php //if ( bbp_is_single_user_replies()     ) bbp_get_template_part( 'user', 'replies-created' ); ?>
-						<?php //if ( bbp_is_single_user_edit()        ) bbp_get_template_part( 'form', 'user-edit'       ); ?>
-						<?php //if ( bbp_is_single_user_profile()     ) bbp_get_template_part( 'user', 'profile'         ); ?>						
+												
 					</div>
 
 					<div class="col-lg-3 col-md-12 col-sm-12">
@@ -178,67 +172,7 @@ defined( 'ABSPATH' ) || exit;
 
 						?>
 						</div>
-						<?php do_action( 'bbp_template_before_user_details_menu_items' ); ?>
-
-						<!-- <div id="bbp-user-navigation">
-							<ul>
-								<li class="<?php if ( bbp_is_single_user_profile() ) :?>current<?php endif; ?>">
-									<span class="vcard bbp-user-profile-link">
-										<a class="url fn n" href="<?php bbp_user_profile_url(); ?>" title="<?php printf( esc_attr__( "%s's Profile", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>" rel="me"><?php esc_html_e( 'Profile', 'bbpress' ); ?></a>
-									</span>
-								</li>
-
-								<li class="<?php if ( bbp_is_single_user_topics() ) :?>current<?php endif; ?>">
-									<span class='bbp-user-topics-created-link'>
-										<a href="<?php bbp_user_topics_created_url(); ?>" title="<?php printf( esc_attr__( "%s's Topics Started", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Topics Started', 'bbpress' ); ?></a>
-									</span>
-								</li>
-
-								<li class="<?php if ( bbp_is_single_user_replies() ) :?>current<?php endif; ?>">
-									<span class='bbp-user-replies-created-link'>
-										<a href="<?php bbp_user_replies_created_url(); ?>" title="<?php printf( esc_attr__( "%s's Replies Created", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Replies Created', 'bbpress' ); ?></a>
-									</span>
-								</li>
-
-								<?php if ( bbp_is_engagements_active() ) : ?>
-									<li class="<?php if ( bbp_is_single_user_engagements() ) :?>current<?php endif; ?>">
-										<span class='bbp-user-engagements-created-link'>
-											<a href="<?php bbp_user_engagements_url(); ?>" title="<?php printf( esc_attr__( "%s's Engagements", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Engagements', 'bbpress' ); ?></a>
-										</span>
-									</li>
-								<?php endif; ?>
-
-								<?php if ( bbp_is_favorites_active() ) : ?>
-									<li class="<?php if ( bbp_is_favorites() ) :?>current<?php endif; ?>">
-										<span class="bbp-user-favorites-link">
-											<a href="<?php bbp_favorites_permalink(); ?>" title="<?php printf( esc_attr__( "%s's Favorites", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Favorites', 'bbpress' ); ?></a>
-										</span>
-									</li>
-								<?php endif; ?>
-
-								<?php if ( bbp_is_user_home() || current_user_can( 'edit_user', bbp_get_displayed_user_id() ) ) : ?>
-
-									<?php if ( bbp_is_subscriptions_active() ) : ?>
-										<li class="<?php if ( bbp_is_subscriptions() ) :?>current<?php endif; ?>">
-											<span class="bbp-user-subscriptions-link">
-												<a href="<?php bbp_subscriptions_permalink(); ?>" title="<?php printf( esc_attr__( "%s's Subscriptions", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Subscriptions', 'bbpress' ); ?></a>
-											</span>
-										</li>
-									<?php endif; ?>
-
-									<li class="<?php if ( bbp_is_single_user_edit() ) :?>current<?php endif; ?>">
-										<span class="bbp-user-edit-link">
-											<a href="<?php bbp_user_profile_edit_url(); ?>" title="<?php printf( esc_attr__( "Edit %s's Profile", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Edit', 'bbpress' ); ?></a>
-										</span>
-									</li>
-
-								<?php endif; ?>
-
-							</ul>
-
-							<?php do_action( 'bbp_template_after_user_details_menu_items' ); ?>
-
-						</div> -->
+						
 					</div>
 				</div>
 			</div>
