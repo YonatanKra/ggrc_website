@@ -24,7 +24,7 @@ get_header("initiatives");
 							
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-12">
-							<a href="../suggest-an-initiative" target="_blank"><button>Suggest an initiative</button></a>
+							<a href="../suggest-an-initiative" target="_blank"><button class="ggrc-btn-blue-md">Suggest an initiative</button></a>
 						</div>
 					</div>
 				

@@ -597,6 +597,12 @@ function is_current_user_following() {
 	return $isfollowing;
 }
 
+function my_excerpt_length($length) {
+	return 15;
+	}
+	
+add_filter('excerpt_length', 'my_excerpt_length');
+
 /* Blog Functions */
 function add_blog_category($classes) {
 	$blogcat = wp_get_post_terms(get_the_ID(), 'blog-category', ['']);

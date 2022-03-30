@@ -46,7 +46,7 @@ h3 {
     background-size: cover;
 }
 
-button, input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button, 
+/* button, input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button, 
 body div.wpforms-container-full .wpforms-form input[type=submit], 
 body div.wpforms-container-full .wpforms-form button[type=submit], 
 body div.wpforms-container-full .wpforms-form .wpforms-page-button {
@@ -62,7 +62,7 @@ body div.wpforms-container-full .wpforms-form .wpforms-page-button {
     color: #ffffff;
     white-space: nowrap;
     border: 0;
-}
+} */
 
 #comment{
     border-radius:5px;
@@ -86,4 +86,4 @@ body div.wpforms-container-full .wpforms-form .wpforms-page-button {
         max-width: 1550px !important;
     }
 }
-}
+

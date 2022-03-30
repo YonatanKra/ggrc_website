@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 	}
 </style>
 
-<button class="trigger">Click here to login!</button>
+<button class="trigger ggrc-btn-blue-md">Click here to login!</button>
 <div class="modal">
     <div class="modal-content">
         <span class="close-button">×</span>
