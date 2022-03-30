@@ -77,7 +77,7 @@ do_action( 'bbp_template_before_user_details' ); ?>
 
 					<li class="<?php if ( bbp_is_single_user_replies() ) :?>current<?php endif; ?>">
 						<span class='bbp-user-replies-created-link'>
-							<a href="<?php bbp_user_replies_created_url(); ?>" title="<?php printf( esc_attr__( "%s's Discussion board", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Replies Created', 'bbpress' ); ?></a>
+							<a href="<?php bbp_user_replies_created_url(); ?>" title="<?php printf( esc_attr__( "%s's Discussion board", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Discussion board', 'bbpress' ); ?></a>
 						</span>
 					</li>
 				

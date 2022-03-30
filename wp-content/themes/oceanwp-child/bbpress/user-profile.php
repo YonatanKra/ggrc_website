@@ -240,27 +240,9 @@ if ( bbp_is_single_user_profile() ) { ?>
 							<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="discussion-cover"/>
 								
 							<div class="initiative-list-detail">
-							<?php 
-								
-								$the_post_id = get_the_ID();
-								$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-								
-								if(empty($action) || ! is_array($action)){
-									echo "";
-								}else{
-									
-									foreach($action as $key => $take_action){
-										
-										?>
-										<p class="action-type"> 
-										<i class="ggrc-icon exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
-									<?php 
-										
-									}
-								}?>
-									<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
-									<?php the_excerpt(); ?>
-									
+							
+								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
+								<?php the_excerpt(); ?>									
 									
 							</div>
 							</div>

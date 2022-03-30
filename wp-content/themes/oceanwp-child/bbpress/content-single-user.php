@@ -42,9 +42,10 @@ defined( 'ABSPATH' ) || exit;
 		padding :0px;
 	}
 
-	#bbp-user-body, #connect-people{
+	#bbp-user-body, #connect-people, #discussion-topics{
 		background-color :#fff;
 		border-radius :3px;
+		box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.13);
 		padding :10px;
 	}
 	

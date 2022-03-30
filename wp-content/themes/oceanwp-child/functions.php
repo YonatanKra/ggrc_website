@@ -598,7 +598,7 @@ function is_current_user_following() {
 }
 
 function my_excerpt_length($length) {
-	return 15;
+	return 12;
 }
 	
 add_filter('excerpt_length', 'my_excerpt_length');
