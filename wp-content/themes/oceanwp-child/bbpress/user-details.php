@@ -57,13 +57,6 @@ do_action( 'bbp_template_before_user_details' ); ?>
 	
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 align-center">
-			<!-- <p>Dashboard</p>
-			<p>Messages</p>
-			<p>Connect to people</p>
-			<p>Events</p>
-			<p>Discussion board</p>
-			<p>Settings</p> -->
-
 			
 			<?php do_action( 'bbp_template_before_user_details_menu_items' ); ?>
 

@@ -62,8 +62,6 @@ defined( 'ABSPATH' ) || exit;
                     $the_query->the_post(); ?>
                     <div class="row">
                         <div class="col-lg-8 col-md-12 col-sm-12">
-                            
-                            <!-- <img src="<?php //echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/> -->
                                 
                             <div class="initiative-list-detail">
                             
