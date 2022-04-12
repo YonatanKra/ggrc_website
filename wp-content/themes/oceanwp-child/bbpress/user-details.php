@@ -80,19 +80,19 @@ do_action( 'bbp_template_before_user_details' ); ?>
 							<a href="<?php bbp_user_replies_created_url(); ?>" title="<?php printf( esc_attr__( "%s's Discussion board", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Discussion board', 'bbpress' ); ?></a>
 						</span>
 					</li>
+					<?php if ( bbp_is_engagements_active() ) : ?>
+						<li class="<?php if ( bbp_is_single_user_engagements() ) :?>current<?php endif; ?>">
+							<span class='bbp-user-engagements-created-link'>
+								<a href="<?php bbp_user_engagements_url(); ?>" title="<?php printf( esc_attr__( "%s's Connect to people", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Connect to people', 'bbpress' ); ?></a>
+							</span>
+						</li>
+					<?php endif; ?>
 				
 					<li class="<?php if ( bbp_is_single_user_topics() ) :?>current<?php endif; ?>">
 						<span class='bbp-user-topics-created-link'>
 							<a href="<?php bbp_user_topics_created_url(); ?>" title="<?php printf( esc_attr__( "%s's Topics Started", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Topics Started', 'bbpress' ); ?></a>
 						</span>
 					</li>
-					<?php if ( bbp_is_engagements_active() ) : ?>
-						<li class="<?php if ( bbp_is_single_user_engagements() ) :?>current<?php endif; ?>">
-							<span class='bbp-user-engagements-created-link'>
-								<a href="<?php bbp_user_engagements_url(); ?>" title="<?php printf( esc_attr__( "%s's Engagements", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Engagements', 'bbpress' ); ?></a>
-							</span>
-						</li>
-					<?php endif; ?>
 
 					<?php if ( bbp_is_user_home() || current_user_can( 'edit_user', bbp_get_displayed_user_id() ) ) : ?>
 

@@ -38,15 +38,19 @@ defined( 'ABSPATH' ) || exit;
 		height: 100%;
 	}
 
-	#initiative-contact{
+	#initiative-contact, .initiative-contact{
 		padding :0px;
 	}
 
-	#bbp-user-body, #connect-people, #discussion-topics{
+	#bbp-user-body, #connect-people, #discussion-topics, #bbp-user-engagements{
 		background-color :#fff;
 		border-radius :3px;
 		box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.13);
 		padding :10px;
+	}
+
+	#bbp-user-engagements{
+		padding:20px
 	}
 	
 </style>

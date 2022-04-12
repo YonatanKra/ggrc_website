@@ -87,21 +87,20 @@ defined( 'ABSPATH' ) || exit;
         
         <div class="row no-margin-left" id="connect-people">
             <p><b>Connect to people</b></p>
-            <hr />
+            <hr/>
         
         <?php
 
-        $roles = array('Member');
-
         $args = array(
-            'role'    => $roles,
+            'role__in'    => array('Member', 'Advisor'),
             'orderby' => 'user_nicename',
             'order'   => 'ASC'
         );
+
         $users = get_users( $args );
 
         foreach ( $users as $user ) { ?>
-            <div class="col-md-12 col-lg-12 col-sm-12" id="initiative-contact">
+            <div class="col-md-12 col-lg-12 col-sm-12 mb-20" id="initiative-contact">
                 <?php										
                         echo get_avatar($user->ID, 60);										
                 ?>
@@ -117,6 +116,7 @@ defined( 'ABSPATH' ) || exit;
         }
 
         ?>
+
         </div>
         
     </div>

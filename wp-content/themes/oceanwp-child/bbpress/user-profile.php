@@ -106,12 +106,12 @@ if ( bbp_is_single_user_profile() ) { ?>
 
 			<?php
 
-				$author_id= get_current_user_id();
+				$user_nicename= bbp_get_displayed_user_field( 'user_nicename' );
 
 				$args = array (
 					'post_type'=> 'initiative',
 					'posts_per_page' => 3,
-					'author' => $author_id
+					'author_name' => $user_nicename
 				);
 
 				$the_query = new WP_Query($args);
@@ -166,7 +166,7 @@ if ( bbp_is_single_user_profile() ) { ?>
 				$args = array (
 					'post_type'=> 'blog_post',
 					'posts_per_page' => 3,
-					'author' => $author_id,
+					'author_name' => $user_nicename,
 					'tax_query' => array(
 						array(
 						'taxonomy' => 'blog-category',
@@ -222,7 +222,7 @@ if ( bbp_is_single_user_profile() ) { ?>
 				$args = array (
 					'post_type'=> 'topic',
 					'posts_per_page' => 3,
-					'author' => $author_id
+					'author_name' => $user_nicename
 				);
 
 				$the_query2 = new WP_Query($args);

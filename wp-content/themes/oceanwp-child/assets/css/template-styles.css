@@ -44,7 +44,7 @@ select{
     border-radius: 3px;
 }
 
-#initiative-contact img, #initiative-followers img{
+#initiative-contact img, #initiative-followers img, .initiative-contact img{
     border-radius: 50%;
     float:left;
 }
@@ -256,6 +256,10 @@ hr{
 
 .no-margin-left{
     margin-left:0;
+}
+
+.no-margin-right{
+    margin-right:0;
 }
 
 .no-padding-left{
