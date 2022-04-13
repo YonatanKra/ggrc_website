@@ -42,7 +42,7 @@ defined( 'ABSPATH' ) || exit;
 		padding :0px;
 	}
 
-	#bbp-user-body, #connect-people, #discussion-topics, #bbp-user-engagements{
+	#bbp-user-body, #connect-people, #discussion-topics, #bbp-user-engagements, #bbp-user-topics-started{
 		background-color :#fff;
 		border-radius :3px;
 		box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.13);
@@ -58,7 +58,9 @@ defined( 'ABSPATH' ) || exit;
 <?php if ( bbp_is_single_user_profile()     ) {
 	
 			bbp_get_template_part( 'user', 'profile'         );
-		} else{ ?>
+		} else{ 
+			check_if_user_logged_in();
+			?>
 			<div id="bbpress-forums" class="bbpress-wrapper">
 
 				<?php do_action( 'bbp_template_notices' ); ?>
