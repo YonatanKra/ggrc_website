@@ -99,7 +99,7 @@ do_action( 'bbp_template_before_user_details' ); ?>
 						<?php if ( bbp_is_subscriptions_active() ) : ?>
 							<li class="<?php if ( bbp_is_subscriptions() ) :?>current<?php endif; ?>">
 								<span class="bbp-user-subscriptions-link">
-									<a href="<?php bbp_subscriptions_permalink(); ?>" title="<?php printf( esc_attr__( "%s's Subscriptions", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Subscriptions', 'bbpress' ); ?></a>
+									<a href="<?php bbp_subscriptions_permalink(); ?>" title="<?php printf( esc_attr__( "%s's Advisor Information", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Advisor Information', 'bbpress' ); ?></a>
 								</span>
 							</li>
 						<?php endif; ?>

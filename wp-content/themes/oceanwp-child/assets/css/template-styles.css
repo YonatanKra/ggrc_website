@@ -311,6 +311,10 @@ hr{
     margin-top: 80px;
 }
 
+.p-20{
+    padding: 20px !important;
+}
+
 .profile{
     color:#0B4F6D !important;
     margin-right:18px

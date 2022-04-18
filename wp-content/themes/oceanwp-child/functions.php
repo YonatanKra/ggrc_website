@@ -558,6 +558,8 @@ function check_if_user_logged_in() {
 	}
 }
 
+
+
 add_action( 'wp_ajax_follow_post', 'follow_initiative' );
 function follow_initiative() {
 	global $wpdb;
@@ -602,6 +604,38 @@ function my_excerpt_length($length) {
 }
 	
 add_filter('excerpt_length', 'my_excerpt_length');
+
+
+function check_users_advisor_request() {
+	global $wpdb;
+
+	$current_user_id = get_current_user_id();
+
+	$user_email = $wpdb->get_var("SELECT user_email FROM ggrc_users WHERE `ID` = '$current_user_id'");
+
+	if ($user_email) {
+		
+		$entry_id = $wpdb->get_var("SELECT entry_id FROM ggrc_frmt_form_entry_meta WHERE `meta_value` = '$user_email'");
+
+		if ($entry_id) {
+			$advisor_info = $wpdb->get_results("SELECT meta_key, meta_value FROM ggrc_frmt_form_entry_meta WHERE `entry_id` = '$entry_id'");
+
+			foreach ($advisor_info as $key => $advisor_meta) {
+				$meta_key= $advisor_meta->meta_key;
+				$meta_value= $advisor_meta->meta_value;
+
+				$advisor_meta_data[$meta_key] = $meta_value;
+
+			}
+
+			return $advisor_meta_data;
+		}		
+				
+	}
+
+	return false;
+	
+}
 
 /* Blog Functions */
 function add_blog_category($classes) {
