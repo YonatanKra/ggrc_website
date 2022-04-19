@@ -20,15 +20,52 @@ defined( 'ABSPATH' ) || exit;
 	.bbp-submit-wrapper{
 		width:100%
 	}
+
+	.forminator-ui#forminator-module-1345.forminator-design--default .forminator-input, .forminator-ui#forminator-module-1345.forminator-design--default .forminator-textarea{
+		background: rgba(255, 255, 255, 0.75);
+		border: 1px solid #ACB4BD;
+		box-sizing: border-box;
+		border-radius: 10px;
+	}
+
+	.forminator-ui#forminator-module-1345.forminator-design--default .forminator-button-submit{
+		background: #FFFFFF !important;
+		border: 5px solid #0B4F6D;
+		box-sizing: border-box;
+		border-radius: 50px;
+		padding: 15px 20px;
+		position: relative;
+		font-size: 20px !important;
+		color: #0B4F6D !important;
+		font-family: 'Arvo' !important;
+	}
+
+	.forminator-ui#forminator-module-1345.forminator-design--default .forminator-button-next, .forminator-ui#forminator-module-1345.forminator-design--default .forminator-button-back, .forminator-ui#forminator-module-1345.forminator-design--default .forminator-button-submit{
+		padding: 10px 15px;
+		position: relative;
+		display:block;
+		background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
+		box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
+		border-radius: 30px;
+	}
+
+	.forminator-row{
+		margin-bottom: 15px !important;
+	}
 </style>
 
+
 <button class="trigger ggrc-btn-blue-md">Click here to register!</button>
-<div class="modal">
+<div class="modal" style="overflow-y: scroll;">
     <div class="modal-content">
         <span class="close-button">×</span>
 		<img src="<?php echo site_url( '/wp-content/uploads/2022/01/logo-32x32.png', null ) ?>" class="center-element">
-        <h3 class="align-center">Become a member!</h3>
-		<form method="post" action="<?php bbp_wp_login_action( array( 'context' => 'login_post' ) ); ?>" class="bbp-login-form">
+        <h2 class="align-center">Become a member!</h2>
+
+        <?php echo do_shortcode('[forminator_form id="1345"]'); 
+
+		?>
+		<!-- <form method="post" action="<?php bbp_wp_login_action( array( 'context' => 'login_post' ) ); ?>" class="bbp-login-form">
 			<fieldset class="bbp-form">
 
 				<?php do_action( 'bbp_template_before_register_fields' ); ?>
@@ -105,7 +142,7 @@ defined( 'ABSPATH' ) || exit;
 				<?php do_action( 'bbp_template_after_register_fields' ); ?>
 
 			</fieldset>
-		</form>
+		</form> -->
     </div>
 </div>
 

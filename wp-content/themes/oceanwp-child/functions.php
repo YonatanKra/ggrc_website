@@ -552,7 +552,8 @@ function add_related_news_to_initiative_pages() {
 function check_if_user_logged_in() {
 	if ( !is_user_logged_in() ) {
 
-		wp_redirect('http://localhost/ggrc_website/');
+		$url = get_site_url();
+		wp_redirect($url);
 
 		exit;
 	}
@@ -636,6 +637,7 @@ function check_users_advisor_request() {
 	return false;
 	
 }
+
 
 /* Blog Functions */
 function add_blog_category($classes) {
