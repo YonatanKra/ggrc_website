@@ -64,6 +64,7 @@ get_header("initiatives");
 					while($the_query->have_posts()) {
 						$the_query->the_post(); ?>
 						<div class="col-lg-4 col-md-6 col-sm-12">
+							<a href="<?php the_permalink(); ?>">
 							<div class="initiative-list">
 							<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
 								
@@ -94,6 +95,7 @@ get_header("initiatives");
 									
 							</div>
 							</div>
+							</a>
 						</div>
 				<?php } ?>
 				<?php } ?>

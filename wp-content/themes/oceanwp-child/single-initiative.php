@@ -217,34 +217,20 @@
 								?>
 						<div class="initiative-take-action-bar">
 							<div class="row">
-								<div class="col-md-5 col-lg-5 col-sm-12">
+								<div class="col-md-6 col-lg-6 col-sm-12">
 									<div class="row">
 										<div class="col-md-12 col-lg-12 col-sm-12 align-center">
 											<h2 class="no-margin-bottom">How to Take Action:</h2>
 										</div>
 									</div>
 								</div>
-								<div class="col-md-7 col-lg-7 col-sm-12 center-element">
+								<div class="col-md-6 col-lg-6 col-sm-12 center-element">
 									<div class="row">
-						<?php 
-							$initiative_action_types = get_post_meta($the_post_id, 'initiative');
-
-							if(empty($initiative_action_types) || ! is_array($initiative_action_types)){
-								echo "No Action";
-							}else{
-
-								foreach($initiative_action_types[0] as $initiative_action_type){
-									if(!empty($initiative_action_type['ActionType'])){
-									
-									?>
-									<div class="col-md-6 col-lg-4 col-sm-6 align-center">
-										<a href="<?php echo $initiative_action_type['ActionLink']; ?>" target="_blank" class="action-btn">
-										<?php echo $initiative_action_type['ActionType'] ; ?></a>
+										<div class="col-md-12 col-lg-12 col-sm-12 align-center">
+										<a href="<?php the_field('intiative-action-link') ?>" target="_blank" class="action-btn">
+										<?php the_field('initiative-action-type') ; ?></a>
 									</div>
-								<?php 
-									}	
-								}
-							} ?>
+						
 									</div>
 								</div>
 							</div>
