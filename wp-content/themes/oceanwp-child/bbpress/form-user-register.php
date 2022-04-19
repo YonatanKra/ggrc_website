@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
 		width:100%
 	}
 
-	.forminator-ui#forminator-module-1345.forminator-design--default .forminator-input, .forminator-ui#forminator-module-1345.forminator-design--default .forminator-textarea{
+	.forminator-ui#forminator-module-1345.forminator-design--default .forminator-input, .forminator-ui#forminator-module-1345.forminator-design--default .forminator-textarea, .forminator-ui#forminator-module-1345.forminator-design--default select.forminator-select2 + .forminator-select .selection .select2-selection--single[role="combobox"] .select2-selection__rendered{
 		background: rgba(255, 255, 255, 0.75);
 		border: 1px solid #ACB4BD;
 		box-sizing: border-box;
@@ -65,6 +65,10 @@ defined( 'ABSPATH' ) || exit;
         <?php echo do_shortcode('[forminator_form id="1345"]'); 
 
 		?>
+
+		 <div class="align-center">
+	        <a href="<?php echo get_site_url(null, '/user-login', null); ?>">Login here</a>
+	    </div>
 		<!-- <form method="post" action="<?php bbp_wp_login_action( array( 'context' => 'login_post' ) ); ?>" class="bbp-login-form">
 			<fieldset class="bbp-form">
 

@@ -49,6 +49,10 @@ defined( 'ABSPATH' ) || exit;
 
         <?php echo do_shortcode('[forminator_form id="1346"]'); ?>
 
+        <div class="align-center">
+	        <a href="<?php echo get_site_url(null, '/user-register', null); ?>">Register here</a>
+	    </div>
+
 		<!-- <form method="post" action="<?php bbp_wp_login_action( array( 'context' => 'login_post' ) ); ?>" class="bbp-login-form">
 			<fieldset class="bbp-form">
 				<legend><?php esc_html_e( 'Log In', 'bbpress' ); ?></legend>

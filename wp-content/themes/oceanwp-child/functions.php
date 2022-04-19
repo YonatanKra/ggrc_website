@@ -528,10 +528,18 @@ function check_users_advisor_request() {
 	$user_email = $wpdb->get_var("SELECT user_email FROM ggrc_users WHERE `ID` = '$current_user_id'");
 
 	if ($user_email) {
-		
-		$entry_id = $wpdb->get_var("SELECT entry_id FROM ggrc_frmt_form_entry_meta WHERE `meta_value` = '$user_email'");
+		$form_id = 1341;
+		$entries = Forminator_API::get_entries( $form_id );
 
-		if ($entry_id) {
+		for ($i=0; $i < count($entries) ; $i++) { 
+			if ($user_email == $entries[$i]->meta_data['hidden-2']['value']) {
+				$entry_id = $entries[$i]->entry_id;
+			}else{
+				$entry_id =0;
+			}
+		}
+
+		if ($entry_id != 0) {
 			$advisor_info = $wpdb->get_results("SELECT meta_key, meta_value FROM ggrc_frmt_form_entry_meta WHERE `entry_id` = '$entry_id'");
 
 			foreach ($advisor_info as $key => $advisor_meta) {
