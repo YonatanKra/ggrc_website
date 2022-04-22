@@ -1,6 +1,6 @@
 <?php
 
-/* Template Name: InitiativeTemplate */ 
+/* Template Name: InitiativeTemplate */
 
 
 ?>
@@ -21,13 +21,13 @@ get_header("initiatives");
 							<p>Do you know of any interesting action around you promoting green recovery? Are you involved with an intervention? We want to know</p>
 						</div>
 						<div class="col-lg-2 col-md-2 col-sm-12">
-							
+
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-12">
 							<a href="../suggest-an-initiative" target="_blank"><button class="ggrc-btn-blue-md">Suggest an initiative</button></a>
 						</div>
 					</div>
-				
+
 				</div>
 
 
@@ -35,8 +35,10 @@ get_header("initiatives");
 
 	<div id="content-wrap" class="container clr">
 		<div class="widget-area sidebar-primary">
-		<?php echo do_shortcode( '[searchandfilter fields="search,initiative_type,initiative_tags" types=" 
-		,checkbox,checkbox" headings=" ,Types,Related Tags"]' ); ?>
+		<?php echo do_shortcode(
+                '[searchandfilter id="1247"]'
+            );
+		?>
 		</div>
 
 		<?php do_action( 'ocean_before_primary' ); ?>
@@ -54,7 +56,7 @@ get_header("initiatives");
 				$args = array (
 					'post_type'=> 'initiative'
 				);
-
+                $args['search_filter_id'] = 1247;
 				$the_query = new WP_Query($args);
 
 				?>
@@ -67,24 +69,24 @@ get_header("initiatives");
 							<a href="<?php the_permalink(); ?>">
 							<div class="initiative-list">
 							<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
-								
+
 							<div class="initiative-list-detail">
-							<?php 
-								
+							<?php
+
 								$the_post_id = get_the_ID();
 								$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-								
+
 								if(empty($action) || ! is_array($action)){
 									echo "";
 								}else{
-									
+
 									foreach($action as $key => $take_action){
-										
+
 										?>
-										<p class="action-type"> 
+										<p class="action-type">
 										<i class="ggrc-icon exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
-									<?php 
-										
+									<?php
+
 									}
 								}?>
 									<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
@@ -92,7 +94,7 @@ get_header("initiatives");
 									<hr/>
 									<p class="no-margin"><i class="ggrc-icon map margin-right"></i> <?php the_field('region') ?></p>
 									<p class="no-margin"><i class="ggrc-icon users margin-right"></i> <?php the_field('venue') ?></p>
-									
+
 							</div>
 							</div>
 							</a>
@@ -104,8 +106,8 @@ get_header("initiatives");
 
 			<?php
 
-				
-			
+
+
 				// Elementor `single` location.
 				if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'single' ) ) {
 
@@ -126,7 +128,7 @@ get_header("initiatives");
 
 			<?php do_action( 'ocean_after_content' ); ?>
 
-		</div><!-- #primary -->		
+		</div><!-- #primary -->
 
 	</div><!-- #content-wrap -->
 

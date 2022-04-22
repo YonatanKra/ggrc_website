@@ -22,15 +22,11 @@
 			width:25%;
 		}
 
-		.searchandfilter ul{
-			display:grid;
-		}
-
 		.wp-block-search.wp-block-search__button-inside .wp-block-search__inside-wrapper{
 			border-radius :5px;
 		}
-		input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button, 
-		body div.wpforms-container-full .wpforms-form input[type=submit], body div.wpforms-container-full .wpforms-form button[type=submit], 
+		input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button,
+		body div.wpforms-container-full .wpforms-form input[type=submit], body div.wpforms-container-full .wpforms-form button[type=submit],
 		body div.wpforms-container-full .wpforms-form .wpforms-page-button {
 			background-color : #fff !important;
 			color : #000 !important;
