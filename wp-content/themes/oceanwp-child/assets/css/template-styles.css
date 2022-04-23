@@ -2,7 +2,7 @@ body {
     --blog-color: #EF8607;
     --testimonials-color: #789B18;
     --stories-color: #0B4F6D;
-    
+
     font-family: 'Lato';
     font-style: normal;
     font-weight: normal;
@@ -53,6 +53,10 @@ button{
     float:left;
 }
 
+li[data-sf-field-input-type^='checkbox'] .fa {
+    float: right;
+}
+
 .action-subheader{
     height:auto; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
 	background-size:cover;
@@ -75,7 +79,7 @@ button{
 }
 
 .suggest-content{
-    height:auto; 
+    height:auto;
     background: linear-gradient(89.48deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url('../../../../uploads/2022/03/suggestbg.jpg');
     background-position-y : bottom;
     box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.13);
@@ -441,7 +445,7 @@ hr{
     margin-right:20px
 }
 
-.blog-cover, .discussion-cover, .initiative-cover{    
+.blog-cover, .discussion-cover, .initiative-cover{
     object-fit:cover;
     width: 100%;
 }
@@ -454,7 +458,7 @@ hr{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     position: absolute;
 }
 
@@ -597,7 +601,7 @@ hr{
 }
 
 .map::after {
-    content: url('../../../../uploads/icons/map.svg');    
+    content: url('../../../../uploads/icons/map.svg');
 }
 
 .users::after {
@@ -754,7 +758,7 @@ hr{
     background-size: cover;
     filter: drop-shadow(2px 3px 12px rgba(0, 0, 0, 0.13));
     border-radius: 10px;
-    
+
 }
 
 .events_header {
