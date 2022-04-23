@@ -44,13 +44,17 @@ select{
     border-radius: 3px;
 }
 
+button{
+    background-color: inherit !important;
+}
+
 #initiative-contact img, #initiative-followers img, .initiative-contact img{
     border-radius: 50%;
     float:left;
 }
 
 .action-subheader{
-    height:auto; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
+    height:auto; background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
 	background-size:cover;
     border-bottom:1px solid #f1f1f1;
     padding:10rem 9rem 4rem 9rem;
@@ -58,13 +62,13 @@ select{
 
 .learn-subheader{
     height:200px;
-    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
 	background-size:cover;
     border-bottom:1px solid #f1f1f1;
 }
 
 .suggest-discussion{
-    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
 	background-size:cover;
     padding: 24px 48px;
     border-radius: 10px;
@@ -141,6 +145,16 @@ select{
     color: #0B4F6D;
 }
 
+.ggrc-btn-white-md{
+    background: #fff;
+    border: 3px solid #0B4F6D;
+    box-sizing: border-box;
+    border-radius: 40px;
+    padding: 16px 46px;
+    font-size: 20px;
+    color: #0B4F6D;
+}
+
 .ggrc-btn-white-sm{
     background: #FFFFFF;
     border: 2px solid #0B4F6D;
@@ -168,14 +182,14 @@ select{
     border-radius: 30px;
     padding: 8px 22px;
     font-size: 16px;
-    color: #fff;
+    color: #fff !important;
     border: none;
 }
 
 .ggrc-btn-blue-md{
     background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
     box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
-    border-radius: 30px;
+    border-radius: 40px;
     padding: 16px 46px;
     font-size: 20px;
     color: #fff;
@@ -203,6 +217,10 @@ hr{
 .ggrc-initiative-priorities{
     line-height:20px;
     margin-bottom:0
+}
+
+.no-border-all{
+    border: none;
 }
 
 .no-border{
@@ -311,6 +329,18 @@ hr{
     margin-top: 80px;
 }
 
+.pt-80{
+    padding-top: 80px;
+}
+
+.pt-100{
+    padding-top: 100px !important;
+}
+
+.pb-30{
+    padding-bottom: 30px !important;
+}
+
 .p-20{
     padding: 20px !important;
 }
@@ -320,13 +350,7 @@ hr{
     margin-right:18px
 }
 
-.news-box{
-    background-color:#fff;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    margin-bottom:15px;
-    border-radius:5px;
-    padding:15px;
-}
+
 
 .center-element{
     display: block !important;
@@ -337,7 +361,7 @@ hr{
 /* Blog Styles Start */
 .blog-subheader{
     height:300px;
-    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
     background-size:cover;
     border-bottom:2px solid;
 }
@@ -611,9 +635,19 @@ hr{
     content: url('../../../../uploads/icons/send.svg');
 }
 
+.ggrc-external-link::after {
+    margin-right: 5px;
+    content: url('../../../../uploads/icons/external-link.svg');
+}
+
 .ggrc-ellipse::after {
     content: url('../../../../uploads/icons/ellipse.svg');
     float: left;
+}
+
+.ggrc-save::after {
+    content: url('../../../../uploads/icons/save.svg');
+    margin-left: 5px
 }
 /* Modal Popup */
 
@@ -686,6 +720,48 @@ hr{
 .discussion-cover{
     height:72px;
     border-radius: 10px 10px 0px 0px;
+}
+
+/* News & Events */
+
+.news-box{
+    background-color:#fff;
+    margin-bottom:15px;
+    border-radius:5px;
+}
+
+
+.news_header {
+    padding: 0px 9.5rem;
+    height: auto;
+    background: linear-gradient(0deg, rgba(255 255 255 / 0%), rgba(255 255 255 / 0%)), url(../../../../uploads/2022/01/news_banner.png);
+    background-size: cover;
+}
+
+.agency-list{
+    background: #EFF3F5;
+    border: 1px solid #AFC5CF;
+    box-sizing: border-box;
+    box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.13);
+    border-radius: 5px;
+    margin: 9px 0px;
+}
+
+.suggest-event{
+    padding:12px;
+    height: auto;
+    background: linear-gradient(0deg, rgba(255 255 255 / 70%), rgba(255 255 255 / 70%)), url(../../../../uploads/2022/01/suggesteventbanner.jpg);
+    background-size: cover;
+    filter: drop-shadow(2px 3px 12px rgba(0, 0, 0, 0.13));
+    border-radius: 10px;
+    
+}
+
+.events_header {
+    padding: 0px 9.5rem;
+    height: auto;
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/2022/01/eventscalendar.jpg);
+    background-size: cover;
 }
 
 
