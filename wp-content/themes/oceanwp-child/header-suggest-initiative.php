@@ -33,12 +33,12 @@
 			width:fit-content !important
 		}
 
-		.wck-checkboxes{
+		.wck-radiobuttons{
 			display:inline-flex !important;
 			float: right;			
 		}
 		
-		.wck-checkboxes > div:first-of-type{
+		.wck-radiobuttons > div:first-of-type{
 			margin-right:20px
 		}
 
