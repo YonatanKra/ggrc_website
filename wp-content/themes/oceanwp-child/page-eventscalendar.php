@@ -42,7 +42,7 @@
 			<div class="col-lg-6 col-md-8 col-sm-12">
 				<h3>Suggest an event</h3>
 				<p><b>Do you know of an interesting event around you promoting green recovery? Are you involved with an intervention? We want to know! Do you have an event you’d like to promote? Please note we’ll only accept events that have a digital presence.</b></p>
-				<button class="no-border-all"><a href="../../suggest-an-event" class="ggrc-btn-blue-sm">suggest</a></button>
+				<button class="no-border-all"><a href="../suggest-an-event" class="ggrc-btn-blue-sm">suggest</a></button>
 			</div>
 		</div>
 	</div>
