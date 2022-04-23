@@ -36,7 +36,7 @@ get_header("initiatives");
 	<div id="content-wrap" class="container clr">
 		<div class="widget-area sidebar-primary">
 		<?php echo do_shortcode(
-                '[searchandfilter id="1247"]'
+                '[searchandfilter id="1300"]'
             );
 		?>
 		</div>
@@ -56,7 +56,7 @@ get_header("initiatives");
 				$args = array (
 					'post_type'=> 'initiative'
 				);
-                $args['search_filter_id'] = 1247;
+                $args['search_filter_id'] = 1300;
 				$the_query = new WP_Query($args);
 
 				?>
