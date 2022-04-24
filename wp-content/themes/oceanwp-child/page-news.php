@@ -27,6 +27,11 @@
 	#agency div {
 	    margin-right:10px !important;
 	}
+
+	#site-navigation-wrap .dropdown-menu>li>a{
+		padding: 0px 8px !important;		
+	}
+
 </style>
 
 <body <?php body_class(); ?> <?php oceanwp_schema_markup( 'html' ); ?>>

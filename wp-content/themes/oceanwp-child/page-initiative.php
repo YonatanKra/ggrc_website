@@ -14,7 +14,7 @@
 
 get_header("initiatives");
 ?>
-				<div class="small_header pt-80">
+				<div class="small_header pt-100">
 					<div class="row">
 						<div class="col-lg-7 col-md-7 col-sm-12">
 							<h3>Suggest Initiatives</h5>

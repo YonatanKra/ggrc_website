@@ -37,7 +37,7 @@
 				<?php //do_action( 'ocean_page_header' ); ?>
 
 
-	<div class="events_header pt-100 pb-30">
+	<div class="events-header pt-100 pb-30">
 		<div class="row">
 			<div class="col-lg-6 col-md-8 col-sm-12">
 				<h3>Suggest an event</h3>
