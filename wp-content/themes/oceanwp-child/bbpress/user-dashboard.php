@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit;
         <a href="<?php echo site_url( '/suggest-an-initiative', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest initiative</button></a>
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12">
-        <a href="<?php echo site_url( '/suggest-event', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest event</button></a>
+        <a href="<?php echo site_url( '/suggest-an-event', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest event</button></a>
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12">
         <a href="<?php echo site_url( '/suggest-a-discussion-board', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest discussion board</button></a>

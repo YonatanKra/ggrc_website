@@ -180,8 +180,18 @@ $single_event_obj = $single_event_main[0];
             	</div>
 
             	<div class="col-lg-3 col-md-12 col-sm-12">
-            		<i class="ggrc-icon ggrc-save"></i>
-            		<p>save</p>
+
+            		<?php 
+						$event_saved =has_current_user_saved_event();											
+						if (!empty($event_saved)){
+							?>
+							<i class="ggrc-icon ggrc-save"></i>
+            				<p id="save">saved!</p>
+							<?php } else{ ?>
+							<i class="ggrc-icon ggrc-save" id="save-event"></i>
+            				<p id="save">save</p>
+							<?php }  
+					?>
 
             		<div class="suggest-event">
             			<h3>Suggest an event</h3>
@@ -220,4 +230,34 @@ $single_event_obj = $single_event_main[0];
 
     <?php do_action('mec_after_main_content'); ?>
 
-<?php get_footer('mec');
+<?php get_footer('mec'); ?>
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function($) {
+	
+		$('#save-event').click(function(){
+			
+			ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ) ?>'; // get ajaxurl
+
+			var data = {
+				'action': 'save_event', // your action name 
+				'postid': '<?php echo get_the_ID(); ?>' // some additional data to send
+			};
+
+			jQuery.ajax({
+				url: ajaxurl, // this will point to admin-ajax.php
+				type: 'POST',
+				data: data,
+				success: function (response) {
+					console.log(response); 
+					$("#save").html("saved!");
+										               
+				}
+			});
+		});
+
+	});
+
+</script>
+

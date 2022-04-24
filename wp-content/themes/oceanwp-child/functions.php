@@ -513,6 +513,30 @@ function is_current_user_following() {
 	return $isfollowing;
 }
 
+add_action( 'wp_ajax_save_event', 'save_event' );
+function save_event() {
+	global $wpdb;
+
+	check_if_user_logged_in();
+
+	$current_user_id = get_current_user_id();
+	$postid = $_POST['postid'];
+
+	$table_name = $wpdb->prefix . 'save_events';
+	$wpdb->insert($table_name, array('userID' => $current_user_id, 'postID' => $postid));
+	
+}
+
+function has_current_user_saved_event() {
+	global $wpdb;
+
+	$current_user_id = get_current_user_id();
+	$postid= get_the_ID();
+	$isSaved = $wpdb->get_results("SELECT DISTINCT userID, postID FROM ggrc_save_events WHERE `userID` = '$current_user_id' and `postID` = '$postid' and `isSaved` = 1");
+
+	return $isSaved;
+}
+
 function my_excerpt_length($length) {
 	return 12;
 }
@@ -573,4 +597,17 @@ function add_blog_category($classes) {
 add_filter('body_class', 'add_blog_category');
 
 add_post_type_support('topic', array('thumbnail'));
+
+
+add_filter( 'fep_menu_buttons', 'fep_cus_fep_menu_buttons', 99 );
+
+function fep_cus_fep_menu_buttons( $menu )
+{
+    unset( $menu['settings'] );
+    unset( $menu['directory'] );
+    unset( $menu['announcement'] );
+    return $menu;
+}
+
+add_filter( 'fep_filter_hide_message_initially_if_read', '__return_false' );
 ?>

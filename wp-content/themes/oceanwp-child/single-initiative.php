@@ -374,6 +374,7 @@
 			});
 		});
 
+		
 		$("#wpd-field-submit-0_0").val("comment");	
 		$("#reply-title").html("Comments");		
 		$('.ql-editor').attr('placeholder', 'Write your comment...');
