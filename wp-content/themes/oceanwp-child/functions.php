@@ -596,9 +596,11 @@ function add_blog_category($classes) {
 }
 add_filter('body_class', 'add_blog_category');
 
+/* Add featured image to topics */
 add_post_type_support('topic', array('thumbnail'));
 
 
+/* Messaging */
 add_filter( 'fep_menu_buttons', 'fep_cus_fep_menu_buttons', 99 );
 
 function fep_cus_fep_menu_buttons( $menu )
@@ -610,4 +612,18 @@ function fep_cus_fep_menu_buttons( $menu )
 }
 
 add_filter( 'fep_filter_hide_message_initially_if_read', '__return_false' );
+
+/* Update Profile */
+
+add_action( 'personal_options_update', 'save_my_custom_user_profile_field' );
+add_action( 'edit_user_profile_update', 'save_my_custom_user_profile_field' );
+function save_my_custom_user_profile_field( ) {
+    if ( !current_user_can( 'edit_user', get_current_user_id() ) )
+        return false;
+    update_user_meta( absint( get_current_user_id() ), 'job_title', wp_kses_post( $_POST['job_title'] ) );
+    update_user_meta( absint( get_current_user_id() ), 'organization', wp_kses_post( $_POST['organization'] ) );
+    update_user_meta( absint( get_current_user_id() ), 'country', wp_kses_post( $_POST['country'] ) );
+    update_user_meta( absint( get_current_user_id() ), 'region', wp_kses_post( $_POST['region'] ) );
+}
+
 ?>

@@ -106,7 +106,7 @@ do_action( 'bbp_template_before_user_details' ); ?>
 
 						<li class="<?php if ( bbp_is_single_user_edit() ) :?>current<?php endif; ?>">
 							<span class="bbp-user-edit-link">
-								<a href="<?php bbp_user_profile_edit_url(); ?>" title="<?php printf( esc_attr__( "Edit %s's Profile", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Edit', 'bbpress' ); ?></a>
+								<a href="<?php bbp_user_profile_edit_url(); ?>" title="<?php printf( esc_attr__( "Edit %s's Profile", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'General member information', 'bbpress' ); ?></a>
 							</span>
 						</li>
 
