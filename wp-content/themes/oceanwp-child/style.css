@@ -39,14 +39,14 @@ h3 {
 }
 
 .small_header {
-    padding-top: 31px;
-    padding-left: 70px;
-    height: 184px;
-    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(http://localhost/ggrc_website/wp-content/uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
+    padding-top: 50px;
+    padding: 0px 9.5rem;
+    height: auto;
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
     background-size: cover;
 }
 
-button, input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button, 
+/* button, input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button, 
 body div.wpforms-container-full .wpforms-form input[type=submit], 
 body div.wpforms-container-full .wpforms-form button[type=submit], 
 body div.wpforms-container-full .wpforms-form .wpforms-page-button {
@@ -62,7 +62,7 @@ body div.wpforms-container-full .wpforms-form .wpforms-page-button {
     color: #ffffff;
     white-space: nowrap;
     border: 0;
-}
+} */
 
 #comment{
     border-radius:5px;
@@ -86,4 +86,4 @@ body div.wpforms-container-full .wpforms-form .wpforms-page-button {
         max-width: 1550px !important;
     }
 }
-}
+

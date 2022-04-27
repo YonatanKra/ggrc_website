@@ -20,7 +20,7 @@
 		#fep-initiative-goal, label[for=initiative-goal], #fep-additional-resources-name-1, label[for=additional-resources-name-1], label[for=additional-resources-1],
 		#upload_additional-resources-1_button, #fep-additional-resources-name-2, label[for=additional-resources-name-2], label[for=additional-resources-2], #upload_additional-resources-2_button, 
 		#fep-initiative-duration, label[for=initiative-duration], #fep-initiative-contact-1, label[for=initiative-contact-1], #fep-initiative-contact-2, label[for=initiative-contact-2],
-		#fep-initiative-contact-3, label[for=initiative-contact-3], p.description
+		#fep-initiative-contact-3, label[for=initiative-contact-3], p.description, #fep-initiative-action-type, #fep-intiative-action-link, label[for=initiative-action-type], label[for=intiative-action-link]
 		{
 			display:none !important;
 		}
@@ -33,12 +33,12 @@
 			width:fit-content !important
 		}
 
-		.wck-checkboxes{
+		.wck-radiobuttons{
 			display:inline-flex !important;
 			float: right;			
 		}
 		
-		.wck-checkboxes > div:first-of-type{
+		.wck-radiobuttons > div:first-of-type{
 			margin-right:20px
 		}
 

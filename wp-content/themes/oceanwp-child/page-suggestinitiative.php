@@ -14,7 +14,7 @@ get_header("suggest-initiative");
 
 		<?php do_action( 'ocean_before_primary' ); ?>
 
-		<div id="primary" class="content-area clr" style="max-width:100%; border:none">
+		<div id="primary" class="content-area clr no-border">
 			<div >
 					<div class="row suggest-titlearea">
 						<div class="col-lg-12 col-md-12 col-sm-12">

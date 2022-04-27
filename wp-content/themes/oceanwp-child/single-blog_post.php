@@ -106,9 +106,7 @@
 				</div>
 				<hr/>
 				<div>
-
-					<p class="like-share">Published : <?php the_time('F j, Y'); ?></p> <p class="like-share"> <i class="ggrc-icon ggrc-icon-heart"></i> 2 Likes</p> <p class="like-share"><i class="ggrc-icon ggrc-icon-share-1"></i> 5 Shares</p>
-
+					<p class="like-share">Published : <?php the_time('F j, Y'); ?></p>
 				</div>
 				<hr/>
 			</div>

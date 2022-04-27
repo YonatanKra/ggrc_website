@@ -14,85 +14,7 @@
  *
  */
 
-function initiative_actiontype_meta_boxes() {
-	add_action('admin_init', 'ggrc_add_initiative_actiontype_meta_boxes', 2);
 
-	function ggrc_add_initiative_actiontype_meta_boxes() {
-		add_meta_box( 'ggrc_initiative_actiontype', 'Action Type Link', 'Repeating_meta_box_display', 'initiative', 'normal', 'default');
-	}
-
-	function actiontype_row_template($actiontypes, $field = null) {
-		?>
-			<tr>
-				<td>
-					<select required type="text" placeholder="Action Type" title="Action Type" name="ActionType[]">
-					<option value="" disabled selected>Select a Action Type</option>
-						<?php
-							foreach ( $actiontypes as $actiontype ) {
-								?>
-									<option value="<?php echo $actiontype->name; ?>" <?php if (!empty($field['ActionType']) && $actiontype->name == $field['ActionType']) echo 'selected="selected"';?>> <?php echo $actiontype->name; ?></option>
-								<?php
-							}
-						?>
-					</select></td>
-				<td>
-					<input required type="text" placeholder="Action Link" name="ActionLink[]" <?php if (!empty($field['ActionLink'])) { echo 'value="' . $field['ActionLink'] . '"';} ?>/>
-					</td>
-				<td>
-					<a class="button cmb-remove-row-button remove-row <?php if ($field === null) echo 'button-disabled'; ?>" href="#">Remove</a>
-				</td>
-			</tr>
-		<?php
-	}
-
-	function Repeating_meta_box_display() {
-
-		global $post;
-
-		$ggrc_initiative_actiontype = get_terms( array(
-			'taxonomy' => 'actiontype',
-			'hide_empty' => false,
-		) );
-		$ggrc_actiontype = get_post_meta($post->ID, 'initiative', true);
-
-		 wp_nonce_field( 'ggrc_repeating_meta_box_nonce', 'ggrc_repeating_meta_box_nonce' );
-		?>
-		<script type="text/javascript">
-		jQuery(document).ready(function( $ ){
-			const tbody = document.querySelector("#repeatable-fieldset-three tbody");
-
-			$( '#add-rows' ).on('click', function() {
-				const rowWrapper = document.createElement('tbody');
-				rowWrapper.innerHTML = `<?php actiontype_row_template($ggrc_initiative_actiontype); ?>`;
-				const row = rowWrapper.children[0];
-				const lastChild = tbody.children[tbody.children.length - 1];
-				tbody.insertBefore( row, lastChild );
-				return false;
-			});
-
-			$( '.remove-row' ).on('click', function() {
-				$(this).parents('tr').remove();
-				return false;
-			});
-		});
-		</script>
-		<table id="repeatable-fieldset-three" width="100%">
-		<tbody>
-			<?php
-			if ( $ggrc_actiontype ) :
-				foreach ( $ggrc_actiontype as $field ) {
-					actiontype_row_template($ggrc_initiative_actiontype, $field);
-				}
-			else :
-				// show a blank one
-				actiontype_row_template($ggrc_initiative_actiontype);
-			endif; ?>
-		</tbody>
-		</table>
-		<p><a id="add-rows" class="button" href="#">Add another</a></p>
-		<?php
-	}
-}
 
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);
@@ -296,17 +218,7 @@ function initiative_meta_boxes() {
 		$title = $_POST['UpdateTitle'];
         $date = $_POST['UpdateDate'];
 		$updates = $_POST['Update'];
-		$actiontype = $_POST['ActionType'];
-		$links = $_POST['ActionLink'];
-
-		$countaction = count( $actiontype );
-		for ( $i = 0; $i < $countaction; $i++ ) {
-			if ( $actiontype[$i] != '' ) :
-				$new[$i]['ActionType'] = stripslashes( strip_tags( $actiontype[$i] ) );
-				$new[$i]['ActionLink'] = stripslashes( $links[$i] ); // and however you want to sanitize
-			endif;
-		}
-
+		
 		$count = count( $updates );
 		for ( $i = 0; $i < $count; $i++ ) {
 			if ( $updates[$i] != '' ) :
@@ -327,7 +239,6 @@ function initiative_meta_boxes() {
 if (is_admin()) {
 	news_meta_boxes();
 	initiative_meta_boxes();
-	initiative_actiontype_meta_boxes();
 }
 
 /**
@@ -353,10 +264,12 @@ function theme_assets() {
     wp_register_style( 'bootstrap', get_stylesheet_directory_uri() . '/assets/bootstrap-4.4.1-dist/css/bootstrap-grid.css' );
 	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
 	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
+	wp_register_style( 'bbpress', get_stylesheet_directory_uri() . '/assets/css/third/bbpress.min.css' );
 
     wp_enqueue_style( 'bootstrap' );
     wp_enqueue_style( 'font-awesome' );
 	wp_enqueue_style( 'template-styling');
+	wp_enqueue_style( 'bbpress' );
 }
 
 add_action( 'get_action_initiatives_by_region', 'add_action_initiatives_by_region' );
@@ -399,37 +312,38 @@ function add_action_initiatives_by_region() {
 				 while($query->have_posts()) {
 					 $query->the_post(); ?>
 					<div class="col-lg-3 col-md-6 col-sm-12">
+						<a href="<?php the_permalink(); ?>">
 						<div class="initiative-list">
-						<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
-
-						<div class="initiative-list-detail">
-						<?php
-
-							$the_post_id = get_the_ID();
-							$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-
-							if(empty($action) || ! is_array($action)){
-								echo "";
-							}else{
-
-								foreach($action as $key => $take_action){
-									
-									?>
-									<p class="action-type"> 
-									<i class="ggrc-icon ggrc-icon-exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
-								<?php 
-									
-								}
-							}?>
-							<p class="initiative-supporters">30 Supporters</p>
-								<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
-								<?php the_excerpt(); ?>
-								<hr class="no-margin"/>
-
-								<i class="ggrc-icon ggrc-icon-map"></i> <?php the_field('venue') ?><br>
-								<i class="ggrc-icon ggrc-icon-users"></i> <?php the_field('region') ?><br>
+							<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
 								
+							<div class="initiative-list-detail">
+							<?php 
+								
+								$the_post_id = get_the_ID();
+								$action = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
+								
+								if(empty($action) || ! is_array($action)){
+									echo "";
+								}else{
+									
+									foreach($action as $key => $take_action){
+										
+										?>
+										<p class="action-type"> 
+										<i class="ggrc-icon exclamation-mark"></i> <?php echo esc_html($take_action->name); ?></p>
+									<?php 
+										
+									}
+								}?>
+									<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
+									<?php the_excerpt(); ?>
+									<hr/>
+									<p class="no-margin"><i class="ggrc-icon map margin-right"></i> <?php the_field('region') ?></p>
+									<p class="no-margin"><i class="ggrc-icon users margin-right"></i> <?php the_field('venue') ?></p>
+									
 							</div>
+						</div>
+						</a>
 					</div>
 			<?php } ?>
             <?php wp_reset_postdata(); ?>
@@ -551,11 +465,14 @@ function add_related_news_to_initiative_pages() {
 function check_if_user_logged_in() {
 	if ( !is_user_logged_in() ) {
 
-		wp_redirect('http://localhost/ggrc_website/');
+		$url = get_site_url();
+		wp_redirect($url);
 
 		exit;
 	}
 }
+
+
 
 add_action( 'wp_ajax_follow_post', 'follow_initiative' );
 function follow_initiative() {
@@ -568,7 +485,7 @@ function follow_initiative() {
 
 	$table_name = $wpdb->prefix . 'follow_posts';
 	$wpdb->insert($table_name, array('userID' => $current_user_id, 'postID' => $postid));
-
+	
 }
 
 add_action( 'wp_ajax_unfollow_post', 'unfollow_initiative' );
@@ -576,12 +493,13 @@ function unfollow_initiative() {
 	global $wpdb;
 
 	check_if_user_logged_in();
-
+	
 	$current_user_id = get_current_user_id();
 	$postid = $_POST['postid'];
 	$table_name = $wpdb->prefix . 'follow_posts';
 
 	$wpdb->query($wpdb->prepare("UPDATE $table_name SET isFollowing = '0' WHERE userID = '$current_user_id' and postID = '$postid'"));
+	
 
 }
 
@@ -595,6 +513,77 @@ function is_current_user_following() {
 	return $isfollowing;
 }
 
+add_action( 'wp_ajax_save_event', 'save_event' );
+function save_event() {
+	global $wpdb;
+
+	check_if_user_logged_in();
+
+	$current_user_id = get_current_user_id();
+	$postid = $_POST['postid'];
+
+	$table_name = $wpdb->prefix . 'save_events';
+	$wpdb->insert($table_name, array('userID' => $current_user_id, 'postID' => $postid));
+	
+}
+
+function has_current_user_saved_event() {
+	global $wpdb;
+
+	$current_user_id = get_current_user_id();
+	$postid= get_the_ID();
+	$isSaved = $wpdb->get_results("SELECT DISTINCT userID, postID FROM ggrc_save_events WHERE `userID` = '$current_user_id' and `postID` = '$postid' and `isSaved` = 1");
+
+	return $isSaved;
+}
+
+function my_excerpt_length($length) {
+	return 12;
+}
+	
+add_filter('excerpt_length', 'my_excerpt_length');
+
+
+function check_users_advisor_request() {
+	global $wpdb;
+
+	$current_user_id = get_current_user_id();
+
+	$user_email = $wpdb->get_var("SELECT user_email FROM ggrc_users WHERE `ID` = '$current_user_id'");
+
+	if ($user_email) {
+		$form_id = 1341;
+		$entries = Forminator_API::get_entries( $form_id );
+
+		for ($i=0; $i < count($entries) ; $i++) { 
+			if ($user_email == $entries[$i]->meta_data['hidden-2']['value']) {
+				$entry_id = $entries[$i]->entry_id;
+			}else{
+				$entry_id =0;
+			}
+		}
+
+		if ($entry_id != 0) {
+			$advisor_info = $wpdb->get_results("SELECT meta_key, meta_value FROM ggrc_frmt_form_entry_meta WHERE `entry_id` = '$entry_id'");
+
+			foreach ($advisor_info as $key => $advisor_meta) {
+				$meta_key= $advisor_meta->meta_key;
+				$meta_value= $advisor_meta->meta_value;
+
+				$advisor_meta_data[$meta_key] = $meta_value;
+
+			}
+
+			return $advisor_meta_data;
+		}		
+				
+	}
+
+	return false;
+	
+}
+
+
 /* Blog Functions */
 function add_blog_category($classes) {
 	$blogcat = wp_get_post_terms(get_the_ID(), 'blog-category', ['']);
@@ -606,4 +595,35 @@ function add_blog_category($classes) {
 	return $classes;
 }
 add_filter('body_class', 'add_blog_category');
+
+/* Add featured image to topics */
+add_post_type_support('topic', array('thumbnail'));
+
+
+/* Messaging */
+add_filter( 'fep_menu_buttons', 'fep_cus_fep_menu_buttons', 99 );
+
+function fep_cus_fep_menu_buttons( $menu )
+{
+    unset( $menu['settings'] );
+    unset( $menu['directory'] );
+    unset( $menu['announcement'] );
+    return $menu;
+}
+
+add_filter( 'fep_filter_hide_message_initially_if_read', '__return_false' );
+
+/* Update Profile */
+
+add_action( 'personal_options_update', 'save_my_custom_user_profile_field' );
+add_action( 'edit_user_profile_update', 'save_my_custom_user_profile_field' );
+function save_my_custom_user_profile_field( ) {
+    if ( !current_user_can( 'edit_user', get_current_user_id() ) )
+        return false;
+    update_user_meta( absint( get_current_user_id() ), 'job_title', wp_kses_post( $_POST['job_title'] ) );
+    update_user_meta( absint( get_current_user_id() ), 'organization', wp_kses_post( $_POST['organization'] ) );
+    update_user_meta( absint( get_current_user_id() ), 'country', wp_kses_post( $_POST['country'] ) );
+    update_user_meta( absint( get_current_user_id() ), 'region', wp_kses_post( $_POST['region'] ) );
+}
+
 ?>
