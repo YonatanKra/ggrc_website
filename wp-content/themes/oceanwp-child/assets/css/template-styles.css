@@ -691,6 +691,30 @@ hr{
     content: url('../../../../uploads/icons/save.svg');
     margin-left: 5px
 }
+
+.ggrc-twitter::after {
+    content: url('../../../../uploads/icons/twitter.svg');
+    margin-right: 8px;
+}
+
+.ggrc-facebook::after {
+    content: url('../../../../uploads/icons/facebook.svg');
+    margin-right: 8px;
+}
+
+.ggrc-instagram::after {
+    content: url('../../../../uploads/icons/instagram.svg');
+    margin-right: 8px;
+}
+.ggrc-linkedin::after {
+    content: url('../../../../uploads/icons/linkedin.svg');
+    margin-right: 8px;
+}
+
+.ggrc-message::after {
+    content: url('../../../../uploads/icons/messages.svg');
+    margin-right: 8px;
+}
 /* Modal Popup */
 
 .modal {
@@ -933,7 +957,12 @@ hr{
 }
 
 
+/*Blog Author*/
 
+.author-picture{
+    width: 40%;
+    border-radius: 50%;
+}
 
 
 /* Responsive CSS */

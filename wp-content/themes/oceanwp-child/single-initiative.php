@@ -16,7 +16,7 @@
 	<?php wp_head(); ?>
 
 	<style>
-		div.wp_ulike_general_class.wp_ulike_is_not_liked, li.ess-total-share.ess-social-networks{
+		div.wp_ulike_general_class.wp_ulike_is_not_liked, li.ess-total-share.ess-social-networks, .ess-social-network-lists li:first-child {
 			display:none !important;
 		}
 		li.ess-all-networks.ess-social-networks{
@@ -71,23 +71,11 @@
 										<div class="col-md-2 col-lg-2 col-sm-4">
 										<i class="ggrc-icon map-pin margin-right"></i> <?php the_field('region') ?>
 										</div>
-										<?php
-											$the_post_id = get_the_ID();
-						
-											$type = wp_get_post_terms($the_post_id, 'initiative_type', ['']);
-											
-											if(!empty($type) && is_array($type)){
-												
-												if($type[0]->name == "Take Action"){ ?>
-													<div class="col-md-2 col-lg-2 col-sm-4">
-													<i class="ggrc-icon clock margin-right"></i> last updated <?php the_modified_time('F jS, Y') ?>
-													</div>
-												<?php } 
-											} else{ ?>
-												<div class="col-md-2 col-lg-2 col-sm-4">
-												<i class="ggrc-icon clock margin-right"></i> <?php the_field('initiative-duration') ?>
-												</div>
-											<?php }  ?>
+
+										<div class="col-md-2 col-lg-2 col-sm-4">
+											<i class="ggrc-icon clock margin-right"></i> last updated <?php the_modified_time('F jS, Y') ?>
+										</div>
+										
 													
 										<div class="col-md-1 col-lg-1 col-sm-1">
 										</div>
@@ -123,7 +111,7 @@
 										$tags = wp_get_post_terms($the_post_id, 'initiative_tags', ['']);
 										
 										if(empty($tags) || ! is_array($tags)){
-											echo "No Tags";
+											echo " ";
 										}else{
 
 											foreach($tags as $key => $posttags){
@@ -136,14 +124,17 @@
 										} ?>
 
 									<div class="row mt-30">
-									<div class="col-md-12 col-lg-12 col-sm-12">
-										<p><b>Additional Resource</b></p>
-										<div class="row">
+									<div class="col-md-12 col-lg-12 col-sm-12">	
+										<div class="row">									
 											<?php 
 												$attachmentID = get_post_custom_values('additional-resources-1');
 												
-												if(!empty($attachmentID[0])){ ?>
+												if(!empty($attachmentID[0])){ ?>												
+												<div class="col-md-12 col-lg-12 col-sm-12">
+													<p><b>Additional Resource</b></p>
+												</div>
 												<div class="col-md-12 col-lg-5 col-sm-12 add-resources">
+													
 												<i class="ggrc-icon attachment"></i>
 													<?php 
 
@@ -172,13 +163,13 @@
 									</div>
 								</div>
 										
-										<hr class="mt-60"/>
+										<hr class="mt-30"/>
 										<p class="ggrc-initiative-priorities"><b>GGRC priorities: </b> <?php the_field('ggrc-priorities'); ?></p>
 										<hr class="mb-60"/>
 										
 										</div>
 										<div class="col-md-7 col-lg-7 col-sm-12">
-											<img src="<?php echo get_the_post_thumbnail_url(); ?>" />
+											<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="mt-30"/>
 										</div>
 									</div>
 
@@ -374,7 +365,7 @@
 			});
 		});
 
-		
+
 		$("#wpd-field-submit-0_0").val("comment");	
 		$("#reply-title").html("Comments");		
 		$('.ql-editor').attr('placeholder', 'Write your comment...');

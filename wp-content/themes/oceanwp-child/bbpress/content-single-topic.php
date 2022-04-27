@@ -91,6 +91,10 @@ $post_id = get_the_ID();
 		display:none;
 	}
 
+	button[type="submit"], .button{
+		background-color: #0b4f6d;
+		border-radius: 30px;
+	}
 </style>
 
 <div id="single-forum" class="bbp-topic-subheader">

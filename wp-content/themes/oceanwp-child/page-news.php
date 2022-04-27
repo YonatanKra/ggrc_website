@@ -86,7 +86,7 @@
 									<div class="row mb-20 no-margin-right no-margin-left" id="agency">
 									<?php
 									if(empty($news_agencies) || ! is_array($news_agencies)){
-										echo "No news agency";
+										echo " ";
 									}else{
 										foreach($news_agencies[0] as $newsagency){
 											?>
@@ -103,7 +103,7 @@
 									<div>
 									<?php
 									if(empty($tags) || ! is_array($tags)){
-										echo "No Tags";
+										echo " ";
 									}else{
 										
 										foreach($tags as $key => $posttags){							
@@ -173,7 +173,7 @@
 									<div class="mb-20">
 									<?php
 									if(empty($news_agencies) || ! is_array($news_agencies)){
-										echo "No news agency";
+										echo " ";
 									}else{
 										foreach($news_agencies[0] as $newsagency){
 											?>
@@ -190,7 +190,7 @@
 									<div>
 									<?php
 									if(empty($tags) || ! is_array($tags)){
-										echo "No Tags";
+										echo " ";
 									}else{
 										
 										foreach($tags as $key => $posttags){							

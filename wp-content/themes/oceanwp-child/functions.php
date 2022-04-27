@@ -404,52 +404,59 @@ function add_related_news_to_initiative_pages() {
             $query = new WP_Query( $args );
 
             ?>
-            <h4>Related News:</h4>
-            <div class="row">
 
-			<?php if($query->have_posts()){
+
+			<?php if($query->have_posts()){ ?>
+				<h4>Related News:</h4>
+            		<div class="row">
+            	<?php
 				 while($query->have_posts()) {
 					 $query->the_post(); ?>
 					<div class="col-lg-4 col-md-4 col-sm-12">
 						<div class="news-box">
-						<h3><?php the_title(); ?></h3>
-						<?php
-						$the_post_id = get_the_ID();
-						$news_agencies = get_post_meta($the_post_id, 'news');
-						$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
-						?>
-							<div class="mb-20">
-							<?php
-							if(empty($news_agencies) || ! is_array($news_agencies)){
-								echo "No news agency";
-							}else{
-								foreach($news_agencies[0] as $newsagency){
+									<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
+								<p class="no-margin-bottom"><b><?php the_title(); ?></b></p> 
+								<?php the_content(); ?>
+								<?php 
+								$the_post_id = get_the_ID();
+								$news_agencies = get_post_meta($the_post_id, 'news');
+								$tags = wp_get_post_terms($the_post_id, 'post_tag', ['']);
+								?>
+									<div class="mb-20">
+									<?php
+									if(empty($news_agencies) || ! is_array($news_agencies)){
+										echo " ";
+									}else{
+										foreach($news_agencies[0] as $newsagency){
+											?>
+											<div class="col-lg-12 col-md-12 col-sm-12 agency-list">
+												<i class="ggrc-icon ggrc-external-link"></i> <a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" /></a>
+											</div>
+											
+										<?php 
+										}
+									}
 									?>
-									<a href="<?php echo $newsagency['Link'] ?>" target="_blank"><img src="<?php echo z_taxonomy_image_url($newsagency['Agency']); ?>" width="10%" /></a>
-
-								<?php
-								}
-							}
-							?>
-							</div>
-							<div>
-							<?php
-							if(empty($tags) || ! is_array($tags)){
-								echo "No Tags";
-							}else{
-
-								foreach($tags as $key => $posttags){
-
+									</div>
+									<hr class="mb-20" />
+									<div>
+									<?php
+									if(empty($tags) || ! is_array($tags)){
+										echo " ";
+									}else{
+										
+										foreach($tags as $key => $posttags){							
+											
+											?>
+											<p style="display: inline;"><a href="#" target="_blank" class="tags"><?php echo esc_html($posttags->name); ?></a></p>
+											
+										<?php 
+											
+										}
+									}
 									?>
-									<a href="<?php echo get_term_link($posttags->term_id, 'post_tag'); ?>" target="_blank" class="tags"><?php echo esc_html($posttags->name); ?></a>
-
-								<?php
-
-								}
-							}
-							?>
-							</div>
-					</div>
+									</div>
+								</div>
 				</div>
 			<?php } ?>
             <?php wp_reset_postdata(); ?>

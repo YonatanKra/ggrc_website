@@ -52,6 +52,10 @@ defined( 'ABSPATH' ) || exit;
 	.forminator-row{
 		margin-bottom: 15px !important;
 	}
+
+	.forminator-ui.forminator-custom-form[data-design=default] .forminator-multiselect{
+		max-height: 110px;
+	}
 </style>
 
 

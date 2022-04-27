@@ -30,17 +30,16 @@ defined( 'ABSPATH' ) || exit;
 <div class="row mt-60">
 	<div class="col-md-4 col-lg-4 col-sm-12">
 		<h2>Discuss</h2>
-		<p>The Global Green Recovery Collaborative invites members to share ideas for a green recovery and working together, 
-			to guide one another and share resources. Connect with experts, practitioners, activists, and researchers.</p>
-		<p>Register and create your profile to participate. Frequently Asked Questions and Community Guidelines will 
-			answer any questions you have about joining and participating.</p>
+		<p>The Global Green Recovery Collaborative invites members to share ideas for green recovery, collaboration, and resources. </p>
+
+		<p>Register and create your profile to participate in discussions.</p>
 
 		<div class="row">
 			<div class="col-md-12 col-lg-12 col-sm-12">
 				<a href="#" class="initiative-website">Community guidelines</a>
 			</div>
 			<div class="col-md-12 col-lg-12 col-sm-12 mt-30">
-				<a><button class="ggrc-btn-white-lg">Log In</button></a>
+				<a href="<?php echo site_url('/user-login') ?>"><button class="ggrc-btn-white-md">Log In</button></a>
 			</div>
 		</div>
 
@@ -49,8 +48,9 @@ defined( 'ABSPATH' ) || exit;
 				<h3 class="no-margin-bottom">Suggest a new discussion board</h3>
 			</div>
 			<div class="col-md-12 col-lg-12 col-sm-12">
-				<p>Massa et egestas vel volutpat mauris condimentum id adipiscing 
-					suspendisse hendrerit eget vulputate integer nulla blandit lacus, diam nunc, vitae</p>
+				<p>GGRC members are invited to share ideas for green recovery, collaboration, and resources.</p>
+
+				<p>Register and create your profile to suggest a discussion topic.</p>
 			</div>
 			<div class="col-md-12 col-lg-12 col-sm-12">
 			<a href="../suggest-a-discussion-board" target="_blank"><button class="ggrc-btn-blue-sm">Suggest</button></a>
