@@ -87,7 +87,13 @@ do_action( 'bbp_template_before_user_details' ); ?>
 							</span>
 						</li>
 					<?php endif; ?>
-				
+
+					<li class="<?php if ( bbp_is_user_home_edit() ) :?>current<?php endif; ?>">
+						<span class="bbp-user-edit-link">
+							<a href="" title="<?php printf( esc_attr__( "Events", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Events', 'bbpress' ); ?></a>
+						</span>
+					</li>
+			
 					<li class="<?php if ( bbp_is_single_user_topics() ) :?>current<?php endif; ?>">
 						<span class='bbp-user-topics-created-link'>
 							<a href="<?php bbp_user_topics_created_url(); ?>" title="<?php printf( esc_attr__( "%s's Messages", 'bbpress' ), bbp_get_displayed_user_field( 'display_name' ) ); ?>"><?php esc_html_e( 'Messages', 'bbpress' ); ?></a>

@@ -62,6 +62,50 @@ if ( bbp_is_single_user_profile() ) { ?>
 	#bbp-user-profile #text{
 		display:none;
 	}
+
+
+	#site-navigation-wrap .dropdown-menu>li>a{
+		padding: 0px 8px !important;		
+	}
+
+	dl, dd, .mec-single-event-time, .mec-single-event-organizer{
+		margin:0px;
+		padding: 0px;
+		background-color: transparent;
+	}
+
+	.mec-time, .mec-single-event-organizer img, .mec-events-single-section-title, .mec-organizer-email, .mec-sl-home{
+		display: none
+	}
+
+	.mec-events-abbr{
+		display: inline;
+		font-size: 16px;
+	}
+
+	.mec-organizer h6{
+		margin-top: 10px;
+		font-size: 16px;
+		font-weight: normal;
+		font-family: 'Lato';
+	}
+
+	.mec-sl-clock{
+		float: left;
+    	margin-right: 5px;
+	}
+
+	.mec-organiser, .users{
+		float: left !important;
+	}
+
+	.users{
+		margin-top: 8px;
+		position: relative;
+    	z-index: 100;
+    	margin-right: 5px
+	}
+
 	
 </style>
 
@@ -251,6 +295,54 @@ if ( bbp_is_single_user_profile() ) { ?>
 				<?php } ?>
 
 			</div>
+
+			<?php
+
+				$single = new MEC_skin_single();
+
+				$args = array (
+					'post_type'=> 'mec-events',
+					'posts_per_page' => 3,
+					'author_name' => $user_nicename
+				);
+
+				$the_query3 = new WP_Query($args);
+
+			?>
+
+			<p class="mt-20"><b>Events</b></p>
+			<div class="row">
+				
+				<?php if($the_query3->have_posts()){
+					while($the_query3->have_posts()) {
+						$the_query3->the_post(); ?>
+						<div class="col-lg-6 col-md-6 col-sm-12">
+								<?php 
+								$single_event_main = $single->get_event_mec(get_the_ID());
+								$single_event_obj = $single_event_main[0];
+
+								?>								
+
+								<div class="row mb-30">										
+									<div class="col-lg-4 col-md-4 col-sm-12">
+										<img src="<?php echo get_the_post_thumbnail_url(); ?>"/>
+									</div>
+									<div class="col-lg-8 col-md-8 col-sm-12 no-padding-left">
+										<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
+										<?php
+			            						$single->display_time_widget($single_event_obj);
+			            				?>
+			            				<i class="ggrc-icon users"></i>
+			            				<?php $single->display_organizer_widget($single_event_obj); ?>
+
+									</div>
+								</div>	
+						</div>
+				<?php } ?>
+				<?php } ?>
+
+			</div>
+
 
 			</div><!-- #bbp-author-topics-started -->
 

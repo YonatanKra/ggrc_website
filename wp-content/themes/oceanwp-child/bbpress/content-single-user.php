@@ -81,7 +81,7 @@ defined( 'ABSPATH' ) || exit;
 							<?php if ( bbp_is_single_user_topics()      ) bbp_get_template_part( 'user', 'topics-created'  ); ?>
 							<?php if ( bbp_is_single_user_replies()     ) bbp_get_template_part( 'user', 'replies-created' ); ?>
 							<?php if ( bbp_is_single_user_edit()        ) bbp_get_template_part( 'form', 'user-edit'       ); ?>
-							<?php //if ( bbp_is_single_user_edit()        ) bbp_get_template_part( 'form', 'user-edit'       ); ?>
+							<?php //bbp_get_template_part( 'user', 'saved-events'       ); ?>
 							
 						</div>
 					</div>

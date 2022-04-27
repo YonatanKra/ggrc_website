@@ -320,7 +320,7 @@ defined('MECEXEC') or die();
 									<div class="col-lg-5 col-md-5 col-sm-12">
 										<img src="<?php echo get_the_post_thumbnail_url(); ?>"/>
 									</div>
-									<div class="col-lg-7 col-md-7 col-sm-12">
+									<div class="col-lg-7 col-md-7 col-sm-12 no-padding-left">
 										<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 										<?php
 			            						$single->display_time_widget($single_event_obj);
