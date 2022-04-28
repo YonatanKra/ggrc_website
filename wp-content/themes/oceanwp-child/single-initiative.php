@@ -61,7 +61,7 @@
 					
 								<div class="action-subheader">
 								<?php $initiative_url = get_site_url(null, '/initiative', null); ?>
-								<a href="<?php echo $initiative_url; ?>">back to explore initiatives</a>
+								<a href="<?php echo $initiative_url; ?>" class="mt-20">back to explore initiatives</a>
 								<hr width="40%"/>
 									<div class="row mt-30">
 										

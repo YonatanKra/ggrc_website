@@ -61,20 +61,30 @@ defined('MECEXEC') or die();
 
 <body <?php body_class(); ?> <?php oceanwp_schema_markup( 'html' ); ?>>
 
+	
+
 	<?php wp_body_open(); ?>
 
 	<?php do_action( 'ocean_before_outer_wrap' ); ?>
 
-	<div id="outer-wrap" class="site clr">
+
 
 		<a class="skip-link screen-reader-text" href="#main"><?php oceanwp_theme_strings( 'owp-string-header-skip-link', 'oceanwp' ); ?></a>
 
 		<?php do_action( 'ocean_before_wrap' ); ?>
 
 		<div id="wrap" class="clr">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<p class="text-danger align-center mt-10 mb-10"><b>* This site is in testing phase. Please feel free to provide feedback or comments <a href="contact">here</a>.</b></p>
+				</div>
+				
+			</div>
+
 
 			<?php do_action( 'ocean_top_bar' ); ?>
-
+			<div id="outer-wrap" class="site clr">
+		
 			<?php do_action( 'ocean_header' ); ?>
 
 

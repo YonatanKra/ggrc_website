@@ -72,7 +72,7 @@
 
 				?>
 
-				<div class="news_header pt-100">
+				<div class="news_header pt-150">
 					<div class="row">
 						<div class="col-lg-6 col-md-7 col-sm-12">
 							<div class="news-box p-20" >

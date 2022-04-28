@@ -112,7 +112,7 @@ $single_event_obj = $single_event_main[0];
             $enddate= strtotime(get_post_meta( get_the_ID(), 'mec_end_date', true));
             
             ?>
-            <p class="links"><a href="../../events-calendar">back to calendar</a></p>
+            <p class="links mt-30"><a href="../../events-calendar">back to calendar</a></p>
             <p><b><?php echo date('F jS, Y', $startdate); ?> <?php if(!empty($enddate)) {echo " - " . date('F jS, Y', $enddate);} ?></b></p>
 
             <div class="row">
