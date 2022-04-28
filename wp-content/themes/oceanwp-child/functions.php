@@ -639,7 +639,7 @@ function save_my_custom_user_profile_field( ) {
 add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
 function add_loginout_link( $items, $args ) {
     if (is_user_logged_in() && $args->theme_location == 'main_menu') {
-        $items .= '<li><a href="'. wp_logout_url() .'">Log Out</a></li>';
+        $items .= '<li><a href="'. wp_logout_url(site_url()) .'">Log Out</a></li>';
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'main_menu') {
         $items .= '<li><a href="'. site_url('user-login') .'">Log In</a></li>';

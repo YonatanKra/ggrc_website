@@ -146,8 +146,13 @@
 							$attachedFile=get_attached_file($author_picture[0]);
 							
 					 		$url = str_replace("/home/572724.cloudwaysapps.com/rspezvgvgu/public_html", "", $attachedFile);
+
+					 		if (!empty($author_picture)) {
+					 			
 					 ?>
-					 <img src="<?php echo site_url($url); ?>" class="author-picture">
+					 		<img src="<?php echo site_url($url); ?>" class="author-picture">
+
+					<?php } ?>
 
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 align-center">

@@ -733,7 +733,7 @@ hr{
 
 .modal-content {
     position: absolute;
-    top: 50%;
+    top: 400px;
     left: 50%;
     transform: translate(-50%, -50%);
     background: linear-gradient(89.48deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url('../../../../uploads/2022/03/login-bg.jpg');
@@ -840,7 +840,7 @@ hr{
 }
 
 .home-banner{
-    background: linear-gradient(0deg, rgba(255 255 255 / 0%), rgba(255 255 255 / 0%)), url(../../../../uploads/2022/01/homepagebanner.png);
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/homepage/MontesdeMaria3_YeniferHerrera.jpg);
     background-size: cover;
 }
 
@@ -880,7 +880,7 @@ hr{
 }
 
 .why-join-banner{
-    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/01/why-join.jpg);
+    background: linear-gradient(90deg, #FFFFFF 20%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/01/why-join.jpg);
     background-size: cover;
     width: 100%; 
     margin: 40px 0px;
@@ -951,9 +951,11 @@ hr{
 .profile-pic{
     position: absolute;
     left: calc(50% - 40%/2);
-    top: -45%;
-    width: 40%;
+    top: -90px;
+    width: 145px;
+    height: 145px;
     filter: drop-shadow(4px 4px 9px rgba(0, 0, 0, 0.13));
+    border-radius: 50%;
 }
 
 

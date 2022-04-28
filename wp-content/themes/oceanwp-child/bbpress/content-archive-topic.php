@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 	}
 </style>
 
-<div class="row mt-60">
+<div class="row mt-80">
 	<div class="col-md-4 col-lg-4 col-sm-12">
 		<h2>Discuss</h2>
 		<p>The Global Green Recovery Collaborative invites members to share ideas for green recovery, collaboration, and resources. </p>
@@ -59,8 +59,8 @@ defined( 'ABSPATH' ) || exit;
 		
 	</div>
 	<div class="col-md-8 col-lg-8 col-sm-12">
-		<div class="row mb-20">
-		<div class="col-md-6 col-lg-3 col-sm-12">
+		<!-- <div class="row mb-20">
+			<div class="col-md-6 col-lg-3 col-sm-12">
 				<select name="region">
 					<option>Region</option>
 					<option>Test</option>
@@ -84,7 +84,7 @@ defined( 'ABSPATH' ) || exit;
 					<option>Test</option>
 				</select>
 			</div>
-		</div>
+		</div> -->
 		<div id="bbpress-forums" class="bbpress-wrapper">
 
 			<!-- <?php //if ( bbp_allow_search() ) : ?>

@@ -96,7 +96,7 @@ defined('MECEXEC') or die();
 				<h1 class="banner-h1">Inspire Together.</h1>
 				<h3 class="mt-30">What is Green Recovery?</h3>
 				<p class="mb-60">Green recovery is a process that transforms how people live and interact with each other and our environment to repair our climate and ecosystems, recover from past environmental damage, and become healthy, resilient, and equitable.</p>
-				<a href="" class="ggrc-btn-white-lg mt-60">Join our Collaborative</a>
+				<a href="user-register" class="ggrc-btn-white-lg mt-60">Join our Collaborative</a>
 			</div>
 		</div>
 	</div>
@@ -117,7 +117,7 @@ defined('MECEXEC') or die();
 				<div class="row mb-60">
 					<div class="col-lg-4 col-md-12 col-sm-12 mb-20">
 						<div class="how-it-works">
-							<img src="wp-content/uploads/2022/01/learn.jpg" width="100%">
+							<img src="wp-content/uploads/homepage/MontesdeMaria4_YeniferHerrera.jpg" width="100%">
 							<div class="home-learn">
 								<h1 class="banner-h1 inline-display">1.</h1>
 								<h2 class="home-learn-title">Learn</h2>
@@ -127,7 +127,7 @@ defined('MECEXEC') or die();
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12 mb-20">
 						<div class="how-it-works">
-							<img src="wp-content/uploads/2022/01/learn.jpg" width="100%">
+							<img src="wp-content/uploads/homepage/JacarandaSchoolnursery_StevenCalcote.JPG" width="100%">
 							<div class="home-learn">
 								<h1 class="banner-h1 inline-display">2.</h1>
 								<h2 class="home-learn-title">Act</h2>
@@ -137,7 +137,7 @@ defined('MECEXEC') or die();
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12 mb-20">
 						<div class="how-it-works">
-							<img src="wp-content/uploads/2022/01/learn.jpg" width="100%">
+							<img src="wp-content/uploads/homepage/Treehuggers_RosalindHelfand.jpg" width="100%">
 							<div class="home-learn">
 								<h1 class="banner-h1 inline-display">3.</h1>
 								<h2 class="home-learn-title">Collaborate</h2>
@@ -149,7 +149,7 @@ defined('MECEXEC') or die();
 				
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h2 class="center-element">What is the Global Green Recovery Collaborative?</h2>
+						<h2 class="align-center">What is the Global Green Recovery Collaborative?</h2>
 						<p class="align-center p-150-lr mt-20">The Global Green Recovery Collaborative gets people talking and acting together! We aim to promote action and collaboration to achieve a green recovery from Covid-19 and other past and future environmental challenges. Learn from our partner initiatives and become a member to connect with the GGRC community.</p>
 					</div>
 				</div>
@@ -192,7 +192,7 @@ defined('MECEXEC') or die();
 						<div class="col-lg-6 col-md-6 col-sm-12">
 							<h2>Why should I join?</h2>
 							<p class="mb-60">We need diverse voices to speak up for green recovery at every level. When you join our collaborative, you join local and global communities who are learning, collaborating, and taking action together for change.</p>
-							<a href="" class="ggrc-btn-blue-md">Join Us!</a>
+							<a href="user-register" class="ggrc-btn-blue-md">Join Us!</a>
 						</div>
 					</div>
 				</div>
