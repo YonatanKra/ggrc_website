@@ -1,4 +1,6 @@
 **/*part*.zip
 **/*log.txt
 
+.DS_Store
+
 wp-content/uploads/wpdiscuz/cache
