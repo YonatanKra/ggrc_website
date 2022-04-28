@@ -3,4 +3,10 @@
 
 .DS_Store
 
+wp-content/advanced-cache.php
+wp-content/cache
+wp-content/wp-rocket-config
+
 wp-content/uploads/wpdiscuz/cache
+
+.htaccess
