@@ -128,7 +128,7 @@ $single_event_obj = $single_event_main[0];
             				$tags = get_the_tags();
 										
 							if(empty($tags) || ! is_array($tags)){
-								echo "No Tags";
+								echo "";
 							}else{
 
 								foreach($tags as $key => $posttags){
@@ -204,11 +204,12 @@ $single_event_obj = $single_event_main[0];
 
             <div class="row mt-30 mb-60">
             	<div class="col-lg-9 col-md-12 col-sm-12">
-            		<p><b>Past Event Recording:</b></p>
+            		
             		<?php $embedurl = get_post_custom_values('upload-past-event-video'); 
 
             			if (!empty($embedurl[0])) {
             				?>
+            				<p><b>Past Event Recording:</b></p>
 							<iframe width="100%" height="400" src="<?php echo $embedurl[0]; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						<?php
             			}

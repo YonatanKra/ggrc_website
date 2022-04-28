@@ -22,6 +22,10 @@ defined( 'ABSPATH' ) || exit;
 	.initiative-list-detail > p:first-of-type{
 		margin-bottom:10px;
 	}
+
+    #connect-to-people img{
+        border-radius: 50%;
+    }
 </style>
 
 <div class="suggest-content row mb-10">
@@ -49,7 +53,9 @@ defined( 'ABSPATH' ) || exit;
         <?php
 
             $args = array (
-                'post_type'=> 'initiative'
+                'post_type'=> 'initiative',
+                'posts_per_page' => 5,
+                'nopaging' => false
             );
 
             $the_query = new WP_Query($args);
@@ -86,36 +92,45 @@ defined( 'ABSPATH' ) || exit;
     <div class="col-lg-3 col-md-12 col-sm-12">
         
         <div class="row no-margin-left" id="connect-people">
-            <p><b>Connect to people</b></p>
-            <hr/>
-        
+             <div class="col-lg-12 col-md-12 col-sm-12">
+                <p class="no-margin-bottom"><b>Connect to people</b></p>
+                <hr />
+                
+                
+            </div>
+            
         <?php
 
         $args = array(
-            'role__in'    => array('Member', 'Advisor'),
+            'role__in'    => array('Member', 'Advisor', 'Adminstrator'),
             'orderby' => 'user_nicename',
-            'order'   => 'ASC'
+            'order'   => 'ASC',
+            'exclude' => array(get_current_user_id()),
+            'number' => 10
+
         );
 
         $users = get_users( $args );
 
         foreach ( $users as $user ) { ?>
-            <div class="col-md-12 col-lg-12 col-sm-12 mb-20" id="initiative-contact">
+            <div class="col-md-12 col-lg-12 col-sm-12 mb-20 align-center" id="connect-to-people">
                 <?php										
                         echo get_avatar($user->ID, 60);										
                 ?>
             
-                <div class="initiative-contact-details">
                     <p class="no-margin-bottom"><b><?php echo $user->display_name ?></b></p>
-                    <p class="no-margin-bottom">title</p>
-                    <p class="no-margin-bottom">organisation</p>
-                </div>
+                    <p class="no-margin-bottom"><?php echo $user->job_title ?></p>
+                    <p class="no-margin-bottom"><?php echo $user->organization ?></p>
+                
                 
             </div>
             <?php
         }
 
         ?>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <p class="links align-center"><a href="../engagements">see all</a></p>
+        </div>
 
         </div>
         

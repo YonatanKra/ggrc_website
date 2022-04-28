@@ -65,21 +65,21 @@
 								<hr width="40%"/>
 									<div class="row mt-30">
 										
-										<div class="col-md-2 col-lg-2 col-sm-4">
+										<div class="col-md-4 col-lg-2 col-sm-4">
 										<i class="ggrc-icon users margin-right"></i>  <?php the_field('venue') ?>
 										</div>
-										<div class="col-md-2 col-lg-2 col-sm-4">
+										<div class="col-md-4 col-lg-2 col-sm-4">
 										<i class="ggrc-icon map-pin margin-right"></i> <?php the_field('region') ?>
 										</div>
 
-										<div class="col-md-2 col-lg-2 col-sm-4">
+										<div class="col-md-4 col-lg-2 col-sm-4">
 											<i class="ggrc-icon clock margin-right"></i> last updated <?php the_modified_time('F jS, Y') ?>
 										</div>
 										
 													
 										<div class="col-md-1 col-lg-1 col-sm-1">
 										</div>
-										<div class="col-md-5 col-lg-5 col-sm-6 align-center mb-30">
+										<div class="col-md-11 col-lg-5 col-sm-12 mb-30 mt-20">
 											<a href="<?php the_field('website') ?>" target="_blank" class="initiative-website">View site</a>
 											
 											<li class="ess-all-networks ess-social-networks ess-list">
@@ -102,7 +102,7 @@
 										
 									</div>
 									<div class="row">
-										<div class="col-md-5 col-lg-5 col-sm-12">
+										<div class="col-md-12 col-lg-5 col-sm-12">
 									
 										<h2><?php the_title(); ?></h2>
 										<span class="initiative-content"><?php the_content(); ?></span>
@@ -133,14 +133,18 @@
 												<div class="col-md-12 col-lg-12 col-sm-12">
 													<p><b>Additional Resource</b></p>
 												</div>
-												<div class="col-md-12 col-lg-5 col-sm-12 add-resources">
+												<div class="col-md-6 col-lg-11 col-sm-12 add-resources">
 													
 												<i class="ggrc-icon attachment"></i>
 													<?php 
 
 													$attachedFile=get_attached_file($attachmentID[0]);
 
-													?><a href="../../../<?php echo trim($attachedFile, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-1'); ?></a>
+													$url = str_replace("/home/572724.cloudwaysapps.com/rspezvgvgu/public_html", "", $attachedFile);
+
+
+													?><a href="<?php echo site_url($url); ?>" target="_blank"><?php the_field('additional-resources-name-1'); ?></a>
+
 
 												</div>
 											<?php } 
@@ -148,13 +152,17 @@
 												$attachmentID1 = get_post_custom_values('additional-resources-2');
 												if(!empty($attachmentID1[0])){ 
 											?>
-												<div class="col-md-12 col-lg-5 col-sm-12 add-resources">
+												<div class="col-md-6 col-lg-11 col-sm-12 add-resources">
 												<i class="ggrc-icon attachment"></i> 
 														<?php 
 
 														$attachedFile1=get_attached_file($attachmentID1[0]);
 
-														?><a href="../../../<?php echo trim($attachedFile1, "C:\'xampp\htdocs\'"); ?>" target="_blank"><?php the_field('additional-resources-name-2'); ?></a>
+														$url1 = str_replace("/home/572724.cloudwaysapps.com/rspezvgvgu/public_html", "", $attachedFile1);
+
+
+													?><a href="<?php echo site_url($url1); ?>" target="_blank"><?php the_field('additional-resources-name-2'); ?></a>
+
 
 													</div>
 												<?php } ?>
@@ -168,8 +176,8 @@
 										<hr class="mb-60"/>
 										
 										</div>
-										<div class="col-md-7 col-lg-7 col-sm-12">
-											<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="mt-30"/>
+										<div class="col-md-12 col-lg-7 col-sm-12">
+											<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="mt-30 mb-20"/>
 										</div>
 									</div>
 
@@ -235,30 +243,24 @@
 							<h3>People for Initiative</h3>
 						</div>
 								<?php 
-									$post_id = get_the_ID();
-									for ( $i = 1; $i <= 3; $i++ ){
-									
-										$id= get_post_custom_values('initiative-contact-'. $i, $post_id);
-										if (!empty($id[0])){ ?>
-									<div class="col-md-4 col-lg-4 col-sm-12" id="initiative-contact">
+
+									for ( $i = 1; $i <= 3; $i++ ){  ?>
 										<?php	
-												$user_id = intval($id[0]);
-												$contact_name = get_the_author_meta( 'display_name', $user_id );
-													
-												echo get_avatar($user_id, 60);										
-										?>
-									
+											
+											if (get_field('initiative-contact-name-'. $i)) {
+																				
+									?>
+
+									<div class="col-md-4 col-lg-4 col-sm-12" id="initiative-contact">
 										<div class="initiative-contact-details">
-											<h4 class="no-margin-bottom"><?php echo $contact_name ?></h4>
-											<p class="no-margin-bottom">title</p>
-											<p class="no-margin-bottom">organisation</p>
+											<h4><?php the_field('initiative-contact-name-'. $i) ?></h4>
+											<p class="no-margin-bottom"><?php the_field('initiative-contact-title-'. $i) ?></p>
+											<p class="no-margin-bottom"><?php the_field('initiative-contact-organisation-'. $i) ?></p>
+											<i class="ggrc-icon ggrc-message"></i> <p class="no-margin-bottom inline-display"><a href="mailto:<?php the_field('initiative-contact-email-'. $i) ?>"><?php the_field('initiative-contact-email-'. $i) ?></a></p>
 										</div>
-										<div class="initiative-contact-profile">									
-											<a href="#" target="_blank" class="profile">view profile</a>
-											<a href="#" target="_blank" class="template-btn"> send message</a>
-										</div>
+										
 									</div>
-								<?php }
+								<?php }	
 								} ?>
 							
 							
@@ -268,14 +270,15 @@
 						
 						comments_template();
 						?>
-						<h3>Updates</h3>
-						<br>
+						
 						<?php
 						$initiative_updates = get_post_meta($the_post_id, 'initiative');
 						if(empty($initiative_updates) || ! is_array($initiative_updates)){
-							echo "No Updates";
+							echo "";
 						}else{
 							?> 
+							<h3>Updates</h3>
+							<br>
 							<div class="row">
 								<div class="col-md-12 col-lg-12 col-sm-12">
 								<?php

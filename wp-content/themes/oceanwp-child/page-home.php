@@ -21,13 +21,13 @@ defined('MECEXEC') or die();
 		padding: 0px 8px !important;		
 	}
 
-	dl, dd, .mec-single-event-time, .mec-single-event-organizer{
+	dl, dd, .mec-single-event-time, .mec-single-event-organizer, .mec-single-event-location, .mec-sl-location-pin{
 		margin:0px;
 		padding: 0px;
 		background-color: #fff
 	}
 
-	.mec-time, .mec-single-event-organizer img, .mec-events-single-section-title, .mec-organizer-email, .mec-sl-home{
+	.mec-time, .mec-single-event-organizer img, .mec-events-single-section-title, .mec-organizer-email, .mec-sl-home, .mec-img-location{
 		display: none
 	}
 
@@ -47,14 +47,12 @@ defined('MECEXEC') or die();
     	margin-right: 5px;
 	}
 
-	.mec-organiser, .users{
+	.mec-organiser, .mec-single-event-location dl, .mec-sl-location-pin{
 		float: left !important;
 	}
 
-	.users{
-		margin-top: 8px;
-		position: relative;
-    	z-index: 100;
+	.mec-sl-location-pin{
+		
     	margin-right: 5px
 	}
 
@@ -314,6 +312,10 @@ defined('MECEXEC') or die();
 								$single_event_main = $single->get_event_mec(get_the_ID());
 								$single_event_obj = $single_event_main[0];
 
+					            $startdate= strtotime(get_post_meta( get_the_ID(), 'mec_start_date', true));
+					            $enddate= strtotime(get_post_meta( get_the_ID(), 'mec_end_date', true));
+            
+
 								?>								
 
 								<div class="row mb-30">										
@@ -321,12 +323,10 @@ defined('MECEXEC') or die();
 										<img src="<?php echo get_the_post_thumbnail_url(); ?>"/>
 									</div>
 									<div class="col-lg-7 col-md-7 col-sm-12 no-padding-left">
-										<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
-										<?php
-			            						$single->display_time_widget($single_event_obj);
-			            				?>
-			            				<i class="ggrc-icon users"></i>
-			            				<?php $single->display_organizer_widget($single_event_obj); ?>
+										<a href="<?php the_permalink(); ?>"><h4 class="mb-10"><?php the_title(); ?></h4></a>
+										<p class="mb-10"><?php echo date('M j', $startdate); ?> <?php if(!empty($enddate)) {echo " - " . date('M j, Y', $enddate);} ?></p>
+			            				
+			            				<?php $single->display_location_widget($single_event_obj); ?>
 
 									</div>
 								</div>	

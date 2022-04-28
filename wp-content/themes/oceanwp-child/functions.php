@@ -633,4 +633,33 @@ function save_my_custom_user_profile_field( ) {
     update_user_meta( absint( get_current_user_id() ), 'region', wp_kses_post( $_POST['region'] ) );
 }
 
+
+// Login In/ Log Out
+
+add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+function add_loginout_link( $items, $args ) {
+    if (is_user_logged_in() && $args->theme_location == 'main_menu') {
+        $items .= '<li><a href="'. wp_logout_url() .'">Log Out</a></li>';
+    }
+    elseif (!is_user_logged_in() && $args->theme_location == 'main_menu') {
+        $items .= '<li><a href="'. site_url('user-login') .'">Log In</a></li>';
+    }
+    return $items;
+}
+
+add_filter( 'wp_nav_menu_objects', 'username_in_menu_items' );
+function username_in_menu_items( $menu_items ) {
+    foreach ( $menu_items as $menu_item ) {
+        if ( strpos($menu_item->title, '#profile_name#') !== false) {
+             if ( is_user_logged_in() )     {
+                $current_user = wp_get_current_user();
+                 $user_public_name = $current_user->display_name;
+                $menu_item->title =  str_replace("#profile_name#",  " <a href=". site_url('forums/users/'.$current_user->user_nicename.'/favorites/') .">Hey, ". $user_public_name, $menu_item->title . "!</a>");
+             }
+        }
+    }
+ 
+    return $menu_items;
+} 
+
 ?>
