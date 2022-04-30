@@ -844,6 +844,10 @@ hr{
     background-size: cover;
 }
 
+.webp-support .home-banner {
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/2022/04/MontesdeMaria3_YeniferHerrera-1.jpeg.webp);
+}
+
 .banner-h1{
     letter-spacing: -0.015em;
     background: linear-gradient(114.38deg, #FDBA1A -1.18%, #EF8607 82.56%);
@@ -888,6 +892,10 @@ hr{
     background-position: center;
 }
 
+.webp-support .why-join-banner {
+    background: linear-gradient(90deg, #FFFFFF 20%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/04/why-join-2.jpeg.webp);
+}
+
 .text-danger{
     color: red;
 }
@@ -897,13 +905,16 @@ hr{
 }
 
 .suggest-initiative-home{
-    
-     background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/04/suggestinitiative-home.jpeg);
+    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/04/suggestinitiative-home.jpeg);
     background-size: cover;
     width: 100%; 
     margin: 40px 0px;
     padding-top: 10px;
     padding-bottom: 30px;
+}
+
+.webp-support ..suggest-initiative-home {
+    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/04/suggestinitiative-home.jpeg.webp);
 }
 
 .about-banner{
@@ -966,7 +977,10 @@ hr{
 #footer-widgets{
     background: linear-gradient(0deg, rgba(255 255 255 / 0%), rgba(255 255 255 / 0%)), url(../../../../uploads/2022/04/footer-2.jpeg);
     background-size: cover;
+}
 
+.webp-support #footer-widgets {
+    background: linear-gradient(0deg, rgba(255 255 255 / 0%), rgba(255 255 255 / 0%)), url(../../../../uploads/2022/04/footer-2.jpeg.webp);
 }
 
 
