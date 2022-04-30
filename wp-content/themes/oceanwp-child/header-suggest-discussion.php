@@ -13,11 +13,20 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<style>
+
+		#wck-fep-login-form ul li{
+		 	overflow: visible !important;
+		 }
+
+		 #wck-fep-login-form input[type=submit]{
+		 	margin-top: 20px;
+		 }
+
 		.fep-container input[type="text"], .fep-container textarea,.fep-container select{
 			width:100% !important;
 		}
 		
-		p.description
+		p.description, .wck-fep-message, #wck-fep-show-register-form, #rememberme, label[for=rememberme]
 		{
 			display:none !important;
 		}

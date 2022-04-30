@@ -3,10 +3,13 @@
 
 .DS_Store
 
+wp-content/ai1wm-backups
+wp-content/ewww
+wp-content/uploads
+wp-content/wpvividbackups
+
 wp-content/advanced-cache.php
 wp-content/cache
 wp-content/wp-rocket-config
-
-wp-content/uploads/wpdiscuz/cache
 
 .htaccess

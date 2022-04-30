@@ -15,13 +15,16 @@
 	<?php wp_head(); ?>
 
 	<style>
-		.widget-area.sidebar-primary {
+		/*.widget-area.sidebar-primary {
 			float: left !important;
 			padding-right: 20px !important;
 			padding-left:0 !important;
 			width:25%;
+		}*/
+		.initiative-list-area{
+			padding-left: 0;
+			border-left-width: 0px;
 		}
-
 		.searchandfilter ul{
 			display:grid;
 		}
@@ -59,7 +62,7 @@
 
 		@media only screen and (min-width: 960px){
 			.content-area, .content-left-sidebar .content-area{
-				width:75%
+				width:100%
 			}
 		}
 

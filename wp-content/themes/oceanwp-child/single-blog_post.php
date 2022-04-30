@@ -15,7 +15,7 @@
 	<?php wp_head(); ?>
 
 	<style>
-		.single .entry-title{
+		.single .entry-title, .ess-social-network-lists li:first-child{
 			display:none;
 		}
 		.wpulike-heart .wp_ulike_general_class{
@@ -102,14 +102,16 @@
 						} 
 					?>
 				</p>
-				<h2><?php the_title(); ?></h2>
+				<h3><?php the_title(); ?></h3>
 				</div>
 				<hr/>
 				<div>
 					<p class="like-share">Published : <?php the_time('F j, Y'); ?></p>
 				</div>
 				<hr/>
+				
 			</div>
+			
 			<?php do_action( 'ocean_before_content' ); ?>
 
 			<div id="content" class="site-content clr">
@@ -138,6 +140,45 @@
 			<?php do_action( 'ocean_after_content' ); ?>
 
 		</div><!-- #primary -->
+
+		<div class="sidebar-container widget-area sidebar-primary mt-30">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 align-center">
+					<?php $author_picture = get_post_custom_values('author-picture');
+					
+					if (!empty($author_picture[0])) {
+
+							$attachedFile=get_attached_file($author_picture[0]);
+							
+					 		$url = str_replace("/home/572724.cloudwaysapps.com/rspezvgvgu/public_html", "", $attachedFile);
+
+					 	
+					 ?>
+					 		<img src="<?php echo site_url($url); ?>" class="author-picture">
+
+					<?php } ?>
+
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 align-center">
+					<h4><?php the_field('author-full-name'); ?></h4>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<p><?php the_field('author-bio'); ?></p>
+					<hr>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 align-center">
+
+					<?php if(!empty(get_field('author-twitter'))){ ; ?><a href="<?php the_field('author-twitter'); ?>" target="_blank"><i class="ggrc-icon ggrc-twitter"></i></a><?php } ?>
+					<?php if(!empty(get_field('author-facebook'))){ ; ?><a href="<?php the_field('author-facebook'); ?>" target="_blank"><i class="ggrc-icon ggrc-facebook"></i></a><?php } ?>
+					<?php if(!empty(get_field('author-instagram'))){ ; ?><a href="<?php the_field('author-instagram'); ?>" target="_blank"><i class="ggrc-icon ggrc-instagram"></i></a><?php } ?>
+					<?php if(!empty(get_field('author-linkedin'))){ ; ?><a href="<?php the_field('author-linkedin'); ?>" target="_blank"><i class="ggrc-icon ggrc-linkedin"></i></a><?php } ?>
+					<?php if(!empty(get_field('author-email'))){ ; ?><a href="mailto:<?php the_field('author-email'); ?>"><i class="ggrc-icon ggrc-message"></i></a><?php } ?>	
+					
+				</div>
+				
+			</div>
+			
+		</div>
 
 		<?php do_action( 'ocean_after_primary' ); ?>
 

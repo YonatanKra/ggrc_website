@@ -13,11 +13,25 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<style>
+
+		#wck-fep-login-form ul li{
+		 	overflow: visible !important;
+		 }
+
+		 #wck-fep-login-form input[type=submit]{
+		 	margin-top: 20px;
+		 }
+
+
+		 #wck-fep-login-form ul li{
+		 	overflow: visible !important;
+		 }
+
 		.fep-container input[type="text"], .fep-container textarea,.fep-container select{
 			width:100% !important;
 		}
 		
-		p.description, label[for=who-can-attend-the-event], #fep-who-can-attend-the-event, label[for=upload-past-event-video], #fep-upload-past-event-video
+		p.description, label[for=who-can-attend-the-event], #fep-who-can-attend-the-event, label[for=upload-past-event-video], #fep-upload-past-event-video, .wck-fep-message, #wck-fep-show-register-form , #rememberme, label[for=rememberme]
 		{
 			display:none !important;
 		}

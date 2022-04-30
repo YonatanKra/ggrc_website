@@ -21,13 +21,13 @@ defined('MECEXEC') or die();
 		padding: 0px 8px !important;		
 	}
 
-	dl, dd, .mec-single-event-time, .mec-single-event-organizer{
+	dl, dd, .mec-single-event-time, .mec-single-event-organizer, .mec-single-event-location, .mec-sl-location-pin{
 		margin:0px;
 		padding: 0px;
 		background-color: #fff
 	}
 
-	.mec-time, .mec-single-event-organizer img, .mec-events-single-section-title, .mec-organizer-email, .mec-sl-home{
+	.mec-time, .mec-single-event-organizer img, .mec-events-single-section-title, .mec-organizer-email, .mec-sl-home, .mec-img-location{
 		display: none
 	}
 
@@ -47,14 +47,12 @@ defined('MECEXEC') or die();
     	margin-right: 5px;
 	}
 
-	.mec-organiser, .users{
+	.mec-organiser, .mec-single-event-location dl, .mec-sl-location-pin{
 		float: left !important;
 	}
 
-	.users{
-		margin-top: 8px;
-		position: relative;
-    	z-index: 100;
+	.mec-sl-location-pin{
+		
     	margin-right: 5px
 	}
 
@@ -63,20 +61,30 @@ defined('MECEXEC') or die();
 
 <body <?php body_class(); ?> <?php oceanwp_schema_markup( 'html' ); ?>>
 
+	
+
 	<?php wp_body_open(); ?>
 
 	<?php do_action( 'ocean_before_outer_wrap' ); ?>
 
-	<div id="outer-wrap" class="site clr">
+
 
 		<a class="skip-link screen-reader-text" href="#main"><?php oceanwp_theme_strings( 'owp-string-header-skip-link', 'oceanwp' ); ?></a>
 
 		<?php do_action( 'ocean_before_wrap' ); ?>
 
 		<div id="wrap" class="clr">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<p class="text-danger align-center mt-10 mb-10"><b>* Our website is currently in the testing phase and is best viewed on desktop and laptops only right now. Please feel free to provide feedback or comments <a href="contact">here</a>.</b></p>
+				</div>
+				
+			</div>
+
 
 			<?php do_action( 'ocean_top_bar' ); ?>
-
+			<div id="outer-wrap" class="site clr">
+		
 			<?php do_action( 'ocean_header' ); ?>
 
 
@@ -98,7 +106,7 @@ defined('MECEXEC') or die();
 				<h1 class="banner-h1">Inspire Together.</h1>
 				<h3 class="mt-30">What is Green Recovery?</h3>
 				<p class="mb-60">Green recovery is a process that transforms how people live and interact with each other and our environment to repair our climate and ecosystems, recover from past environmental damage, and become healthy, resilient, and equitable.</p>
-				<a href="" class="ggrc-btn-white-lg mt-60">Join our Collaborative</a>
+				<a href="user-register" class="ggrc-btn-white-lg mt-60">Join our Collaborative</a>
 			</div>
 		</div>
 	</div>
@@ -119,7 +127,7 @@ defined('MECEXEC') or die();
 				<div class="row mb-60">
 					<div class="col-lg-4 col-md-12 col-sm-12 mb-20">
 						<div class="how-it-works">
-							<img src="wp-content/uploads/2022/01/learn.jpg" width="100%">
+							<?php echo wp_get_attachment_image( 1756 , 'medium', "", array( "class" => "img-responsive" ) );  ?>
 							<div class="home-learn">
 								<h1 class="banner-h1 inline-display">1.</h1>
 								<h2 class="home-learn-title">Learn</h2>
@@ -129,7 +137,7 @@ defined('MECEXEC') or die();
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12 mb-20">
 						<div class="how-it-works">
-							<img src="wp-content/uploads/2022/01/learn.jpg" width="100%">
+							<?php echo wp_get_attachment_image( 1754 , 'medium', "", array( "class" => "img-responsive" ) );  ?>
 							<div class="home-learn">
 								<h1 class="banner-h1 inline-display">2.</h1>
 								<h2 class="home-learn-title">Act</h2>
@@ -139,7 +147,7 @@ defined('MECEXEC') or die();
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12 mb-20">
 						<div class="how-it-works">
-							<img src="wp-content/uploads/2022/01/learn.jpg" width="100%">
+							<?php echo wp_get_attachment_image( 1757 , 'medium', "", array( "class" => "img-responsive" ) );  ?>
 							<div class="home-learn">
 								<h1 class="banner-h1 inline-display">3.</h1>
 								<h2 class="home-learn-title">Collaborate</h2>
@@ -151,7 +159,7 @@ defined('MECEXEC') or die();
 				
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h2 class="center-element">What is the Global Green Recovery Collaborative?</h2>
+						<h2 class="align-center">What is the Global Green Recovery Collaborative?</h2>
 						<p class="align-center p-150-lr mt-20">The Global Green Recovery Collaborative gets people talking and acting together! We aim to promote action and collaboration to achieve a green recovery from Covid-19 and other past and future environmental challenges. Learn from our partner initiatives and become a member to connect with the GGRC community.</p>
 					</div>
 				</div>
@@ -194,7 +202,7 @@ defined('MECEXEC') or die();
 						<div class="col-lg-6 col-md-6 col-sm-12">
 							<h2>Why should I join?</h2>
 							<p class="mb-60">We need diverse voices to speak up for green recovery at every level. When you join our collaborative, you join local and global communities who are learning, collaborating, and taking action together for change.</p>
-							<a href="" class="ggrc-btn-blue-md">Join Us!</a>
+							<a href="user-register" class="ggrc-btn-blue-md">Join Us!</a>
 						</div>
 					</div>
 				</div>
@@ -314,6 +322,10 @@ defined('MECEXEC') or die();
 								$single_event_main = $single->get_event_mec(get_the_ID());
 								$single_event_obj = $single_event_main[0];
 
+					            $startdate= strtotime(get_post_meta( get_the_ID(), 'mec_start_date', true));
+					            $enddate= strtotime(get_post_meta( get_the_ID(), 'mec_end_date', true));
+            
+
 								?>								
 
 								<div class="row mb-30">										
@@ -321,12 +333,10 @@ defined('MECEXEC') or die();
 										<img src="<?php echo get_the_post_thumbnail_url(); ?>"/>
 									</div>
 									<div class="col-lg-7 col-md-7 col-sm-12 no-padding-left">
-										<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
-										<?php
-			            						$single->display_time_widget($single_event_obj);
-			            				?>
-			            				<i class="ggrc-icon users"></i>
-			            				<?php $single->display_organizer_widget($single_event_obj); ?>
+										<a href="<?php the_permalink(); ?>"><h4 class="mb-10"><?php the_title(); ?></h4></a>
+										<p class="mb-10"><?php echo date('M j', $startdate); ?> <?php if(!empty($enddate)) {echo " - " . date('M j, Y', $enddate);} ?></p>
+			            				
+			            				<?php $single->display_location_widget($single_event_obj); ?>
 
 									</div>
 								</div>	

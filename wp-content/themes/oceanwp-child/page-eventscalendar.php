@@ -37,11 +37,11 @@
 				<?php //do_action( 'ocean_page_header' ); ?>
 
 
-	<div class="events-header pt-100 pb-30">
+	<div class="events-header pt-150 pb-30">
 		<div class="row">
 			<div class="col-lg-6 col-md-8 col-sm-12">
 				<h3>Suggest an event</h3>
-				<p><b>Do you know of an interesting event around you promoting green recovery? Are you involved with an intervention? We want to know! Do you have an event you’d like to promote? Please note we’ll only accept events that have a digital presence.</b></p>
+				<p><b>Are you hosting an event GGRC members should know about? Feel free to suggest events that meet our Event Guidelines.</b></p>
 				<button class="no-border-all"><a href="../suggest-an-event" class="ggrc-btn-blue-sm">suggest</a></button>
 			</div>
 		</div>
