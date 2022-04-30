@@ -2,6 +2,7 @@
 **/*log.txt
 
 .DS_Store
+.htaccess
 
 wp-content/ai1wm-backups
 wp-content/ewww
@@ -11,5 +12,3 @@ wp-content/wpvividbackups
 wp-content/advanced-cache.php
 wp-content/cache
 wp-content/wp-rocket-config
-
-.htaccess
