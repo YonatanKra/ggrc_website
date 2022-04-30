@@ -112,7 +112,7 @@ $single_event_obj = $single_event_main[0];
             $enddate= strtotime(get_post_meta( get_the_ID(), 'mec_end_date', true));
             
             ?>
-            <p class="links"><a href="../../events-calendar">back to calendar</a></p>
+            <p class="links mt-30"><a href="../../events-calendar">back to calendar</a></p>
             <p><b><?php echo date('F jS, Y', $startdate); ?> <?php if(!empty($enddate)) {echo " - " . date('F jS, Y', $enddate);} ?></b></p>
 
             <div class="row">
@@ -128,7 +128,7 @@ $single_event_obj = $single_event_main[0];
             				$tags = get_the_tags();
 										
 							if(empty($tags) || ! is_array($tags)){
-								echo "No Tags";
+								echo "";
 							}else{
 
 								foreach($tags as $key => $posttags){
@@ -195,7 +195,7 @@ $single_event_obj = $single_event_main[0];
 
             		<div class="suggest-event">
             			<h3>Suggest an event</h3>
-            			<p>Do you know of an interesting event around you promoting green recovery? Are you involved with an intervention? We want to know! Do you have an event you’d like to promote? Please note we’ll only accept events that have a digital presence.</p>
+            			<p>Are you hosting an event GGRC members should know about? Feel free to suggest events that meet our Event Guidelines.</p>
             			<button class="no-border-all"><a href="../../suggest-an-event" class="ggrc-btn-blue-sm">suggest</a></button>
             			
             		</div>
@@ -204,11 +204,12 @@ $single_event_obj = $single_event_main[0];
 
             <div class="row mt-30 mb-60">
             	<div class="col-lg-9 col-md-12 col-sm-12">
-            		<p><b>Past Event Recording:</b></p>
+            		
             		<?php $embedurl = get_post_custom_values('upload-past-event-video'); 
 
             			if (!empty($embedurl[0])) {
             				?>
+            				<p><b>Past Event Recording:</b></p>
 							<iframe width="100%" height="400" src="<?php echo $embedurl[0]; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						<?php
             			}

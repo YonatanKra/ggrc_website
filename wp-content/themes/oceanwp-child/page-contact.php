@@ -34,7 +34,7 @@ get_header(); ?>
 
 			<?php do_action( 'ocean_before_content' ); ?>
 
-			<div id="content" class="site-content clr mt-150 p-170-lr">
+			<div id="content" class="site-content clr pt-150 p-170-lr">
 
 				<?php do_action( 'ocean_before_content_inner' ); ?>
 				<h2>Contact Us</h2>

@@ -72,7 +72,7 @@
 
 				?>
 
-				<div class="news_header pt-100">
+				<div class="news_header pt-150">
 					<div class="row">
 						<div class="col-lg-6 col-md-7 col-sm-12">
 							<div class="news-box p-20" >
@@ -86,7 +86,7 @@
 									<div class="row mb-20 no-margin-right no-margin-left" id="agency">
 									<?php
 									if(empty($news_agencies) || ! is_array($news_agencies)){
-										echo "No news agency";
+										echo " ";
 									}else{
 										foreach($news_agencies[0] as $newsagency){
 											?>
@@ -103,7 +103,7 @@
 									<div>
 									<?php
 									if(empty($tags) || ! is_array($tags)){
-										echo "No Tags";
+										echo " ";
 									}else{
 										
 										foreach($tags as $key => $posttags){							
@@ -173,7 +173,7 @@
 									<div class="mb-20">
 									<?php
 									if(empty($news_agencies) || ! is_array($news_agencies)){
-										echo "No news agency";
+										echo " ";
 									}else{
 										foreach($news_agencies[0] as $newsagency){
 											?>
@@ -190,7 +190,7 @@
 									<div>
 									<?php
 									if(empty($tags) || ! is_array($tags)){
-										echo "No Tags";
+										echo " ";
 									}else{
 										
 										foreach($tags as $key => $posttags){							
@@ -213,6 +213,7 @@
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-12">
 					<h3>Upcoming Events</h3>
+					<p class="links"><a href="../events-calendar">go to calendar</a></p>
 					<?php echo do_shortcode('[MEC id="1355"]'); ?>
 				</div>
 				

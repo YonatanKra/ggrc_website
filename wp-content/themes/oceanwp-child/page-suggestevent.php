@@ -17,7 +17,7 @@ get_header("suggest-event");
 					<div class="row suggest-titlearea">
 						<div class="col-lg-12 col-md-12 col-sm-12">
 							<h2>Suggest an event</h2>
-							<p><b>We encourage you to help us reach initiatives that we wouldn’t know of. We at the GGRC aim to connect as many people as we can and we need help with that. Feel free to suggest any even that follow our community guidelines, we’ll review it and be in touch.</b></p>
+							<p><b>Are you hosting an event GGRC members should know about? Feel free to suggest events.</b></p>
 						</div>
 						
 					</div>

@@ -19,7 +19,7 @@ get_header("suggest-initiative");
 					<div class="row suggest-titlearea">
 						<div class="col-lg-12 col-md-12 col-sm-12">
 							<h2>Suggest an Initiative</h2>
-							<p><b>We encourage you to help us reach initiatives that we wouldn’t know of. We at the GGRC aim to connect as many people as we can and we need help with that. Feel free to suggest any initiative that follow our community guidelines, we’ll review it and be in touch.</b></p>
+							<p><b>Do you want to share your program, project, or campaign with the GGRC community? Suggest your initiative to our team! Read our <a href="<?php echo site_url('wp-content/uploads/ggrc_documents/GGRCInitiativeGuidelines.pdf') ?>" class="text-primary" target="_blank">Initiative Guidelines</a> first.</b></p>
 						</div>
 						
 					</div>

@@ -17,7 +17,7 @@ get_header("suggest-discussion");
 					<div class="row suggest-titlearea">
 						<div class="col-lg-12 col-md-12 col-sm-12">
 							<h2>Suggest a discussion board</h2>
-							<p><b>We encourage you to help us reach initiatives that we wouldn’t know of. We at the GGRC aim to connect as many people as we can and we need help with that. Feel free to suggest any initiative that follow our community guidelines, we’ll review it and be in touch.</b></p>
+							<p><b>Read our <a href="../community-guidelines" class="text-primary" target="_blank">Community Guidelines</a> and Priorities before making your suggestion.</b></p>
 						</div>
 						
 					</div>

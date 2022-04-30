@@ -14,16 +14,16 @@
 
 get_header("initiatives");
 ?>
-				<div class="small_header pt-100">
+				<div class="small_header pt-150">
 					<div class="row">
 						<div class="col-lg-7 col-md-7 col-sm-12">
-							<h3>Suggest Initiatives</h5>
-							<p>Do you know of any interesting action around you promoting green recovery? Are you involved with an intervention? We want to know</p>
+							<h3>Green Recovery Initiatives</h3>
+							<p>Connect with the projects, programs and campaigns that are transforming our world at every level. These initiatives feature opportunities to share learning resources, engage, discuss, and collaborate with the people leading change.</p>
 						</div>
 						<div class="col-lg-2 col-md-2 col-sm-12">
 							
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-12">
+						<div class="col-lg-3 col-md-3 col-sm-12 mb-20">
 							<a href="../suggest-an-initiative" target="_blank"><button class="ggrc-btn-blue-md">Suggest an initiative</button></a>
 						</div>
 					</div>
@@ -34,10 +34,9 @@ get_header("initiatives");
 	<?php do_action( 'ocean_before_content_wrap' ); ?>
 
 	<div id="content-wrap" class="container clr">
-		<div class="widget-area sidebar-primary">
-		<?php echo do_shortcode( '[searchandfilter fields="search,initiative_type,initiative_tags" types=" 
-		,checkbox,checkbox" headings=" ,Types,Related Tags"]' ); ?>
-		</div>
+		<!-- <div class="widget-area sidebar-primary">
+		<?php //echo do_shortcode( '[searchandfilter fields="search,initiative_type,initiative_tags" types=",checkbox,checkbox" headings=" ,Types,Related Tags"]' ); ?>
+		</div> -->
 
 		<?php do_action( 'ocean_before_primary' ); ?>
 
@@ -66,8 +65,7 @@ get_header("initiatives");
 						<div class="col-lg-4 col-md-6 col-sm-12">
 							<a href="<?php the_permalink(); ?>">
 							<div class="initiative-list">
-							<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
-								
+							<?php the_post_thumbnail('medium', ['class' => 'initiative-cover', 'title' => 'Feature image']); ?>
 							<div class="initiative-list-detail">
 							<?php 
 								

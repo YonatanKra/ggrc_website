@@ -13,6 +13,15 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<style>
+
+		#wck-fep-login-form ul li{
+		 	overflow: visible !important;
+		 }
+
+		 #wck-fep-login-form input[type=submit]{
+		 	margin-top: 20px;
+		 }
+
 		.fep-container input[type="text"], .fep-container textarea,.fep-container select{
 			width:100% !important;
 		}
@@ -20,7 +29,7 @@
 		#fep-initiative-goal, label[for=initiative-goal], #fep-additional-resources-name-1, label[for=additional-resources-name-1], label[for=additional-resources-1],
 		#upload_additional-resources-1_button, #fep-additional-resources-name-2, label[for=additional-resources-name-2], label[for=additional-resources-2], #upload_additional-resources-2_button, 
 		#fep-initiative-duration, label[for=initiative-duration], #fep-initiative-contact-1, label[for=initiative-contact-1], #fep-initiative-contact-2, label[for=initiative-contact-2],
-		#fep-initiative-contact-3, label[for=initiative-contact-3], p.description, #fep-initiative-action-type, #fep-intiative-action-link, label[for=initiative-action-type], label[for=intiative-action-link]
+		#fep-initiative-contact-3, label[for=initiative-contact-3], p.description, #fep-initiative-action-type, #fep-intiative-action-link, label[for=initiative-action-type], label[for=intiative-action-link], #fep-initiative-contact-name-1, label[for=initiative-contact-name-1], #fep-initiative-contact-title-1, label[for=initiative-contact-title-1], #fep-initiative-contact-organisation-1, label[for=initiative-contact-organisation-1], #fep-initiative-contact-email-1, label[for=initiative-contact-email-1], #fep-initiative-contact-name-2, label[for=initiative-contact-name-2], #fep-initiative-contact-title-2, label[for=initiative-contact-title-2], #fep-initiative-contact-organisation-2, label[for=initiative-contact-organisation-2], #fep-initiative-contact-email-2, label[for=initiative-contact-email-2], #fep-initiative-contact-name-3, label[for=initiative-contact-name-3], #fep-initiative-contact-title-3, label[for=initiative-contact-title-3], #fep-initiative-contact-organisation-3, label[for=initiative-contact-organisation-3], #fep-initiative-contact-email-3, label[for=initiative-contact-email-3], .wck-fep-message, #wck-fep-show-register-form , #rememberme, label[for=rememberme]
 		{
 			display:none !important;
 		}
@@ -58,7 +67,7 @@
 			background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
 			box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
 			border-radius: 30px !important;
-			top : -70px;
+			top : -150px;
 		}
 	</style>
 

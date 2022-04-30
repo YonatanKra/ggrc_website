@@ -156,11 +156,11 @@ function wpbaw_get_blog_post( $atts, $content = null ){
 						<?php if($show_author || $show_date){ ?>
 							<div class="blog-author">
 								<?php if($show_author) {?>
-									<span>
-										<?php esc_html_e( 'by: ', 'wp-blog-and-widgets' ); ?> <a href="<?php echo esc_url( get_author_posts_url( $post->post_author ) ); ?>" target="_self"><?php echo get_the_author(); ?></a>
-									</span>
+									<!-- <span>
+										<?php //esc_html_e( 'by: ', 'wp-blog-and-widgets' ); ?> <a href="<?php //echo esc_url( get_author_posts_url( $post->post_author ) ); ?>" target="_self"><?php //echo get_the_author(); ?></a>
+									</span> -->
 								<?php }?>
-								<?php echo ($show_author && $show_date) ? ' / ' : '' ?>
+								<?php echo ($show_author && $show_date) ? '' : '' ?>
 								<?php echo ($show_date)? get_the_date() : "" ;?>
 							</div>
 						<?php } 
