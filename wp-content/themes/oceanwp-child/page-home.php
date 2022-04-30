@@ -2,18 +2,11 @@
 
 /* Template Name: HomePageTemplate */ 
 
-defined('MECEXEC') or die();
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
-?>
-
-<!DOCTYPE html>
-<html class="<?php echo esc_attr( oceanwp_html_classes() ); ?>" <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-
-	<?php wp_head(); ?>
-</head>
+get_header(); ?>
 
 <style type="text/css">
 
@@ -74,14 +67,7 @@ defined('MECEXEC') or die();
 		<?php do_action( 'ocean_before_wrap' ); ?>
 
 		<div id="wrap" class="clr">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12">
-					<p class="text-danger align-center mt-10 mb-10"><b>* Our website is currently in the testing phase and is best viewed on desktop and laptops only right now. Please feel free to provide feedback or comments <a href="contact">here</a>.</b></p>
-				</div>
-				
-			</div>
-
-
+			
 			<?php do_action( 'ocean_top_bar' ); ?>
 			<div id="outer-wrap" class="site clr">
 		
