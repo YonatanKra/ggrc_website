@@ -662,4 +662,14 @@ function username_in_menu_items( $menu_items ) {
     return $menu_items;
 } 
 
+/* General - Hide admin bar for users */
+
+add_action('after_setup_theme', 'remove_admin_bar');
+
+function remove_admin_bar() {
+  if (!current_user_can('administrator') && !is_admin()) {
+    show_admin_bar(false);
+  }
+}
+
 ?>
