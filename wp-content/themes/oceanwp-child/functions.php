@@ -261,15 +261,16 @@ add_action( 'wp_enqueue_scripts', 'oceanwp_child_enqueue_parent_style' );
 
 add_action( 'wp_enqueue_scripts', 'theme_assets' );
 function theme_assets() {
-    wp_register_style( 'bootstrap', get_stylesheet_directory_uri() . '/assets/bootstrap-4.4.1-dist/css/bootstrap-grid.css' );
 	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
 	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
 	wp_register_style( 'bbpress', get_stylesheet_directory_uri() . '/assets/css/third/bbpress.min.css' );
 
-    wp_enqueue_style( 'bootstrap' );
     wp_enqueue_style( 'font-awesome' );
 	wp_enqueue_style( 'template-styling');
 	wp_enqueue_style( 'bbpress' );
+
+	wp_enqueue_script( 'bootstrap_js', get_stylesheet_directory_uri() . '/assets/bootstrap/js/bootstrap.min.js' );
+    wp_enqueue_style( 'bootstrap_css', get_stylesheet_directory_uri() . '/assets/bootstrap/css/bootstrap.min.css' );
 }
 
 add_action( 'get_action_initiatives_by_region', 'add_action_initiatives_by_region' );
