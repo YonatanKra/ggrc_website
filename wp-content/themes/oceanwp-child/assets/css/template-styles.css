@@ -841,6 +841,7 @@ hr{
 
 .home-banner{
     background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../../../uploads/2022/04/MontesdeMaria3_YeniferHerrera-1.jpeg);
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
@@ -886,6 +887,7 @@ hr{
 
 .why-join-banner{
     background: linear-gradient(90deg, #FFFFFF 20%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/04/why-join-2.jpeg);
+    background-repeat: no-repeat;
     background-size: cover;
     width: 100%; 
     margin: 40px 0px;
@@ -906,6 +908,7 @@ hr{
 
 .suggest-initiative-home{
     background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/04/suggestinitiative-home.jpeg);
+    background-repeat: no-repeat;
     background-size: cover;
     width: 100%; 
     margin: 40px 0px;
@@ -976,6 +979,7 @@ hr{
 
 #footer-widgets{
     background: linear-gradient(0deg, rgba(255 255 255 / 0%), rgba(255 255 255 / 0%)), url(../../../../uploads/2022/04/footer-2.jpeg);
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
