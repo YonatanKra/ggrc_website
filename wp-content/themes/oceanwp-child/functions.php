@@ -14,7 +14,37 @@
  *
  */
 
+/* Genera - Load Parent CSS */
 
+function oceanwp_child_enqueue_parent_style() {
+
+	// Dynamically get version number of the parent stylesheet (lets browsers re-cache your stylesheet when you update the theme).
+	$theme   = wp_get_theme( 'OceanWP' );
+	$version = $theme->get( 'Version' );
+
+	// Load the stylesheet.
+	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'oceanwp-style' ), $version );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'oceanwp_child_enqueue_parent_style' );
+
+/* General - Adding/Remove CSS & Scripts */
+
+add_action( 'wp_enqueue_scripts', 'theme_assets' );
+
+function theme_assets() {
+	wp_enqueue_script( 'bootstrap_js', get_stylesheet_directory_uri() . '/assets/bootstrap/js/bootstrap.min.js' );
+    wp_enqueue_style( 'bootstrap_css', get_stylesheet_directory_uri() . '/assets/bootstrap/css/bootstrap.min.css' );
+
+	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
+	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
+	wp_register_style( 'bbpress', get_stylesheet_directory_uri() . '/assets/css/third/bbpress.min.css' );
+
+    wp_enqueue_style( 'font-awesome' );
+	wp_enqueue_style( 'template-styling');
+	wp_enqueue_style( 'bbpress' );
+}
 
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);
@@ -239,38 +269,6 @@ function initiative_meta_boxes() {
 if (is_admin()) {
 	news_meta_boxes();
 	initiative_meta_boxes();
-}
-
-/**
- * Load the parent style.css file
- *
- * @link http://codex.wordpress.org/Child_Themes
- */
-function oceanwp_child_enqueue_parent_style() {
-
-	// Dynamically get version number of the parent stylesheet (lets browsers re-cache your stylesheet when you update the theme).
-	$theme   = wp_get_theme( 'OceanWP' );
-	$version = $theme->get( 'Version' );
-
-	// Load the stylesheet.
-	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'oceanwp-style' ), $version );
-
-}
-
-add_action( 'wp_enqueue_scripts', 'oceanwp_child_enqueue_parent_style' );
-
-add_action( 'wp_enqueue_scripts', 'theme_assets' );
-function theme_assets() {
-	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
-	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
-	wp_register_style( 'bbpress', get_stylesheet_directory_uri() . '/assets/css/third/bbpress.min.css' );
-
-    wp_enqueue_style( 'font-awesome' );
-	wp_enqueue_style( 'template-styling');
-	wp_enqueue_style( 'bbpress' );
-
-	wp_enqueue_script( 'bootstrap_js', get_stylesheet_directory_uri() . '/assets/bootstrap/js/bootstrap.min.js' );
-    wp_enqueue_style( 'bootstrap_css', get_stylesheet_directory_uri() . '/assets/bootstrap/css/bootstrap.min.css' );
 }
 
 add_action( 'get_action_initiatives_by_region', 'add_action_initiatives_by_region' );
