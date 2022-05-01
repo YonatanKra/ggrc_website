@@ -47,7 +47,7 @@ defined( 'ABSPATH' ) || exit;
 </div>
 <div class="row">
     <div class="col-lg-9 col-md-12 col-sm-12" id="bbp-user-body">
-        <p class="m-0"><b>Initiative updates</b></p>
+        <p class="no-margin-bottom"><b>Initiative updates</b></p>
         <hr/>
 
         <?php
@@ -93,7 +93,7 @@ defined( 'ABSPATH' ) || exit;
         
         <div class="row no-margin-left" id="connect-people">
              <div class="col-lg-12 col-md-12 col-sm-12">
-                <p class="m-0"><b>Connect to people</b></p>
+                <p class="no-margin-bottom"><b>Connect to people</b></p>
                 <hr />
                 
                 
@@ -118,9 +118,9 @@ defined( 'ABSPATH' ) || exit;
                         echo get_avatar($user->ID, 60);										
                 ?>
             
-                    <p class="m-0"><b><?php echo $user->display_name ?></b></p>
-                    <p class="m-0"><?php echo $user->job_title ?></p>
-                    <p class="m-0"><?php echo $user->organization ?></p>
+                    <p class="no-margin-bottom"><b><?php echo $user->display_name ?></b></p>
+                    <p class="no-margin-bottom"><?php echo $user->job_title ?></p>
+                    <p class="no-margin-bottom"><?php echo $user->organization ?></p>
                 
                 
             </div>
