@@ -37,7 +37,6 @@
 			<div class="col-12">
 				<p class="text-danger align-center mt-10 mb-10"><b>* Our website is currently in the testing phase and is best viewed on desktop and laptops only right now. Please feel free to provide feedback or comments <a href="<?php the_permalink('contact'); ?>">here</a>.</b></p>
 			</div>
-			
 		</div>
 
 		<?php do_action( 'ocean_before_wrap' ); ?>
