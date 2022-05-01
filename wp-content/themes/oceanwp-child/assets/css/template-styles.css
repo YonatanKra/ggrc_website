@@ -924,6 +924,16 @@ hr{
 	width: 100%;
 }
 
+.why-join-banner {
+    padding: 3rem;
+}
+
+@media (min-width: 768px) {
+    .why-join-banner {
+        padding: 10rem 0;
+    }
+}
+
 .why-join-banner{
     background: linear-gradient(90deg, #FFFFFF 20%, rgba(255, 255, 255, 0) 100%), url(../../../../uploads/2022/04/why-join-2.jpeg);
     background-repeat: no-repeat;

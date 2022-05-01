@@ -53,7 +53,7 @@ get_header(); ?>
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-lg-4 mb-5 mb-md-0">
+					<div class="col-12 col-lg-4">
 						<div class="how-it-works">
 							<?php echo wp_get_attachment_image( 1757 , 'medium', "", array( "class" => "img-responsive" ) );  ?>
 							<div class="home-learn">
@@ -92,7 +92,7 @@ get_header(); ?>
 			</div><!-- #content -->
 
 			<div class="container-fluid mt-5 mb-5">
-				<div class="row mb-5 p-5 why-join-banner">
+				<div class="row mb-5 why-join-banner">
 					<div class="col-12 col-md-6 offset-md-1">
 						<h2>Why should I join?</h2>
 						<p class="mb-5">We need diverse voices to speak up for green recovery at every level. When you join our collaborative, you join local and global communities who are learning, collaborating, and taking action together for change.</p>
@@ -172,7 +172,7 @@ get_header(); ?>
 
 			<div class="container">
 				<div class="row mb-5">
-					<div class="col-12 col-md-4">
+					<div class="col-12 col-md-4 mb-5 mb-md-0">
 						<h4 class="text-center m-0">Events</h4>
 						<hr class="mt-0 mb-20" />
 						<?php
@@ -188,34 +188,28 @@ get_header(); ?>
 
 						?>
 						
-						<?php if($the_query->have_posts()){
-							while($the_query->have_posts()) {
-								$the_query->the_post(); 
+						<?php if($the_query->have_posts()){ while($the_query->have_posts()) { $the_query->the_post(); 
+							$single_event_main = $single->get_event_mec(get_the_ID());
+							$single_event_obj = $single_event_main[0];
 
-								$single_event_main = $single->get_event_mec(get_the_ID());
-								$single_event_obj = $single_event_main[0];
+							$startdate= strtotime(get_post_meta( get_the_ID(), 'mec_start_date', true));
+							$enddate= strtotime(get_post_meta( get_the_ID(), 'mec_end_date', true));
+						?>									
 
-					            $startdate= strtotime(get_post_meta( get_the_ID(), 'mec_start_date', true));
-					            $enddate= strtotime(get_post_meta( get_the_ID(), 'mec_end_date', true));
-            
+							<div class="row mb-3">										
+								<div class="col-lg-5 col-md-5 col-sm-12 mb-3 mb-md-0">
+									<?php the_post_thumbnail('medium', ['class' => 'initiative-cover', ]); ?>
+								</div>
+								<div class="col-lg-7 col-md-7 col-sm-12">
+									<a href="<?php the_permalink(); ?>"><?php the_title('<h4 class="mb-3">' , '</h4>'); ?></a>
+									<p class="mb-3"><?php echo date('M j', $startdate); ?> <?php if(!empty($enddate)) {echo " - " . date('M j, Y', $enddate);} ?></p>
+									
+									<?php $single->display_location_widget($single_event_obj); ?>
 
-								?>								
-
-								<div class="row mb-30">										
-									<div class="col-lg-5 col-md-5 col-sm-12">
-										<?php the_post_thumbnail('medium'); ?>
-									</div>
-									<div class="col-lg-7 col-md-7 col-sm-12 ps-0">
-										<a href="<?php the_permalink(); ?>"><h4 class="mb-3"><?php the_title(); ?></h4></a>
-										<p class="mb-3"><?php echo date('M j', $startdate); ?> <?php if(!empty($enddate)) {echo " - " . date('M j, Y', $enddate);} ?></p>
-			            				
-			            				<?php $single->display_location_widget($single_event_obj); ?>
-
-									</div>
-								</div>	
+								</div>
+							</div>	
 								
-						<?php } ?>
-						<?php } ?>
+						<?php } } ?>
 
 						<div class="row mt-3 text-center">
 							<div class="col-12">
@@ -225,7 +219,7 @@ get_header(); ?>
 
 					</div>
 
-					<div class="col-12 col-md-4">
+					<div class="col-12 col-md-4 mb-5 mb-md-0">
 						<h4 class="text-center m-0">Latest News</h4>
 						<hr class=" mt-0 mb-20" />
 						<?php
