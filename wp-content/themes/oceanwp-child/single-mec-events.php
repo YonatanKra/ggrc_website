@@ -142,7 +142,7 @@ $single_event_obj = $single_event_main[0];
 
 							?>
 							<br>
-							<button class="ggrc-btn-white-md mt-60"><a href="<?php echo get_post_meta( get_the_ID(), 'mec_more_info', true) ?>" target="_blank"><h3 class="mb-0">More Information</h3></a></button>
+							<button class="btn btn-primary mt-60"><a href="<?php echo get_post_meta( get_the_ID(), 'mec_more_info', true) ?>" target="_blank"><h3 class="mb-0">More Information</h3></a></button>
 
 							<?php $single->display_export_widget($single_event_obj); ?>
 

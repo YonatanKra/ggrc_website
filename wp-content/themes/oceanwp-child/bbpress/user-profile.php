@@ -194,8 +194,8 @@ if ( bbp_is_single_user_profile() ) { ?>
 									<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 									<?php the_excerpt(); ?>
 									<hr/>
-									<p class="no-margin"><i class="ggrc-icon map margin-right"></i> <?php the_field('venue') ?></p>
-									<p class="no-margin"><i class="ggrc-icon users margin-right"></i> <?php the_field('region') ?></p>
+									<p class="m-0"><i class="ggrc-icon map margin-right"></i> <?php the_field('venue') ?></p>
+									<p class="m-0"><i class="ggrc-icon users margin-right"></i> <?php the_field('region') ?></p>
 									
 							</div>
 							</div>
@@ -327,7 +327,7 @@ if ( bbp_is_single_user_profile() ) { ?>
 									<div class="col-lg-4 col-md-4 col-sm-12">
 										<img src="<?php echo get_the_post_thumbnail_url(); ?>"/>
 									</div>
-									<div class="col-lg-8 col-md-8 col-sm-12 no-padding-left">
+									<div class="col-lg-8 col-md-8 col-sm-12 ps-0">
 										<a href="<?php the_permalink(); ?>"><h4><?php the_title(); ?></h4></a>
 										<?php
 			            						$single->display_time_widget($single_event_obj);
