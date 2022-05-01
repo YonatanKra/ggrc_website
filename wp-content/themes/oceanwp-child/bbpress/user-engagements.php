@@ -14,7 +14,7 @@ do_action( 'bbp_template_before_user_engagements' ); ?>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
 		<div id="bbp-user-engagements" class="bbp-user-engagements">
-			<p class="no-margin-bottom"><b>All members</b></p>
+			<p class="m-0"><b>All members</b></p>
 			<hr/>
 
 			<div class="row bbp-user-section no-margin-right no-margin-left">
@@ -37,9 +37,9 @@ do_action( 'bbp_template_before_user_engagements' ); ?>
 						?>
 					
 						<a href="<?php echo site_url( '/forums/users/'. $user->user_nicename, null ) ?>"><div class="initiative-contact-details">
-							<p class="no-margin-bottom"><b><?php echo $user->display_name ?></b></p>
-							<p class="no-margin-bottom"><?php echo $user->job_title ?></p>
-							<p class="no-margin-bottom"><?php echo $user->organization ?></p>
+							<p class="m-0"><b><?php echo $user->display_name ?></b></p>
+							<p class="m-0"><?php echo $user->job_title ?></p>
+							<p class="m-0"><?php echo $user->organization ?></p>
 						</div></a>
 						
 					</div>

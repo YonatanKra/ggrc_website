@@ -131,8 +131,8 @@ if ( bbp_is_single_user_profile() ) { ?>
 
 					<?php $user_nicename= bbp_get_displayed_user_field( 'user_nicename' ); ?>
 					<div class="align-center">
-						<h4 class="no-margin-bottom"><?php bbp_displayed_user_field( 'display_name' ); ?></h4>
-						<p class="no-margin-bottom"><?php bbp_displayed_user_field( 'job_title' ); ?></p>
+						<h4 class="m-0"><?php bbp_displayed_user_field( 'display_name' ); ?></h4>
+						<p class="m-0"><?php bbp_displayed_user_field( 'job_title' ); ?></p>
 						<p><?php bbp_displayed_user_field( 'country' ); ?></p>
 						<a href="<?php echo site_url('forums/users/'. $user_nicename . '/topics') ?>" class="ggrc-btn-blue-sm"><i class="ggrc-icon ggrc-send"></i> send message</a>
 					</div>
@@ -147,7 +147,7 @@ if ( bbp_is_single_user_profile() ) { ?>
 			<?php do_action( 'bbp_template_before_user_profile' ); ?>
 
 			<div id="bbp-user-profile" class="bbp-user-profile">
-			<h4 class="no-margin-bottom">Content by <?php bbp_displayed_user_field( 'display_name' ); ?></h4>
+			<h4 class="m-0">Content by <?php bbp_displayed_user_field( 'display_name' ); ?></h4>
         	<hr/>
 
 			<?php				
