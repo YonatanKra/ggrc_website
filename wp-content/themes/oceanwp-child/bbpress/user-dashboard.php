@@ -28,21 +28,21 @@ defined( 'ABSPATH' ) || exit;
     }
 </style>
 
-<div class="suggest-content row mb-10">
+<div class="suggest-content row mb-3">
     <div class="col-lg-12 col-md-12 col-sm-12">
-        <h4 class="mb-10">Suggest content</h4>
+        <h4 class="mb-3">Suggest content</h4>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12">
         <p>We are always happy to hear from our members about what interests them!</p>
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12">
-        <a href="<?php echo site_url( '/suggest-an-initiative', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest initiative</button></a>
+        <a href="<?php echo site_url( '/suggest-an-initiative', null ) ?>"><button class="ggrc-btn-blue-sm mb-3">suggest initiative</button></a>
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12">
-        <a href="<?php echo site_url( '/suggest-an-event', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest event</button></a>
+        <a href="<?php echo site_url( '/suggest-an-event', null ) ?>"><button class="ggrc-btn-blue-sm mb-3">suggest event</button></a>
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12">
-        <a href="<?php echo site_url( '/suggest-a-discussion-board', null ) ?>"><button class="ggrc-btn-blue-sm mb-10">suggest discussion board</button></a>
+        <a href="<?php echo site_url( '/suggest-a-discussion-board', null ) ?>"><button class="ggrc-btn-blue-sm mb-3">suggest discussion board</button></a>
     </div>
 </div>
 <div class="row">
@@ -71,7 +71,7 @@ defined( 'ABSPATH' ) || exit;
                                 
                             <div class="initiative-list-detail">
                             
-                                    <a href="<?php the_permalink(); ?>"><h4 class="mb-10"><?php the_title(); ?></h4></a>
+                                    <a href="<?php the_permalink(); ?>"><h4 class="mb-3"><?php the_title(); ?></h4></a>
                                     <?php the_excerpt(); ?>
                                     <p><?php the_time('j F, Y'); ?></p>
                                     
@@ -79,7 +79,7 @@ defined( 'ABSPATH' ) || exit;
                             
                         </div>
                         <div class="col-lg-4 col-md-12 col-sm-12 center-element">
-                            <a href="<?php the_permalink(); ?>"><button class="ggrc-btn-white-sm mb-10">see initiative</button></a>
+                            <a href="<?php the_permalink(); ?>"><button class="ggrc-btn-white-sm mb-3">see initiative</button></a>
                         </div>
                     </div>
             <?php } ?>
