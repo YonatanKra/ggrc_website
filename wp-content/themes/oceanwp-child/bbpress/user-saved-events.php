@@ -18,7 +18,7 @@ do_action( 'bbp_template_before_user_subscriptions' ); ?>
 
 		<div id="bbp-user-subscriptions" class="bbp-user-subscriptions p-20">
 
-			<p class="m-0"><b>Events</b></p>
+			<p class="no-margin-bottom"><b>Events</b></p>
 			<hr/>
 
 			<!-- <?php //bbp_get_template_part( 'form', 'topic-search' ); ?> -->
