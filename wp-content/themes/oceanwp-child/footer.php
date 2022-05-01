@@ -7,22 +7,6 @@
 
 ?>
 
-<style type="text/css">
-	#block-13, #block-26, #block-27{
-		float: left;
-		margin-right: 20px;
-		margin-left: 20px;
-	}
-
-	.col-3 {
-	    width: 50% !important;
-	    max-width: 50%;
-	    padding-top: 10px !important;
-	}
-
-	
-</style>
-
 	</main><!-- #main -->
 
 	<?php do_action( 'ocean_after_main' ); ?>
