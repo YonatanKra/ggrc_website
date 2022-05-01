@@ -148,7 +148,7 @@ $single_event_obj = $single_event_main[0];
 
             			</div>
             			<div class="col-lg-3 col-md-3 col-sm-12 mt-60" id="event-details">
-            				<h4 class="mb-10">Organizers</h4>
+            				<h4 class="mb-3">Organizers</h4>
             				<?php $single->display_organizer_widget($single_event_obj); ?>
             				<h4 class="mb-0">Who</h4>
             				<?php	

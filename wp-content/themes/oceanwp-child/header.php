@@ -35,7 +35,7 @@
 
 		<div class="row">
 			<div class="col-12">
-				<p class="text-danger align-center mt-10 mb-10"><b>* Our website is currently in the testing phase and is best viewed on desktop and laptops only right now. Please feel free to provide feedback or comments <a href="<?php the_permalink('contact'); ?>">here</a>.</b></p>
+				<p class="text-danger align-center mt-3 mb-3"><b>* Our website is currently in the testing phase and is best viewed on desktop and laptops only right now. Please feel free to provide feedback or comments <a href="<?php the_permalink('contact'); ?>">here</a>.</b></p>
 			</div>
 		</div>
 

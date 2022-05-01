@@ -217,7 +217,7 @@ do_action( 'bbp_template_before_user_replies' ); ?>
 			<?php if($the_query2->have_posts()){
 				while($the_query2->have_posts()) {
 					$the_query2->the_post(); ?>
-					<div class="col-lg-12 col-md-12 col-sm-12 no-padding-left no-padding-right mb-10">
+					<div class="col-lg-12 col-md-12 col-sm-12 no-padding-left no-padding-right mb-3">
 						<div class="discussion">
 						<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="discussion-cover"/>
 							
