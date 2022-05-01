@@ -98,10 +98,10 @@ $post_id = get_the_ID();
 </style>
 
 <div id="single-forum" class="bbp-topic-subheader">
-	<p class="links no-margin-bottom mt-20"><a href="../../../discuss">back to discussions</a></p>
-	<hr class="no-margin-top" width="50%"/>
-	<p class="no-margin-bottom mt-20">last active: <?php bbp_topic_freshness_link(); ?></p>
-	<h2 class="no-margin-bottom"><?php bbp_topic_title(); ?></h2>
+	<p class="links mb-0 mt-20"><a href="../../../discuss">back to discussions</a></p>
+	<hr class="mt-0" width="50%"/>
+	<p class="mb-0 mt-20">last active: <?php bbp_topic_freshness_link(); ?></p>
+	<h2 class="mb-0"><?php bbp_topic_title(); ?></h2>
 
 	<?php do_action( 'bbp_theme_before_topic_started_by' ); ?>
 

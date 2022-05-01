@@ -142,7 +142,7 @@ $single_event_obj = $single_event_main[0];
 
 							?>
 							<br>
-							<button class="ggrc-btn-white-md mt-60"><a href="<?php echo get_post_meta( get_the_ID(), 'mec_more_info', true) ?>" target="_blank"><h3 class="no-margin-bottom">More Information</h3></a></button>
+							<button class="ggrc-btn-white-md mt-60"><a href="<?php echo get_post_meta( get_the_ID(), 'mec_more_info', true) ?>" target="_blank"><h3 class="mb-0">More Information</h3></a></button>
 
 							<?php $single->display_export_widget($single_event_obj); ?>
 
@@ -150,21 +150,21 @@ $single_event_obj = $single_event_main[0];
             			<div class="col-lg-3 col-md-3 col-sm-12 mt-60" id="event-details">
             				<h4 class="mb-10">Organizers</h4>
             				<?php $single->display_organizer_widget($single_event_obj); ?>
-            				<h4 class="no-margin-bottom">Who</h4>
+            				<h4 class="mb-0">Who</h4>
             				<?php	
             						$who = get_post_custom_values('who-can-attend-the-event');
             						echo $who[0];
             				?>
 
-            				<h4 class="no-margin-bottom mt-20">Where</h4>
+            				<h4 class="mb-0 mt-20">Where</h4>
             				<?php
             					$single->display_location_widget($single_event_obj); 
             				?>
-            				<h4 class="no-margin-bottom mt-20">Time</h4>
+            				<h4 class="mb-0 mt-20">Time</h4>
             				<?php
             						$single->display_time_widget($single_event_obj);
             				?>
-            				<h4 class="no-margin-bottom mt-20">Participation cost</h4>
+            				<h4 class="mb-0 mt-20">Participation cost</h4>
             				<?php
             						$cost= get_post_meta( get_the_ID(), 'mec_cost', true );
 

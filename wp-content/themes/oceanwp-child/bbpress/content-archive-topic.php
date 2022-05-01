@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<div class="row mt-60 suggest-discussion">
 			<div class="col-md-12 col-lg-12 col-sm-12">
-				<h3 class="no-margin-bottom">Suggest a new discussion board</h3>
+				<h3 class="mb-0">Suggest a new discussion board</h3>
 			</div>
 			<div class="col-md-12 col-lg-12 col-sm-12">
 				<p>GGRC members are invited to share ideas for green recovery, collaboration, and resources.</p>

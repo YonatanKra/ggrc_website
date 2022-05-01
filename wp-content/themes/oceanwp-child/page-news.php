@@ -83,7 +83,7 @@
 								$news_agencies = get_post_meta($the_firstpost_id, 'news');
 								$tags = wp_get_post_terms($the_firstpost_id, 'post_tag', ['']);
 								?>
-									<div class="row mb-20 no-margin-right no-margin-left" id="agency">
+									<div class="row mb-20 me-0 ms-0" id="agency">
 									<?php
 									if(empty($news_agencies) || ! is_array($news_agencies)){
 										echo " ";
@@ -163,7 +163,7 @@
 							<div class="col-lg-4 col-md-4 col-sm-12">
 								<div class="news-box">
 									<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
-								<p class="no-margin-bottom"><b><?php the_title(); ?></b></p> 
+								<p class="mb-0"><b><?php the_title(); ?></b></p> 
 								<?php the_content(); ?>
 								<?php 
 								$the_post_id = get_the_ID();
