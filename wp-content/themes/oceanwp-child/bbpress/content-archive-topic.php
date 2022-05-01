@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 				<a href="../community-guidelines" class="initiative-website">Community guidelines</a>
 			</div>
 			<div class="col-md-12 col-lg-12 col-sm-12 mt-30">
-				<a href="<?php echo site_url('/user-login') ?>"><button class="ggrc-btn-white-md">Log In</button></a>
+				<a href="<?php echo site_url('/user-login') ?>"><button class="btn btn-primary">Log In</button></a>
 			</div>
 		</div>
 
