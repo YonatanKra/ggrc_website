@@ -219,7 +219,7 @@
 								<div class="col-md-6 col-lg-6 col-sm-12">
 									<div class="row">
 										<div class="col-md-12 col-lg-12 col-sm-12 align-center">
-											<h2 class="no-margin-bottom">How to Take Action:</h2>
+											<h2 class="mb-0">How to Take Action:</h2>
 										</div>
 									</div>
 								</div>
@@ -254,9 +254,9 @@
 									<div class="col-md-4 col-lg-4 col-sm-12" id="initiative-contact">
 										<div class="initiative-contact-details">
 											<h4><?php the_field('initiative-contact-name-'. $i) ?></h4>
-											<p class="no-margin-bottom"><?php the_field('initiative-contact-title-'. $i) ?></p>
-											<p class="no-margin-bottom"><?php the_field('initiative-contact-organisation-'. $i) ?></p>
-											<i class="ggrc-icon ggrc-message"></i> <p class="no-margin-bottom inline-display"><a href="mailto:<?php the_field('initiative-contact-email-'. $i) ?>"><?php the_field('initiative-contact-email-'. $i) ?></a></p>
+											<p class="mb-0"><?php the_field('initiative-contact-title-'. $i) ?></p>
+											<p class="mb-0"><?php the_field('initiative-contact-organisation-'. $i) ?></p>
+											<i class="ggrc-icon ggrc-message"></i> <p class="mb-0 inline-display"><a href="mailto:<?php the_field('initiative-contact-email-'. $i) ?>"><?php the_field('initiative-contact-email-'. $i) ?></a></p>
 										</div>
 										
 									</div>
@@ -285,8 +285,8 @@
 								foreach($initiative_updates[0] as $initiative_update){
 									if(!empty($initiative_update['UpdateTitle'])){
 									?>
-									<p class="no-margin-bottom links"><?php echo date('F j, Y', strtotime($initiative_update['UpdateDate'])); ?></p>
-									<h3 class="no-margin-bottom"><?php echo $initiative_update['UpdateTitle']; ?></h3>								
+									<p class="mb-0 links"><?php echo date('F j, Y', strtotime($initiative_update['UpdateDate'])); ?></p>
+									<h3 class="mb-0"><?php echo $initiative_update['UpdateTitle']; ?></h3>								
 									<p><?php echo $initiative_update['Update']; ?></p>
 									
 									<?php 

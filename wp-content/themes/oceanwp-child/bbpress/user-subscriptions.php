@@ -56,7 +56,7 @@ do_action( 'bbp_template_before_user_subscriptions' ); ?>
 
 		<div id="bbp-user-subscriptions" class="bbp-user-subscriptions p-20">
 
-			<p class="no-margin-bottom"><b>Advisor Information</b></p>
+			<p class="mb-0"><b>Advisor Information</b></p>
 			<hr/>
 
 			<!-- <?php //bbp_get_template_part( 'form', 'topic-search' ); ?>

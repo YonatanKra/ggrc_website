@@ -109,7 +109,7 @@ do_action( 'bbp_template_before_user_replies' ); ?>
 <div class="row">
     <div class="col-lg-9 col-md-12 col-sm-12" id="bbp-user-body">
 		<div id="bbp-user-replies-created" class="bbp-user-replies-created">
-		<p class="no-margin-bottom"><b>Discussion Board</b></p>
+		<p class="mb-0"><b>Discussion Board</b></p>
         <hr/>
 
 			<div class="bbp-user-section">
@@ -210,7 +210,7 @@ do_action( 'bbp_template_before_user_replies' ); ?>
 		$the_query2 = new WP_Query($args);
 
 		?>
-        <div class="row no-margin-left" id="discussion-topics">
+        <div class="row ms-0" id="discussion-topics">
             <p><b>Might interest you</b></p>
             <hr/>
 
