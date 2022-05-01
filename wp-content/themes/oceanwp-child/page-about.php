@@ -90,7 +90,7 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-12 col-sm-12">
 				
-				<h2 class="mt-30">About the Global Green Recovery Collaborative</h2>
+				<h1 class="banner-title">About the Global Green Recovery Collaborative</h1>
 				
 			</div>
 		</div>
