@@ -163,7 +163,7 @@
 							<div class="col-lg-4 col-md-4 col-sm-12">
 								<div class="news-box">
 									<img src="<?php echo get_the_post_thumbnail_url(); ?>" class="initiative-cover"/>
-								<p class="no-margin-bottom"><b><?php the_title(); ?></b></p> 
+								<p class="m-0"><b><?php the_title(); ?></b></p> 
 								<?php the_content(); ?>
 								<?php 
 								$the_post_id = get_the_ID();

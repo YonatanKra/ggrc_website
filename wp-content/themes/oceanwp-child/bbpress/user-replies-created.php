@@ -109,7 +109,7 @@ do_action( 'bbp_template_before_user_replies' ); ?>
 <div class="row">
     <div class="col-lg-9 col-md-12 col-sm-12" id="bbp-user-body">
 		<div id="bbp-user-replies-created" class="bbp-user-replies-created">
-		<p class="no-margin-bottom"><b>Discussion Board</b></p>
+		<p class="m-0"><b>Discussion Board</b></p>
         <hr/>
 
 			<div class="bbp-user-section">
