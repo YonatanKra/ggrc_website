@@ -338,7 +338,7 @@ class MEC_wc extends MEC_base
 
                     $transaction['price_details']['details'][] = array(
                         'amount' => $wc_discount,
-                        'description' => __('Discount by WC Coupon', 'modern-events-calendar-lite'),
+                        'description' => esc_html__('Discount by WC Coupon', 'modern-events-calendar-lite'),
                         'type' => 'discount',
                         'coupon' => implode(', ', $coupons)
                     );

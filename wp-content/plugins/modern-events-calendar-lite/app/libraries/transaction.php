@@ -59,8 +59,8 @@ class MEC_transaction extends MEC_base
         $total = $this->get_total();
         $payable = $this->get_payable();
 
-        if($total == $payable) return '<span class="mec-transaction-price">'.$this->render_price($payable).'</span>';
-        else return '<span class="mec-transaction-price"><span class="mec-line-through">'.$this->render_price($total).'</span><br>'.$this->render_price($payable).'</span>';
+        if($total == $payable) return '<span class="mec-transaction-price">'.esc_html($this->render_price($payable)).'</span>';
+        else return '<span class="mec-transaction-price"><span class="mec-line-through">'.esc_html($this->render_price($total)).'</span><br>'.esc_html($this->render_price($payable)).'</span>';
     }
 
     public function render_price($amount)
@@ -94,7 +94,7 @@ class MEC_transaction extends MEC_base
     public function get_event_link()
     {
         $event = $this->get_event();
-        return '<a href="'.esc_url(get_permalink($event)).'" target="_blank">'.$event->post_title.'</a>';
+        return '<a href="'.esc_url(get_permalink($event)).'" target="_blank">'.MEC_kses::element($event->post_title).'</a>';
     }
 
     public function get_event_featured_image()
@@ -148,9 +148,9 @@ class MEC_transaction extends MEC_base
             $names = array_unique($row['names']);
 
             $names_html = '';
-            foreach($names as $name) $names_html .= '<h6>'.$name.'</h6>';
+            foreach($names as $name) $names_html .= '<h6>'.esc_html(stripslashes($name)).'</h6>';
 
-            $html .= '<li><h5>'.$row['name'].($row['count'] > 1 ? ' ('.$row['count'].')' : '').'</h5>'.$names_html.'</li>';
+            $html .= '<li><h5>'.esc_html(stripslashes($row['name'])).($row['count'] > 1 ? esc_html(' ('.$row['count'].')') : '').'</h5>'.$names_html.'</li>';
         }
 
         $html .= '</ul>';
@@ -177,7 +177,7 @@ class MEC_transaction extends MEC_base
         {
             $times = explode(':', $timestamp);
 
-            $html .= '<li>'.sprintf(__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format.' '.$time_format, $times[0]), $this->main->date_i18n($date_format.' '.$time_format, $times[1])).'</li>';
+            $html .= '<li>'.sprintf(esc_html__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format.' '.$time_format, $times[0]), $this->main->date_i18n($date_format.' '.$time_format, $times[1])).'</li>';
         }
 
         $html .= '</ul>';

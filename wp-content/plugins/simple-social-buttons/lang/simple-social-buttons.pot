@@ -1,16 +1,16 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Simple Social Buttons\n"
-"POT-Creation-Date: 2019-11-09 10:43+0500\n"
+"POT-Creation-Date: 2022-02-11 17:30+0500\n"
 "PO-Revision-Date: 2017-10-28 11:17+0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: simple-social-buttons.php\n"
@@ -21,53 +21,58 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: classes/ssb-admin.php:116
+#: classes/ssb-admin.php:126
 msgid "SSB Settings"
 msgstr ""
 
-#: classes/ssb-admin.php:143
+#: classes/ssb-admin.php:153
 msgid "Hide Simple Social Buttons"
 msgstr ""
 
-#: classes/ssb-admin.php:327
+#: classes/ssb-admin.php:338
 msgid "Leave A Review?"
 msgstr ""
 
-#: classes/ssb-admin.php:328
+#: classes/ssb-admin.php:339
 msgid ""
 "We hope you've enjoyed using Simple Social Buttons! Would you consider "
 "leaving us a review on WordPress.org?"
 msgstr ""
 
-#: classes/ssb-admin.php:329
+#: classes/ssb-admin.php:340
 msgid "Sure! I'd love to!"
 msgstr ""
 
-#: classes/ssb-admin.php:330
+#: classes/ssb-admin.php:341
 msgid "I've already left a review"
 msgstr ""
 
-#: classes/ssb-admin.php:331
+#: classes/ssb-admin.php:342
 msgid "Maybe Later"
 msgstr ""
 
-#: classes/ssb-admin.php:332
+#: classes/ssb-admin.php:343
 msgid "Never show again"
 msgstr ""
 
-#: classes/ssb-admin.php:440
+#: classes/ssb-admin.php:451
 msgid "Vote!"
 msgstr ""
 
-#: classes/ssb-admin.php:442
+#: classes/ssb-admin.php:453
 msgid "Rate"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:419
+#: classes/ssb-settings-strucutre.php:309 classes/ssb-settings.php:198
+#: classes/ssb-settings.php:328
+msgid "Post Type Settings"
+msgstr ""
+
+#: classes/ssb-settings-strucutre.php:463
 msgid "makes Social Sharing easy for everyone"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:420
+#: classes/ssb-settings-strucutre.php:464
 msgid ""
 "<strong>Simple Social Buttons</strong> by <strong><a href=\"https://"
 "wpbrigade.com/?utm_source=simple-social-buttons-lite&utm_medium=link-"
@@ -79,60 +84,66 @@ msgid ""
 "social sharing plugin ever for Everyone."
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:432
+#: classes/ssb-settings-strucutre.php:476
 msgid "Spread the Word"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:435
+#: classes/ssb-settings-strucutre.php:479
 msgid "Share on Twitter"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:438
+#: classes/ssb-settings-strucutre.php:482
 msgid "Share on Facebook"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:442
+#: classes/ssb-settings-strucutre.php:486
 msgid "Rate on WordPress.org"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:451
+#: classes/ssb-settings-strucutre.php:495
 msgid "Subscribe Newsletter"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:454
+#: classes/ssb-settings-strucutre.php:498
 msgid "Email"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:459
+#: classes/ssb-settings-strucutre.php:503
 msgid "Name"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:475
+#: classes/ssb-settings-strucutre.php:519
 msgid "Recommended Plugins"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:697
+#: classes/ssb-settings-strucutre.php:741
 msgid "Choose File"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:907
+#: classes/ssb-settings-strucutre.php:974
 msgid ""
 "<span class=\"ssb_step\">Step 1: </span> <a target=\"_blank\" href=\"http://"
 "twitcount.com\">Click here </a> to visit twitcount.com"
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:908
+#: classes/ssb-settings-strucutre.php:975
 msgid ""
 "<span class=\"ssb_step\">Step 2: </span> Click the Button “Give Me My "
 "Twitter Count Back”  on their website to create an account. If you see a "
 "prompt to customize your button, ignore to click paste code. "
 msgstr ""
 
-#: classes/ssb-settings-strucutre.php:909
+#: classes/ssb-settings-strucutre.php:976
 msgid ""
 "<span class=\"ssb_step\">Step 3: </span> After creating an account Click "
 "“Account and Settings” tab then add your website click save button to track "
 "your Twitter share counts."
+msgstr ""
+
+#: classes/ssb-settings-strucutre.php:992
+msgid ""
+"Social media is about the people! Not about your business. Provide for the "
+"people and the people will provide you."
 msgstr ""
 
 #: classes/ssb-settings.php:30
@@ -156,7 +167,7 @@ msgid "Social Buttons Designs"
 msgstr ""
 
 #: classes/ssb-settings.php:52
-msgid "Social Buttons Postions"
+msgid "Social Buttons Positions"
 msgstr ""
 
 #: classes/ssb-settings.php:57
@@ -219,12 +230,8 @@ msgstr ""
 msgid "Hide On Mobile Devices"
 msgstr ""
 
-#: classes/ssb-settings.php:198 classes/ssb-settings.php:326
-msgid "Post type Settings"
-msgstr ""
-
-#: classes/ssb-settings.php:199 classes/ssb-settings.php:327
-#: classes/ssb-settings.php:374
+#: classes/ssb-settings.php:199 classes/ssb-settings.php:329
+#: classes/ssb-settings.php:376
 msgid "Multi checkbox description"
 msgstr ""
 
@@ -233,9 +240,9 @@ msgid ""
 "Want even more fine tuned control over your Sidebar Social Buttons Styling?"
 msgstr ""
 
-#: classes/ssb-settings.php:212 classes/ssb-settings.php:340
-#: classes/ssb-settings.php:388 classes/ssb-settings.php:397
-#: classes/ssb-settings.php:406
+#: classes/ssb-settings.php:212 classes/ssb-settings.php:342
+#: classes/ssb-settings.php:390 classes/ssb-settings.php:399
+#: classes/ssb-settings.php:408
 msgid ""
 "By upgrading to Simple Social Buttons Pro, you get access to Styling Social "
 "buttons of your own choice that matches with your website color schemes. "
@@ -277,70 +284,82 @@ msgstr ""
 msgid "Share Title"
 msgstr ""
 
-#: classes/ssb-settings.php:339
+#: classes/ssb-settings.php:341
 msgid "Want to style the Inline Social buttons matches your theme colors?"
 msgstr ""
 
-#: classes/ssb-settings.php:357
+#: classes/ssb-settings.php:359
 msgid "Icon Style"
 msgstr ""
 
-#: classes/ssb-settings.php:373
-msgid "Postions"
+#: classes/ssb-settings.php:375
+msgid "Positions"
 msgstr ""
 
-#: classes/ssb-settings.php:387
+#: classes/ssb-settings.php:389
 msgid "Show Social Sharing buttons on images or photos in your posts/pages."
 msgstr ""
 
-#: classes/ssb-settings.php:396
+#: classes/ssb-settings.php:398
 msgid ""
 "Get more engagement and shares on scrolling and exit intent to visitors."
 msgstr ""
 
-#: classes/ssb-settings.php:405
+#: classes/ssb-settings.php:407
 msgid "Advanced Fly ins with animations to have more Social shares."
 msgstr ""
 
-#: classes/ssb-settings.php:414
+#: classes/ssb-settings.php:416
 msgid "Twitter @username:"
 msgstr ""
 
-#: classes/ssb-settings.php:420
+#: classes/ssb-settings.php:422
 msgid "Http/Https counts resolve:"
 msgstr ""
 
-#: classes/ssb-settings.php:425
+#: classes/ssb-settings.php:427
+msgid "Open Graph Tags"
+msgstr ""
+
+#: classes/ssb-settings.php:435
 msgid "Remove Settings on Uninstall"
 msgstr ""
 
-#: classes/ssb-settings.php:426
+#: classes/ssb-settings.php:436
 msgid ""
 "<span class=\"ssb_uninstall_data\">This tool will remove all Simple Social "
 "Button settings upon uninstall.</span>"
 msgstr ""
 
-#: classes/ssb-settings.php:432
+#: classes/ssb-settings.php:442
 msgid "Facebook App ID:"
 msgstr ""
 
-#: classes/ssb-settings.php:437
+#: classes/ssb-settings.php:449
 msgid "Facebook App Secret:"
 msgstr ""
 
-#: classes/ssb-settings.php:489
+#: classes/ssb-settings.php:455
+msgid "Custom CSS"
+msgstr ""
+
+#: classes/ssb-settings.php:462
+msgid "Custom JS"
+msgstr ""
+
+#: classes/ssb-settings.php:539
 #, php-format
 msgid "Free support is available on the %1$s plugin support forums%2$s."
 msgstr ""
 
-#: classes/ssb-settings.php:491
+#: classes/ssb-settings.php:542
 #, php-format
 msgid ""
 "For premium features, add-ons and priority email support, %1$s upgrade to pro"
 "%2$s."
 msgstr ""
 
-#: classes/ssb-settings.php:497
+#: classes/ssb-settings.php:550
 msgid "Download Log File"
 msgstr ""
 
@@ -554,11 +573,11 @@ msgid ""
 "        WhatsApp Mobile Number:"
 msgstr ""
 
-#: simple-social-buttons.php:1231
+#: simple-social-buttons.php:1363
 msgid "Simple Social Buttons 2.0 (Relaunched)"
 msgstr ""
 
-#: simple-social-buttons.php:1232
+#: simple-social-buttons.php:1364
 msgid ""
 "Simple Social Buttons had 50,000 Active installs and It was abondoned and "
 "rarely updated since last 5 years.<br /> We at <a href=\"https://WPBrigade."
@@ -577,16 +596,16 @@ msgstr ""
 #. enter 'characters_excluding_spaces' or 'characters_including_spaces'. Otherwise, enter 'words'.
 #. Do not translate into your own language.
 #.
-#: simple-social-buttons.php:2030
+#: simple-social-buttons.php:1821
 msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr ""
 
-#: simple-social-buttons.php:2083
+#: simple-social-buttons.php:1874
 msgid "Settings"
 msgstr ""
 
-#: simple-social-buttons.php:2088
+#: simple-social-buttons.php:1879
 #, php-format
 msgid "%1$s %3$s Upgrade Pro %4$s %2$s"
 msgstr ""
@@ -596,7 +615,9 @@ msgid "Simple Social Buttons"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://www.WPBrigade.com/wordpress/plugins/simple-social-buttons/"
+msgid ""
+"https://simplesocialbuttons.com/?utm_source=loginpress-"
+"lite&utm_medium=plugin-url-link"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -612,5 +633,7 @@ msgid "WPBrigade"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://www.WPBrigade.com/"
+msgid ""
+"https://www.WPBrigade.com/?utm_source=simple-social-buttons-"
+"lite&utm_medium=author-url-link"
 msgstr ""

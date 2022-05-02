@@ -85,10 +85,7 @@ class MEC_feature_cart extends MEC_base
 
     public function remove()
     {
-        // Request
-        $request = $this->getRequest();
-
-        $transaction_id = $request->getVar('transaction_id');
+        $transaction_id = isset($_REQUEST['transaction_id']) ? sanitize_text_field($_REQUEST['transaction_id']) : NULL;
 
         $cart_id = $this->cart->get_cart_id();
         $cart = $this->cart->get_cart($cart_id);
@@ -120,10 +117,7 @@ class MEC_feature_cart extends MEC_base
 
     public function coupon()
     {
-        // Request
-        $request = $this->getRequest();
-
-        $coupon = $request->getVar('coupon');
+        $coupon = isset($_REQUEST['coupon']) ? sanitize_text_field($_REQUEST['coupon']) : NULL;
 
         $cart_id = $this->cart->get_cart_id();
         $cart = $this->cart->get_cart($cart_id);
@@ -171,7 +165,7 @@ class MEC_feature_cart extends MEC_base
             wp_send_json(array(
                 'success' => 0,
                 'code' => 'NONCE_IS_INVALID',
-                'message' => __('Request is invalid!', 'modern-events-calendar-lite'),
+                'message' => esc_html__('Request is invalid!', 'modern-events-calendar-lite'),
             ));
         }
 
@@ -181,16 +175,16 @@ class MEC_feature_cart extends MEC_base
             wp_send_json(array(
                 'success' => 0,
                 'code' => 'NOT_FREE',
-                'message' => __('Your cart is not free!', 'modern-events-calendar-lite'),
+                'message' => esc_html__('Your cart is not free!', 'modern-events-calendar-lite'),
             ));
         }
 
         $free_gateway = new MEC_gateway_free();
         $results = $free_gateway->cart_do_transaction($cart_id);
 
-        $results['output'] = '<h4>' . __('Thanks for your booking.', 'modern-events-calendar-lite') . '</h4>
+        $results['output'] = '<h4>' . esc_html__('Thanks for your booking.', 'modern-events-calendar-lite') . '</h4>
         <div class="mec-event-book-message">
-            <div class="' . ($results['success'] ? 'mec-success' : 'mec-error') . '">' . $results['message'] . '</div>
+            <div class="' . ($results['success'] ? 'mec-success' : 'mec-error') . '">' . MEC_kses::element($results['message']) . '</div>
         </div>';
 
         wp_send_json($results);

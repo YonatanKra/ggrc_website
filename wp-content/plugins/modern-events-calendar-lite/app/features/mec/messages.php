@@ -17,7 +17,7 @@ $values = $this->main->get_messages_options(($multilingual ? $locale : NULL));
             <i class="mec-sl-magnifier"></i>
             <input id="mec-search-settings" type="text" placeholder="<?php esc_html_e('Search...' ,'modern-events-calendar-lite'); ?>">
         </div>        
-        <a href="" id="" class="dpr-btn dpr-save-btn"><?php _e('Save Changes', 'modern-events-calendar-lite'); ?></a>
+        <a href="" id="" class="dpr-btn dpr-save-btn"><?php esc_html_e('Save Changes', 'modern-events-calendar-lite'); ?></a>
     </div>
 
     <div class="wns-be-sidebar">
@@ -33,18 +33,18 @@ $values = $this->main->get_messages_options(($multilingual ? $locale : NULL));
                 <div class="mec-container">
                     <form id="mec_messages_form">
                         <div class="mec-options-fields active">
-                            <h2><?php _e('Messages', 'modern-events-calendar-lite'); ?></h2>
-                            <p><?php _e("You can change some MEC messages here. For example if you like to change \"REGISTER\" button label, you can do it here. By the Way, if your website is a multilingual website, we recommend you to change the messages/phrases from language files.", 'modern-events-calendar-lite'); ?></p>
+                            <h2><?php esc_html_e('Messages', 'modern-events-calendar-lite'); ?></h2>
+                            <p><?php esc_html_e("You can change some MEC messages here. For example if you like to change \"REGISTER\" button label, you can do it here. By the Way, if your website is a multilingual website, we recommend you to change the messages/phrases from language files.", 'modern-events-calendar-lite'); ?></p>
                             <div class="mec-form-row" id="mec_messages_form_container">
                                 <ul class="mec-accordion mec-message-categories" id="mec_message_categories_wp">
                                     <?php foreach($messages as $cat_key=>$category): ?>
-                                        <li class="mec-acc-label" data-key="<?php echo $cat_key; ?>" data-status="close">
-                                            <div class="mec-acc-cat-name"><?php echo $category['category']['name']; ?></div>
-                                            <ul id="mec-acc-<?php echo $cat_key; ?>">
+                                        <li class="mec-acc-label" data-key="<?php echo esc_attr($cat_key); ?>" data-status="close">
+                                            <div class="mec-acc-cat-name"><?php echo esc_html($category['category']['name']); ?></div>
+                                            <ul id="mec-acc-<?php echo esc_attr($cat_key); ?>">
                                                 <?php foreach($category['messages'] as $key=>$message): ?>
                                                     <li>
-                                                        <label for="<?php echo 'mec_m_'.$key; ?>"><?php echo $message['label']; ?></label>
-                                                        <input id="<?php echo 'mec_m_'.$key; ?>" name="mec[messages][<?php echo $key; ?>]" type="text" placeholder="<?php echo esc_attr($message['default']); ?>" value="<?php echo (isset($values[$key]) and trim($values[$key])) ? esc_attr(stripslashes($values[$key])) : ''; ?>" />
+                                                        <label for="<?php echo 'mec_m_'.esc_attr($key); ?>"><?php echo esc_html($message['label']); ?></label>
+                                                        <input id="<?php echo 'mec_m_'.esc_attr($key); ?>" name="mec[messages][<?php echo esc_attr($key); ?>]" type="text" placeholder="<?php echo esc_attr($message['default']); ?>" value="<?php echo (isset($values[$key]) and trim($values[$key])) ? esc_attr(stripslashes($values[$key])) : ''; ?>" />
                                                     </li>
                                                 <?php endforeach; ?>
                                             </ul>
@@ -57,7 +57,7 @@ $values = $this->main->get_messages_options(($multilingual ? $locale : NULL));
                                 <?php if($multilingual): ?>
                                 <input name="mec_locale" type="hidden" value="<?php echo esc_attr($locale); ?>" />
                                 <?php endif; ?>
-                                <button style="display: none;" id="mec_messages_form_button" class="button button-primary mec-button-primary" type="submit"><?php _e('Save Changes', 'modern-events-calendar-lite'); ?></button>
+                                <button style="display: none;" id="mec_messages_form_button" class="button button-primary mec-button-primary" type="submit"><?php esc_html_e('Save Changes', 'modern-events-calendar-lite'); ?></button>
                             </div>
                         </div>
                     </form>
@@ -67,59 +67,65 @@ $values = $this->main->get_messages_options(($multilingual ? $locale : NULL));
     </div>
 
     <div id="wns-be-footer">
-        <a href="" id="" class="dpr-btn dpr-save-btn"><?php _e('Save Changes', 'modern-events-calendar-lite'); ?></a>
+        <a href="" id="" class="dpr-btn dpr-save-btn"><?php esc_html_e('Save Changes', 'modern-events-calendar-lite'); ?></a>
     </div>
 
 </div>
 
-<script type="text/javascript">
-jQuery(document).ready(function()
+<?php
+$this->getFactory()->params('footer', function()
 {
-    jQuery(".dpr-save-btn").on('click', function(event)
+    ?>
+    <script type="text/javascript">
+    jQuery(document).ready(function()
+    {
+        jQuery(".dpr-save-btn").on('click', function(event)
+        {
+            event.preventDefault();
+            jQuery("#mec_messages_form_button").trigger('click');
+        });
+    });
+
+    jQuery("#mec_messages_form").on('submit', function(event)
     {
         event.preventDefault();
-        jQuery("#mec_messages_form_button").trigger('click');
-    });
-});
 
-jQuery("#mec_messages_form").on('submit', function(event)
-{
-    event.preventDefault();
-    
-    // Add loading Class to the button
-    jQuery(".dpr-save-btn").addClass('loading').text("<?php echo esc_js(esc_attr__('Saved', 'modern-events-calendar-lite')); ?>");
-    jQuery('<div class="wns-saved-settings"><?php echo esc_js(esc_attr__('Settings Saved!', 'modern-events-calendar-lite')); ?></div>').insertBefore('#wns-be-content');
+        // Add loading Class to the button
+        jQuery(".dpr-save-btn").addClass('loading').text("<?php echo esc_js(esc_attr__('Saved', 'modern-events-calendar-lite')); ?>");
+        jQuery('<div class="wns-saved-settings"><?php echo esc_js(esc_attr__('Settings Saved!', 'modern-events-calendar-lite')); ?></div>').insertBefore('#wns-be-content');
 
-    var messages = jQuery("#mec_messages_form").serialize();
-    jQuery.ajax(
-    {
-        type: "POST",
-        url: ajaxurl,
-        data: "action=mec_save_messages&"+messages,
-        beforeSend: function()
+        var messages = jQuery("#mec_messages_form").serialize();
+        jQuery.ajax(
         {
-            jQuery('.wns-be-main').append('<div class="mec-loarder-wrap mec-settings-loader"><div class="mec-loarder"><div></div><div></div><div></div></div></div>');
-        },
-        success: function(data)
-        {
-            // Remove the loading Class to the button
-            setTimeout(function()
+            type: "POST",
+            url: ajaxurl,
+            data: "action=mec_save_messages&"+messages,
+            beforeSend: function()
             {
-                jQuery(".dpr-save-btn").removeClass('loading').text("<?php echo esc_js(esc_attr__('Save Changes', 'modern-events-calendar-lite')); ?>");
-                jQuery('.wns-saved-settings').remove();
-                jQuery('.mec-loarder-wrap').remove();
-            }, 1000);
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            // Remove the loading Class to the button
-            setTimeout(function()
+                jQuery('.wns-be-main').append('<div class="mec-loarder-wrap mec-settings-loader"><div class="mec-loarder"><div></div><div></div><div></div></div></div>');
+            },
+            success: function(data)
             {
-                jQuery(".dpr-save-btn").removeClass('loading').text("<?php echo esc_js(esc_attr__('Save Changes', 'modern-events-calendar-lite')); ?>");
-                jQuery('.wns-saved-settings').remove();
-                jQuery('.mec-loarder-wrap').remove();
-            }, 1000);
-        }
+                // Remove the loading Class to the button
+                setTimeout(function()
+                {
+                    jQuery(".dpr-save-btn").removeClass('loading').text("<?php echo esc_js(esc_attr__('Save Changes', 'modern-events-calendar-lite')); ?>");
+                    jQuery('.wns-saved-settings').remove();
+                    jQuery('.mec-loarder-wrap').remove();
+                }, 1000);
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                // Remove the loading Class to the button
+                setTimeout(function()
+                {
+                    jQuery(".dpr-save-btn").removeClass('loading').text("<?php echo esc_js(esc_attr__('Save Changes', 'modern-events-calendar-lite')); ?>");
+                    jQuery('.wns-saved-settings').remove();
+                    jQuery('.mec-loarder-wrap').remove();
+                }, 1000);
+            }
+        });
     });
+    </script>
+    <?php
 });
-</script>

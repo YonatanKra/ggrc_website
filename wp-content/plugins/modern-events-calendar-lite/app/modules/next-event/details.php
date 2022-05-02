@@ -96,7 +96,7 @@ else
             $start_datetime .= ' '.$start_time;
         }
 
-        if(strtotime($start_datetime) >= strtotime($start_date))
+        if(strtotime($start_datetime) > strtotime($start_date))
         {
             $found = true;
             $next_date = $occ;
@@ -134,27 +134,27 @@ $midnight_event = $this->is_midnight_event($next);
 if($midnight_event) $next_date['end']['date'] = date('Y-m-d', strtotime('-1 Day', strtotime($next_date['end']['date'])));
 ?>
 <div class="mec-next-event-details mec-frontbox" id="mec_next_event_details">
-    <div class="mec-next-<?php echo $method; ?>">
+    <div class="mec-next-<?php echo esc_attr($method); ?>">
         <h3 class="mec-frontbox-title"><?php echo ($method == 'occurrence' ? esc_html__('Next Occurrence', 'modern-events-calendar-lite') : esc_html__('Next Event', 'modern-events-calendar-lite')); ?></h3>
         <ul>
             <li>
-                <a href="<?php echo $this->get_event_date_permalink($next, $next_date['start']['date'], true, $next_time); ?>"><?php echo ($method == 'occurrence' ? __('Go to occurrence page', 'modern-events-calendar-lite') : $next->data->title); ?></a>
+                <a href="<?php echo esc_url($this->get_event_date_permalink($next, $next_date['start']['date'], true, $next_time)); ?>"><?php echo ($method == 'occurrence' ? esc_html__('Go to occurrence page', 'modern-events-calendar-lite') : $next->data->title); ?></a>
             </li>
             <li>
                 <i class="mec-sl-calendar"></i>
-                <h6><?php _e('Date', 'modern-events-calendar-lite'); ?></h6>
-                <dl><dd><abbr class="mec-events-abbr"><?php echo $this->date_label($next_date['start'], (isset($next_date['end']) ? $next_date['end'] : NULL), $date_format1); ?></abbr></dd></dl>
+                <h6><?php esc_html_e('Date', 'modern-events-calendar-lite'); ?></h6>
+                <dl><dd><abbr class="mec-events-abbr"><?php echo MEC_kses::element($this->date_label($next_date['start'], (isset($next_date['end']) ? $next_date['end'] : NULL), $date_format1)); ?></abbr></dd></dl>
             </li>
             <?php if(isset($next->data->time) and trim($next->data->time['start'])): ?>
             <li>
                 <i class="mec-sl-clock"></i>
-                <h6><?php _e('Time', 'modern-events-calendar-lite'); ?></h6>
-                <i class="mec-time-comment"><?php echo (isset($time_comment) ? $time_comment : ''); ?></i>
+                <h6><?php esc_html_e('Time', 'modern-events-calendar-lite'); ?></h6>
+                <i class="mec-time-comment"><?php echo (isset($time_comment) ? esc_html($time_comment) : ''); ?></i>
                 <dl>
                 <?php if($allday == '0' and isset($next->data->time) and trim($next->data->time['start'])): ?>
-                <dd><abbr class="mec-events-abbr"><?php echo $next_time['start']; ?><?php echo (trim($next_time['end']) ? ' - '.$next_time['end'] : ''); ?></abbr></dd>
+                <dd><abbr class="mec-events-abbr"><?php echo esc_html($next_time['start']); ?><?php echo (trim($next_time['end']) ? ' - '.esc_html($next_time['end']) : ''); ?></abbr></dd>
                 <?php else: ?>
-                <dd><abbr class="mec-events-abbr"><?php echo $this->m('all_day', __('All Day' , 'modern-events-calendar-lite')); ?></abbr></dd>
+                <dd><abbr class="mec-events-abbr"><?php echo esc_html($this->m('all_day', esc_html__('All Day' , 'modern-events-calendar-lite'))); ?></abbr></dd>
                 <?php endif; ?>
                 </dl>
             </li>

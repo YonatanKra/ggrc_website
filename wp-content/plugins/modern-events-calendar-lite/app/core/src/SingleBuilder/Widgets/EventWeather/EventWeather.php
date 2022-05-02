@@ -33,8 +33,8 @@ class EventWeather extends WidgetBase {
 		if ( true === $this->is_editor_mode && ( !isset($settings['weather_module_status']) || !$settings['weather_module_status'] ) ) {
 
 			$html = '<div class="mec-content-notification"><p>'
-					.'<span>'. __('This widget is displayed if weather is set. In order for the widget in this page to be displayed correctly, please set location for your last event.', 'modern-events-calendar-lite').'</span>'
-					. '<a href="https://webnus.net/dox/modern-events-calendar/weather-module/" target="_blank">' . __('How to set weather', 'modern-events-calendar-lite') . ' </a>'
+					.'<span>'. esc_html__('This widget is displayed if weather is set. In order for the widget in this page to be displayed correctly, please set location for your last event.', 'modern-events-calendar-lite').'</span>'
+					. '<a href="https://webnus.net/dox/modern-events-calendar/weather-module/" target="_blank">' . esc_html__('How to set weather', 'modern-events-calendar-lite') . ' </a>'
 				.'</p></div>';
 		} else {
 

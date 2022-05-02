@@ -84,7 +84,7 @@ class MEC_walker extends Walker
         else $taxonomy = $args['taxonomy'];
 
         if('category' === $taxonomy) $name = 'post_category';
-        else $name = 'tax_input[' . $taxonomy . ']';
+        else $name = 'tax_input[' . esc_attr($taxonomy) . ']';
 
         $args['popular_cats'] = !empty($args['popular_cats']) ? array_map('intval', $args['popular_cats']) : array();
         $class = in_array($category->term_id, $args['popular_cats'], true) ? ' class="popular-category"' : '';

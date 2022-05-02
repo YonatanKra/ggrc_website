@@ -42,7 +42,7 @@ class Wpbaw_Script {
 		wp_register_script( 'wpbaw-admin-js', WPBAW_URL.'assets/js/wpbaw-admin.js', array('jquery'), WPBAW_VERSION, true );
 
 		// Taking pages array
-		$pages_arr = array( WPBAW_POST_TYPE );
+		$pages_arr = array( WPBAW_POST_TYPE, 'blog_post_page_wpbaw-solutions-features' );
 
 		if( in_array($typenow, $pages_arr) ) {
 			wp_enqueue_style( 'wpbaw-admin-style' );
@@ -51,6 +51,10 @@ class Wpbaw_Script {
 		if( $hook == WPBAW_POST_TYPE.'_page_wpbawh-designs' ) {
 			wp_enqueue_script( 'wpbaw-admin-js' );
 		}
+
+		// if( $hook == 'blog_post_page_wpbaw-solutions-features' ) {
+		// 	wp_enqueue_style( 'wpbaw-admin-style' );
+		// }
 	}
 
 	/**

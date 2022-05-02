@@ -384,16 +384,16 @@ class MEC_skin_timetable extends MEC_skins
      */
     public function load_month()
     {
-        $this->sf = $this->request->getVar('sf', array());
-        $apply_sf_date = $this->request->getVar('apply_sf_date', 1);
-        $atts = $this->sf_apply($this->request->getVar('atts', array()), $this->sf, $apply_sf_date);
+        $this->sf = (isset($_REQUEST['sf']) and is_array($_REQUEST['sf'])) ? $this->main->sanitize_deep_array($_REQUEST['sf']) : array();
+        $apply_sf_date = isset($_REQUEST['apply_sf_date']) ? sanitize_text_field($_REQUEST['apply_sf_date']) : 1;
+        $atts = $this->sf_apply(((isset($_REQUEST['atts']) and is_array($_REQUEST['atts'])) ? $this->main->sanitize_deep_array($_REQUEST['atts']) : array()), $this->sf, $apply_sf_date);
 
         // Initialize the skin
         $this->initialize($atts);
 
         // Start Date
-        $this->year = $this->request->getVar('mec_year', date('Y'));
-        $this->month = $this->request->getVar('mec_month', date('m'));
+        $this->year = isset($_REQUEST['mec_year']) ? sanitize_text_field($_REQUEST['mec_year']) : current_time('Y');
+        $this->month = isset($_REQUEST['mec_month']) ? sanitize_text_field($_REQUEST['mec_month']) : current_time('m');
         $this->week = 1;
 
         // Set MEC Year And Month If Disable Options
@@ -455,16 +455,16 @@ class MEC_skin_timetable extends MEC_skins
      */
     public function load_weeklyprogram()
     {
-        $this->sf = $this->request->getVar('sf', array());
-        $apply_sf_date = $this->request->getVar('apply_sf_date', 1);
-        $atts = $this->sf_apply($this->request->getVar('atts', array()), $this->sf, $apply_sf_date);
+        $this->sf = (isset($_REQUEST['sf']) and is_array($_REQUEST['sf'])) ? $this->main->sanitize_deep_array($_REQUEST['sf']) : array();
+        $apply_sf_date = isset($_REQUEST['apply_sf_date']) ? sanitize_text_field($_REQUEST['apply_sf_date']) : 1;
+        $atts = $this->sf_apply(((isset($_REQUEST['atts']) and is_array($_REQUEST['atts'])) ? $this->main->sanitize_deep_array($_REQUEST['atts']) : array()), $this->sf, $apply_sf_date);
 
         // Initialize the skin
         $this->initialize($atts);
 
         // Start Date
-        $this->year = $this->request->getVar('mec_year', date('Y'));
-        $this->month = $this->request->getVar('mec_month', date('m'));
+        $this->year = isset($_REQUEST['mec_year']) ? sanitize_text_field($_REQUEST['mec_year']) : date('Y');
+        $this->month = isset($_REQUEST['mec_month']) ? sanitize_text_field($_REQUEST['mec_month']) : date('m');
 
         // Return the events
         $this->atts['return_items'] = true;

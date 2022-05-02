@@ -15,7 +15,7 @@ class BookingForm extends WidgetBase {
 		return ob_get_clean();
 	}
 
-	 /**
+	/**
 	 *  Get HTML Output
 	 *
 	 * @param int $event_id
@@ -34,6 +34,16 @@ class BookingForm extends WidgetBase {
 			return '';
 		}
 
+		if( isset( $atts['display_price_label'] ) && $atts['display_price_label'] ){
+			update_option('mec_filter_price_label','yes');
+			update_option('mec_filter_ticket_price_label','yes');
+
+		}else{
+
+			update_option('mec_filter_price_label','no');
+			update_option('mec_filter_ticket_price_label','no');
+		}
+
 		$settings = $this->settings;
 		$event_detail = $this->get_event_detail($event_id);
 		$html = '';
@@ -42,9 +52,9 @@ class BookingForm extends WidgetBase {
 			$html = '<div class="mec-content-notification">
 					<p>'
 						.'<span>'
-							. __('This widget is displayed if label is set. In order for the widget in this page to be displayed correctly, please set Booking module for your last event.', 'modern-events-calendar-lite')
+							. esc_html__('This widget is displayed if label is set. In order for the widget in this page to be displayed correctly, please set Booking module for your last event.', 'modern-events-calendar-lite')
 						.'</span>'
-						.'<a href="https://webnus.net/dox/modern-events-calendar/booking/" target="_blank">' . __('How to set booking module', 'modern-events-calendar-lite') . ' </a>'
+						.'<a href="https://webnus.net/dox/modern-events-calendar/booking/" target="_blank">' . esc_html__('How to set booking module', 'modern-events-calendar-lite') . ' </a>'
 					.'</p>'
 				.'</div>';
 		} else {
@@ -67,9 +77,9 @@ class BookingForm extends WidgetBase {
 
 				$html .= '<div class="mec-content-notification"><p>'
 						.'<span>'
-							. __('This widget is displayed if Booking is set. In order for the widget in this page to be displayed correctly, please set Booking module for your last event.', 'modern-events-calendar-lite')
+							. esc_html__('This widget is displayed if Booking is set. In order for the widget in this page to be displayed correctly, please set Booking module for your last event.', 'modern-events-calendar-lite')
 						.'</span>'
-						.'<a href="https://webnus.net/dox/modern-events-calendar/add-a-booking-system/" target="_blank">' . __('How to set Booking module', 'modern-events-calendar-lite') . ' </a>'
+						.'<a href="https://webnus.net/dox/modern-events-calendar/add-a-booking-system/" target="_blank">' . esc_html__('How to set Booking module', 'modern-events-calendar-lite') . ' </a>'
 					.'</p></div>';
 			}
 		}

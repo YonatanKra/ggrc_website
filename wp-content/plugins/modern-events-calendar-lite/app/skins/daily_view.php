@@ -320,12 +320,12 @@ class MEC_skin_daily_view extends MEC_skins
      */
     public function get_date_labels()
     {
-        $labels = '<div id="mec-owl-calendar-d-table-'.$this->id.'-'.date('Ym', strtotime($this->start_date)).'" class="mec-daily-view-date-labels mec-owl-carousel mec-owl-theme">';
+        $labels = '<div id="mec-owl-calendar-d-table-'.esc_attr($this->id).'-'.date('Ym', strtotime($this->start_date)).'" class="mec-daily-view-date-labels mec-owl-carousel mec-owl-theme">';
 
         foreach($this->events as $date=>$events)
         {
             $time = strtotime($date);
-            $labels .= '<div class="mec-daily-view-day '.(count($events) ? 'mec-has-event' : '').'" id="mec_daily_view_day'.$this->id.'_'.date('Ymd', $time).'" data-events-count="'.count($events).'" data-month-id="'.date('Ym', $time).'" data-day-id="'.date('Ymd', $time).'" data-day-weekday="'.$this->main->date_i18n('l', $time).'" data-day-monthday="'.date('j', $time).'">'.$this->main->date_i18n('j', $time).'</div>';
+            $labels .= '<div class="mec-daily-view-day '.(count($events) ? 'mec-has-event' : '').'" id="mec_daily_view_day'.esc_attr($this->id).'_'.date('Ymd', $time).'" data-events-count="'.esc_attr(count($events)).'" data-month-id="'.date('Ym', $time).'" data-day-id="'.date('Ymd', $time).'" data-day-weekday="'.esc_attr($this->main->date_i18n('l', $time)).'" data-day-monthday="'.date('j', $time).'">'.esc_html($this->main->date_i18n('j', $time)).'</div>';
         }
 
         return $labels.'</div>';
@@ -338,10 +338,11 @@ class MEC_skin_daily_view extends MEC_skins
      */
     public function load_month()
     {
-        $this->sf = $this->request->getVar('sf', array());
-        $apply_sf_date = $this->request->getVar('apply_sf_date', 1);
-        $atts = $this->sf_apply($this->request->getVar('atts', array()), $this->sf, $apply_sf_date);
-        $navigator_click = $this->request->getVar('navigator_click', false);
+        $this->sf = (isset($_REQUEST['sf']) and is_array($_REQUEST['sf'])) ? $this->main->sanitize_deep_array($_REQUEST['sf']) : array();
+        $apply_sf_date = isset($_REQUEST['apply_sf_date']) ? sanitize_text_field($_REQUEST['apply_sf_date']) : 1;
+        $atts = $this->sf_apply(((isset($_REQUEST['atts']) and is_array($_REQUEST['atts'])) ? $this->main->sanitize_deep_array($_REQUEST['atts']) : array()), $this->sf, $apply_sf_date);
+
+        $navigator_click = isset($_REQUEST['navigator_click']) ? (bool) sanitize_text_field($_REQUEST['navigator_click']) : false;
 
         // Initialize the skin
         $this->initialize($atts);
@@ -366,8 +367,8 @@ class MEC_skin_daily_view extends MEC_skins
             else
             {
                 // Start Date
-                $this->year = $this->request->getVar('mec_year', date('Y'));
-                $this->month = $this->request->getVar('mec_month', date('m'));
+                $this->year = isset($_REQUEST['mec_year']) ? sanitize_text_field($_REQUEST['mec_year']) : current_time('Y');
+                $this->month = isset($_REQUEST['mec_month']) ? sanitize_text_field($_REQUEST['mec_month']) : current_time('m');
             }
 
             $this->day = '1';

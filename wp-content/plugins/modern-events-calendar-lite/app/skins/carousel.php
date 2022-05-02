@@ -183,7 +183,8 @@ class MEC_skin_carousel extends MEC_skins
         $this->end_date = $this->start_date;
         
         // Apply Maximum Date
-        if($this->request->getVar('apply_sf_date', 0) == 1) $this->maximum_date = date('Y-m-t', strtotime($this->start_date));
+        $apply_sf_date = isset($_REQUEST['apply_sf_date']) ? sanitize_text_field($_REQUEST['apply_sf_date']) : 0;
+        if($apply_sf_date == 1) $this->maximum_date = date('Y-m-t', strtotime($this->start_date));
         
         // Found Events
         $this->found = 0;

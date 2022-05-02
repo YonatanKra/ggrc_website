@@ -229,12 +229,12 @@ if ( ! class_exists( 'Ssb_Settings_Structure' ) ) :
 
 			$value = $this->get_option( $args['id'], $args['section'], $args['std'] );
 			?>
-		  <div class="simplesocial-postion-outer-wrapper">
+		  <div class="simplesocial-position-outer-wrapper">
 			<?php printf( '<input type="hidden" name="%1$s[%2$s]" value="" />', $args['section'], $args['id'] ); ?>
 			<?php foreach ( $args['options'] as $key => $label ) : ?>
 				<?php $checked = isset( $value[ $key ] ) ? $value[ $key ] : '0'; ?>
-			  <div class="simplesocial-postion-outer">
-				<label class="simplesocial-postion-box simplesocial-<?php echo $key; ?>">
+			  <div class="simplesocial-position-outer">
+				<label class="simplesocial-position-box simplesocial-<?php echo $key; ?>">
 				  <span class="simplesocial-fb-sharehd-line"><?php echo $label; ?></span>
 				  <span class="simplesocial-blue-box">
 					<span class="simplesocial-highlight">
@@ -306,7 +306,7 @@ if ( ! class_exists( 'Ssb_Settings_Structure' ) ) :
 			$value = $this->get_option( $args['id'], $args['section'], $args['std'] );
 			$html  = '<fieldset>';
 			?>
-	  <h4>Post type Settings</h4>
+	  <h4><?php esc_html_e( 'Post Type Settings', 'simplesocialbuttons' ); ?></h4>
 	  <div class="simplesocial-inline-form-section">
 			<?php printf( '<input type="hidden" name="%1$s[%2$s]" value="" />', $args['section'], $args['id'] ); ?>
 			<?php
@@ -1221,7 +1221,7 @@ if ( ! class_exists( 'Ssb_Settings_Structure' ) ) :
 			$(this).addClass('social-active').parent().siblings().find('.simplesocialbuttons-style').removeClass('social-active');
 			$(this).find('input[type="radio"]').prop('checked', true);
 		  });
-		  $('.simplesocial-postion-box').on('click',function(){
+		  $('.simplesocial-position-box').on('click',function(){
 			var el = $(this);
 			var target = $(this).children('input[type="checkbox"]').val();
 			if($(this).children('input[type="checkbox"]').is(':checked')){
@@ -1234,7 +1234,7 @@ if ( ! class_exists( 'Ssb_Settings_Structure' ) ) :
 			$(this).find('.shadow').addClass('animated');
 			setTimeout(function(){ el.find('.shadow').removeClass('animated'); }, 400);
 		  });
-		  $('.simplesocial-postion-box').each(function(){
+		  $('.simplesocial-position-box').each(function(){
 			var el = $(this);
 			var target = $(this).children('input[type="checkbox"]').val();
 			if($(this).children('input[type="checkbox"]').is(':checked')){

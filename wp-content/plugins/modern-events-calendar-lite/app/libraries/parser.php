@@ -124,41 +124,25 @@ class MEC_parser extends MEC_base
     {
         // We're in an embed post
         if(is_embed()) return $template;
-        
+
         $PT = $this->main->get_main_post_type();
-        $file = $this->getFile();
-        
         if(is_single() and get_post_type() == $PT)
         {
-            $template = locate_template('single-'.$PT.'.php');
-            if($template == '')
+            // Block Themes
+            if(function_exists('wp_is_block_theme') and wp_is_block_theme())
             {
-                $wp_template = get_template();
-                $wp_stylesheet = get_stylesheet();
-                
-                $wp_template_file = MEC_ABSPATH.'templates'.DS.'themes'.DS.$wp_template.DS.'single-mec-events.php';
-                $wp_stylesheet_file = MEC_ABSPATH.'templates'.DS.'themes'.DS.$wp_template.DS.'childs'.DS.$wp_stylesheet.DS.'single-mec-events.php';
-                
-                if($file->exists($wp_stylesheet_file)) $template = $wp_stylesheet_file;
-                elseif($file->exists($wp_template_file)) $template = $wp_template_file;
-                else $template = MEC_ABSPATH.'templates'.DS.'single-mec-events.php';
+                add_filter('the_content', array($this, 'block_theme_single_content'));
+
+                return $template;
             }
+
+            $template = locate_template('single-'.$PT.'.php');
+            if($template == '') $template = MEC_ABSPATH.'templates'.DS.'single-mec-events.php';
         }
         elseif(is_post_type_archive($PT) && !is_search())
         {
             $template = locate_template('archive-'.$PT.'.php');
-            if($template == '')
-            {
-                $wp_template = get_template();
-                $wp_stylesheet = get_stylesheet();
-                
-                $wp_template_file = MEC_ABSPATH.'templates'.DS.'themes'.DS.$wp_template.DS.'archive-mec-events.php';
-                $wp_stylesheet_file = MEC_ABSPATH.'templates'.DS.'themes'.DS.$wp_template.DS.'childs'.DS.$wp_stylesheet.DS.'archive-mec-events.php';
-                
-                if($file->exists($wp_stylesheet_file)) $template = $wp_stylesheet_file;
-                elseif($file->exists($wp_template_file)) $template = $wp_template_file;
-                else $template = MEC_ABSPATH.'templates'.DS.'archive-mec-events.php';
-            }
+            if($template == '') $template = MEC_ABSPATH.'templates'.DS.'archive-mec-events.php';
 
             add_action('mec_before_main_content', function()
             {
@@ -173,18 +157,7 @@ class MEC_parser extends MEC_base
         elseif(is_tax('mec_category'))
         {
             $template = locate_template('taxonomy-mec-category.php');
-            if($template == '')
-            {
-                $wp_template = get_template();
-                $wp_stylesheet = get_stylesheet();
-                
-                $wp_template_file = MEC_ABSPATH.'templates'.DS.'themes'.DS.$wp_template.DS.'taxonomy-mec-category.php';
-                $wp_stylesheet_file = MEC_ABSPATH.'templates'.DS.'themes'.DS.$wp_template.DS.'childs'.DS.$wp_stylesheet.DS.'taxonomy-mec-category.php';
-                
-                if($file->exists($wp_stylesheet_file)) $template = $wp_stylesheet_file;
-                elseif($file->exists($wp_template_file)) $template = $wp_template_file;
-                else $template = MEC_ABSPATH.'templates'.DS.'taxonomy-mec-category.php';
-            }
+            if($template == '') $template = MEC_ABSPATH.'templates'.DS.'taxonomy-mec-category.php';
         }
         
         return $template;
@@ -266,5 +239,11 @@ class MEC_parser extends MEC_base
         }
 
         return $title;
+    }
+
+    public function block_theme_single_content($content)
+    {
+        remove_filter('the_content', array($this, 'block_theme_single_content'));
+        return $this->single_content($content);
     }
 }

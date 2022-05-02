@@ -57,8 +57,8 @@ class MEC_feature_autoemails extends MEC_base
      */
     public function register_post_type()
     {
-        $singular_label = __('Email', 'modern-events-calendar-lite');
-        $plural_label = __('Emails', 'modern-events-calendar-lite');
+        $singular_label = esc_html__('Email', 'modern-events-calendar-lite');
+        $plural_label = esc_html__('Emails', 'modern-events-calendar-lite');
 
         $capability = 'manage_options';
         register_post_type($this->PT,
@@ -67,12 +67,12 @@ class MEC_feature_autoemails extends MEC_base
                 (
                     'name'=>$plural_label,
                     'singular_name'=>$singular_label,
-                    'add_new'=>sprintf(__('Add %s', 'modern-events-calendar-lite'), $singular_label),
-                    'add_new_item'=>sprintf(__('Add %s', 'modern-events-calendar-lite'), $singular_label),
-                    'not_found'=>sprintf(__('No %s found!', 'modern-events-calendar-lite'), strtolower($plural_label)),
+                    'add_new'=>sprintf(esc_html__('Add %s', 'modern-events-calendar-lite'), $singular_label),
+                    'add_new_item'=>sprintf(esc_html__('Add %s', 'modern-events-calendar-lite'), $singular_label),
+                    'not_found'=>sprintf(esc_html__('No %s found!', 'modern-events-calendar-lite'), strtolower($plural_label)),
                     'all_items'=>$plural_label,
-                    'edit_item'=>sprintf(__('Edit %s', 'modern-events-calendar-lite'), $plural_label),
-                    'not_found_in_trash'=>sprintf(__('No %s found in Trash!', 'modern-events-calendar-lite'), strtolower($singular_label))
+                    'edit_item'=>sprintf(esc_html__('Edit %s', 'modern-events-calendar-lite'), $plural_label),
+                    'not_found_in_trash'=>sprintf(esc_html__('No %s found in Trash!', 'modern-events-calendar-lite'), strtolower($singular_label))
                 ),
                 'public'=>false,
                 'show_ui'=>(current_user_can($capability) ? true : false),
@@ -112,7 +112,7 @@ class MEC_feature_autoemails extends MEC_base
      */
     public function register_meta_boxes()
     {
-        add_meta_box('mec_email_metabox_details', __('Details', 'modern-events-calendar-lite'), array($this, 'meta_box_details'), $this->PT, 'normal', 'high');
+        add_meta_box('mec_email_metabox_details', esc_html__('Details', 'modern-events-calendar-lite'), array($this, 'meta_box_details'), $this->PT, 'normal', 'high');
     }
 
     public function meta_box_details($post)
@@ -121,7 +121,7 @@ class MEC_feature_autoemails extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -142,18 +142,18 @@ class MEC_feature_autoemails extends MEC_base
         if(defined('DOING_AUTOSAVE') and DOING_AUTOSAVE) return;
 
         // MEC Data
-        $mec = (isset($_POST['mec']) and is_array($_POST['mec'])) ? $_POST['mec'] : array();
+        $mec = (isset($_POST['mec']) and is_array($_POST['mec'])) ? $this->main->sanitize_deep_array($_POST['mec']) : array();
 
         // All Options
         update_post_meta($post_id, 'mec', $mec);
 
-        update_post_meta($post_id, 'mec_time', (isset($mec['time']) ? $mec['time'] : 1));
-        update_post_meta($post_id, 'mec_type', (isset($mec['type']) ? $mec['type'] : 'day'));
-        update_post_meta($post_id, 'mec_afterbefore', (isset($mec['afterbefore']) ? $mec['afterbefore'] : 'before'));
+        update_post_meta($post_id, 'mec_time', (isset($mec['time']) ? sanitize_text_field($mec['time']) : 1));
+        update_post_meta($post_id, 'mec_type', (isset($mec['type']) ? sanitize_text_field($mec['type']) : 'day'));
+        update_post_meta($post_id, 'mec_afterbefore', (isset($mec['afterbefore']) ? sanitize_text_field($mec['afterbefore']) : 'before'));
 
-        $events = ((isset($mec['events']) and is_array($mec['events'])) ? $mec['events'] : array());
+        $events = (isset($mec['events']) and is_array($mec['events']) and count($mec['events'])) ? array_map('sanitize_text_field', wp_unslash($mec['events'])) : array();
 
-        $all = (isset($mec['all']) ? $mec['all'] : 1);
+        $all = (isset($mec['all']) ? sanitize_text_field($mec['all']) : 1);
         if($all) $events = array();
 
         update_post_meta($post_id, 'mec_all', $all);

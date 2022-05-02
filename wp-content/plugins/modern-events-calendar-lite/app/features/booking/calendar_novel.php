@@ -70,38 +70,38 @@ $navigator_html = '';
 // Show previous navigation
 if(strtotime(date('Y-m-t', $_1month_before)) >= time())
 {
-    $navigator_html .= '<div class="mec-previous-month mec-load-month mec-previous-month" data-mec-year="'.date('Y', $_1month_before).'" data-mec-month="'.date('m', $_1month_before).'"><a href="#" class="mec-load-month-link"><i class="mec-sl-angle-left"></i> '.$this->main->date_i18n('F', $_1month_before).'</a></div>';
+    $navigator_html .= '<div class="mec-previous-month mec-load-month mec-previous-month" data-mec-year="'.date('Y', $_1month_before).'" data-mec-month="'.date('m', $_1month_before).'"><a href="#" class="mec-load-month-link"><i class="mec-sl-angle-left"></i> '.esc_html($this->main->date_i18n('F', $_1month_before)).'</a></div>';
 }
 
-$navigator_html .= '<div class="mec-calendar-header"><h2>'.$this->main->date_i18n('F Y', $current_month_time).'</h2></div>';
+$navigator_html .= '<div class="mec-calendar-header"><h2>'.esc_html($this->main->date_i18n('F Y', $current_month_time)).'</h2></div>';
 
 // Show next navigation
 if(strtotime(date('Y-m-01', $_1month_after)) >= time())
 {
-    $navigator_html .= '<div class="mec-next-month mec-load-month mec-next-month" data-mec-year="'.date('Y', $_1month_after).'" data-mec-month="'.date('m', $_1month_after).'"><a href="#" class="mec-load-month-link">'.$this->main->date_i18n('F', $_1month_after).' <i class="mec-sl-angle-right"></i></a></div>';
+    $navigator_html .= '<div class="mec-next-month mec-load-month mec-next-month" data-mec-year="'.date('Y', $_1month_after).'" data-mec-month="'.date('m', $_1month_after).'"><a href="#" class="mec-load-month-link">'.esc_html($this->main->date_i18n('F', $_1month_after)).' <i class="mec-sl-angle-right"></i></a></div>';
 }
 
 // Generating javascript code tpl
 $javascript = '<script type="text/javascript">
 jQuery(document).ready(function()
 {
-    jQuery("#mec_booking_calendar_'.$uniqueid.'").mecBookingCalendar(
+    jQuery("#mec_booking_calendar_'.esc_js($uniqueid).'").mecBookingCalendar(
     {
         active_month: {year: "'.date('Y', $current_month_time).'", month: "'.date('m', $current_month_time).'"},
         next_month: {year: "'.date('Y', $_1month_after).'", month: "'.date('m', $_1month_after).'"},
         ajax_url: "'.admin_url('admin-ajax.php', NULL).'",
-        id: "'.$uniqueid.'",
-        event_id: "'.$event->ID.'",
+        id: "'.esc_js($uniqueid).'",
+        event_id: "'.esc_js($event->ID).'",
     });
 });
 </script>';
 
 // Include javascript code into the page
-echo $javascript;
+echo MEC_kses::full($javascript);
 ?>
-<div class="mec-booking-calendar mec-wrap" id="mec_booking_calendar_<?php echo $uniqueid; ?>">
-    <div class="mec-booking-calendar-month-navigation"><?php echo $navigator_html; ?></div>
-    <div class="mec-calendar mec-box-calendar mec-event-calendar-classic mec-event-container-novel <?php echo $multiple_date; ?>">
+<div class="mec-booking-calendar mec-wrap" id="mec_booking_calendar_<?php echo esc_attr($uniqueid); ?>">
+    <div class="mec-booking-calendar-month-navigation"><?php echo MEC_kses::element($navigator_html); ?></div>
+    <div class="mec-calendar mec-box-calendar mec-event-calendar-classic mec-event-container-novel <?php echo esc_attr($multiple_date); ?>">
         <?php
             // Table Headings
             $headings = $this->main->get_weekday_abbr_labels();
@@ -142,7 +142,7 @@ echo $javascript;
                             $soldout = $this->main->is_soldout($event->ID, $start_datetime);
                             if($is_soldout and !$soldout) $is_soldout = false;
 
-                            $render .='<div class="mec-booking-calendar-date '.($soldout ? 'mec-booking-calendar-date-soldout' : '').'" data-timestamp="'.$this->book->timestamp($date['start'], $date['end']).'">' .(($date['start']['date'] !== $date['end']['date']) ? '<div class="mec-booking-calendar-date-hover">'.strip_tags($this->main->date_label($date['start'], $date['end'], $date_format, ' - ', false, (isset($date['allday']) ? $date['allday'] : 0), $event)).'</div><div class="mec-booking-calendar-time-hover">' : ($allday != 0 ? esc_html__('All Day' , 'modern-events-calendar-lite') : '')).strip_tags($this->main->date_label($date['start'], $date['end'], $time_format, ' - ', false, (isset($date['allday']) ? $date['allday'] : 0))).(($date['start']['date'] !== $date['end']['date']) ?'</div>' : '') .'</div>';
+                            $render .='<div class="mec-booking-calendar-date '.($soldout ? 'mec-booking-calendar-date-soldout' : '').'" data-timestamp="'.esc_attr($this->book->timestamp($date['start'], $date['end'])).'">' .(($date['start']['date'] !== $date['end']['date']) ? '<div class="mec-booking-calendar-date-hover">'.strip_tags($this->main->date_label($date['start'], $date['end'], $date_format, ' - ', false, (isset($date['allday']) ? $date['allday'] : 0), $event)).'</div><div class="mec-booking-calendar-time-hover">' : ($allday != 0 ? esc_html__('All Day' , 'modern-events-calendar-lite') : '')).strip_tags($this->main->date_label($date['start'], $date['end'], $time_format, ' - ', false, (isset($date['allday']) ? $date['allday'] : 0))).(($date['start']['date'] !== $date['end']['date']) ?'</div>' : '') .'</div>';
                             $first_day = strtotime($date['start']['date']) == $time ? ' first-day' : null;
                             $middle_day = (strtotime($date['end']['date']) != $time && strtotime($date['start']['date']) != $time) ? ' middle-day' : null;
                             $last_day = strtotime($date['end']['date']) == $time ? ' last-day' : null;
@@ -151,13 +151,13 @@ echo $javascript;
                     }
 
                     $repeat_class = $repeat > 1 ? ' mec-has-time-repeat' : '';
-                    $date_for_wrap = $repeat == 1 ? 'data-timestamp="'.$date_timestamp.'"' : '';
+                    $date_for_wrap = $repeat == 1 ? 'data-timestamp="'.esc_attr($date_timestamp).'"' : '';
                     $custom_class1 = $repeat == 1 ? ' mec-has-one-repeat-in-day' : '';
                     $custom_class2 = $repeat >= 1 ? ' mec-has-event-for-booking' : '';
                     $soldout_class = ($is_soldout ? ' mec-booking-calendar-date-soldout' : '');
 
-                    echo '<dt class="mec-calendar-day'.$default_day.$repeat_class.$custom_class1.$custom_class2.$first_day.$last_day.$middle_day.$soldout_class.'" '.$date_for_wrap.'><div class="mec-calendar-novel-selected-day"><span>'.$list_day.'</span></div>';
-                    echo '<div class="mec-booking-tooltip">'.$render.'</div>';
+                    echo '<dt class="mec-calendar-day '.$default_day.$repeat_class.$custom_class1.$custom_class2.$first_day.$last_day.$middle_day.$soldout_class.'" '.$date_for_wrap.'><div class="mec-calendar-novel-selected-day"><span>'.$list_day.'</span></div>';
+                    echo '<div class="mec-booking-tooltip">'.MEC_kses::full($render).'</div>';
                     echo '</dt>';
 
                     if($running_day == 6)
@@ -181,11 +181,11 @@ echo $javascript;
                 {
                     for($x = 1; $x <= (8 - $days_in_this_week); $x++)
                     {
-                        echo '<dt class="mec-table-nullday">'.$x.'</dt>';
+                        echo '<dt class="mec-table-nullday">'.esc_html($x).'</dt>';
                     }
                 }
             ?>
         </dl>
     </div>
 </div>
-<div class="mec-choosen-time-message disable"><?php echo __('Chosen Time:', 'modern-events-calendar-lite'); ?> <span class="mec-choosen-time"></span></div>
+<div class="mec-choosen-time-message disable"><?php echo esc_html__('Chosen Time:', 'modern-events-calendar-lite'); ?> <span class="mec-choosen-time"></span></div>

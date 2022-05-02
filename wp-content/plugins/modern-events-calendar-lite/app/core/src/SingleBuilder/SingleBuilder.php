@@ -194,6 +194,11 @@ class SingleBuilder extends Singleton {
                 $html = Widgets\EventWeather\EventWeather::getInstance()->output( $event_id, $atts );
 
                 break;
+            case 'event-public-download':
+
+                $html = Widgets\EventPublicDownload\EventPublicDownload::getInstance()->output( $event_id, $atts );
+
+                break;
         }
 
         return $html;

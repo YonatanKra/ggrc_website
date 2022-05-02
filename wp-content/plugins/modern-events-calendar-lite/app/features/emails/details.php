@@ -48,7 +48,7 @@ $upcoming_event_ids = $this->main->get_upcoming_event_ids();
                 <?php foreach($upcoming_event_ids as $upcoming_event_id): $event = get_post($upcoming_event_id); ?>
                 <li>
                     <label>
-                        <input type="checkbox" name="mec[events][]" value="<?php echo $event->ID; ?>" <?php echo (in_array($event->ID, $events) ? 'checked' : ''); ?>> <?php esc_html_e($event->post_title); ?>
+                        <input type="checkbox" name="mec[events][]" value="<?php echo esc_attr($event->ID); ?>" <?php echo (in_array($event->ID, $events) ? 'checked' : ''); ?>> <?php esc_html_e($event->post_title); ?>
                     </label>
                 </li>
                 <?php endforeach; ?>

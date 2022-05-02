@@ -92,7 +92,7 @@ class MEC_book extends MEC_base
                         $v_price = (isset($ticket_variation['price']) and trim($ticket_variation['price']) != '') ? $ticket_variation['price'] : 0;
 
                         $variation_amount = $v_price*$variation_count;
-                        $variation_title = $ticket_variation['title'].' ('.$variation_count.')';
+                        $variation_title = $ticket_variation['title'].' ('.esc_html($variation_count).')';
 
                         // Add To Total
                         $date_variations_amount += $variation_amount;
@@ -105,7 +105,7 @@ class MEC_book extends MEC_base
 
                             $new_count = ((int) $variation_details[$key]['count'] + $variation_count);
                             $variation_details[$key]['count'] = $new_count;
-                            $variation_details[$key]['description'] = __($ticket_variation['title'].' ('.$new_count.')', 'modern-events-calendar-lite');
+                            $variation_details[$key]['description'] = esc_html__($ticket_variation['title'].' ('.$new_count.')', 'modern-events-calendar-lite');
                         }
                     }
                 }
@@ -169,7 +169,7 @@ class MEC_book extends MEC_base
         }
 
         // Ticket Details
-        $details[] = array('amount'=>$total_tickets_amount, 'description'=>sprintf(__('%s Price', 'modern-events-calendar-lite'), $this->main->m('tickets', __('Tickets', 'modern-events-calendar-lite'))), 'type'=>'tickets');
+        $details[] = array('amount'=>$total_tickets_amount, 'description'=>sprintf(esc_html__('%s Price', 'modern-events-calendar-lite'), $this->main->m('tickets', esc_html__('Tickets', 'modern-events-calendar-lite'))), 'type'=>'tickets');
 
         // Variation Details
         foreach($variation_details as $variation_detail) $details[] = $variation_detail;
@@ -435,10 +435,31 @@ class MEC_book extends MEC_base
         {
             // Work or don't work auto confirmation when pay through pay locally payment.
             $gateways_settings = get_option('mec_options', array());
-            $pay_locally_gateway = ((isset($_GET['action']) and trim($_GET['action']) == 'mec_do_transaction_pay_locally') and (isset($gateways_settings['gateways'][1]['disable_auto_confirmation']) and trim($gateways_settings['gateways'][1]['disable_auto_confirmation']))) ? true : false;
-            $bank_transfer_gateway = ((isset($_GET['action']) and trim($_GET['action']) == 'mec_do_transaction_bank_transfer') and (isset($gateways_settings['gateways'][8]['disable_auto_confirmation']) and trim($gateways_settings['gateways'][8]['disable_auto_confirmation']))) ? true : false;
+            $gateway_key = null;
+            $can_auto_confirm = true;
+            $action =  isset($_GET['action']) ? sanitize_text_field( $_GET['action'] ) : false;
+            switch( $action ){
+                case 'mec_do_transaction_pay_locally':
+                case 'mec_cart_do_transaction_pay_locally':
 
-            if(!$pay_locally_gateway and !$bank_transfer_gateway) $this->confirm($book_id, 'auto');
+                    $gateway_key = 1;
+                    break;
+                case 'mec_do_transaction_bank_transfer':
+                case 'mec_cart_do_transaction_bank_transfer':
+
+                    $gateway_key = 8;
+                    break;
+            }
+
+            if( !is_null( $gateway_key ) && isset($gateways_settings['gateways'][ $gateway_key ]['disable_auto_confirmation']) && trim($gateways_settings['gateways'][ $gateway_key ]['disable_auto_confirmation']) ){
+
+                $can_auto_confirm = false;
+            }
+
+            if( $can_auto_confirm ) {
+
+                $this->confirm($book_id, 'auto');
+            }
         }
 
         // Latest Booking Date & Time
@@ -738,7 +759,7 @@ class MEC_book extends MEC_base
         $availability = array();
         foreach($dates as $date)
         {
-            $ex = explode(':', $date);
+            $ex = explode(':', sanitize_text_field($date));
             $date = $ex[0];
 
             $a = $this->get_tickets_availability($event_id, $date);
@@ -1097,12 +1118,15 @@ class MEC_book extends MEC_base
         ));
     }
 
-    public function get_thankyou_page($page_id, $transaction_id)
+    public function get_thankyou_page($page_id, $transaction_id = NULL, $cart_id = NULL)
     {
         $main = $this->getMain();
         $page = get_permalink($page_id);
 
-        return ($transaction_id ? $main->add_qs_var('transaction', $transaction_id, $page) : $page);
+        if($transaction_id) $page = $main->add_qs_var('transaction', $transaction_id, $page);
+        if($cart_id) $page = $main->add_qs_var('cart', $cart_id, $page);
+
+        return $page;
     }
 
     public function invoice_link_shortcode()
@@ -1111,7 +1135,7 @@ class MEC_book extends MEC_base
         if(!$transaction) return NULL;
 
         $book = $this->getBook();
-        return '<a href="'.$book->get_invoice_link($transaction).'" target="_blank">'.__('Download Invoice', 'modern-events-calendar-lite').'</a>';
+        return '<a href="'.esc_url($book->get_invoice_link($transaction)).'" target="_blank">'.esc_html__('Download Invoice', 'modern-events-calendar-lite').'</a>';
     }
 
     public function get_total_attendees($book_id)
@@ -1214,7 +1238,12 @@ class MEC_book extends MEC_base
         // No Ticket Found!
         if(!is_array($tickets) or (is_array($tickets) and !count($tickets))) return $prices;
 
-        foreach($tickets as $ticket_id=>$ticket) $prices[$ticket_id] = $this->get_ticket_price_key($ticket, $date, $event_id, $key);
+        foreach($tickets as $ticket_id=>$ticket) {
+
+            $price = $this->get_ticket_price_key($ticket, $date, $event_id, $key);
+            $prices[$ticket_id] = apply_filters( 'mec_filter_ticket_price_label', $price, $ticket, $event_id, $this );
+
+        }
         return $prices;
     }
 
@@ -1358,7 +1387,7 @@ class MEC_book extends MEC_base
             {
                 if(!$variation_count or ($variation_count and $variation_count < 0)) continue;
 
-                $variation_price += isset($ticket_variations[$variation_id]['price']) ? $ticket_variations[$variation_id]['price'] : 0;
+                $variation_price += ((isset($ticket_variations[$variation_id]['price']) and is_numeric($ticket_variations[$variation_id]['price'])) ? $ticket_variations[$variation_id]['price'] : 0);
             }
         }
 

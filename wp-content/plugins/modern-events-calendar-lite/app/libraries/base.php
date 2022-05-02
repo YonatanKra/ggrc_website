@@ -21,17 +21,6 @@ abstract class MEC_base extends MEC
     }
     
     /**
-     * Returns MEC_request instance
-     * @final
-     * @author Webnus <info@webnus.biz>
-     * @return MEC_request instance
-     */
-    final public function getRequest()
-    {
-        return MEC::getInstance('app.libraries.request');
-    }
-    
-    /**
      * Returns MEC_file instance
      * @final
      * @author Webnus <info@webnus.biz>
@@ -172,7 +161,7 @@ abstract class MEC_base extends MEC
      */
     final public function getPRO()
     {
-        return MEC::getInstance(base64_decode('YXBwLmxpYnJhcmllcy5wcm8='));
+        return MEC::getInstance('app.libraries.pro');
     }
 
     /**

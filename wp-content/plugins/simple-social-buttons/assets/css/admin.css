@@ -943,18 +943,18 @@ div.inside div.simplesocialbuttons-nav li a {
 
 }
 
-.simplesocial-postion-outer-wrapper {
+.simplesocial-position-outer-wrapper {
   font-size: 0;
   margin: 0 -20px;
 }
 
-.simplesocial-postion-outer {
+.simplesocial-position-outer {
   width: 20%;
   display: inline-block;
   padding: 0 20px;
 }
 
-.simplesocial-postion-outer label {
+.simplesocial-position-outer label {
   font-weight: 600;
   font-size: 14px;
   color: #444;
@@ -966,15 +966,15 @@ div.inside div.simplesocialbuttons-nav li a {
   margin-bottom: 40px;
 }
 
-.simplesocial-postion-outer label.social-active {
+.simplesocial-position-outer label.social-active {
   border: 1px solid #0085ba;
 }
 
-.simplesocial-postion-outer label.simplesocial-popup {
+.simplesocial-position-outer label.simplesocial-popup {
   position: relative;
 }
 
-.simplesocial-postion-outer label.simplesocial-popup .simplesocial-highlight {
+.simplesocial-position-outer label.simplesocial-popup .simplesocial-highlight {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1183,11 +1183,11 @@ div.inside div.simplesocialbuttons-nav li a {
   right: 0;
 }
 
-.simplesocial-postion-box input[type="checkbox"] {
+.simplesocial-position-box input[type="checkbox"] {
   display: none;
 }
 
-.simplesocial-postion-box input[type="checkbox"] + .checkbox {
+.simplesocial-position-box input[type="checkbox"] + .checkbox {
   position: absolute;
   top: 100%;
   left: 50%;
@@ -1200,12 +1200,12 @@ div.inside div.simplesocialbuttons-nav li a {
   border: 1px solid #b4b9be;
 }
 
-.simplesocial-postion-box input[type=checkbox]:checked + .checkbox {
+.simplesocial-position-box input[type=checkbox]:checked + .checkbox {
   background: #0085ba;
   border-color: #0085ba;
 }
 
-.simplesocial-postion-box input[type=checkbox]:checked + .checkbox:before {
+.simplesocial-position-box input[type=checkbox]:checked + .checkbox:before {
   content: "";
   width: 10px;
   height: 2px;
@@ -1219,7 +1219,7 @@ div.inside div.simplesocialbuttons-nav li a {
   z-index: 100;
 }
 
-.simplesocial-postion-box input[type=checkbox]:checked + .checkbox:after {
+.simplesocial-position-box input[type=checkbox]:checked + .checkbox:after {
   content: "";
   width: 5px;
   height: 2px;
@@ -1849,7 +1849,7 @@ div.inside .simplesocial-form-section ul.options li {
 }
 
 @media screen and (max-width: 1500px) {
-  .simplesocial-postion-outer {
+  .simplesocial-position-outer {
     width: 33.333%;
   }
 }
@@ -1861,7 +1861,7 @@ div.inside .simplesocial-form-section ul.options li {
 }
 
 @media screen and (max-width: 1100px) {
-  .simplesocial-postion-outer {
+  .simplesocial-position-outer {
     width: 50%;
   }
 }
@@ -1890,12 +1890,12 @@ div.inside .simplesocial-form-section ul.options li {
 }
 
 @media screen and (max-width: 480px) {
-  .simplesocial-postion-outer {
+  .simplesocial-position-outer {
     width: 100%;
     max-width: 300px;
   }
 
-  .simplesocial-postion-outer-wrapper {
+  .simplesocial-position-outer-wrapper {
     text-align: center;
   }
 

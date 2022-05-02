@@ -547,17 +547,10 @@ a.mec-wizard-close-button:hover svg path {
     </a>
 </div>
 
-
-<?php 
-$path_event = MEC::import('app.features.popup.event', true, true);
-include $path_event;
-
-$path_shortcode = MEC::import('app.features.popup.shortcode', true, true);
-include $path_shortcode;
-
-
-$path_settings = MEC::import('app.features.popup.settings', true, true);
-include $path_settings;
+<?php
+include MEC::import('app.features.popup.event', true, true);
+include MEC::import('app.features.popup.shortcode', true, true);
+include MEC::import('app.features.popup.settings', true, true);
 ?>
 <script>
     jQuery(document).on('lity:close', function(event, instance) {

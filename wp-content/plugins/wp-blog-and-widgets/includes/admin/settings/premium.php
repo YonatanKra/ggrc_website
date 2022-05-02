@@ -12,7 +12,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 <div class="wrap">
 
-	<h2><?php _e( 'WP Blog and Widget with ', 'wp-blog-and-widgets' ); ?><span class="h-blue"><?php _e('Essential Plugin Bundle', 'wp-blog-and-widgets'); ?></span></h2>
+	<h2><?php _e( 'WP Blog and Widget', 'wp-blog-and-widgets' ); ?></h2>
 
 	<style>
 		.wpos-plugin-pricing-table thead th h2{font-weight: 400; font-size: 2.4em; line-height:normal; margin:0px; color: #2ECC71;}
@@ -85,249 +85,163 @@ if ( !defined( 'ABSPATH' ) ) {
 	</style>
 	
 	<div id="poststuff">
-		<div id="post-body" class="metabox-holder columns-2">
+		<div id="post-body" class="metabox-holder">
 			<div id="post-body-content">
-					<h3 class="larger-font"><?php _e( 'Well <span style="color:#388e3c"> optimized</span>, <span style="color:#7b1fa2">light weight</span> & <span style="color:#3e50b4">expandable</span> plugins <br /> for <span style="background:#ff4081; color:#fff;">web site, landing pages &amp; conversions</span>', 'wp-blog-and-widgets' ); ?></h3>
-				<h3 class=""><?php _e( 'Multiple pre-built template options with <span class="h-orange"> Gutenberg, DIVI, Elementor, Avada, VC/WPbakery </span>etc page builder/themes', 'wp-blog-and-widgets' ); ?></h3>
-				<h3 class="larger-font"><?php _e( '<span class="h-blue">46 plugins</span>, <span class="h-blue">10 sliders</span> with <span class="h-blue">2000+</span> pre-built templates in <span class="h-blue">Essential Bundle</span>', 'wp-blog-and-widgets' ); ?></h3>
-				<h3 style="text-align:center;"><?php _e( 'Top plugins category wise:', 'wp-blog-and-widgets' ); ?></h3>
-				
-				<table class="wpos-plugin-pricing-table wpos-about-epb-table">
+				<h3 style="text-align:center"><?php _e( 'Compare "WP Blog and Widget" Free VS Pro', 'wp-blog-and-widgets' ); ?></h3>
+				<table class="wpos-plugin-pricing-table">
+					<colgroup></colgroup>
+					<colgroup></colgroup>
+					<colgroup></colgroup>
 					<thead>
 						<tr>
-							<th>Web Site</th>
-							<th>Landing Pages</th>
-							<th>Conversions</th>	    		
-						</tr>
-						<tr>
-							<td>
-								<ul>
-									<li>Logo Showcase Responsive Slider</li>
-									<li>Responsive Recent Post Slider</li>
-									<li>Slick Slider and Image Carousel</li>
-									<li>Blog Designer – Post and Widget</li>
-									<li>Album and Image Gallery plus Lightbox</li>
-									<li>Essential Security</li>
-								</ul>
-								<div class="wp-plugin-icon">
-									<img src="<?php echo WPBAW_URL; ?>assets/images/utility-50.png" width="26">
-									<img src="<?php echo WPBAW_URL; ?>assets/images/security-icon.png" width="26">
-								</div>
-							</td>
-							<td>
-								<ul>
-									<li>Popup Anything – A Marketing Popup</li>
-									<li>Countdown Timer Ultimate</li>
-									<li>Woo Product Slider and Carousel</li>
-									<li>Pricing Table Ultimate Pro</li>
-									<li> Social Proof</li>
-									<li> Whatsapp Chat Support</li>
-									
-								</ul>
-								<div class="wp-plugin-icon">
-									<img src="<?php echo WPBAW_URL; ?>assets/images/utility-50.png" width="26">
-									<img src="<?php echo WPBAW_URL; ?>assets/images/inboundwp-50.png" width="26">
-								</div>
-							</td>
-							<td>
-								<ul>
-									<li>Popup Anything – A Marketing Popup</li>
-									<li>Countdown Timer Ultimate</li>
-									<li>SlidersPack</li>
-									<li>Testimonial with Widget</li>
-									<li>Social Proof</li>
-									<li>Whatsapp Chat Support</li>
-								</ul>
-								<div class="wp-plugin-icon">
-									<img src="<?php echo WPBAW_URL; ?>assets/images/utility-50.png" width="26">
-									<img src="<?php echo WPBAW_URL; ?>assets/images/inboundwp-50.png" width="26">
-									<img src="<?php echo WPBAW_URL; ?>assets/images/SlidersPack-50.png" width="26">
-									<img src="<?php echo WPBAW_URL; ?>assets/images/security-icon.png" width="26">
-								</div>
-							</td>
+							<th></th>
+							<th>
+								<h2>Free</h2>
+							</th>
+							<th>
+								<h2 class="wpos-epb">Premium</h2>
+								<a href="<?php echo WPBAW_PLUGIN_LINK_UPGRADE; ?>" target="_blank">Buy Now</a>
+							</th>
 						</tr>
 					</thead>
+
+					<tfoot>
+						<tr>
+							<th></th>
+							<td></td>
+							<td>
+							<a href="<?php echo WPBAW_PLUGIN_LINK_UPGRADE; ?>" target="_blank">Buy Now</a></td>
+						</tr>
+					</tfoot>
+
+					<tbody>
+						<tr>
+							<th>Designs <span>Designs that make your website better</span></th>
+							<td>1</td>
+							<td>120+</td>
+						</tr>
+						<tr>
+							<th>Shortcodes <span>Shortcode provide output to the front-end side</span></th>
+							<td>1 (Blog, Recent Blog)</td>
+							<td>6 (Blog, Recent Blog, Slider, Gridbox , Gridbox Slider , List)</td>
+						</tr>
+						<tr>
+							<th>Shortcode Parameters <span>Add extra power to the shortcode</span></th>
+							<td>10</td>
+							<td>30+</td>
+						</tr>
+						<tr>
+							<th>Shortcode Generator <span>Play with all shortcode parameters with preview panel. No documentation required!!</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>WP Templating Features <span class="subtext">You can modify plugin html/designs in your current theme.</span></th>
+							<td><i class="dashicons dashicons-no-alt"> </i></td>
+							<td><i class="dashicons dashicons-yes"> </i></td>
+						</tr>
+						<tr>
+							<th>Widgets<span> WordPress Widgets to your sidebars.</span></th>
+							<td>1</td>
+							<td>6</td>
+						</tr>
+						<tr>
+							<th>Drag & Drop Post Order Change <span>Arrange your desired post with your desired order and display</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Gutenberg Block Supports <span>Use this plugin with Gutenberg easily</span></th>
+							<td><i class="dashicons dashicons-yes"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Elementor Page Builder Support <em class="wpos-new-feature">New</em> <span>Use this plugin with Elementor easily</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Bevear Builder Support <em class="wpos-new-feature">New</em> <span>Use this plugin with Bevear Builder easily</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>SiteOrigin Page Builder Support <em class="wpos-new-feature">New</em> <span>Use this plugin with SiteOrigin easily</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Divi Page Builder Native Support <em class="wpos-new-feature">New</em> <span>Use this plugin with Divi Builder easily</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Fusion Page Builder (Avada) native support <em class="wpos-new-feature">New</em> <span>Use this plugin with Fusion(Avada) Builder easily</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>WPBakery Page Builder Supports <span>Use this plugin with Visual Composer/WPBakery Page Builder easily</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Custom Read More link for Post <span>Redirect post to third party destination if any</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Publicize <span> Support with Jetpack to publish your News post on</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr><tr>
+							<th>Display Desired Post <span>Display only the post you want</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Display Post for Particular Categories <span>Display only the posts with particular category</span></th>
+							<td><i class="dashicons dashicons-yes"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Exclude Some Posts <span>Do not display the posts you want</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Exclude Some Categories <span>Do not display the posts for particular categories</span></th>
+							<td><i class="dashicons dashicons-no-alt"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Post Order / Order By Parameters <span>Display post according to date, title and etc</span></th>
+							<td><i class="dashicons dashicons-yes"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Multiple Slider Parameters <span>Slider parameters like autoplay, number of slide, sider dots and etc.</span></th>
+							<td><i class="dashicons dashicons-yes"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Slider RTL Support <span>Slider supports for RTL website</span></th>
+							<td><i class="dashicons dashicons-yes"></i></td>
+							<td><i class="dashicons dashicons-yes"></i></td>
+						</tr>
+						<tr>
+							<th>Automatic Update <span>Get automatic  plugin updates </span></th>
+							<td>Lifetime</td>
+							<td>Lifetime</td>
+						</tr>
+						<tr>
+							<th>Support <span>Get support for plugin</span></th>
+							<td>Limited</td>
+							<td>1 Year</td>
+						</tr>
+					</tbody>
 				</table>
-				<div class="wp-icons">
-					<ul>
-						<li><img src="<?php echo WPBAW_URL; ?>assets/images/utility-50.png" width="18"> - Utility Plugin (Total 39), </li>
-						<li><img src="<?php echo WPBAW_URL; ?>assets/images/inboundwp-50.png" width="15">  -  Inbound Maketing (Total 6), </li>
-						<li><img src="<?php echo WPBAW_URL; ?>assets/images/SlidersPack-50.png" width="16">  -  SlidersPack (Total 10), </li>
-						<li><img src="<?php echo WPBAW_URL; ?>assets/images/security-icon.png" width="16">  -  Essnetial Security</li>
-					</ul>
-					<a class="epb-cutom-button" href="<?php echo WPBAW_SITE_LINK; ?>/pricing/?utm_source=WP&utm_medium=Blog&utm_campaign=Upgrade-PRO-Top-Cat" target="_blank">Buy Now</a>
-				</div>
-
-				<h3 style="text-align:center"><?php _e( 'Compare "WP Blog and Widget" Free VS Pro', 'wp-blog-and-widgets' ); ?></h3>
-					<table class="wpos-plugin-pricing-table">
-						<colgroup></colgroup>
-						<colgroup></colgroup>
-						<colgroup></colgroup>
-						<thead>
-							<tr>
-								<th></th>
-								<th>
-									<h2>Free</h2>
-								</th>
-								<th>
-									<h2 class="wpos-epb">Premium</h2>
-									<p>Gain access to <strong>WP Blog and Widget</strong> included in <br /><strong class="wpos-epb">Essential Plugin Bundle</strong></p>
-									<a href="<?php echo WPBAW_SITE_LINK; ?>/pricing/?utm_source=WP&utm_medium=Blog&utm_campaign=Upgrade-PRO" target="_blank">Buy Now</a>
-								</th>
-							</tr>
-						</thead>
-
-						<tfoot>
-							<tr>
-								<th></th>
-								<td></td>
-								<td><p>Gain access to <strong>WP Blog and Widget</strong> included in <br /><strong>Essential Plugin Bundle</strong></p>
-								<a href="<?php echo WPBAW_SITE_LINK; ?>/pricing/?utm_source=WP&utm_medium=Blog&utm_campaign=Upgrade-PRO" target="_blank">Buy Now</a></td>
-							</tr>
-						</tfoot>
-
-						<tbody>
-							<tr>
-								<th>Designs <span>Designs that make your website better</span></th>
-								<td>1</td>
-								<td>120+</td>
-							</tr>
-							<tr>
-								<th>Shortcodes <span>Shortcode provide output to the front-end side</span></th>
-								<td>1 (Blog, Recent Blog)</td>
-								<td>6 (Blog, Recent Blog, Slider, Gridbox , Gridbox Slider , List)</td>
-							</tr>
-							<tr>
-								<th>Shortcode Parameters <span>Add extra power to the shortcode</span></th>
-								<td>10</td>
-								<td>30+</td>
-							</tr>
-							<tr>
-								<th>Shortcode Generator <span>Play with all shortcode parameters with preview panel. No documentation required!!</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>WP Templating Features <span class="subtext">You can modify plugin html/designs in your current theme.</span></th>
-								<td><i class="dashicons dashicons-no-alt"> </i></td>
-								<td><i class="dashicons dashicons-yes"> </i></td>
-							</tr>
-							<tr>
-								<th>Widgets<span> WordPress Widgets to your sidebars.</span></th>
-								<td>1</td>
-								<td>6</td>
-							</tr>
-							<tr>
-								<th>Drag & Drop Post Order Change <span>Arrange your desired post with your desired order and display</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Gutenberg Block Supports <span>Use this plugin with Gutenberg easily</span></th>
-								<td><i class="dashicons dashicons-yes"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Elementor Page Builder Support <em class="wpos-new-feature">New</em> <span>Use this plugin with Elementor easily</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Bevear Builder Support <em class="wpos-new-feature">New</em> <span>Use this plugin with Bevear Builder easily</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>SiteOrigin Page Builder Support <em class="wpos-new-feature">New</em> <span>Use this plugin with SiteOrigin easily</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Divi Page Builder Native Support <em class="wpos-new-feature">New</em> <span>Use this plugin with Divi Builder easily</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Fusion Page Builder (Avada) native support <em class="wpos-new-feature">New</em> <span>Use this plugin with Fusion(Avada) Builder easily</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>WPBakery Page Builder Supports <span>Use this plugin with Visual Composer/WPBakery Page Builder easily</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Custom Read More link for Post <span>Redirect post to third party destination if any</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Publicize <span> Support with Jetpack to publish your News post on</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr><tr>
-								<th>Display Desired Post <span>Display only the post you want</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Display Post for Particular Categories <span>Display only the posts with particular category</span></th>
-								<td><i class="dashicons dashicons-yes"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Exclude Some Posts <span>Do not display the posts you want</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Exclude Some Categories <span>Do not display the posts for particular categories</span></th>
-								<td><i class="dashicons dashicons-no-alt"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Post Order / Order By Parameters <span>Display post according to date, title and etc</span></th>
-								<td><i class="dashicons dashicons-yes"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Multiple Slider Parameters <span>Slider parameters like autoplay, number of slide, sider dots and etc.</span></th>
-								<td><i class="dashicons dashicons-yes"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Slider RTL Support <span>Slider supports for RTL website</span></th>
-								<td><i class="dashicons dashicons-yes"></i></td>
-								<td><i class="dashicons dashicons-yes"></i></td>
-							</tr>
-							<tr>
-								<th>Automatic Update <span>Get automatic  plugin updates </span></th>
-								<td>Lifetime</td>
-								<td>Lifetime</td>
-							</tr>
-							<tr>
-								<th>Support <span>Get support for plugin</span></th>
-								<td>Limited</td>
-								<td>1 Year</td>
-							</tr>
-						</tbody>
-					</table>
-	</div>	
-				<!--Upgrad to Pro HTML -->
-					<div id="postbox-container-1" class="postbox-container wpos-sidebar">
-						<div class="wpos-epb-wrap">
-							<h2><span>Well, What's inside our</span> Essential Plugin Bundle?</h2>
-							<ul>
-								<li><b>40+ Utility Plugins</b> including <span><?php echo WPBAW_Name; ?> premium </span> version.</li>
-								<li><b>Inbound Marketing</b> with popup anything - a marketing popup tools that makes your visitors engage.</li>
-								<li><b>10+ Sliderspack</b> for the best post, image &amp; logo sliders.</li>
-								<li><b>Popup Anything a Marketing Popup</b> engage with customers, subscribers, leads and sales with Popup Anything.</li>
-							</ul>			
-							<p>with the best themes compatibility</b> & at the most <b>competitive price</b> ever the <b>ultimate bundle</b> with all our premium <b>essential plugins</b> in one single bundle.</p>
-							<a class="button-yellow button-orange" style="margin-bottom:0px;" href="<?php echo WPBAW_SITE_LINK; ?>/essential-bundle/?utm_source=WP&utm_medium=Blog&utm_campaign=EPB-Upgrade-PRO" target="_blank">Buy Now</a>
-						</div>
-					</div><!-- #post-container-1 -->
 			</div>
-		</div>			
+		</div>
+	</div>			
 </div>

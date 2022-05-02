@@ -68,7 +68,10 @@ class MEC
         }
 
         // Initialize Auto Update Feaature
-        if($factory->getPRO()) $factory->load_auto_update();
+        if($factory->getPRO()) {
+            define('MEC_API_URL', 'https://webnus.net/api/v3');
+            $factory->load_auto_update();
+        } 
 
         // Registering MEC actions
         $factory->load_actions();
@@ -107,9 +110,7 @@ class MEC
         $factory->action('admin_enqueue_scripts', array($factory, 'load_backend_assets'), 0);
 
         // Include needed assets (CSS, JavaScript etc) in the website frontend
-
-
-        (isset($settings['assets_in_footer_status']) and $settings['assets_in_footer_status'] == '1') ? $factory->action('wp_footer', array($factory, 'load_frontend_assets'), 0): $factory->action('wp_enqueue_scripts', array($factory, 'load_frontend_assets'), 0);
+        (isset($settings['assets_in_footer_status']) and $settings['assets_in_footer_status'] == '1') ? $factory->action('wp_footer', array($factory, 'load_frontend_assets'), 0) : $factory->action('wp_enqueue_scripts', array($factory, 'load_frontend_assets'), 0);
 
         // Register the shortcodes
         $factory->action('init', array($factory, 'load_shortcodes'));

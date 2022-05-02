@@ -337,10 +337,11 @@ class MEC_skin_monthly_view extends MEC_skins
      */
     public function load_month()
     {
-        $this->sf = $this->request->getVar('sf', array());
-        $apply_sf_date = $this->request->getVar('apply_sf_date', 1);
-        $atts = $this->sf_apply($this->request->getVar('atts', array()), $this->sf, $apply_sf_date);
-        $navigator_click = $this->request->getVar('navigator_click', false);
+        $this->sf = (isset($_REQUEST['sf']) and is_array($_REQUEST['sf'])) ? $this->main->sanitize_deep_array($_REQUEST['sf']) : array();
+        $apply_sf_date = isset($_REQUEST['apply_sf_date']) ? sanitize_text_field($_REQUEST['apply_sf_date']) : 1;
+        $atts = $this->sf_apply(((isset($_REQUEST['atts']) and is_array($_REQUEST['atts'])) ? $this->main->sanitize_deep_array($_REQUEST['atts']) : array()), $this->sf, $apply_sf_date);
+
+        $navigator_click = isset($_REQUEST['navigator_click']) ? (bool) sanitize_text_field($_REQUEST['navigator_click']) : false;
 
         // Initialize the skin
         $this->initialize($atts);
@@ -365,8 +366,8 @@ class MEC_skin_monthly_view extends MEC_skins
            else
             {
                 // Start Date
-                $this->year = $this->request->getVar('mec_year', current_time('Y'));
-                $this->month = $this->request->getVar('mec_month', current_time('m'));
+                $this->year = isset($_REQUEST['mec_year']) ? sanitize_text_field($_REQUEST['mec_year']) : current_time('Y');
+                $this->month = isset($_REQUEST['mec_month']) ? sanitize_text_field($_REQUEST['mec_month']) : current_time('m');
             }
 
             if($this->show_only_expired_events)
@@ -420,8 +421,8 @@ class MEC_skin_monthly_view extends MEC_skins
 
         if($this->main->is_day_first())
         {
-            return '<h6 class="mec-table-side-title">'.sprintf(__('Events for %s %s', 'modern-events-calendar-lite'), '<span class="mec-color mec-table-side-day"> '.$date_suffix.'</span>', $this->main->date_i18n('F', $time)).'</h6>';
+            return '<h6 class="mec-table-side-title">'.sprintf(esc_html__('Events for %s %s', 'modern-events-calendar-lite'), '<span class="mec-color mec-table-side-day"> '.esc_html($date_suffix).'</span>', esc_html($this->main->date_i18n('F', $time))).'</h6>';
         }
-        else return '<h6 class="mec-table-side-title">'.sprintf(__('Events for %s', 'modern-events-calendar-lite'), $this->main->date_i18n('F', $time)).'</h6><h3 class="mec-color mec-table-side-day"> '.$date_suffix.'</h3>';
+        else return '<h6 class="mec-table-side-title">'.sprintf(esc_html__('Events for %s', 'modern-events-calendar-lite'), esc_html($this->main->date_i18n('F', $time))).'</h6><h3 class="mec-color mec-table-side-day"> '.esc_html($date_suffix).'</h3>';
     }
 }

@@ -48,7 +48,7 @@ class FeaturedImage extends WidgetBase {
 
 		if ( true === $this->is_editor_mode && empty($html) ) {
 
-			$html = '<img src="' . plugins_url('empty-pic.jpg' , __FILE__ ) . '" width="'.$atts['image_width'].'" height="'.$atts['image_height'].'"> ';
+			$html = '<img src="' . esc_attr( plugins_url('empty-pic.jpg' , __FILE__ ) ) . '" width="'. esc_attr( $atts['image_width'] ) .'" height="'. esc_attr( $atts['image_height'] ).'"> ';
 		}
 
 		return  $html;

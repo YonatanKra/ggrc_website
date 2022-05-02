@@ -49,7 +49,7 @@ class Ssb_Settings {
 				),
 				array(
 					'id'       => 'ssb_positions',
-					'title'    => __( 'Social Buttons Postions', 'simple-social-buttons' ),
+					'title'    => __( 'Social Buttons Positions', 'simple-social-buttons' ),
 					'priority' => '20',
 				),
 				array(
@@ -195,7 +195,7 @@ class Ssb_Settings {
 				),
 				array(
 					'name'     => 'posts',
-					'label'    => __( 'Post type Settings', 'simple-social-buttons' ),
+					'label'    => __( 'Post Type Settings', 'simple-social-buttons' ),
 					'desc'     => __( 'Multi checkbox description', 'simple-social-buttons' ),
 					'type'     => 'ssb_post_types',
 					'default'  => array(
@@ -325,7 +325,7 @@ class Ssb_Settings {
 				),
 				array(
 					'name'     => 'posts',
-					'label'    => __( 'Post type Settings', 'simple-social-buttons' ),
+					'label'    => __( 'Post Type Settings', 'simple-social-buttons' ),
 					'desc'     => __( 'Multi checkbox description', 'simple-social-buttons' ),
 					'type'     => 'ssb_post_types',
 					'default'  => array(
@@ -372,7 +372,7 @@ class Ssb_Settings {
 				'ssb_positions' => array(
 					array(
 						'name'    => 'position',
-						'label'   => __( 'Postions', 'simple-social-buttons' ),
+						'label'   => __( 'Positions', 'simple-social-buttons' ),
 						'desc'    => __( 'Multi checkbox description', 'simple-social-buttons' ),
 						'type'    => 'position',
 						'default' => 'inline',

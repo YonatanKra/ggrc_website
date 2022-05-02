@@ -148,6 +148,7 @@ class MEC_feature_mec extends MEC_base
 
         // License Activation
         $this->factory->action('wp_ajax_activate_license', array($this, 'activate_license'));
+        $this->factory->action('wp_ajax_revoke_license', array($this, 'revoke_license'));
 
         // Close Notification
         $this->factory->action('wp_ajax_close_notification', array($this, 'close_notification'));
@@ -176,7 +177,7 @@ class MEC_feature_mec extends MEC_base
         $this->factory->action('wp_ajax_total-booking-get-reports',array($this, 'dashboard_widget_total_booking_ajax_handler'));
 
         // Custom Capability Map
-        if (is_admin()) $this->factory->filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
+        if(is_admin()) $this->factory->filter('map_meta_cap', array($this, 'map_meta_cap'), 10, 4);
 
         // Protected Content Shortcode
         if($this->getPRO()) $this->factory->shortcode('mec-only-booked-users', array($this, 'only_booked_users_content'));
@@ -197,6 +198,15 @@ class MEC_feature_mec extends MEC_base
         {
             update_option('mec_latest_event_datetime', current_time('YmdHis'), false);
         });
+
+        // Kses
+        MEC::import('app.libraries.kses');
+
+        $this->factory->filter('mec_kses_tags', array('MEC_kses', 'tags'), 10, 2);
+        $this->factory->filter('safe_style_css', array('MEC_kses', 'styles'));
+
+        // Upload
+        $this->factory->filter('upload_mimes', array($this, 'upload_mimes'));
     }
 
     /* Activate License */
@@ -207,30 +217,51 @@ class MEC_feature_mec extends MEC_base
             // Current User is not Permitted
             if(!current_user_can('manage_options')) $this->main->response(array('success'=>0, 'code'=>'ADMIN_ONLY'));
 
-            if(!wp_verify_nonce($_REQUEST['nonce'], 'mec_settings_nonce')) exit();
+            if(!wp_verify_nonce(sanitize_text_field($_REQUEST['nonce']), 'mec_settings_nonce')) exit();
 
             $options = get_option('mec_options');
-            $options['product_name'] = $_REQUEST['content']['LicenseTypeJson'];
-            $options['purchase_code'] = $_REQUEST['content']['PurchaseCodeJson'];
+            $options['product_name'] = sanitize_text_field($_REQUEST['content']['LicenseTypeJson']);
+            $options['purchase_code'] = sanitize_text_field($_REQUEST['content']['PurchaseCodeJson']);
+            $payload = array('message'=> '' , 'status'=> '', 'button_text' => '');
 
             $verify = NULL;
             $verify = $this->plugin_activation_request($options);
 
             if($verify and !is_null($verify) and isset($verify->item_link) and !is_null($verify->item_link))
             {
-                $LicenseStatus = 'success';
+                $payload['message'] = esc_html__('success');
+                $payload['status'] = true;
+                $payload['button_text'] = esc_html__('revoke' , 'modern-events-calendar-lite');
                 update_option('mec_license_status', 'active');
                 $options['product_id'] = $verify->item_id;
             }
             else
             {
-                $LicenseStatus = __('Activation failed. Please check your purchase code or license type.<br><b>Note: Your purchase code should match your licesne type.</b>', 'modern-events-calendar-lite') . '<a style="text-decoration: underline; padding-left: 7px;" href="https://webnus.net/dox/modern-events-calendar/auto-update-issue/" target="_blank">'  . __('Troubleshooting', 'modern-events-calendar-lite') . '</a>';
+                $payload['message'] = esc_html__('Activation failed');
+                $payload['status'] = false;
+                $payload['button_text'] = esc_html__('submit' , 'modern-events-calendar-lite');
                 update_option('mec_license_status', 'faild');
             }
-            
 
-            update_option( 'mec_options', $options);
-            echo $LicenseStatus;
+            update_option('mec_options', $options);
+            $payload = json_encode($payload);
+            echo MEC_kses::element($payload);
+            wp_die();
+        }
+    }
+
+    public function revoke_license()
+    {
+        if($this->getPRO())
+        {
+            $options = get_option('mec_options');
+            $options['product_name'] = '';
+            $options['purchase_code'] = '';
+            $options['product_id'] = '';
+            update_option('mec_options', $options);
+
+            $payload = json_encode(array('message'=> 'revoked' , 'status'=> true, 'button_text' => esc_html__('submit' , 'modern-events-calendar-lite') ));
+            echo MEC_kses::element($payload);
             wp_die();
         }
     }
@@ -265,7 +296,7 @@ class MEC_feature_mec extends MEC_base
         // Current User is not Permitted
         if(!current_user_can('mec_settings') and !current_user_can('administrator')) $this->main->response(array('success'=>0, 'code'=>'ADMIN_ONLY'));
 
-        if(!wp_verify_nonce($_REQUEST['nonce'], 'mec_settings_download'))
+        if(!wp_verify_nonce(sanitize_text_field($_REQUEST['nonce']), 'mec_settings_download'))
         {
             exit();
         }
@@ -288,7 +319,7 @@ class MEC_feature_mec extends MEC_base
     {
         // Current User is not Permitted
         if(!current_user_can('mec_settings') and !current_user_can('administrator')) $this->main->response(array('success'=>0, 'code'=>'ADMIN_ONLY'));
-        if(!wp_verify_nonce( $_REQUEST['nonce'], 'mec_settings_nonce')) exit();
+        if(!wp_verify_nonce(sanitize_text_field($_REQUEST['nonce']), 'mec_settings_nonce')) exit();
 
         update_option('mec_addons_notification_option', 'open');
         wp_die();
@@ -299,7 +330,7 @@ class MEC_feature_mec extends MEC_base
     {
         // Current User is not Permitted
         if(!current_user_can('mec_settings') and !current_user_can('administrator')) $this->main->response(array('success'=>0, 'code'=>'ADMIN_ONLY'));
-        if(!wp_verify_nonce( $_REQUEST['nonce'], 'mec_settings_nonce')) exit();
+        if(!wp_verify_nonce(sanitize_text_field($_REQUEST['nonce']), 'mec_settings_nonce')) exit();
 
         update_option('mec_custom_msg_2_close_option', 'open');
         wp_die();
@@ -310,7 +341,7 @@ class MEC_feature_mec extends MEC_base
     {
         // Current User is not Permitted
         if(!current_user_can('mec_settings') and !current_user_can('administrator')) $this->main->response(array('success'=>0, 'code'=>'ADMIN_ONLY'));
-        if(!wp_verify_nonce( $_REQUEST['nonce'], 'mec_settings_nonce')) exit();
+        if(!wp_verify_nonce(sanitize_text_field($_REQUEST['nonce']), 'mec_settings_nonce')) exit();
 
         update_option('mec_custom_msg_close_option', 'open');
         wp_die();
@@ -322,9 +353,9 @@ class MEC_feature_mec extends MEC_base
     {
         // Current User is not Permitted
         if(!current_user_can('mec_report')) $this->main->response(array('success'=>0, 'code'=>'ADMIN_ONLY'));
-        if(!wp_verify_nonce($_REQUEST['nonce'], 'mec_settings_nonce')) exit();
+        if(!wp_verify_nonce(sanitize_text_field($_REQUEST['nonce']), 'mec_settings_nonce')) exit();
 
-        $event_id = $_POST['event_id'];
+        $event_id = sanitize_text_field($_POST['event_id']);
         $feature_class = new MEC_feature_mec();
 
         $booking_options = get_post_meta($event_id, 'mec_booking', true);
@@ -338,7 +369,7 @@ class MEC_feature_mec extends MEC_base
             $date_format = (isset($this->ml_settings['booking_date_format1']) and trim($this->ml_settings['booking_date_format1'])) ? $this->ml_settings['booking_date_format1'] : 'Y-m-d';
             if(get_post_meta($event_id, 'mec_repeat_type', true) === 'custom_days') $date_format .= ' '.get_option('time_format');
 
-            echo '<select name="mec-report-event-dates" class="mec-reports-selectbox mec-reports-selectbox-dates" onchange="mec_event_attendees('.$event_id.', this.value);">';
+            echo '<select name="mec-report-event-dates" class="mec-reports-selectbox mec-reports-selectbox-dates" onchange="mec_event_attendees('.esc_attr($event_id).', this.value);">';
             echo '<option value="none">'.esc_html__( "Select Date" , "mec").'</option>';
 
             if($bookings_all_occurrences)
@@ -362,7 +393,7 @@ class MEC_feature_mec extends MEC_base
                     'ampm' => date('A', $date->tend),
                 );
 
-                echo '<option value="'.$date->tstart.'" '.($occurrence == $date->tstart ? 'class="selected-day"' : '').'>'.strip_tags($this->main->date_label($start, $end, $date_format, ' - ', false)).'</option>';
+                echo '<option value="'.esc_attr($date->tstart).'" '.($occurrence == $date->tstart ? 'class="selected-day"' : '').'>'.strip_tags($this->main->date_label($start, $end, $date_format, ' - ', false)).'</option>';
             }
 
             echo '</select>';
@@ -380,9 +411,9 @@ class MEC_feature_mec extends MEC_base
     {
         // Current User is not Permitted
         if(!current_user_can('mec_settings') and !current_user_can('administrator')) $this->main->response(array('success'=>0, 'code'=>'ADMIN_ONLY'));
-        if(!wp_verify_nonce($_REQUEST['nonce'], 'mec_settings_nonce')) exit();
+        if(!wp_verify_nonce(sanitize_text_field($_REQUEST['nonce']), 'mec_settings_nonce')) exit();
 
-        $options = $_REQUEST['content'];
+        $options = $this->main->sanitize_deep_array($_REQUEST['content']);
         if($options == 'No-JSON')
         {
             echo '<div class="mec-message-import-error">' . esc_html__('Your option is not in JSON format. Please insert correct options in this field and try again.', 'modern-events-calendar-lite') . '</div>';
@@ -503,7 +534,7 @@ class MEC_feature_mec extends MEC_base
      */
     public function support_menu()
     {
-        add_submenu_page('mec-intro', __('MEC - Support', 'modern-events-calendar-lite'), __('Support', 'modern-events-calendar-lite'), 'manage_options', 'MEC-support', array($this, 'support_page'));
+        add_submenu_page('mec-intro', esc_html__('MEC - Support', 'modern-events-calendar-lite'), esc_html__('Support', 'modern-events-calendar-lite'), 'manage_options', 'MEC-support', array($this, 'support_page'));
     }
 
     /**
@@ -519,41 +550,41 @@ class MEC_feature_mec extends MEC_base
         remove_menu_page('edit.php?post_type=mec_calendars');
         do_action('before_mec_submenu_action');
 
-        add_submenu_page('mec-intro', __('Add Event', 'modern-events-calendar-lite'), __('Add Event', 'modern-events-calendar-lite'), 'edit_posts', 'post-new.php?post_type='.$this->PT);
-        add_submenu_page('mec-intro', __('Tags', 'modern-events-calendar-lite'), __('Tags', 'modern-events-calendar-lite'), 'edit_others_posts', 'edit-tags.php?taxonomy='.apply_filters('mec_taxonomy_tag', '').'&post_type='.$this->PT);
-        add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_categories', __('Categories', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_categories', __('Categories', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_category&post_type='.$this->PT);
-        add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_labels', __('Labels', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_labels', __('Labels', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_label&post_type='.$this->PT);
-        add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_locations', __('Locations', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_locations', __('Locations', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_location&post_type='.$this->PT);
-        add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_organizers', __('Organizers', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_organizers', __('Organizers', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_organizer&post_type='.$this->PT);
+        add_submenu_page('mec-intro', esc_html__('Add Event', 'modern-events-calendar-lite'), esc_html__('Add Event', 'modern-events-calendar-lite'), 'edit_posts', 'post-new.php?post_type='.$this->PT);
+        add_submenu_page('mec-intro', esc_html__('Tags', 'modern-events-calendar-lite'), esc_html__('Tags', 'modern-events-calendar-lite'), 'edit_others_posts', 'edit-tags.php?taxonomy='.apply_filters('mec_taxonomy_tag', '').'&post_type='.$this->PT);
+        add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_categories', esc_html__('Categories', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_categories', esc_html__('Categories', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_category&post_type='.$this->PT);
+        add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_labels', esc_html__('Labels', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_labels', esc_html__('Labels', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_label&post_type='.$this->PT);
+        add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_locations', esc_html__('Locations', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_locations', esc_html__('Locations', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_location&post_type='.$this->PT);
+        add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_organizers', esc_html__('Organizers', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_organizers', esc_html__('Organizers', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_organizer&post_type='.$this->PT);
 
         // Speakers Menu
         if(isset($this->settings['speakers_status']) and $this->settings['speakers_status'])
         {
-            add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_speakers', __('Speakers', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_speakers', __('Speakers', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_speaker&post_type='.$this->PT);
+            add_submenu_page('mec-intro', esc_html($this->main->m('taxonomy_speakers', esc_html__('Speakers', 'modern-events-calendar-lite'))), esc_html($this->main->m('taxonomy_speakers', esc_html__('Speakers', 'modern-events-calendar-lite'))), 'edit_others_posts', 'edit-tags.php?taxonomy=mec_speaker&post_type='.$this->PT);
         }
 
         $capability = (current_user_can('administrator') ? 'manage_options' : 'mec_shortcodes');
-        add_submenu_page('mec-intro', __('Shortcodes', 'modern-events-calendar-lite'), __('Shortcodes', 'modern-events-calendar-lite'), $capability, 'edit.php?post_type=mec_calendars');
+        add_submenu_page('mec-intro', esc_html__('Shortcodes', 'modern-events-calendar-lite'), esc_html__('Shortcodes', 'modern-events-calendar-lite'), $capability, 'edit.php?post_type=mec_calendars');
 
         // Auto Email Menu
         if(isset($this->settings['auto_emails_module_status']) and $this->settings['auto_emails_module_status'])
         {
             $capability = 'manage_options';
-            add_submenu_page('mec-intro', __('Emails', 'modern-events-calendar-lite'), __('Emails', 'modern-events-calendar-lite'), $capability, 'edit.php?post_type=mec-emails');
+            add_submenu_page('mec-intro', esc_html__('Emails', 'modern-events-calendar-lite'), esc_html__('Emails', 'modern-events-calendar-lite'), $capability, 'edit.php?post_type=mec-emails');
         }
 
         $capability = (current_user_can('administrator') ? 'manage_options' : 'mec_settings');
-        add_submenu_page('mec-intro', __('MEC - Settings', 'modern-events-calendar-lite'), __('Settings', 'modern-events-calendar-lite'), $capability, 'MEC-settings', array($this, 'page'));
+        add_submenu_page('mec-intro', esc_html__('MEC - Settings', 'modern-events-calendar-lite'), esc_html__('Settings', 'modern-events-calendar-lite'), $capability, 'MEC-settings', array($this, 'page'));
 
-        add_submenu_page('mec-intro', __('MEC - Addons', 'modern-events-calendar-lite'), __('Addons', 'modern-events-calendar-lite'), 'manage_options', 'MEC-addons', array($this, 'addons'));
-        add_submenu_page('mec-intro', __('MEC - Wizard', 'modern-events-calendar-lite'), __('Wizard', 'modern-events-calendar-lite'), 'manage_options', 'MEC-wizard', array($this, 'setup_wizard'));
+        add_submenu_page('mec-intro', esc_html__('MEC - Addons', 'modern-events-calendar-lite'), esc_html__('Addons', 'modern-events-calendar-lite'), 'manage_options', 'MEC-addons', array($this, 'addons'));
+        add_submenu_page('mec-intro', esc_html__('MEC - Wizard', 'modern-events-calendar-lite'), esc_html__('Wizard', 'modern-events-calendar-lite'), 'manage_options', 'MEC-wizard', array($this, 'setup_wizard'));
 
         if(isset($this->settings['booking_status']) and $this->settings['booking_status'])
         {
-            add_submenu_page('mec-intro', __('MEC - Report', 'modern-events-calendar-lite'), __('Report', 'modern-events-calendar-lite'), 'mec_report', 'MEC-report', array($this, 'report'));
+            add_submenu_page('mec-intro', esc_html__('MEC - Report', 'modern-events-calendar-lite'), esc_html__('Report', 'modern-events-calendar-lite'), 'mec_report', 'MEC-report', array($this, 'report'));
         }
 
-        if(!$this->getPRO()) add_submenu_page('mec-intro', __('MEC - Go Pro', 'modern-events-calendar-lite'), __('Go Pro', 'modern-events-calendar-lite'), 'manage_options', 'MEC-go-pro', array($this, 'go_pro'));
+        if(!$this->getPRO()) add_submenu_page('mec-intro', esc_html__('MEC - Go Pro', 'modern-events-calendar-lite'), esc_html__('Go Pro', 'modern-events-calendar-lite'), 'manage_options', 'MEC-go-pro', array($this, 'go_pro'));
         do_action('after_mec_submenu_action');
     }
     
@@ -577,7 +608,7 @@ class MEC_feature_mec extends MEC_base
         $path = MEC::import('app.features.mec.wizard', true, true);
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -625,7 +656,7 @@ class MEC_feature_mec extends MEC_base
      */
     public function filter_columns($columns)
     {
-        $columns['shortcode'] = __('Shortcode', 'modern-events-calendar-lite');
+        $columns['shortcode'] = esc_html__('Shortcode', 'modern-events-calendar-lite');
         return $columns;
     }
 
@@ -653,10 +684,10 @@ class MEC_feature_mec extends MEC_base
         $screen = get_current_screen();
         if ( $screen->id == 'mec_calendars' ) remove_all_actions('acf/input/admin_head');
 
-		add_meta_box('mec_calendar_display_options', __('Display Options', 'modern-events-calendar-lite'), array($this, 'meta_box_display_options'), 'mec_calendars', 'normal', 'high');
-        add_meta_box('mec_calendar_filter', __('Filter Options', 'modern-events-calendar-lite'), array($this, 'meta_box_filter'), 'mec_calendars', 'normal', 'high');
-        add_meta_box('mec_calendar_shortcode', __('Shortcode', 'modern-events-calendar-lite'), array($this, 'meta_box_shortcode'), 'mec_calendars', 'side');
-        add_meta_box('mec_calendar_search_form', __('Search Form', 'modern-events-calendar-lite'), array($this, 'meta_box_search_form'), 'mec_calendars', 'side');
+		add_meta_box('mec_calendar_display_options', esc_html__('Display Options', 'modern-events-calendar-lite'), array($this, 'meta_box_display_options'), 'mec_calendars', 'normal', 'high');
+        add_meta_box('mec_calendar_filter', esc_html__('Filter Options', 'modern-events-calendar-lite'), array($this, 'meta_box_filter'), 'mec_calendars', 'normal', 'high');
+        add_meta_box('mec_calendar_shortcode', esc_html__('Shortcode', 'modern-events-calendar-lite'), array($this, 'meta_box_shortcode'), 'mec_calendars', 'side');
+        add_meta_box('mec_calendar_search_form', esc_html__('Search Form', 'modern-events-calendar-lite'), array($this, 'meta_box_search_form'), 'mec_calendars', 'side');
     }
 
     /**
@@ -676,14 +707,14 @@ class MEC_feature_mec extends MEC_base
         // If this is an autosave, our form has not been submitted, so we don't want to do anything.
         if(defined('DOING_AUTOSAVE') and DOING_AUTOSAVE) return;
 
-        $terms = isset($_POST['mec_tax_input']) ? $_POST['mec_tax_input'] : array();
+        $terms = isset($_POST['mec_tax_input']) ? $this->main->sanitize_deep_array($_POST['mec_tax_input']) : array();
 
-        $categories = (isset($terms['mec_category']) and is_array($terms['mec_category'])) ? implode(',', $terms['mec_category']) : '';
-        $locations = (isset($terms['mec_location']) and is_array($terms['mec_location'])) ? implode(',', $terms['mec_location']) : '';
-        $organizers = (isset($terms['mec_organizer']) and is_array($terms['mec_organizer'])) ? implode(',', $terms['mec_organizer']) : '';
-        $labels = (isset($terms['mec_label']) and is_array($terms['mec_label'])) ? implode(',', $terms['mec_label']) : '';
-        $tags = (isset($terms['mec_tag'])) ? explode(',', trim($terms['mec_tag'])) : '';
-        $authors = (isset($terms['mec_author']) and is_array($terms['mec_author'])) ? implode(',', $terms['mec_author']) : '';
+        $categories = (isset($terms['mec_category']) and is_array($terms['mec_category'])) ? sanitize_text_field(implode(',', $terms['mec_category'])) : '';
+        $locations = (isset($terms['mec_location']) and is_array($terms['mec_location'])) ? sanitize_text_field(implode(',', $terms['mec_location'])) : '';
+        $organizers = (isset($terms['mec_organizer']) and is_array($terms['mec_organizer'])) ? sanitize_text_field(implode(',', $terms['mec_organizer'])) : '';
+        $labels = (isset($terms['mec_label']) and is_array($terms['mec_label'])) ? sanitize_text_field(implode(',', $terms['mec_label'])) : '';
+        $tags = (isset($terms['mec_tag'])) ? explode(',', sanitize_text_field(trim($terms['mec_tag']))) : '';
+        $authors = (isset($terms['mec_author']) and is_array($terms['mec_author'])) ? sanitize_text_field(implode(',', $terms['mec_author'])) : '';
 
         // Fix tags
         if(is_array($tags) and count($tags) == 1 and trim($tags[0]) == '') $tags = array();
@@ -702,11 +733,11 @@ class MEC_feature_mec extends MEC_base
 
         do_action('mec_shortcode_filters_save', $post_id, $terms );
 
-        $mec = (isset($_POST['mec']) ? $_POST['mec'] : array());
+        $mec = (isset($_POST['mec']) ? $this->main->sanitize_deep_array($_POST['mec']) : array());
         
-        $skin = (isset($mec['skin']) ? $mec['skin'] : '');
-        $start_date_type = ((isset($mec['sk-options'][$skin]) and isset($mec['sk-options'][$skin]['start_date_type'])) ? $mec['sk-options'][$skin]['start_date_type'] : 'today');
-        $end_date_type = ((isset($mec['sk-options'][$skin]) and isset($mec['sk-options'][$skin]['end_date_type'])) ? $mec['sk-options'][$skin]['end_date_type'] : 'date');
+        $skin = (isset($mec['skin']) ? sanitize_text_field($mec['skin']) : '');
+        $start_date_type = ((isset($mec['sk-options'][$skin]) and isset($mec['sk-options'][$skin]['start_date_type'])) ? sanitize_text_field($mec['sk-options'][$skin]['start_date_type']) : 'today');
+        $end_date_type = ((isset($mec['sk-options'][$skin]) and isset($mec['sk-options'][$skin]['end_date_type'])) ? sanitize_text_field($mec['sk-options'][$skin]['end_date_type']) : 'date');
 
         $ongoing = ((isset($mec['show_only_ongoing_events']) and $mec['show_only_ongoing_events']) ? 1 : 0);
 
@@ -735,7 +766,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -749,7 +780,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -763,7 +794,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -777,7 +808,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -791,7 +822,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -814,7 +845,7 @@ class MEC_feature_mec extends MEC_base
         $path = MEC::import('app.features.mec.go-pro', true, true);
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -837,7 +868,7 @@ class MEC_feature_mec extends MEC_base
         $path = MEC::import('app.features.mec.addons', true, true);
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -862,7 +893,7 @@ class MEC_feature_mec extends MEC_base
         ob_start();
         include $path;
         do_action('mec_display_report_page', $path);
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -875,7 +906,7 @@ class MEC_feature_mec extends MEC_base
         $path = MEC::import('app.features.mec.support-page', true, true);
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -923,7 +954,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -937,7 +968,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -951,7 +982,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -965,7 +996,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -979,7 +1010,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -993,7 +1024,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -1007,7 +1038,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -1021,7 +1052,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -1035,7 +1066,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -1049,7 +1080,7 @@ class MEC_feature_mec extends MEC_base
 
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo MEC_kses::full(ob_get_clean());
     }
 
     /**
@@ -1091,43 +1122,43 @@ class MEC_feature_mec extends MEC_base
     {
         $image_popup_html = '<div class="mec-form-row mec-image-popup-wrap mec-switcher">
             <div class="mec-col-4">
-                <label for="mec_skin_'.$skin.'_image_popup">'.__('Display content\'s images as Popup', 'modern-events-calendar-lite').'</label>
+                <label for="mec_skin_'.esc_attr($skin).'_image_popup">'.esc_html__('Display content\'s images as Popup', 'modern-events-calendar-lite').'</label>
             </div>
             <div class="mec-col-4">
-                <input type="hidden" name="mec[sk-options]['.$skin.'][image_popup]" value="0" />
-                <input type="checkbox" name="mec[sk-options]['.$skin.'][image_popup]" id="mec_skin_'.$skin.'_image_popup" value="1"';
+                <input type="hidden" name="mec[sk-options]['.esc_attr($skin).'][image_popup]" value="0" />
+                <input type="checkbox" name="mec[sk-options]['.esc_attr($skin).'][image_popup]" id="mec_skin_'.esc_attr($skin).'_image_popup" value="1"';
 
             if($image_popup == 1) $image_popup_html .= 'checked="checked"';
 
-            $image_popup_html .= '/><label for="mec_skin_'.$skin.'_image_popup"></label>
+            $image_popup_html .= '/><label for="mec_skin_'.esc_attr($skin).'_image_popup"></label>
             </div>
         </div>';
 
         return '<div class="mec-form-row mec-sed-method-wrap">
             <div class="mec-col-4">
-                <label for="mec_skin_'.$skin.'_sed_method">'.__('Single Event Display Method', 'modern-events-calendar-lite').'</label>
+                <label for="mec_skin_'.esc_attr($skin).'_sed_method">'.esc_html__('Single Event Display Method', 'modern-events-calendar-lite').'</label>
             </div>
             <div class="mec-col-8">
-                <input type="hidden" name="mec[sk-options]['.$skin.'][sed_method]" value="'.$value.'" id="mec_skin_'.$skin.'_sed_method_field" />
-                <ul class="mec-sed-methods" data-for="#mec_skin_'.$skin.'_sed_method_field">
-                    <li data-method="0" class="'.(!$value ? 'active' : '').'"><a href="#mec_skin_'.$skin.'_sed_method_field">'.__('Current Window', 'modern-events-calendar-lite').'</a></li>
-                    <li data-method="new" class="'.($value === 'new' ? 'active' : '').'"><a href="#mec_skin_'.$skin.'_sed_method_field">'.__('New Window', 'modern-events-calendar-lite').'</a></li>
-                    <li data-method="m1" class="'.($value === 'm1' ? 'active' : '').'"><a href="#mec_skin_'.$skin.'_sed_method_field">'.__('Modal Popup', 'modern-events-calendar-lite').'</a></li>
-                    <li data-method="no" class="'.($value === 'no' ? 'active' : '').'"><a href="#mec_skin_'.$skin.'_sed_method_field">'.__('Disable Link', 'modern-events-calendar-lite').'</a></li>
+                <input type="hidden" name="mec[sk-options]['.esc_attr($skin).'][sed_method]" value="'.esc_attr($value).'" id="mec_skin_'.esc_attr($skin).'_sed_method_field" />
+                <ul class="mec-sed-methods" data-for="#mec_skin_'.esc_attr($skin).'_sed_method_field">
+                    <li data-method="0" class="'.(!$value ? 'active' : '').'"><a href="#mec_skin_'.esc_attr($skin).'_sed_method_field">'.esc_html__('Current Window', 'modern-events-calendar-lite').'</a></li>
+                    <li data-method="new" class="'.($value === 'new' ? 'active' : '').'"><a href="#mec_skin_'.esc_attr($skin).'_sed_method_field">'.esc_html__('New Window', 'modern-events-calendar-lite').'</a></li>
+                    <li data-method="m1" class="'.($value === 'm1' ? 'active' : '').'"><a href="#mec_skin_'.esc_attr($skin).'_sed_method_field">'.esc_html__('Modal Popup', 'modern-events-calendar-lite').'</a></li>
+                    <li data-method="no" class="'.($value === 'no' ? 'active' : '').'"><a href="#mec_skin_'.esc_attr($skin).'_sed_method_field">'.esc_html__('Disable Link', 'modern-events-calendar-lite').'</a></li>
                 </ul>
             </div>
-        </div>' . $image_popup_html;
+        </div>' . MEC_kses::form($image_popup_html);
     }
 
     public function order_method_field($skin, $value = 'ASC', $key = 'order_method')
     {
         return '<div class="mec-form-row mec-switcher">
             <div class="mec-col-4">
-                <label for="mec_skin_'.$skin.'_'.$key.'">'.__('Descending Order', 'modern-events-calendar-lite').'</label>
+                <label for="mec_skin_'.esc_attr($skin).'_'.esc_attr($key).'">'.esc_html__('Descending Order', 'modern-events-calendar-lite').'</label>
             </div>
             <div class="mec-col-4">
-                <input type="hidden" name="mec[sk-options]['.$skin.']['.$key.']" value="ASC" />
-                <input type="checkbox" name="mec[sk-options]['.$skin.']['.$key.']" id="mec_skin_'.$skin.'_'.$key.'" value="DESC" '.($value == 'DESC' ? 'checked="checked"' : '').' /><label for="mec_skin_'.$skin.'_'.$key.'"></label>
+                <input type="hidden" name="mec[sk-options]['.esc_attr($skin).']['.esc_attr($key).']" value="ASC" />
+                <input type="checkbox" name="mec[sk-options]['.esc_attr($skin).']['.esc_attr($key).']" id="mec_skin_'.esc_attr($skin).'_'.esc_attr($key).'" value="DESC" '.($value == 'DESC' ? 'checked="checked"' : '').' /><label for="mec_skin_'.esc_attr($skin).'_'.esc_attr($key).'"></label>
             </div>
         </div>';
     }
@@ -1139,11 +1170,11 @@ class MEC_feature_mec extends MEC_base
 
         return '<div class="mec-form-row mec-booking-button-wrap mec-switcher">
             <div class="mec-col-4">
-                <label for="mec_skin_'.$skin.'_booking_button">'.__('Booking Button / Icon', 'modern-events-calendar-lite').'</label>
+                <label for="mec_skin_'.esc_attr($skin).'_booking_button">'.esc_html__('Booking Button / Icon', 'modern-events-calendar-lite').'</label>
             </div>
             <div class="mec-col-4">
-                <input type="hidden" name="mec[sk-options]['.$skin.'][booking_button]" value="0" />
-                <input type="checkbox" name="mec[sk-options]['.$skin.'][booking_button]" id="mec_skin_'.$skin.'_booking_button" value="1" '.($value == '1' ? 'checked="checked"' : '').' /><label for="mec_skin_'.$skin.'_booking_button"></label>
+                <input type="hidden" name="mec[sk-options]['.esc_attr($skin).'][booking_button]" value="0" />
+                <input type="checkbox" name="mec[sk-options]['.esc_attr($skin).'][booking_button]" id="mec_skin_'.esc_attr($skin).'_booking_button" value="1" '.($value == '1' ? 'checked="checked"' : '').' /><label for="mec_skin_'.esc_attr($skin).'_booking_button"></label>
             </div>
         </div>';
     }
@@ -1152,11 +1183,11 @@ class MEC_feature_mec extends MEC_base
     {
         return '<div class="mec-form-row mec-display-organizer-wrap mec-switcher">
             <div class="mec-col-4">
-                <label for="mec_skin_'.$skin.'_display_organizer">'.__('Display Organizers', 'modern-events-calendar-lite').'</label>
+                <label for="mec_skin_'.esc_attr($skin).'_display_organizer">'.esc_html__('Display Organizers', 'modern-events-calendar-lite').'</label>
             </div>
             <div class="mec-col-4">
-                <input type="hidden" name="mec[sk-options]['.$skin.'][display_organizer]" value="0" />
-                <input type="checkbox" name="mec[sk-options]['.$skin.'][display_organizer]" id="mec_skin_'.$skin.'_display_organizer" value="1" '.($value == '1' ? 'checked="checked"' : '').' /><label for="mec_skin_'.$skin.'_display_organizer"></label>
+                <input type="hidden" name="mec[sk-options]['.esc_attr($skin).'][display_organizer]" value="0" />
+                <input type="checkbox" name="mec[sk-options]['.esc_attr($skin).'][display_organizer]" id="mec_skin_'.esc_attr($skin).'_display_organizer" value="1" '.($value == '1' ? 'checked="checked"' : '').' /><label for="mec_skin_'.esc_attr($skin).'_display_organizer"></label>
             </div>
         </div>';
     }
@@ -1165,11 +1196,11 @@ class MEC_feature_mec extends MEC_base
     {
         return '<div class="mec-form-row mec-display-organizer-wrap mec-switcher">
             <div class="mec-col-4">
-                <label for="mec_skin_'.$skin.'_custom_data">'.__('Display Custom Fields', 'modern-events-calendar-lite').'</label>
+                <label for="mec_skin_'.esc_attr($skin).'_custom_data">'.esc_html__('Display Custom Fields', 'modern-events-calendar-lite').'</label>
             </div>
             <div class="mec-col-4">
-                <input type="hidden" name="mec[sk-options]['.$skin.'][custom_data]" value="0" />
-                <input type="checkbox" name="mec[sk-options]['.$skin.'][custom_data]" id="mec_skin_'.$skin.'_custom_data" value="1" '.($value == '1' ? 'checked="checked"' : '').' /><label for="mec_skin_'.$skin.'_custom_data"></label>
+                <input type="hidden" name="mec[sk-options]['.esc_attr($skin).'][custom_data]" value="0" />
+                <input type="checkbox" name="mec[sk-options]['.esc_attr($skin).'][custom_data]" id="mec_skin_'.esc_attr($skin).'_custom_data" value="1" '.($value == '1' ? 'checked="checked"' : '').' /><label for="mec_skin_'.esc_attr($skin).'_custom_data"></label>
             </div>
         </div>';
     }
@@ -1178,12 +1209,12 @@ class MEC_feature_mec extends MEC_base
     {
         return '<div class="mec-form-row mec-switcher">
             <div class="mec-col-4">
-                <label for="mec_skin_'.$skin.'_detailed_time">'.__('Detailed Time', 'modern-events-calendar-lite').'</label>
-                <span>'.__('For Multiple Day Events', 'modern-events-calendar-lite').'</span>
+                <label for="mec_skin_'.esc_attr($skin).'_detailed_time">'.esc_html__('Detailed Time', 'modern-events-calendar-lite').'</label>
+                <span>'.esc_html__('For Multiple Day Events', 'modern-events-calendar-lite').'</span>
             </div>
             <div class="mec-col-4">
-                <input type="hidden" name="mec[sk-options]['.$skin.'][detailed_time]" value="0" />
-                <input type="checkbox" name="mec[sk-options]['.$skin.'][detailed_time]" id="mec_skin_'.$skin.'_detailed_time" value="1" '.($value == '1' ? 'checked="checked"' : '').' /><label for="mec_skin_'.$skin.'_detailed_time"></label>
+                <input type="hidden" name="mec[sk-options]['.esc_attr($skin).'][detailed_time]" value="0" />
+                <input type="checkbox" name="mec[sk-options]['.esc_attr($skin).'][detailed_time]" id="mec_skin_'.esc_attr($skin).'_detailed_time" value="1" '.($value == '1' ? 'checked="checked"' : '').' /><label for="mec_skin_'.esc_attr($skin).'_detailed_time"></label>
             </div>
         </div>';
     }
@@ -1338,7 +1369,7 @@ class MEC_feature_mec extends MEC_base
     {
         wp_add_dashboard_widget(
             'mec_widget_news_features',
-            __('Modern Events Calendar', 'modern-events-calendar-lite'),
+            esc_html__('Modern Events Calendar', 'modern-events-calendar-lite'),
             array($this, 'widget_news')
         );
 
@@ -1346,7 +1377,7 @@ class MEC_feature_mec extends MEC_base
         {
             wp_add_dashboard_widget(
                 'mec_widget_total_bookings',
-                __('Total Bookings', 'modern-events-calendar-lite'),
+                esc_html__('Total Bookings', 'modern-events-calendar-lite'),
                 array($this, 'widget_total_bookings')
             );
         }
@@ -1362,7 +1393,7 @@ class MEC_feature_mec extends MEC_base
         echo '<div class="mec-metabox-head-wrap">
             <div class="mec-metabox-head-version">
                 <img src="'.plugin_dir_url(__FILE__ ) . '../../assets/img/ico-mec-vc.png" />
-                <p>'.($this->getPRO() ? __('Modern Events Calendar', 'modern-events-calendar-lite') : __('Modern Events Calendar (Lite)', 'modern-events-calendar-lite')).'</p>
+                <p>'.($this->getPRO() ? esc_html__('Modern Events Calendar', 'modern-events-calendar-lite') : esc_html__('Modern Events Calendar (Lite)', 'modern-events-calendar-lite')).'</p>
                 <a href="'.esc_html__(admin_url( 'post-new.php?post_type=mec-events' )).'" class="button"><span aria-hidden="true" class="dashicons dashicons-plus"></span> Create New Event</a>
             </div>
             <div class="mec-metabox-head-button"></div>
@@ -1389,10 +1420,10 @@ class MEC_feature_mec extends MEC_base
                 echo '<li>
                     <span aria-hidden="true" class="dashicons dashicons-calendar-alt"></span>
                     <div class="mec-metabox-upcoming-event">
-                        <a href="'.$event_link.'" target="">'.$event_title.'</a>
-                        <div class="mec-metabox-upcoming-event-location">'.$locationName.'</div>
+                        <a href="'.esc_url($event_link).'" target="">'.esc_html($event_title).'</a>
+                        <div class="mec-metabox-upcoming-event-location">'.esc_html($locationName).'</div>
                     </div>
-                    <div class="mec-metabox-upcoming-event-date">'.$event_date.'</div>
+                    <div class="mec-metabox-upcoming-event-date">'.esc_html($event_date).'</div>
                     <div style="clear:both"></div>
                 </li>';
             }
@@ -1432,8 +1463,8 @@ class MEC_feature_mec extends MEC_base
             foreach($obj as $key => $value)
             {
                 echo '<li>
-                    <a href="'.$value->link.'" target="_blank">'.$value->title.'</a>
-                    <p>'.$value->content.'</p>
+                    <a href="'.esc_url($value->link).'" target="_blank">'.esc_html($value->title).'</a>
+                    <p>'.esc_html($value->content).'</p>
                 </li>';
             }
 
@@ -1490,13 +1521,13 @@ class MEC_feature_mec extends MEC_base
                 var ctx = document.getElementById("mec_total_bookings_chart");
                 var mecSellsChart = new Chart(ctx,
                 {
-                    type: "'.$chart.'",
+                    type: "'.esc_js($chart).'",
                     data:
                     {
                         labels: ['.trim($labels, ', ').'],
                         datasets: [
                         {
-                            label: "'.esc_js(sprintf(__('Total Sales (%s)', 'modern-events-calendar-lite'), $currency)).'",
+                            label: "'.esc_js(sprintf(esc_html__('Total Sales (%s)', 'modern-events-calendar-lite'), $currency)).'",
                             data: ['.trim($stats, ', ').'],
                             backgroundColor: "rgba(159, 216, 255, 0.3)",
                             borderColor: "#36A2EB",
@@ -1510,7 +1541,7 @@ class MEC_feature_mec extends MEC_base
 
     public function widget_total_bookings()
     {
-        $current_page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+        $current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : 'dashboard';
 
         wp_enqueue_script('mec-chartjs-script', $this->main->asset('js/chartjs.min.js'));
         wp_enqueue_script('mec-total-booking-reports-script', $this->main->asset('js/total-booking-reports.js'));
@@ -1526,30 +1557,30 @@ class MEC_feature_mec extends MEC_base
                     </div>
                     <div class="w-box-content">
                         <ul>
-                            <li class="mec-chart-this-month"><a href="<?php echo add_query_arg(array(
+                            <li class="mec-chart-this-month"><a href="<?php echo esc_url(add_query_arg(array(
                                 'sort' => 'this_month',
                                 'start' => date('Y-m-01'),
                                 'end' => date('Y-m-t'),
                                 'type' => 'daily',
-                            )); ?>"><?php _e('This Month', 'modern-events-calendar-lite'); ?></a></li>
-                            <li class="mec-chart-last-month"><a href="<?php echo add_query_arg(array(
+                            ))); ?>"><?php esc_html_e('This Month', 'modern-events-calendar-lite'); ?></a></li>
+                            <li class="mec-chart-last-month"><a href="<?php echo esc_url(add_query_arg(array(
                                 'sort' => 'last_month',
                                 'start' => date('Y-m-01', strtotime('-1 Month')),
                                 'end' => date('Y-m-t', strtotime('-1 Month')),
                                 'type' => 'daily',
-                            )); ?>"><?php _e('Last Month', 'modern-events-calendar-lite'); ?></a></li>
-                            <li class="mec-chart-this-year"><a href="<?php echo add_query_arg(array(
+                            ))); ?>"><?php esc_html_e('Last Month', 'modern-events-calendar-lite'); ?></a></li>
+                            <li class="mec-chart-this-year"><a href="<?php echo esc_url(add_query_arg(array(
                                 'sort' => 'this_year',
                                 'start' => date('Y-01-01'),
                                 'end' => date('Y-12-31'),
                                 'type' => 'monthly',
-                            )); ?>"><?php _e('This Year', 'modern-events-calendar-lite'); ?></a></li>
-                            <li class="mec-chart-last-year"><a href="<?php echo add_query_arg(array(
+                            ))); ?>"><?php esc_html_e('This Year', 'modern-events-calendar-lite'); ?></a></li>
+                            <li class="mec-chart-last-year"><a href="<?php echo esc_url(add_query_arg(array(
                                 'sort' => 'last_year',
                                 'start' => date('Y-01-01', strtotime('-1 Year')),
                                 'end' => date('Y-12-31', strtotime('-1 Year')),
                                 'type' => 'monthly',
-                            )); ?>"><?php _e('Last Year', 'modern-events-calendar-lite'); ?></a></li>
+                            ))); ?>"><?php esc_html_e('Last Year', 'modern-events-calendar-lite'); ?></a></li>
                         </ul>
                         <script>                        
                         </script>
@@ -1561,18 +1592,18 @@ class MEC_feature_mec extends MEC_base
                         ?>
                         <form class="mec-sells-filter" method="GET" action="">
                             <?php if($current_page != 'dashboard'): ?><input type="hidden" name="page" value="mec-intro" /><?php endif; ?>
-                            <input type="text" class="mec_date_picker" name="start" placeholder="<?php esc_attr_e('Start Date', 'modern-events-calendar-lite'); ?>" value="<?php echo $start; ?>" />
-                            <input type="text" class="mec_date_picker" name="end" placeholder="<?php esc_attr_e('End Date', 'modern-events-calendar-lite'); ?>" value="<?php echo $end; ?>" />
+                            <input type="text" class="mec_date_picker" name="start" placeholder="<?php esc_attr_e('Start Date', 'modern-events-calendar-lite'); ?>" value="<?php echo esc_attr($start); ?>" />
+                            <input type="text" class="mec_date_picker" name="end" placeholder="<?php esc_attr_e('End Date', 'modern-events-calendar-lite'); ?>" value="<?php echo esc_attr($end); ?>" />
                             <select name="type">
-                                <option value="daily" <?php echo $type == 'daily' ? 'selected="selected"' : ''; ?>><?php _e('Daily', 'modern-events-calendar-lite'); ?></option>
-                                <option value="monthly" <?php echo $type == 'monthly' ? 'selected="selected"' : ''; ?>><?php _e('Monthly', 'modern-events-calendar-lite'); ?></option>
-                                <option value="yearly" <?php echo $type == 'yearly' ? 'selected="selected"' : ''; ?>><?php _e('Yearly', 'modern-events-calendar-lite'); ?></option>
+                                <option value="daily" <?php echo ($type == 'daily' ? 'selected="selected"' : ''); ?>><?php esc_html_e('Daily', 'modern-events-calendar-lite'); ?></option>
+                                <option value="monthly" <?php echo ($type == 'monthly' ? 'selected="selected"' : ''); ?>><?php esc_html_e('Monthly', 'modern-events-calendar-lite'); ?></option>
+                                <option value="yearly" <?php echo ($type == 'yearly' ? 'selected="selected"' : ''); ?>><?php esc_html_e('Yearly', 'modern-events-calendar-lite'); ?></option>
                             </select>
                             <select name="chart">
-                                <option value="bar" <?php echo $chart == 'bar' ? 'selected="selected"' : ''; ?>><?php _e('Bar', 'modern-events-calendar-lite'); ?></option>
-                                <option value="line" <?php echo $chart == 'line' ? 'selected="selected"' : ''; ?>><?php _e('Line', 'modern-events-calendar-lite'); ?></option>
+                                <option value="bar" <?php echo ($chart == 'bar' ? 'selected="selected"' : ''); ?>><?php esc_html_e('Bar', 'modern-events-calendar-lite'); ?></option>
+                                <option value="line" <?php echo ($chart == 'line' ? 'selected="selected"' : ''); ?>><?php esc_html_e('Line', 'modern-events-calendar-lite'); ?></option>
                             </select>
-                            <button type="submit"><?php _e('Filter', 'modern-events-calendar-lite'); ?></button>
+                            <button type="submit"><?php esc_html_e('Filter', 'modern-events-calendar-lite'); ?></button>
                         </form>
                         <div id="mec-total-booking-report">
                             <?php
@@ -1603,15 +1634,15 @@ class MEC_feature_mec extends MEC_base
                             <input type="hidden" name="method" value="mec-print">
                             <select name="mec-year" title="<?php esc_attr('Year', 'modern-events-calendar-lite'); ?>">
                                 <?php for($i = $start_year; $i <= $end_year; $i++): ?>
-                                <option value="<?php echo $i; ?>" <?php echo ($i == date('Y', current_time('timestamp', 0))) ? 'selected="selected"' : ''; ?>><?php echo $i; ?></option>
+                                <option value="<?php echo esc_attr($i); ?>" <?php echo ($i == date('Y', current_time('timestamp', 0))) ? 'selected="selected"' : ''; ?>><?php echo esc_html($i); ?></option>
                                 <?php endfor; ?>
                             </select>
                             <select name="mec-month" title="<?php esc_attr('Month', 'modern-events-calendar-lite'); ?>">
                                 <?php for($i = 1; $i <= 12; $i++): ?>
-                                <option value="<?php echo ($i < 10 ? '0'.$i : $i); ?>" <?php echo ($current_month == $i ? 'selected="selected"' : ''); ?>><?php echo $this->main->date_i18n('F', mktime(0, 0, 0, $i, 10)); ?></option>
+                                <option value="<?php echo ($i < 10 ? esc_attr('0'.$i) : esc_attr($i)); ?>" <?php echo ($current_month == $i ? 'selected="selected"' : ''); ?>><?php echo esc_html($this->main->date_i18n('F', mktime(0, 0, 0, $i, 10))); ?></option>
                                 <?php endfor; ?>
                             </select>
-                            <button type="submit"><?php _e('Display Events', 'modern-events-calendar-lite'); ?></button>
+                            <button type="submit"><?php esc_html_e('Display Events', 'modern-events-calendar-lite'); ?></button>
                         </form>
                     </div>
                 </div>
@@ -1658,7 +1689,7 @@ class MEC_feature_mec extends MEC_base
     public function register_assets_per_page_meta_boxes()
     {
         $post_types = $this->assets_per_page_post_types();
-        add_meta_box('mec_metabox_app', __('Include MEC Assets', 'modern-events-calendar-lite'), array($this, 'meta_box_assets_per_page'), $post_types, 'side', 'low');
+        add_meta_box('mec_metabox_app', esc_html__('Include MEC Assets', 'modern-events-calendar-lite'), array($this, 'meta_box_assets_per_page'), $post_types, 'side', 'low');
     }
 
     public function meta_box_assets_per_page($post)
@@ -1669,7 +1700,7 @@ class MEC_feature_mec extends MEC_base
             <label for="mec_include_assets">
                 <input type="hidden" name="mec_include_assets" value="0" />
                 <input type="checkbox" name="mec_include_assets" id="mec_include_assets" <?php echo ($mec_include_assets ? 'checked="checked"' : ''); ?> value="1" />
-                <?php _e('Include Modern Events Calendar Assets (CSS, JavaScript, etc files.)', 'modern-events-calendar-lite'); ?>
+                <?php esc_html_e('Include Modern Events Calendar Assets (CSS, JavaScript, etc files.)', 'modern-events-calendar-lite'); ?>
             </label>
         </div>
         <?php
@@ -1735,7 +1766,7 @@ class MEC_feature_mec extends MEC_base
 
             $timestamp = ((isset($_GET['time']) and $_GET['time']) ? (int) sanitize_text_field($_GET['time']) : NULL);
 
-            $occurrence = (isset($_GET['occurrence']) ? $_GET['occurrence'] : NULL);
+            $occurrence = (isset($_GET['occurrence']) ? sanitize_text_field($_GET['occurrence']) : NULL);
             if(!$timestamp and $occurrence) $timestamp = strtotime($occurrence) + (int) get_post_meta($post->ID, 'mec_start_day_seconds', true);
 
             if(!$timestamp)
@@ -1760,8 +1791,8 @@ class MEC_feature_mec extends MEC_base
         // Verify that the nonce is valid.
         if(!wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']), 'mec_occurrences_dropdown')) $this->main->response(array('success'=>0, 'code'=>'NONCE_IS_INVALID'));
 
-        $date = isset($_POST['date']) ? $_POST['date'] : '';
-        $id = isset($_POST['id']) ? $_POST['id'] : '';
+        $date = isset($_POST['date']) ? sanitize_text_field($_POST['date']) : '';
+        $id = isset($_POST['id']) ? sanitize_text_field($_POST['id']) : '';
 
         // Date is invalid!
         if(!trim($date) or !trim($id)) $this->main->response(array('success'=>0, 'code'=>'DATE_OR_ID_IS_INVALID'));
@@ -1780,18 +1811,26 @@ class MEC_feature_mec extends MEC_base
         $datetime_format = $date_format.' '.$time_format;
 
         $success = 0;
-        $html = '<option class="mec-load-occurrences" value="'.$_6months_ago.':'.$_6months_ago.'">'.__('Previous Occurrences', 'modern-events-calendar-lite').'</option>';
+        $html = '<option class="mec-load-occurrences" value="'.esc_attr($_6months_ago.':'.$_6months_ago).'">'.esc_html__('Previous Occurrences', 'modern-events-calendar-lite').'</option>';
 
         $i = 1;
         foreach($occurrences as $occurrence)
         {
-            $success  = 1;
-            $html .= '<option value="'.$occurrence->tstart.':'.$occurrence->tend.'" '.($i === 1 ? 'selected="selected"' : '').'>'.(date_i18n($datetime_format, $occurrence->tstart)).'</option>';
+            $success = 1;
+            $html .= '<option value="'.esc_attr($occurrence->tstart.':'.$occurrence->tend).'" '.($i === 1 ? 'selected="selected"' : '').'>'.date_i18n($datetime_format, $occurrence->tstart).'</option>';
             $i++;
         }
 
-        if(count($occurrences) >= $limit and isset($occurrence)) $html .= '<option class="mec-load-occurrences" value="'.$occurrence->tstart.':'.$occurrence->tend.'">'.__('Next Occurrences', 'modern-events-calendar-lite').'</option>';
+        if(count($occurrences) >= $limit and isset($occurrence)) $html .= '<option class="mec-load-occurrences" value="'.esc_attr($occurrence->tstart.':'.$occurrence->tend).'">'.esc_html__('Next Occurrences', 'modern-events-calendar-lite').'</option>';
 
         $this->main->response(array('success'=>$success, 'html'=>$html));
+    }
+
+    public function upload_mimes($mimes)
+    {
+        if(!is_array($mimes)) return $mimes;
+
+        if(!isset($mimes['zip'])) $mimes['zip'] = 'application/zip';
+        return $mimes;
     }
 }

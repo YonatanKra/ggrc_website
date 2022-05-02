@@ -31,7 +31,7 @@ class WpUlikeInit {
   */
   private function __construct() {
     // init plugin
-    $this->init();
+    $this->plugin();
 
     // This hook is called once any activated plugins have been loaded.
     add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
@@ -39,9 +39,19 @@ class WpUlikeInit {
     // Activate plugin when new blog is added
     add_action( 'activated_plugin', array( $this, 'after_activation' ) );
 
+    // init action
+    add_action( 'init', array( $this, 'init' ) );
+
     $prefix = is_network_admin() ? 'network_admin_' : '';
     add_filter( "{$prefix}plugin_action_links",  array( $this, 'add_links' ), 10, 5 );
   }
+
+  /**
+   * init method
+   *
+   * @return void
+   */
+  public function init(){}
 
   /**
    * Plugins loaded hook
@@ -76,7 +86,7 @@ class WpUlikeInit {
   *
   * @return void
   */
-  public function init(){
+  public function plugin(){
     // Define constant values
     $this->define_constants();
 

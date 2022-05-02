@@ -20,7 +20,7 @@ class MEC_single_widget extends WP_Widget
 	 */
 	public function __construct()
 	{
-		parent::__construct($this->get_widget_slug(), __('MEC Single Sidebar Items', 'modern-events-calendar-lite'), array('classname' => $this->get_widget_slug() . '-class', 'description' => __('To manage event details page elements.', 'modern-events-calendar-lite')));
+		parent::__construct($this->get_widget_slug(), esc_html__('MEC Single Sidebar Items', 'modern-events-calendar-lite'), array('classname' => $this->get_widget_slug() . '-class', 'description' => esc_html__('To manage event details page elements.', 'modern-events-calendar-lite')));
 
 		// Refreshing the widget's cached output with each new post
 		add_action('save_post', array($this, 'flush_widget_cache'));
@@ -54,7 +54,7 @@ class MEC_single_widget extends WP_Widget
         $settings = $main->get_settings();
 
         $layout = (isset($settings['single_single_style']) ? $settings['single_single_style'] : 'modern');
-        echo $this->get_layout_output($layout, $settings);
+        echo MEC_kses::full($this->get_layout_output($layout, $settings));
 	}
 
     public function get_layout_output($layout, $settings)
@@ -110,83 +110,83 @@ class MEC_single_widget extends WP_Widget
         ?>
 		<ul class="mec-sortable">
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($data_time, 'on'); ?> id="<?php echo $this->get_field_id('data_time'); ?>" name="<?php echo $this->get_field_name('data_time'); ?>" />
-				<label for="<?php echo $this->get_field_id('data_time'); ?>"><?php _e('Date Time Module', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($data_time, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('data_time')); ?>" name="<?php echo esc_attr($this->get_field_name('data_time')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('data_time')); ?>"><?php esc_html_e('Date Time Module', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($local_time, 'on'); ?> id="<?php echo $this->get_field_id('local_time'); ?>" name="<?php echo $this->get_field_name('local_time'); ?>" />
-				<label for="<?php echo $this->get_field_id('local_time'); ?>"><?php _e('Local Time', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($local_time, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('local_time')); ?>" name="<?php echo esc_attr($this->get_field_name('local_time')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('local_time')); ?>"><?php esc_html_e('Local Time', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($event_cost, 'on'); ?> id="<?php echo $this->get_field_id('event_cost'); ?>" name="<?php echo $this->get_field_name('event_cost'); ?>" />
-				<label for="<?php echo $this->get_field_id('event_cost'); ?>"><?php _e('Event Cost', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($event_cost, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('event_cost')); ?>" name="<?php echo esc_attr($this->get_field_name('event_cost')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('event_cost')); ?>"><?php esc_html_e('Event Cost', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($more_info, 'on'); ?> id="<?php echo $this->get_field_id('more_info'); ?>" name="<?php echo $this->get_field_name('more_info'); ?>" />
-				<label for="<?php echo $this->get_field_id('more_info'); ?>"><?php _e('More Info', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($more_info, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('more_info')); ?>" name="<?php echo esc_attr($this->get_field_name('more_info')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('more_info')); ?>"><?php esc_html_e('More Info', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($event_label, 'on'); ?> id="<?php echo $this->get_field_id('event_label'); ?>" name="<?php echo $this->get_field_name('event_label'); ?>" />
-				<label for="<?php echo $this->get_field_id('event_label'); ?>"><?php _e('Event Label', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($event_label, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('event_label')); ?>" name="<?php echo esc_attr($this->get_field_name('event_label')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('event_label')); ?>"><?php esc_html_e('Event Label', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($event_location, 'on'); ?> id="<?php echo $this->get_field_id('event_location'); ?>" name="<?php echo $this->get_field_name('event_location'); ?>" />
-				<label for="<?php echo $this->get_field_id('event_location'); ?>"><?php _e('Event Location', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($event_location, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('event_location')); ?>" name="<?php echo esc_attr($this->get_field_name('event_location')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('event_location')); ?>"><?php esc_html_e('Event Location', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($event_categories, 'on'); ?> id="<?php echo $this->get_field_id('event_categories'); ?>" name="<?php echo $this->get_field_name('event_categories'); ?>" />
-				<label for="<?php echo $this->get_field_id('event_categories'); ?>"><?php _e('Event Categories', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($event_categories, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('event_categories')); ?>" name="<?php echo esc_attr($this->get_field_name('event_categories')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('event_categories')); ?>"><?php esc_html_e('Event Categories', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($event_orgnizer, 'on'); ?> id="<?php echo $this->get_field_id('event_orgnizer'); ?>" name="<?php echo $this->get_field_name('event_orgnizer'); ?>" />
-				<label for="<?php echo $this->get_field_id('event_orgnizer'); ?>"><?php _e('Event Organizer', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($event_orgnizer, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('event_orgnizer')); ?>" name="<?php echo esc_attr($this->get_field_name('event_orgnizer')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('event_orgnizer')); ?>"><?php esc_html_e('Event Organizer', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($event_speakers, 'on'); ?> id="<?php echo $this->get_field_id('event_speakers'); ?>" name="<?php echo $this->get_field_name('event_speakers'); ?>" />
-				<label for="<?php echo $this->get_field_id('event_speakers'); ?>"><?php _e('Event Speakers', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($event_speakers, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('event_speakers')); ?>" name="<?php echo esc_attr($this->get_field_name('event_speakers')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('event_speakers')); ?>"><?php esc_html_e('Event Speakers', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($register_btn, 'on'); ?> id="<?php echo $this->get_field_id('register_btn'); ?>" name="<?php echo $this->get_field_name('register_btn'); ?>" />
-				<label for="<?php echo $this->get_field_id('register_btn'); ?>"><?php _e('Register Button', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($register_btn, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('register_btn')); ?>" name="<?php echo esc_attr($this->get_field_name('register_btn')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('register_btn')); ?>"><?php esc_html_e('Register Button', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($attende_module, 'on'); ?> id="<?php echo $this->get_field_id('attende_module'); ?>" name="<?php echo $this->get_field_name('attende_module'); ?>" />
-				<label for="<?php echo $this->get_field_id('attende_module'); ?>"><?php _e('Attendees Module', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($attende_module, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('attende_module')); ?>" name="<?php echo esc_attr($this->get_field_name('attende_module')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('attende_module')); ?>"><?php esc_html_e('Attendees Module', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($next_module, 'on'); ?> id="<?php echo $this->get_field_id('next_module'); ?>" name="<?php echo $this->get_field_name('next_module'); ?>" />
-				<label for="<?php echo $this->get_field_id('next_module'); ?>"><?php _e('Next Event', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($next_module, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('next_module')); ?>" name="<?php echo esc_attr($this->get_field_name('next_module')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('next_module')); ?>"><?php esc_html_e('Next Event', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($links_module, 'on'); ?> id="<?php echo $this->get_field_id('links_module'); ?>" name="<?php echo $this->get_field_name('links_module'); ?>" />
-				<label for="<?php echo $this->get_field_id('links_module'); ?>"><?php _e('Social Module', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($links_module, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('links_module')); ?>" name="<?php echo esc_attr($this->get_field_name('links_module')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('links_module')); ?>"><?php esc_html_e('Social Module', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($weather, 'on'); ?> id="<?php echo $this->get_field_id('weather_module'); ?>" name="<?php echo $this->get_field_name('weather_module'); ?>" />
-				<label for="<?php echo $this->get_field_id('weather_module'); ?>"><?php _e('Weather Module', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($weather, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('weather_module')); ?>" name="<?php echo esc_attr($this->get_field_name('weather_module')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('weather_module')); ?>"><?php esc_html_e('Weather Module', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($google_map, 'on'); ?> id="<?php echo $this->get_field_id('google_map'); ?>" name="<?php echo $this->get_field_name('google_map'); ?>" />
-				<label for="<?php echo $this->get_field_id('google_map'); ?>"><?php _e('Google Map', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($google_map, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('google_map')); ?>" name="<?php echo esc_attr($this->get_field_name('google_map')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('google_map')); ?>"><?php esc_html_e('Google Map', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($qrcode, 'on'); ?> id="<?php echo $this->get_field_id('qrcode_module'); ?>" name="<?php echo $this->get_field_name('qrcode_module'); ?>" />
-				<label for="<?php echo $this->get_field_id('qrcode_module'); ?>"><?php _e('QR Code', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($qrcode, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('qrcode_module')); ?>" name="<?php echo esc_attr($this->get_field_name('qrcode_module')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('qrcode_module')); ?>"><?php esc_html_e('QR Code', 'modern-events-calendar-lite'); ?></label>
 			</li>
             <li>
-                <input class="checkbox" type="checkbox" <?php checked($public_download, 'on'); ?> id="<?php echo $this->get_field_id('public_download_module'); ?>" name="<?php echo $this->get_field_name('public_download_module'); ?>" />
-                <label for="<?php echo $this->get_field_id('public_download_module'); ?>"><?php _e('Public Download', 'modern-events-calendar-lite'); ?></label>
+                <input class="checkbox" type="checkbox" <?php checked($public_download, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('public_download_module')); ?>" name="<?php echo esc_attr($this->get_field_name('public_download_module')); ?>" />
+                <label for="<?php echo esc_attr($this->get_field_id('public_download_module')); ?>"><?php esc_html_e('Public Download', 'modern-events-calendar-lite'); ?></label>
             </li>
             <li>
-                <input class="checkbox" type="checkbox" <?php checked($custom_fields, 'on'); ?> id="<?php echo $this->get_field_id('custom_fields_module'); ?>" name="<?php echo $this->get_field_name('custom_fields_module'); ?>" />
-                <label for="<?php echo $this->get_field_id('custom_fields_module'); ?>"><?php _e('Custom Fields', 'modern-events-calendar-lite'); ?></label>
+                <input class="checkbox" type="checkbox" <?php checked($custom_fields, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('custom_fields_module')); ?>" name="<?php echo esc_attr($this->get_field_name('custom_fields_module')); ?>" />
+                <label for="<?php echo esc_attr($this->get_field_id('custom_fields_module')); ?>"><?php esc_html_e('Custom Fields', 'modern-events-calendar-lite'); ?></label>
             </li>
 
 			<?php if(!function_exists('is_plugin_active')) include_once(ABSPATH . 'wp-admin/includes/plugin.php'); ?>
 			<?php if(is_plugin_active('mec-virtual-events/mec-virtual-events.php')): ?>
 			<li>
-				<input class="checkbox" type="checkbox" <?php checked($virtual_events, 'on'); ?> id="<?php echo $this->get_field_id('virtual_events_module'); ?>" name="<?php echo $this->get_field_name('virtual_events_module'); ?>" />
-				<label for="<?php echo $this->get_field_id('virtual_events_module'); ?>"><?php _e('Virtual Event', 'modern-events-calendar-lite'); ?></label>
+				<input class="checkbox" type="checkbox" <?php checked($virtual_events, 'on'); ?> id="<?php echo esc_attr($this->get_field_id('virtual_events_module')); ?>" name="<?php echo esc_attr($this->get_field_name('virtual_events_module')); ?>" />
+				<label for="<?php echo esc_attr($this->get_field_id('virtual_events_module')); ?>"><?php esc_html_e('Virtual Event', 'modern-events-calendar-lite'); ?></label>
 			</li>
 			<?php endif;  ?>
 		</ul>

@@ -41,8 +41,8 @@ class MEC_feature_login extends MEC_base
         if(!wp_verify_nonce(sanitize_text_field($_POST['mec_login_nonce']), 'mec-ajax-login-nonce')) return;
         
         $info = array();
-        $info['user_login'] = $_POST['username'];
-        $info['user_password'] = $_POST['password'];
+        $info['user_login'] = sanitize_text_field($_POST['username']);
+        $info['user_password'] = sanitize_text_field($_POST['password']);
         $info['remember'] = true;
 
         $user_signon = wp_signon($info, true); // secure_cookie set true.

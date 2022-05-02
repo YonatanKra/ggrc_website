@@ -51,7 +51,7 @@ class Ssb_Logs_Info {
 		$html .= 'Plugin Version:           ' . SSB_VERSION . "\n";
 		$html .= 'Social Networks:          ' . $networks_option['icon_selection'] . "\n";
 		$html .= 'Social Buttons Designs:   ' . $theme_option['icon_style'] . "\n";
-		$html .= 'Social Buttons Postions:  ' . print_r( $position_option['position'], true ) . "\n";
+		$html .= 'Social Buttons Positions:  ' . print_r( $position_option['position'], true ) . "\n";
 		$html .= 'Sidebar:                  ' . print_r( $sidebar_option, true ) . "\n";
 		$html .= 'InLine:                   ' . print_r( $inline_option, true ) . "\n";
 		$html .= 'Media:                    ' . print_r( $media_option, true ) . "\n";

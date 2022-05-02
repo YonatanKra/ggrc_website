@@ -64,7 +64,6 @@ class MEC_skins extends MEC_base
     public $db;
     public $file;
     public $render;
-    public $request;
     public $found;
     public $multiple_days_method;
     public $hide_time_method;
@@ -147,9 +146,6 @@ class MEC_skins extends MEC_base
 
         // MEC render library
         $this->render = $this->getRender();
-
-        // MEC request library
-        $this->request = $this->getRequest();
 
         // MEC Settings
         $this->settings = $this->main->get_settings();
@@ -800,8 +796,10 @@ class MEC_skins extends MEC_base
         global $MEC_Events_dates;
         if($this->show_only_expired_events)
         {
-            $apply_sf_date = $this->request->getVar('apply_sf_date', 1);
-            $start = ((isset($this->sf) || $this->request->getVar('sf', array())) and $apply_sf_date) ? date('Y-m-t', strtotime($this->start_date)) : $this->start_date;
+            $apply_sf_date = isset($_REQUEST['apply_sf_date']) ? sanitize_text_field($_REQUEST['apply_sf_date']) : 1;
+            $sf = (isset($_REQUEST['sf']) and is_array($_REQUEST['sf'])) ? $this->main->sanitize_deep_array($_REQUEST['sf']) : array();
+
+            $start = ((isset($this->sf) || $sf) and $apply_sf_date) ? date('Y-m-t', strtotime($this->start_date)) : $this->start_date;
 
             $end = date('Y-m-01', strtotime('-15 Years', strtotime($start)));
         }
@@ -964,12 +962,12 @@ class MEC_skins extends MEC_base
 
         $start_date = $event->date['start']['date'];
         $start_time = $event->data->time['start'];
-        $start_datetime = __('All Day','modern-events-calendar-lite') !== $start_time ? "$start_date $start_time" : $start_date;
+        $start_datetime = esc_html__('All Day','modern-events-calendar-lite') !== $start_time ? "$start_date $start_time" : $start_date;
         $start_timestamp = strtotime( $start_datetime );
 
         $end_date = $event->date['end']['date'];
         $end_time = $event->data->time['end'];
-        $end_datetime = __('All Day','modern-events-calendar-lite') !== $end_time ? "$end_date $end_time" : $end_date;
+        $end_datetime = esc_html__('All Day','modern-events-calendar-lite') !== $end_time ? "$end_date $end_time" : $end_date;
         $end_timestamp = strtotime( $end_datetime );
 
         return array(
@@ -1083,11 +1081,11 @@ class MEC_skins extends MEC_base
         $form = '';
         if(trim($fields) && (in_array('dropdown', $display_form) || in_array('checkboxes', $display_form) || in_array('text_input', $display_form) || in_array('address_input', $display_form) || in_array('minmax', $display_form) || in_array('local-time-picker', $display_form)))
         {
-            $form .= '<div id="mec_search_form_'.$this->id.'" class="mec-search-form mec-totalcal-box">';
+            $form .= '<div id="mec_search_form_'.esc_attr($this->id).'" class="mec-search-form mec-totalcal-box">';
             $form .= $fields;
 
             // Reset Button
-            if($this->sf_reset_button) $form .='<div class="mec-search-reset-button"><button class="button mec-button" id="mec_search_form_'.$this->id.'_reset" type="button">'.esc_html__('Reset', 'modern-events-calendar-lite').'</button></div>';
+            if($this->sf_reset_button) $form .='<div class="mec-search-reset-button"><button class="button mec-button" id="mec_search_form_'.esc_attr($this->id).'_reset" type="button">'.esc_html__('Reset', 'modern-events-calendar-lite').'</button></div>';
 
 
             $form = apply_filters('mec_sf_search_form_end', $form, $this );
@@ -1123,12 +1121,12 @@ class MEC_skins extends MEC_base
         $output = '';
         if($field == 'category')
         {
-            $label = $this->main->m('taxonomy_category', __('Category', 'modern-events-calendar-lite'));
+            $label = $this->main->m('taxonomy_category', esc_html__('Category', 'modern-events-calendar-lite'));
 
             if($type == 'dropdown')
             {
                 $output .='<div class="mec-dropdown-search">';
-                $display_label == 1 ? $output .= '<label for="mec_sf_category_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .= '<label for="mec_sf_category_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
 
                 $output .='<i class="mec-sl-folder"></i>';
                 $output .= wp_dropdown_categories(array
@@ -1152,13 +1150,13 @@ class MEC_skins extends MEC_base
             elseif($type == 'checkboxes' and wp_count_terms(array('taxonomy' => 'mec_category')))
             {
                 $output .= '<div class="mec-checkboxes-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_category_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_category_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .='<i class="mec-sl-folder"></i>';
 
                 $selected = ((isset($this->atts['category']) and trim($this->atts['category'])) ? explode(',', trim($this->atts['category'], ', ')) : array());
 
                 $output .= '<div class="mec-searchbar-category-wrap">';
-                $output .= '<div id="mec_sf_category_'.$this->id.'">';
+                $output .= '<div id="mec_sf_category_'.esc_attr($this->id).'">';
                 $output .= wp_terms_checklist(0, array
                 (
                     'echo'=>false,
@@ -1178,12 +1176,12 @@ class MEC_skins extends MEC_base
         }
         elseif($field == 'location')
         {
-            $label = $this->main->m('taxonomy_location', __('Location', 'modern-events-calendar-lite'));
+            $label = $this->main->m('taxonomy_location', esc_html__('Location', 'modern-events-calendar-lite'));
 
             if($type == 'dropdown')
             {
                 $output .= '<div class="mec-dropdown-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_location_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_location_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
 
                 $output .= '<i class="mec-sl-location-pin"></i>';
                 $output .= wp_dropdown_categories(array
@@ -1207,12 +1205,12 @@ class MEC_skins extends MEC_base
         }
         elseif($field == 'organizer')
         {
-            $label = $this->main->m('taxonomy_organizer', __('Organizer', 'modern-events-calendar-lite'));
+            $label = $this->main->m('taxonomy_organizer', esc_html__('Organizer', 'modern-events-calendar-lite'));
 
             if($type == 'dropdown')
             {
                 $output .= '<div class="mec-dropdown-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_organizer_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_organizer_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-user"></i>';
 
                 $output .= wp_dropdown_categories(array
@@ -1236,12 +1234,12 @@ class MEC_skins extends MEC_base
         }
         elseif($field == 'speaker' and $speakers_status)
         {
-            $label = $this->main->m('taxonomy_speaker', __('Speaker', 'modern-events-calendar-lite'));
+            $label = $this->main->m('taxonomy_speaker', esc_html__('Speaker', 'modern-events-calendar-lite'));
 
             if($type == 'dropdown')
             {
                 $output .= '<div class="mec-dropdown-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_speaker_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_speaker_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-microphone"></i>';
 
                 $output .= wp_dropdown_categories(array
@@ -1265,12 +1263,12 @@ class MEC_skins extends MEC_base
         }
         elseif($field == 'tag')
         {
-            $label = $this->main->m('taxonomy_tag', __('Tag', 'modern-events-calendar-lite'));
+            $label = $this->main->m('taxonomy_tag', esc_html__('Tag', 'modern-events-calendar-lite'));
 
             if($type == 'dropdown')
             {
                 $output .= '<div class="mec-dropdown-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_tag_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_tag_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-tag"></i>';
 
                 $output .= wp_dropdown_categories(array
@@ -1293,12 +1291,12 @@ class MEC_skins extends MEC_base
         }
         elseif($field == 'label')
         {
-            $label = $this->main->m('taxonomy_label', __('Label', 'modern-events-calendar-lite'));
+            $label = $this->main->m('taxonomy_label', esc_html__('Label', 'modern-events-calendar-lite'));
 
             if($type == 'dropdown')
             {
                 $output .= '<div class="mec-dropdown-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_label_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_label_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-pin"></i>';
 
                 $output .= wp_dropdown_categories(array
@@ -1322,7 +1320,7 @@ class MEC_skins extends MEC_base
         }
         elseif($field == 'month_filter')
         {
-            $label = __('Date', 'modern-events-calendar-lite');
+            $label = esc_html__('Date', 'modern-events-calendar-lite');
             if($type == 'dropdown')
             {
                 $time = isset($this->start_date) ? strtotime($this->start_date) : '';
@@ -1331,25 +1329,25 @@ class MEC_skins extends MEC_base
                 $skins = array('list', 'grid', 'agenda', 'map');
                 if(isset($this->skin_options['default_view']) and $this->skin_options['default_view'] == 'list') array_push($skins, 'full_calendar');
 
-                $item = __('Select', 'modern-events-calendar-lite');
-                $option = in_array($this->skin, $skins) ? '<option class="mec-none-item" value="none" selected="selected">'.$item.'</option>' : '';
+                $item = esc_html__('Select', 'modern-events-calendar-lite');
+                $option = in_array($this->skin, $skins) ? '<option class="mec-none-item" value="none" selected="selected">'.esc_html($item).'</option>' : '';
 
-                $output .= '<div class="mec-date-search"><input type="hidden" id="mec-filter-none" value="'.$item.'">';
-                $display_label == 1 ? $output .='<label for="mec_sf_month_'.$this->id.'">'.$label.': </label>' : null;
+                $output .= '<div class="mec-date-search"><input type="hidden" id="mec-filter-none" value="'.esc_attr($item).'">';
+                $display_label == 1 ? $output .='<label for="mec_sf_month_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-calendar"></i>
-                    <select id="mec_sf_month_'.$this->id.'">
-                        <option value="">'.__('Select Month','modern-events-calendar-lite').'</option>';
+                    <select id="mec_sf_month_'.esc_attr($this->id).'">
+                        <option value="">'.esc_html__('Select Month','modern-events-calendar-lite').'</option>';
 
                 $output .= $option;
                 $Y = date('Y', $time);
 
                 for($i = 1; $i <= 12; $i++)
                 {
-                    $output .= '<option value="'.($i < 10 ? '0'.$i : $i).'">'.$this->main->date_i18n('F', mktime(0, 0, 0, $i, 10)).'</option>';
+                    $output .= '<option value="'.($i < 10 ? esc_attr('0'.$i) : esc_attr($i)).'">'.esc_html($this->main->date_i18n('F', mktime(0, 0, 0, $i, 10))).'</option>';
                 }
 
                 $output .= '</select>';
-                $output .= '<select id="mec_sf_year_'.$this->id.'">'.$option;
+                $output .= '<select id="mec_sf_year_'.esc_attr($this->id).'">'.$option;
 
                 $start_year = $min_start_year = $this->db->select("SELECT MIN(cast(meta_value as unsigned)) AS date FROM `#__postmeta` WHERE `meta_key`='mec_start_date'", 'loadResult');
                 $end_year = $max_end_year = $this->db->select("SELECT MAX(cast(meta_value as unsigned)) AS date FROM `#__postmeta` WHERE `meta_key`='mec_end_date'", 'loadResult');
@@ -1371,8 +1369,8 @@ class MEC_skins extends MEC_base
 
                 for($i = $start_year; $i <= $end_year; $i++)
                 {
-                    $selected = (!in_array($this->skin, $skins) and $i == date('Y', $now)) ? 'selected="selected"' : '';
-                    $output .= '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
+                    $selected = (!in_array($this->skin, $skins) and $i == date('Y', $now)) ? 'selected' : '';
+                    $output .= '<option value="'.esc_attr($i).'" '.esc_attr($selected).'>'.esc_html($i).'</option>';
                 }
 
                 $output .= '</select></div>';
@@ -1382,70 +1380,70 @@ class MEC_skins extends MEC_base
                 $min_date = (isset($this->start_date) ? $this->start_date : NULL);
 
                 $output .= '<div class="mec-date-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_date_start_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_date_start_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-calendar"></i>
-                    <input class="mec-col-3 mec_date_picker_dynamic_format_start" data-min="'.$min_date.'" type="text"
-                           id="mec_sf_date_start_'.$this->id.'"
+                    <input class="mec-col-3 mec_date_picker_dynamic_format_start" data-min="'.esc_attr($min_date).'" type="text"
+                           id="mec_sf_date_start_'.esc_attr($this->id).'"
                            placeholder="'.esc_attr__('Start', 'modern-events-calendar-lite').'" autocomplete="off">
                     <input class="mec-col-3 mec_date_picker_dynamic_format_end" type="text"
-                           id="mec_sf_date_end_'.$this->id.'"
+                           id="mec_sf_date_end_'.esc_attr($this->id).'"
                            placeholder="'.esc_attr__('End', 'modern-events-calendar-lite').'" autocomplete="off">
                 </div>';
             }
         }
         elseif($field == 'time_filter')
         {
-            $label = __('Time', 'modern-events-calendar-lite');
+            $label = esc_html__('Time', 'modern-events-calendar-lite');
             if($type == 'local-time-picker')
             {
                 $this->main->load_time_picker_assets();
 
                 $output .= '<div class="mec-time-picker-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_timepicker_start_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_timepicker_start_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-clock"></i>
-                    <input type="text" class="mec-timepicker-start" id="mec_sf_timepicker_start_'.$this->id.'" placeholder="'.__('Start Time', 'modern-events-calendar-lite').'" data-format="'.$this->main->get_hour_format().'" />
-                    <input type="text" class="mec-timepicker-end" id="mec_sf_timepicker_end_'.$this->id.'" placeholder="'.__('End Time', 'modern-events-calendar-lite').'" data-format="'.$this->main->get_hour_format().'" />
+                    <input type="text" class="mec-timepicker-start" id="mec_sf_timepicker_start_'.esc_attr($this->id).'" placeholder="'.esc_html__('Start Time', 'modern-events-calendar-lite').'" data-format="'.esc_attr($this->main->get_hour_format()).'" />
+                    <input type="text" class="mec-timepicker-end" id="mec_sf_timepicker_end_'.esc_attr($this->id).'" placeholder="'.esc_html__('End Time', 'modern-events-calendar-lite').'" data-format="'.esc_attr($this->main->get_hour_format()).'" />
                 </div>';
             }
         }
         elseif($field == 'text_search')
         {
-            $label = __('Text', 'modern-events-calendar-lite');
+            $label = esc_html__('Text', 'modern-events-calendar-lite');
             if($type == 'text_input')
             {
                 $placeholder = (isset($options['placeholder']) ? $options['placeholder'] : '');
 
                 $output .= '<div class="mec-text-input-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_s_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_s_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-magnifier"></i>
-                    <input type="search" value="'.(isset($this->atts['s']) ? $this->atts['s'] : '').'" id="mec_sf_s_'.$this->id.'" placeholder="'.esc_attr($placeholder).'" />
+                    <input type="search" value="'.(isset($this->atts['s']) ? $this->atts['s'] : '').'" id="mec_sf_s_'.esc_attr($this->id).'" placeholder="'.esc_attr($placeholder).'" />
                 </div>';
             }
         }
         elseif($field == 'address_search')
         {
-            $label = __('Address', 'modern-events-calendar-lite');
+            $label = esc_html__('Address', 'modern-events-calendar-lite');
             if($type == 'address_input')
             {
                 $placeholder = (isset($options['placeholder']) ? $options['placeholder'] : '');
 
                 $output .= '<div class="mec-text-address-search">';
-                $display_label == 1 ? $output .='<label for="mec_sf_address_s_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_address_s_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-map"></i>
-                    <input type="search" value="'.(isset($this->atts['address']) ? $this->atts['address'] : '').'" id="mec_sf_address_s_'.$this->id.'" placeholder="'.esc_attr($placeholder).'" />
+                    <input type="search" value="'.(isset($this->atts['address']) ? $this->atts['address'] : '').'" id="mec_sf_address_s_'.esc_attr($this->id).'" placeholder="'.esc_attr($placeholder).'" />
                 </div>';
             }
         }
         elseif($field == 'event_cost')
         {
-            $label = __('Cost', 'modern-events-calendar-lite');
+            $label = esc_html__('Cost', 'modern-events-calendar-lite');
             if($type == 'minmax')
             {
                 $output .= '<div class="mec-minmax-event-cost">';
-                $display_label == 1 ? $output .='<label for="mec_sf_event_cost_min_'.$this->id.'">'.$label.': </label>' : null;
+                $display_label == 1 ? $output .='<label for="mec_sf_event_cost_min_'.esc_attr($this->id).'">'.esc_html($label).': </label>' : null;
                 $output .= '<i class="mec-sl-credit-card"></i>
-                    <input type="number" min="0" step="0.01" value="'.(isset($this->atts['event-cost-min']) ? $this->atts['event-cost-min'] : '').'" id="mec_sf_event_cost_min_'.$this->id.'" class="mec-minmax-price" placeholder="'.esc_attr__('Min Price', 'modern-events-calendar-lite').'" />
-                    <input type="number" min="0" step="0.01" value="'.(isset($this->atts['event-cost-max']) ? $this->atts['event-cost-max'] : '').'" id="mec_sf_event_cost_max_'.$this->id.'" class="mec-minmax-price" placeholder="'.esc_attr__('Max Price', 'modern-events-calendar-lite').'" />
+                    <input type="number" min="0" step="0.01" value="'.(isset($this->atts['event-cost-min']) ? $this->atts['event-cost-min'] : '').'" id="mec_sf_event_cost_min_'.esc_attr($this->id).'" class="mec-minmax-price" placeholder="'.esc_attr__('Min Price', 'modern-events-calendar-lite').'" />
+                    <input type="number" min="0" step="0.01" value="'.(isset($this->atts['event-cost-max']) ? $this->atts['event-cost-max'] : '').'" id="mec_sf_event_cost_max_'.esc_attr($this->id).'" class="mec-minmax-price" placeholder="'.esc_attr__('Max Price', 'modern-events-calendar-lite').'" />
                 </div>';
             }
         }
@@ -1468,7 +1466,7 @@ class MEC_skins extends MEC_base
         if(isset($sf['category']) and trim($sf['category'])) $atts['category'] = $sf['category'];
 
         // Apply Location Query
-        if(isset($sf['location']) and trim($sf['location'])) $atts['location'] = $sf['location'];
+        if(isset($sf['location'])) $atts['location'] = $sf['location'];
 
         // Apply Organizer Query
         if(isset($sf['organizer']) and trim($sf['organizer'])) $atts['organizer'] = $sf['organizer'];
@@ -1494,16 +1492,16 @@ class MEC_skins extends MEC_base
         if($apply_sf_date == 1)
         {
             // Apply Month of Month Filter
-            if(isset($sf['month']) and trim($sf['month'])) $this->request->setVar('mec_month', $sf['month']);
+            if(isset($sf['month']) and trim($sf['month'])) $_REQUEST['mec_month'] = $sf['month'];
 
             // Apply Year of Month Filter
-            if(isset($sf['year']) and trim($sf['year'])) $this->request->setVar('mec_year', $sf['year']);
+            if(isset($sf['year']) and trim($sf['year'])) $_REQUEST['mec_year'] = $sf['year'];
 
             // Apply to Start Date
             if(isset($sf['month']) and trim($sf['month']) and isset($sf['year']) and trim($sf['year']))
             {
                 $start_date = $sf['year'].'-'.$sf['month'].'-'.(isset($sf['day']) ? $sf['day'] : '01');
-                $this->request->setVar('mec_start_date', $start_date);
+                $_REQUEST['mec_start_date'] = $start_date;
 
                 $skins = $this->main->get_skins();
                 foreach($skins as $skin=>$label)
@@ -1517,10 +1515,10 @@ class MEC_skins extends MEC_base
             if(isset($sf['start']) and trim($sf['start']) and isset($sf['end']) and trim($sf['end']))
             {
                 $start = $this->main->standardize_format($sf['start']);
-                $this->request->setVar('mec_start_date', $start);
+                $_REQUEST['mec_start_date'] = $start;
 
                 $end = $this->main->standardize_format($sf['end']);
-                $this->request->setVar('mec_maximum_date', $end);
+                $_REQUEST['mec_maximum_date'] = $end;
                 $this->maximum_date = $end;
 
                 $skins = $this->main->get_skins();
@@ -1591,7 +1589,7 @@ class MEC_skins extends MEC_base
         $link = $this->main->add_qs_var('method', 'mec-booking-modal', $link);
 
         $modal = 'data-featherlight="iframe" data-featherlight-iframe-height="450" data-featherlight-iframe-width="700"';
-        $title = $this->main->m('booking_button', __('Book Event', 'modern-events-calendar-lite'));
+        $title = $this->main->m('booking_button', esc_html__('Book Event', 'modern-events-calendar-lite'));
 
         if($type === 'button') return '<a class="mec-modal-booking-button mec-mb-button" href="'.esc_url($link).'" '.$modal.'>'.esc_html($title).'</a>';
         else return '<a class="mec-modal-booking-button mec-mb-icon" title="' . esc_attr($title) . '" href="'.esc_url($link).'" '.$modal.'><i class="mec-sl-note"></i></a>';
@@ -1650,8 +1648,8 @@ class MEC_skins extends MEC_base
         $time_format = get_option('time_format');
 
         $output = '<div class="mec-detailed-time-wrapper">';
-        $output .= '<div class="mec-detailed-time-start">'.sprintf(__('Start from: %s - %s', 'modern-events-calendar-lite'), date_i18n($date_format, strtotime($from)), date_i18n($time_format, strtotime($from.' '.$start_time))).'</div>';
-        $output .= '<div class="mec-detailed-time-end">'.sprintf(__('End at: %s - %s', 'modern-events-calendar-lite'), date_i18n($date_format, strtotime($to)), date_i18n($time_format, strtotime($to.' '.$end_time))).'</div>';
+        $output .= '<div class="mec-detailed-time-start">'.sprintf(esc_html__('Start from: %s - %s', 'modern-events-calendar-lite'), date_i18n($date_format, strtotime($from)), date_i18n($time_format, strtotime($from.' '.$start_time))).'</div>';
+        $output .= '<div class="mec-detailed-time-end">'.sprintf(esc_html__('End at: %s - %s', 'modern-events-calendar-lite'), date_i18n($date_format, strtotime($to)), date_i18n($time_format, strtotime($to.' '.$end_time))).'</div>';
         $output .= '</div>';
 
         return $output;
@@ -1690,8 +1688,8 @@ class MEC_skins extends MEC_base
         {
             foreach($event->data->organizers as $organizer)
             {
-                $organizer_url = !empty($organizer['url']) ? 'href="'. $organizer['url'] .'" target="_blank"' : 'href="#"';
-                if(isset($organizer['name']) and trim($organizer['name'])) $output .= '<li class="mec-organizer-item"><a class="mec-color-hover" '.$organizer_url.'>' . trim($organizer['name']) . '</a></li>';
+                $organizer_url = !empty($organizer['url']) ? 'href="'. esc_url($organizer['url']) .'" target="_blank"' : 'href="#"';
+                if(isset($organizer['name']) and trim($organizer['name'])) $output .= '<li class="mec-organizer-item"><a class="mec-color-hover" '.$organizer_url.'>' . esc_html(trim($organizer['name'])) . '</a></li>';
             }
         }
 
@@ -1751,14 +1749,37 @@ class MEC_skins extends MEC_base
         {
             $repeat_type = (isset($event->data) and isset($event->data->meta) and isset($event->data->meta['mec_repeat_type'])) ? $event->data->meta['mec_repeat_type'] : '';
 
-            if(in_array($repeat_type, array('daily', 'weekly', 'monthly', 'yearly'))) $repeat_label = '<span class="mec-repeating-label">'.esc_html__(ucfirst($repeat_type)).'</span>';
-            elseif(in_array($repeat_type, array('weekend', 'weekday'))) $repeat_label = '<span class="mec-repeating-label">'.sprintf(esc_html__('Every %s', 'modern-events-calendar-lite'), ucfirst($repeat_type)).'</span>';
-            elseif(in_array($repeat_type, array('certain_weekdays', 'custom_days', 'advanced'))) $repeat_label = '<span class="mec-repeating-label">'.esc_html__('Repeating Event', 'modern-events-calendar-lite').'</span>';
+            // Change to switch case for translatability
+            switch ($repeat_type) {
+                case 'daily':
+                    $repeat_label = '<span class="mec-repeating-label">'.esc_html__('Daily' , 'modern-events-calendar-lite').'</span>';
+                    break;
+                case 'weekly':
+                    $repeat_label = '<span class="mec-repeating-label">'.esc_html__('Weekly' , 'modern-events-calendar-lite').'</span>';
+                    break;
+                case 'monthly':
+                    $repeat_label = '<span class="mec-repeating-label">'.esc_html__('Monthly' , 'modern-events-calendar-lite').'</span>';
+                    break;
+                case 'yearly':
+                    $repeat_label = '<span class="mec-repeating-label">'.esc_html__('Yearly' , 'modern-events-calendar-lite').'</span>';
+                    break;
+                case 'weekend':
+                    $repeat_label = '<span class="mec-repeating-label">'.esc_html__('Every Weekend' , 'modern-events-calendar-lite').'</span>';
+                    break;
+                case 'weekday':
+                    $repeat_label = '<span class="mec-repeating-label">'.esc_html__('Every Weekday' , 'modern-events-calendar-lite').'</span>';
+                    break;
+                case 'certain_weekdays':
+                case 'custom_days':
+                case 'advanced':
+                    $repeat_label = '<span class="mec-repeating-label">'.esc_html__('Repeating Event' , 'modern-events-calendar-lite').'</span>';
+                    break;
+            }
         }
 
         // Link is disabled
         if($method == 'no' and in_array($class, array('mec-booking-button', 'mec-detail-button', 'mec-booking-button mec-bg-color-hover mec-border-color-hover', 'mec-event-link'))) return '';
-        elseif($method == 'no') return $title.$repeat_label;
+        elseif($method == 'no') return MEC_kses::form($title.$repeat_label);
         else
         {
             $sed_method = (isset($this->skin_options['sed_method']) ? $this->skin_options['sed_method'] : '');
@@ -1777,10 +1798,10 @@ class MEC_skins extends MEC_base
             $sed_method = ($sed_method ? $sed_method : '_self');
         }
 
-        $target = (!empty($sed_method) ? 'target="'.$sed_method.'" rel="noopener"' : '');
+        $target = (!empty($sed_method) ? 'target="'.esc_attr($sed_method).'" rel="noopener"' : '');
         $target = apply_filters('mec_event_link_change_target', $target, $event->data->ID);
 
-        return '<a '.($class ? 'class="'.$class.'"' : '').' '.($attributes ? $attributes : '').' data-event-id="'.$event->data->ID.'" href="'.$this->main->get_event_date_permalink($event, $event->date['start']['date']).'" '.$target.'>'.$title.'</a>'.$repeat_label;
+        return '<a '.($class ? 'class="'.esc_attr($class).'"' : '').' '.($attributes ? $attributes : '').' data-event-id="'.esc_attr($event->data->ID).'" href="'.esc_url($this->main->get_event_date_permalink($event, $event->date['start']['date'])).'" '.$target.'>'.MEC_kses::form($title).'</a>'.MEC_kses::element($repeat_label);
     }
 
     public function get_end_date()
@@ -1803,7 +1824,7 @@ class MEC_skins extends MEC_base
             {
                 if(!isset($label['style']) or (isset($label['style']) and !trim($label['style']))) continue;
 
-                $captions .= '<span class="mec-event-label-captions '.$extra_class.'" style="--background-color: '.esc_attr($label['color']).';background-color: '.esc_attr($label['color']).'">';
+                $captions .= '<span class="mec-event-label-captions '.esc_attr($extra_class).'" style="--background-color: '.esc_attr($label['color']).';background-color: '.esc_attr($label['color']).'">';
                 if($label['style'] == 'mec-label-featured') $captions .= esc_html__($label['name'], 'modern-events-calendar-lite');
                 elseif($label['style'] == 'mec-label-canceled') $captions .= esc_html__($label['name'], 'modern-events-calendar-lite');
                 elseif($label['style'] == 'mec-label-custom' and isset($label['name']) and trim($label['name'])) $captions .= esc_html__($label['name'], 'modern-events-calendar-lite');

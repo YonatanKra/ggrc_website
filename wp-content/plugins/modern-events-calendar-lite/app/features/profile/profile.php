@@ -116,15 +116,15 @@ $id = 1;
             // Multiple Dates
             $all_dates = (isset($transaction['all_dates']) and is_array($transaction['all_dates'])) ? $transaction['all_dates'] : array();
         ?>
-        <tr id="mec_profile_booking_<?php echo $ID; ?>">
+        <tr id="mec_profile_booking_<?php echo esc_attr($ID); ?>">
             <td>
-                <span class="mec-event-id"><?php echo $id; ?></span>
+                <span class="mec-event-id"><?php echo esc_html($id); ?></span>
             </td>
             <td>
                 <?php if(!isset($event->ID) or !isset($event->title)) : ?>
-                <span class="mec-event-title"><?php _e('N/A', 'modern-events-calendar-lite'); ?></span>
+                <span class="mec-event-title"><?php esc_html_e('N/A', 'modern-events-calendar-lite'); ?></span>
                 <?php else : ?>
-                <a class="mec-event-title" href="<?php echo get_the_permalink($event->ID); ?>"><?php echo $event->title; ?></a>
+                <a class="mec-event-title" href="<?php echo esc_url(get_the_permalink($event->ID)); ?>"><?php echo esc_html($event->title); ?></a>
                 <?php do_action('mec_profile_event_title', $event, $transaction); ?>
                 <?php endif; ?>
             </td>
@@ -147,22 +147,22 @@ $id = 1;
                 </span>
             </td>
             <td>
-                <span class="mec-event-status <?php echo $status_class;?>">
+                <span class="mec-event-status <?php echo esc_attr($status_class); ?>">
                     <div class="mec-tooltip">
                         <div class="box">
-                            <?php echo $this->main->get_confirmation_label($confirmed); ?>
+                            <?php echo esc_html($this->main->get_confirmation_label($confirmed)); ?>
                         </div>
                         <i class="mec-sl-layers"></i>
                     </div>
                 </span>
             </td>
             <td>
-                <a class="mec-booking-number-of-attendees"  href="#mec_profile_booking_<?php echo $ID; ?>">
-                    <?php echo sprintf(__('<i class="mec-sl-eye"></i> %s', 'modern-events-calendar-lite'), ((is_array($transaction) and isset($transaction['tickets'])) ? count($transaction['tickets']) : 0)); ?>
+                <a class="mec-booking-number-of-attendees"  href="#mec_profile_booking_<?php echo esc_attr($ID); ?>">
+                    <i class="mec-sl-eye"></i> <?php echo ((is_array($transaction) and isset($transaction['tickets'])) ? count($transaction['tickets']) : 0); ?>
                 </a>
             </td>
             <td>
-                <span class="mec-profile-bookings-view-invoice"><a target="_blank" href="<?php echo $this->book->get_invoice_link($transaction_id); ?>"><i class="mec-sl-cloud-download"></i></a></span>
+                <span class="mec-profile-bookings-view-invoice"><a target="_blank" href="<?php echo esc_url($this->book->get_invoice_link($transaction_id)); ?>"><i class="mec-sl-cloud-download"></i></a></span>
             </td>
             <td>
                 <?php
@@ -193,7 +193,7 @@ $id = 1;
                 </span>
             </td>
         </tr>
-        <div id="mec_profile_booking_<?php echo $ID; ?>" class="mec-booking-attendees lity-hide">
+        <div id="mec_profile_booking_<?php echo esc_attr($ID); ?>" class="mec-booking-attendees lity-hide">
             <div class="mec-booking-attendees-wrapper">
                 <div class="mec-booking-attendees-head">
                     <span class="mec-booking-attendee-id">
@@ -222,10 +222,10 @@ $id = 1;
                         if(!is_numeric($attendee_i)) continue;
 
                         echo '<div class="mec-booking-attendees-head-content">';
-                        echo '<span class="mec-booking-attendee-id">'.$person_id.'</span>';
-                        echo '<span class="mec-booking-attendee-name">'. ( isset($attendee['_name']) ? $attendee['_name'] : $attendee['name'] ).'</span>';
-                        echo '<span class="mec-booking-attendee-email">'.$attendee['email'].'</span>';
-                        echo '<span class="mec-booking-attendee-ticket">'.((isset($event->tickets[$attendee['id']]) ? $event->tickets[$attendee['id']]['name'] : '').' '.(isset($event->tickets[$attendee['id']]) ? $event->tickets[$attendee['id']]['price_label'] : '')).'</span>';
+                        echo '<span class="mec-booking-attendee-id">'.esc_html($person_id).'</span>';
+                        echo '<span class="mec-booking-attendee-name">'.(isset($attendee['_name']) ? esc_html($attendee['_name']) : esc_html($attendee['name'])).'</span>';
+                        echo '<span class="mec-booking-attendee-email">'.esc_html($attendee['email']).'</span>';
+                        echo '<span class="mec-booking-attendee-ticket">'.((isset($event->tickets[$attendee['id']]) ? esc_html($event->tickets[$attendee['id']]['name']) : '').' '.(isset($event->tickets[$attendee['id']]) ? esc_html($event->tickets[$attendee['id']]['price_label']) : '')).'</span>';
 
                         // Ticket Variations
                         echo '<span class="mec-booking-attendee-ticket-variations">';
@@ -239,7 +239,7 @@ $id = 1;
                                 $variation_title = (isset($ticket_variations[$variation_id]) and isset($ticket_variations[$variation_id]['title'])) ? $ticket_variations[$variation_id]['title'] : '';
                                 if(!trim($variation_title)) continue;
 
-                                echo '<span class="mec-booking-attendee-ticket-variations-title">'.' + '.$variation_title.' ('.$variation_count.')'.'</span>';
+                                echo '<span class="mec-booking-attendee-ticket-variations-title">'.' + '.esc_html($variation_title).' ('.esc_html($variation_count).')'.'</span>';
                             }
                         }
                         else
@@ -258,7 +258,7 @@ $id = 1;
         <?php $id++; endwhile; wp_reset_postdata(); // Restore original Post Data ?>
     </table>
     <?php else: ?>
-    <p><?php echo __('No bookings found!', 'modern-events-calendar-lite'); ?></p>
+    <p><?php echo esc_html__('No bookings found!', 'modern-events-calendar-lite'); ?></p>
     <?php endif; ?>
 </div>
 <script>

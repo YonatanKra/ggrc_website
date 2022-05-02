@@ -25,7 +25,7 @@ get_header('mec'); ?>
 
                 <?php while(have_posts()): the_post(); $title = apply_filters('mec_archive_title', get_the_title()); ?>
 
-                    <?php if(trim($title)): ?><<?php echo $title_tag; ?>><?php echo $title; ?></<?php echo $title_tag; ?>><?php endif; ?>
+                    <?php if(trim($title)): ?><<?php echo esc_html($title_tag); ?>><?php echo MEC_kses::element($title); ?></<?php echo esc_html($title_tag); ?>><?php endif; ?>
 
                     <?php the_content(); ?>
 

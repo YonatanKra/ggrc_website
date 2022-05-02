@@ -13,11 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 function wpbaw_register_guten_block() {
 
 	// Block Editor Script
-	wp_register_script( 'wpbaw-block-js', WPBAW_URL.'assets/js/blocks.build.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components' ), WPBAW_VERSION, true );
+	wp_register_script( 'wpbaw-block-js', WPBAW_URL.'assets/js/blocks.build.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-block-editor', 'wp-components' ), WPBAW_VERSION, true );
 	wp_localize_script( 'wpbaw-block-js', 'Wpbawf_Block', array(
 																'pro_demo_link'		=> 'https://demo.wponlinesupport.com/prodemo/pro-blog-and-widgets-plugin-demo/',
 																'free_demo_link'	=> 'https://demo.wponlinesupport.com/blog-demo/',
-																'pro_link'			=> WPBAW_PLUGIN_LINK,
+																'pro_link'			=> WPBAW_PLUGIN_LINK_UNLOCK,
 															));
 
 	// Register block and explicit attributes for grid

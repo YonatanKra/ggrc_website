@@ -146,7 +146,7 @@ class MEC_feature_feed extends MEC_base
 
     public function ical()
     {
-        $ical_feed = (isset($_GET['mec-ical-feed']) and $_GET['mec-ical-feed']);
+        $ical_feed = (isset($_GET['mec-ical-feed']) and sanitize_text_field($_GET['mec-ical-feed']));
         if(!$ical_feed) return false;
 
         // Feed is not enabled
@@ -165,7 +165,7 @@ class MEC_feature_feed extends MEC_base
         header('Content-Disposition: inline; filename="mec-events-'.date('YmdTHi').'.ics"');
 
         // Print the Calendar
-        echo $ical_calendar;
+        echo MEC_kses::full($ical_calendar);
         exit;
     }
 }

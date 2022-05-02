@@ -301,18 +301,17 @@ var mec_search_callback2;
             var sf = 'sf[s]=' + s + '&sf[address]=' + address + '&sf[cost-min]=' + cost_min + '&sf[cost-max]=' + cost_max + '&sf[time-start]=' + time_start + '&sf[time-end]=' + time_end + '&sf[month]=' + month + '&sf[year]=' + year + '&sf[start]=' + start + '&sf[end]=' + end + '&sf[category]=' + category + '&sf[location]=' + location + '&sf[organizer]=' + organizer + '&sf[speaker]=' + speaker + '&sf[tag]=' + tag + '&sf[label]=' + label + '&sf[event_type]=' + event_type + '&sf[event_type_2]=' + event_type_2 + '&sf[attribute]=' + attribute + addation_attr;
 
             var fields = get_fields();
-            $.each(fields,function(i,field){
-
-                if( $("#mec_sf_"+ field +"_" + settings.id).length ){
-
+            $.each(fields, function(i, field)
+            {
+                if($("#mec_sf_"+ field +"_" + settings.id).length)
+                {
                     v = $("#mec_sf_"+ field +"_" + settings.id).val();
                     sf += '&sf['+ field +']=' + v;
                 }
             });
 
-
             // Refine Parameters
-            if (settings.refine) refine(sf);
+            if(settings.refine) refine(sf);
 
             // Attributes
             var atts = settings.atts + '&' + sf;
@@ -390,57 +389,57 @@ var mec_search_callback2;
             else if ($category.length) category_type = 'dropdown';
 
             $.ajax(
-                {
-                    url: settings.ajax_url,
-                    data: "action=mec_refine_search_items&" + sf + '&last_field=' + last_field + '&category_type=' + category_type + '&id=' + settings.id,
-                    dataType: "json",
-                    type: "post",
-                    success: function (response) {
-                        // Categories
-                        if (typeof response.categories !== 'undefined' && response.categories !== '') {
-                            // Checkboxes
-                            if ($category.length && $category.prop('tagName') && $category.prop('tagName').toLowerCase() === 'div') {
-                                $category.html(response.categories);
-                            }
-                            // Dropdown
-                            else if ($category.length) {
-                                $category.replaceWith(response.categories)
-                            }
-
-                            // Categories Search bar
-                            if ( jQuery(".mec-searchbar-category-wrap select").length > 0 && jQuery().niceSelect) jQuery(".mec-searchbar-category-wrap select").niceSelect();
+            {
+                url: settings.ajax_url,
+                data: "action=mec_refine_search_items&" + sf + '&last_field=' + last_field + '&category_type=' + category_type + '&id=' + settings.id,
+                dataType: "json",
+                type: "post",
+                success: function (response) {
+                    // Categories
+                    if (typeof response.categories !== 'undefined' && response.categories !== '') {
+                        // Checkboxes
+                        if ($category.length && $category.prop('tagName') && $category.prop('tagName').toLowerCase() === 'div') {
+                            $category.html(response.categories);
+                        }
+                        // Dropdown
+                        else if ($category.length) {
+                            $category.replaceWith(response.categories)
                         }
 
-                        // Locations
-                        if (typeof response.locations !== 'undefined' && response.locations !== '') {
-                            $location.replaceWith(response.locations)
-                        }
+                        // Categories Search bar
+                        if ( jQuery(".mec-searchbar-category-wrap select").length > 0 && jQuery().niceSelect) jQuery(".mec-searchbar-category-wrap select").niceSelect();
+                    }
 
-                        // Organizers
-                        if (typeof response.organizers !== 'undefined' && response.organizers !== '') {
-                            $organizer.replaceWith(response.organizers)
-                        }
+                    // Locations
+                    if (typeof response.locations !== 'undefined' && response.locations !== '') {
+                        $location.replaceWith(response.locations)
+                    }
 
-                        // Speakers
-                        if (typeof response.speakers !== 'undefined' && response.speakers !== '') {
-                            $speaker.replaceWith(response.speakers)
-                        }
+                    // Organizers
+                    if (typeof response.organizers !== 'undefined' && response.organizers !== '') {
+                        $organizer.replaceWith(response.organizers)
+                    }
 
-                        // Labels
-                        if (typeof response.labels !== 'undefined' && response.labels !== '') {
-                            $label.replaceWith(response.labels)
-                        }
+                    // Speakers
+                    if (typeof response.speakers !== 'undefined' && response.speakers !== '') {
+                        $speaker.replaceWith(response.speakers)
+                    }
 
-                        // Tags
-                        if (typeof response.tags !== 'undefined' && response.tags !== '') {
-                            $tag.replaceWith(response.tags)
-                        }
+                    // Labels
+                    if (typeof response.labels !== 'undefined' && response.labels !== '') {
+                        $label.replaceWith(response.labels)
+                    }
 
-                        // Trigger
-                        trigger();
-                    },
-                    error: function () { }
-                });
+                    // Tags
+                    if (typeof response.tags !== 'undefined' && response.tags !== '') {
+                        $tag.replaceWith(response.tags)
+                    }
+
+                    // Trigger
+                    trigger();
+                },
+                error: function () { }
+            });
         }
     };
 }(jQuery));
@@ -570,8 +569,17 @@ jQuery(window).on('load', function()
             settings.skin = skin;
 
             // Add Loading Class
-            if (jQuery('.mec-modal-result').length === 0) jQuery('.mec-wrap').append('<div class="mec-modal-result"></div>');
+            if(jQuery('.mec-modal-result').length === 0) jQuery('.mec-wrap').append('<div class="mec-modal-result"></div>');
             jQuery('.mec-modal-result').addClass('mec-month-navigator-loading');
+
+            var $month_picker = $("#mec_sf_month_" + settings.id);
+            var $year_picker = $("#mec_sf_year_" + settings.id);
+
+            // Add Month & Year
+            if(settings.atts.indexOf('sf[month]') <= -1 && $month_picker.length && $year_picker.length)
+            {
+                settings.atts += '&sf[month]='+$month_picker.val()+'&sf[year]='+$year_picker.val();
+            }
 
             $.ajax({
                 url: settings.ajax_url,
@@ -858,6 +866,10 @@ jQuery(window).on('load', function()
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
 
+                if( 'undefined' == typeof id ){
+                    return;
+                }
+
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
         }
@@ -925,6 +937,10 @@ jQuery(window).on('load', function()
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -1046,7 +1062,12 @@ jQuery(window).on('load', function()
             }
 
             // Month exists so we just show it
-            if ($("#mec_monthly_view_month_" + settings.id + "_" + month_id).length) {
+            if ($("#mec_monthly_view_month_" + settings.id + "_" + month_id).length)
+            {
+                // Set Month Filter values in search widget
+                $("#mec_sf_month_" + settings.id).val(month);
+                $("#mec_sf_year_" + settings.id).val(year);
+
                 // Toggle Month
                 toggleMonth(month_id);
             } else {
@@ -1084,7 +1105,6 @@ jQuery(window).on('load', function()
 
                             // Remove loading Class
                             $('.mec-modal-result').removeClass("mec-month-navigator-loading");
-
 
                             // Set Month Filter values in search widget
                             $("#mec_sf_month_" + settings.id).val(month);
@@ -1132,6 +1152,8 @@ jQuery(window).on('load', function()
             // Toggle Events Side
             $("#mec_skin_" + settings.id + " .mec-month-side").hide();
             $("#mec_month_side_" + settings.id + "_" + month_id).show();
+
+            jQuery(document).trigger('mec_toggle_month', [settings, month_id]);
         }
 
         var sf;
@@ -1196,6 +1218,10 @@ jQuery(window).on('load', function()
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -1447,7 +1473,12 @@ jQuery(window).on('load', function()
             navigation_click = navigation_click || false;
 
             // Month exists so we just show it
-            if ($("#mec_weekly_view_month_" + settings.id + "_" + month_id).length) {
+            if ($("#mec_weekly_view_month_" + settings.id + "_" + month_id).length)
+            {
+                // Set Month Filter values in search widget
+                $("#mec_sf_month_" + settings.id).val(month);
+                $("#mec_sf_year_" + settings.id).val(year);
+
                 // Toggle Month
                 toggleMonth(month_id);
 
@@ -1505,6 +1536,8 @@ jQuery(window).on('load', function()
 
             // Initialize Month Navigator
             if (settings.month_navigator) initMonthNavigator(month_id);
+
+            jQuery(document).trigger('mec_toggle_month', [settings, month_id]);
         }
 
         function sed() {
@@ -1521,6 +1554,10 @@ jQuery(window).on('load', function()
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -1743,7 +1780,12 @@ jQuery(window).on('load', function()
             navigation_click = navigation_click || false;
 
             // Month exists so we just show it
-            if ($("#mec_daily_view_month_" + settings.id + "_" + month_id).length) {
+            if ($("#mec_daily_view_month_" + settings.id + "_" + month_id).length)
+            {
+                // Set Month Filter values in search widget
+                $("#mec_sf_month_" + settings.id).val(month);
+                $("#mec_sf_year_" + settings.id).val(year);
+
                 // Toggle Month
                 toggleMonth(month_id);
 
@@ -1804,6 +1846,8 @@ jQuery(window).on('load', function()
 
             // Focus First Active Day
             mecFocusDay(settings);
+
+            jQuery(document).trigger('mec_toggle_month', [settings, month_id]);
         }
 
         function sed() {
@@ -1820,6 +1864,10 @@ jQuery(window).on('load', function()
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -2089,6 +2137,8 @@ jQuery(window).on('load', function()
 
             // Initialize Month Navigator
             if (settings.month_navigator) initMonthNavigator(month_id);
+
+            jQuery(document).trigger('mec_toggle_month', [settings, month_id]);
         }
 
         function sed() {
@@ -2100,6 +2150,10 @@ jQuery(window).on('load', function()
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -2183,6 +2237,10 @@ jQuery(window).on('load', function()
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -2358,6 +2416,10 @@ jQuery(window).on('load', function()
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
 
+                if( 'undefined' == typeof id ){
+                    return;
+                }
+
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
         }
@@ -2527,7 +2589,7 @@ jQuery(window).on('load', function()
                 // Trigger Google Map
                 var unique_id = $(this).parent().find(".mec-modal-wrap").data('unique-id');
 
-                window['mec_init_gmap' + unique_id]();
+                if(typeof window['mec_init_gmap' + unique_id] === 'function') window['mec_init_gmap' + unique_id]();
             });
         }
 
@@ -2541,6 +2603,10 @@ jQuery(window).on('load', function()
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
 
+                if( 'undefined' == typeof id ){
+                    return;
+                }
+
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
 
@@ -2551,6 +2617,10 @@ jQuery(window).on('load', function()
                 var id = $(this).parent().data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -2730,6 +2800,10 @@ jQuery(window).on('load', function()
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
 
+                if( 'undefined' == typeof id ){
+                    return;
+                }
+
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
             $("#mec_skin_" + settings.id + " .mec-event-image a img").off('click').on('click', function (e) {
@@ -2739,6 +2813,10 @@ jQuery(window).on('load', function()
                 var id = $(this).parent().data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -2902,6 +2980,10 @@ jQuery(window).on('load', function()
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
 
+                if( 'undefined' == typeof id ){
+                    return;
+                }
+
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
             $("#mec_skin_" + settings.id + " .mec-event-image a img").off('click').on('click', function (e) {
@@ -2911,6 +2993,10 @@ jQuery(window).on('load', function()
                 var id = $(this).parent().data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -3098,6 +3184,10 @@ jQuery(window).on('load', function()
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
 
+                if( 'undefined' == typeof id ){
+                    return;
+                }
+
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
             $("#mec_skin_" + settings.id + " .mec-event-image a img").off('click').on('click', function (e) {
@@ -3107,6 +3197,10 @@ jQuery(window).on('load', function()
                 var id = $(this).parent().data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -3274,6 +3368,10 @@ jQuery(window).on('load', function()
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -3535,6 +3633,10 @@ jQuery(window).on('load', function()
             var id = $(this).data('event-id');
             var occurrence = get_parameter_by_name('occurrence', href);
             var time = get_parameter_by_name('time', href);
+
+            if( 'undefined' == typeof id ){
+                return;
+            }
 
             mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
         });
@@ -3850,6 +3952,8 @@ jQuery(window).on('load', function()
             // Toggle Month
             $("#mec_skin_" + settings.id + " .mec-month-container").hide().removeClass("mec-month-container-selected");
             $("#mec_tile_month_" + settings.id + "_" + month_id).show().addClass("mec-month-container-selected");
+
+            jQuery(document).trigger('mec_toggle_month', [settings, month_id]);
         }
 
         var sf;
@@ -3900,6 +4004,7 @@ jQuery(window).on('load', function()
         function sed() {
             // Single Event Display
             $("#mec_skin_" + settings.id + " .mec-event-content").off('click').on('click', function (e) {
+
                 var sed_method = $(this).parent().data('target');
                 if ('_blank' === sed_method) {
                     return;
@@ -3910,6 +4015,10 @@ jQuery(window).on('load', function()
                 var id = $(this).find('.mec-event-title a').data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -4958,6 +5067,8 @@ function mecFluentYearlyUI(eventID, yearID) {
             // Add selected class
             $("#mec_skin_" + settings.id + " .mec-month-container").removeClass("mec-month-container-selected");
             $("#mec_list_view_month_" + settings.id + "_" + month_id).addClass("mec-month-container-selected");
+
+            jQuery(document).trigger('mec_toggle_month', [settings, month_id]);
         }
 
         var sf;
@@ -4971,6 +5082,10 @@ function mecFluentYearlyUI(eventID, yearID) {
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -5225,6 +5340,8 @@ function mecFluentYearlyUI(eventID, yearID) {
             // Add selected class
             $("#mec_skin_" + settings.id + " .mec-month-container").removeClass("mec-month-container-selected");
             $("#mec_grid_view_month_" + settings.id + "_" + month_id).addClass("mec-month-container-selected");
+
+            jQuery(document).trigger('mec_toggle_month', [settings, month_id]);
         }
 
         var sf;
@@ -5238,6 +5355,10 @@ function mecFluentYearlyUI(eventID, yearID) {
                 var id = $(this).data('event-id');
                 var occurrence = get_parameter_by_name('occurrence', href);
                 var time = get_parameter_by_name('time', href);
+
+                if( 'undefined' == typeof id ){
+                    return;
+                }
 
                 mecSingleEventDisplayer.getSinglePage(id, occurrence, time, settings.ajax_url, settings.sed_method, settings.image_popup);
             });
@@ -5533,10 +5654,22 @@ function mecFluentYearlyUI(eventID, yearID) {
 
                 // Hide all gateway forms
                 jQuery(".mec-checkout-form-gateway-checkout").addClass("mec-util-hidden");
+                jQuery(".mec-checkout-price-details-wrapper").addClass("mec-util-hidden");
+                jQuery(".mec-checkout-price-wrapper").addClass("mec-util-hidden");
 
                 // Show selected gateway form
                 jQuery("#mec_checkout_form_gateway_checkout" + gateway_id).removeClass("mec-util-hidden");
+                jQuery("#mec-checkout-price-details-wrapper-" + gateway_id).removeClass("mec-util-hidden");
+                jQuery("#mec-checkout-price-wrapper-" + gateway_id).removeClass("mec-util-hidden");
             });
+
+            if( $(".mec-checkout-gateways-radio:first").length ){
+
+                $(".mec-checkout-gateways-radio:first").prop('checked',true).change();
+            }else{
+
+                jQuery(".mec-checkout-price-details-wrapper:first").removeClass("mec-util-hidden");
+            }
 
             $('#mec_checkout_form_free_booking').off('submit').on('submit', function(e)
             {

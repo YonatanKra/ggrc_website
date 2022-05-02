@@ -8,10 +8,9 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
-}
+} ?>
 
-?>
-<div class="pro-notice"><?php echo sprintf( __( 'Upgrade to <a href="%s" target="_blank">Pro Version</a> with Essential Plugin Bundle to boost your <b style="color:#FF5D52;">web site, landing pages & conversions</b>.', 'wp-blog-and-widgets'), WPBAW_PLUGIN_LINK); ?></div>
+<div class="pro-notice"><?php echo sprintf( __( 'Utilize these <a href="%s" target="_blank">Premium Features</a> to get best of this plugin.', 'wp-blog-and-widgets'), WPBAW_PLUGIN_LINK_UNLOCK); ?></div>
 <table class="form-table wpbaw-metabox-table">
 	<tbody>
 
