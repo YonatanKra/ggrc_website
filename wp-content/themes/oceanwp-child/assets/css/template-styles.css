@@ -732,6 +732,12 @@ hr{
         max-width: 160px;
     }
 }
+
+#site-navigation-wrap .dropdown-menu {
+    border: 0;
+    display: block;
+    position: relative;
+}
 /* Modal Popup */
 
 .modal {
