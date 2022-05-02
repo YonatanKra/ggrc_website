@@ -46,6 +46,10 @@ function theme_assets() {
 	wp_enqueue_style( 'bbpress' );
 }
 
+/* General - Registering New Post Thumbnails */
+	
+add_image_size( 'card-medium', 400, 300, true );
+
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);
 
