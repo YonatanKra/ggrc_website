@@ -304,9 +304,9 @@
 }
 
 /* ---------------------
-	
-	
-	
+
+
+
 	/* # Modern Events Calendar (WP Plugin) Styles
 	================================================== */
 .mec-wrap {
@@ -359,7 +359,7 @@
 	display: none;
 }
 
-/* MEC Current Day Event Toggle 
+/* MEC Current Day Event Toggle
 	-------------------------- */
 #mec-active-current {
 	display: block;
@@ -1580,6 +1580,31 @@ span.mec-event-title-soldout {
 
 .mec-event-list-modern .mec-event-sharing li:hover a i {
 	background: #40d9f1;
+}
+
+.mec-event-list-modern .mec-event-sharing li .fa-telegram {
+    fill: #000;
+    max-width: 20px !important;
+    width: 20px !important;
+    max-height: 20px !important;
+    height: 20px;
+    position: relative;
+    padding: 0px !important;
+    margin-bottom: -4px !important;
+}
+
+.mec-event-list-modern .mec-event-sharing li  .fa-telegram * {
+    transform: scale(0.04);
+}
+
+.mec-event-list-modern .mec-event-sharing li .svg-inline--fa.fa-telegram.fa-w-16 path {
+    fill: #767676;
+}
+
+.mec-event-list-modern .mec-event-sharing li .telegram {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 9px 7px 9px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -4163,7 +4188,8 @@ button#mec-book-form-back-btn-step-3 {
 }
 
 .mec-single-event a.button:after,
-.mec-single-event .mec-events-meta-group-booking button[type='submit']:after {
+.mec-single-event .mec-events-meta-group-booking button[type='submit']:after,
+.mec-wrap .mec-events-meta-group-booking button[type='submit']:after {
 	display: none;
 	font-family: 'simple-line-icons';
 	content: '\e098';
@@ -4176,7 +4202,8 @@ button#mec-book-form-back-btn-step-3 {
 }
 
 .mec-single-event a.button.loading:after,
-.mec-single-event .mec-events-meta-group-booking button[type='submit'].loading:after {
+.mec-single-event .mec-events-meta-group-booking button[type='submit'].loading:after,
+.mec-wrap .mec-events-meta-group-booking button[type='submit'].loading:after {
 	display: inline-block;
 }
 
@@ -6874,7 +6901,7 @@ li.mec-no-event-found .mec-event-title {
 	margin-bottom: 20px;
 }
 
-/* Mec Countdown 
+/* Mec Countdown
 	-------------------------------- */
 .mec-single-event {
 	margin-top: 10px;
@@ -7006,7 +7033,7 @@ li.mec-no-event-found .mec-event-title {
 	}
 }
 
-/* Mec Warning 
+/* Mec Warning
 	-------------------------------- */
 .info-msg,
 .mec-success,
@@ -7039,7 +7066,7 @@ li.mec-no-event-found .mec-event-title {
 	background-color: #ffbaba;
 }
 
-/* Mec Frontend Submission 
+/* Mec Frontend Submission
 	-------------------------------- */
 .mec-fes-form,
 .mec-fes-list {
@@ -8989,7 +9016,7 @@ li.mec-no-event-found .mec-event-title {
 	}
 }
 
-/* MEC Datepicker 
+/* MEC Datepicker
 	---------------------*/
 .ui-datepicker {
 	background-color: #fff;
@@ -11512,6 +11539,12 @@ body .featherlight .featherlight-close-icon:hover {
 	}
 }
 
+@media only screen and (min-width: 320px) and (max-width:767px) {
+    .mec-wrap .flip-clock-wrapper ul {
+        padding: 0;
+    }
+}
+
 @media (max-width: 414px) {
 	.mec-wrap span.flip-clock-divider {
 		width: 30px;
@@ -12998,7 +13031,7 @@ body .featherlight .featherlight-close-icon:hover {
 	}
 
 	.mec-wrap span.flip-clock-divider {
-		width: 20px;
+		width: 5px;
 	}
 
 	.mec-single-event .mec-events-meta-group-countdown {
@@ -13648,9 +13681,14 @@ body .featherlight .featherlight-close-icon:hover {
 		max-width: 218px;
 	}
 
-	.single-mec-events .mec-wrap .mec-events-meta-group-countdown {
-		padding: 20px 20px 20px 40px;
-	}
+    .single-mec-events .mec-wrap .mec-events-meta-group-countdown {
+        padding: 20px 10px 20px 10px
+    }
+
+    .mec-wrap .flip-clock-wrapper ul {
+        width: 25px!important;
+        padding: 0;
+    }
 
 	.single-mec-events .mec-wrap .flip-clock-wrapper .flip {
 		margin-bottom: 40px;
@@ -13661,21 +13699,24 @@ body .featherlight .featherlight-close-icon:hover {
 	}
 
 	.single-mec-events .mec-wrap .flip-clock-divider.days .flip-clock-label {
-		left: 21px;
+		left: -15px;
 	}
 
 	.single-mec-events .mec-wrap .flip-clock-divider.hours .flip-clock-label {
-		left: 31px;
+		left: 0;
 	}
 
 	.single-mec-events .mec-wrap .flip-clock-divider.minutes .flip-clock-label {
-		bottom: -108px;
-		left: -390px;
+		left: 0;
 	}
 
 	.single-mec-events .mec-wrap .flip-clock-divider.seconds .flip-clock-label {
-		left: 20px;
+		left: -15px;
 	}
+
+    .single-mec-events .mec-wrap .flip-clock-wrapper {
+        max-width: unset;
+    }
 }
 
 /* MEC Events - Extras

@@ -182,7 +182,7 @@ class Event extends PostBase {
 	 *
 	 * @return string
 	 */
-	public function get_permalink( $start_timestamp = '', $replace_read_more_link = true ){
+	public function get_permalink( $start_timestamp = '', $replace_read_more_link = true, $single_date_method = '' ){
 
 		if( $replace_read_more_link ){
 
@@ -193,7 +193,11 @@ class Event extends PostBase {
 			}
 		}
 
-		$single_date_method = \MEC\Settings\Settings::getInstance()->get_settings( 'single_date_method' );
+		if( is_null( $single_date_method ) ){
+
+			$single_date_method = \MEC\Settings\Settings::getInstance()->get_settings( 'single_date_method' );
+		}
+
 		$url = isset( $this->data['data']->permalink ) ? $this->data['data']->permalink : get_the_permalink( $this->get_id() );
 
 		if( !( empty( $single_date_method ) || 'next' === $single_date_method ) ) {
@@ -251,5 +255,41 @@ class Event extends PostBase {
 		}
 
 		return $ids;
+	}
+
+	/**
+	 * Return event custom data
+	 *
+	 * @return array
+	 */
+	public function get_custom_data(){
+
+		$data = array();
+		$event_fields_data = $this->get_meta( 'mec_fields' );
+        if(!is_array($event_fields_data)) $event_fields_data = array();
+
+		$event_fields = \MEC\Base::get_main()->get_event_fields();
+        foreach($event_fields as $f => $event_field){
+
+            if(!is_numeric($f)) {
+
+                continue;
+            }
+
+            $label = isset($event_field['label']) ? $event_field['label'] : '';
+            $value = isset($event_fields_data[$f]) ? $event_fields_data[$f] : NULL;
+
+			if(is_array($value)) {
+
+				$value = implode(', ', $value);
+			}
+
+			$data[ $f ] = array(
+				'label' => $label,
+				'value' => $value,
+			);
+        }
+
+		return $data;
 	}
 }

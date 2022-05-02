@@ -53,6 +53,11 @@ class MEC_notifications extends MEC_base
      */
     public function email_verification($book_id, $mode = 'auto')
     {
+        if( !$book_id ){
+
+            return false;
+        }
+
         $booker = $this->u->booking($book_id);
         if(!isset($booker->user_email)) return false;
 
@@ -72,7 +77,7 @@ class MEC_notifications extends MEC_base
         // Auto verification for paid bookings is enabled so don't send the verification email
         if($mode == 'auto' and $price > 0 and $auto_verify_paid) return false;
 
-        $subject = isset($this->notif_settings['email_verification']['subject']) ? __($this->notif_settings['email_verification']['subject'], 'modern-events-calendar-lite') : __('Please verify your email.', 'modern-events-calendar-lite');
+        $subject = isset($this->notif_settings['email_verification']['subject']) ? esc_html__($this->notif_settings['email_verification']['subject'], 'modern-events-calendar-lite') : esc_html__('Please verify your email.', 'modern-events-calendar-lite');
         $subject = $this->content($this->get_subject($subject, 'email_verification', $event_id, $book_id), $book_id);
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
@@ -169,6 +174,11 @@ class MEC_notifications extends MEC_base
      */
     public function booking_notification($book_id)
     {
+        if( !$book_id ){
+
+            return false;
+        }
+
         $booking_notification = apply_filters('mec_booking_notification', true);
         if(!$booking_notification) return false;
 
@@ -181,7 +191,7 @@ class MEC_notifications extends MEC_base
         // Event ID
         $event_id = get_post_meta($book_id, 'mec_event_id', true);
 
-        $subject = isset($this->notif_settings['booking_notification']['subject']) ? __($this->notif_settings['booking_notification']['subject'], 'modern-events-calendar-lite') : __('Your booking is received.', 'modern-events-calendar-lite');
+        $subject = isset($this->notif_settings['booking_notification']['subject']) ? esc_html__($this->notif_settings['booking_notification']['subject'], 'modern-events-calendar-lite') : esc_html__('Your booking is received.', 'modern-events-calendar-lite');
         $subject = $this->content($this->get_subject($subject, 'booking_notification', $event_id, $book_id), $book_id);
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
@@ -289,6 +299,10 @@ class MEC_notifications extends MEC_base
      */
     public function booking_confirmation($book_id, $mode = 'manually')
     {
+        if( !$book_id ){
+
+            return false;
+        }
         // Booking Confirmation is disabled
         if(isset($this->notif_settings['booking_confirmation']['status']) and !$this->notif_settings['booking_confirmation']['status']) return false;
 
@@ -313,7 +327,7 @@ class MEC_notifications extends MEC_base
         // Event ID
         $event_id = get_post_meta($book_id, 'mec_event_id', true);
 
-        $subject = isset($this->notif_settings['booking_confirmation']['subject']) ? __($this->notif_settings['booking_confirmation']['subject'], 'modern-events-calendar-lite') : __('Your booking is confirmed.', 'modern-events-calendar-lite');
+        $subject = isset($this->notif_settings['booking_confirmation']['subject']) ? esc_html__($this->notif_settings['booking_confirmation']['subject'], 'modern-events-calendar-lite') : esc_html__('Your booking is confirmed.', 'modern-events-calendar-lite');
         $subject = $this->content($this->get_subject($subject, 'booking_confirmation', $event_id, $book_id), $book_id);
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
@@ -408,6 +422,10 @@ class MEC_notifications extends MEC_base
      */
     public function booking_cancellation($book_id)
     {
+        if( !$book_id ){
+
+            return false;
+        }
         $cancellation_notification = apply_filters('mec_booking_cancellation', true);
         if(!$cancellation_notification) return;
 
@@ -499,7 +517,7 @@ class MEC_notifications extends MEC_base
         // Event ID
         $event_id = get_post_meta($book_id, 'mec_event_id', true);
 
-        $subject = isset($this->notif_settings['cancellation_notification']['subject']) ? __($this->notif_settings['cancellation_notification']['subject'], 'modern-events-calendar-lite') : __('booking canceled.', 'modern-events-calendar-lite');
+        $subject = isset($this->notif_settings['cancellation_notification']['subject']) ? esc_html__($this->notif_settings['cancellation_notification']['subject'], 'modern-events-calendar-lite') : esc_html__('booking canceled.', 'modern-events-calendar-lite');
         $subject = $this->content($this->get_subject($subject, 'cancellation_notification', $event_id, $book_id), $book_id);
 
         // Changing some sender email info.
@@ -557,6 +575,10 @@ class MEC_notifications extends MEC_base
      */
     public function booking_rejection($book_id)
     {
+        if( !$book_id ){
+
+            return false;
+        }
         $rejection_notification = apply_filters('mec_booking_rejection', true);
         if(!$rejection_notification) return;
 
@@ -648,7 +670,7 @@ class MEC_notifications extends MEC_base
         // Event ID
         $event_id = get_post_meta($book_id, 'mec_event_id', true);
 
-        $subject = isset($this->notif_settings['booking_rejection']['subject']) ? __($this->notif_settings['booking_rejection']['subject'], 'modern-events-calendar-lite') : __('booking rejected.', 'modern-events-calendar-lite');
+        $subject = isset($this->notif_settings['booking_rejection']['subject']) ? esc_html__($this->notif_settings['booking_rejection']['subject'], 'modern-events-calendar-lite') : esc_html__('booking rejected.', 'modern-events-calendar-lite');
         $subject = $this->content($this->get_subject($subject, 'booking_rejection', $event_id, $book_id), $book_id);
 
         // Changing some sender email info.
@@ -706,6 +728,10 @@ class MEC_notifications extends MEC_base
      */
     public function admin_notification($book_id)
     {
+        if( !$book_id ){
+
+            return false;
+        }
         // Admin Notification is disabled
         if(isset($this->notif_settings['admin_notification']['status']) and !$this->notif_settings['admin_notification']['status']) return;
 
@@ -713,7 +739,7 @@ class MEC_notifications extends MEC_base
         $event_id = get_post_meta($book_id, 'mec_event_id', true);
 
         $to = get_bloginfo('admin_email');
-        $subject = isset($this->notif_settings['admin_notification']['subject']) ? __($this->notif_settings['admin_notification']['subject'], 'modern-events-calendar-lite') : __('A new booking is received.', 'modern-events-calendar-lite');
+        $subject = isset($this->notif_settings['admin_notification']['subject']) ? esc_html__($this->notif_settings['admin_notification']['subject'], 'modern-events-calendar-lite') : esc_html__('A new booking is received.', 'modern-events-calendar-lite');
         $subject = $this->content($this->get_subject($subject, 'admin_notification', $event_id, $book_id), $book_id);
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
@@ -824,13 +850,17 @@ class MEC_notifications extends MEC_base
      */
     public function booking_reminder($book_id, $timestamps = NULL)
     {
+        if( !$book_id ){
+
+            return false;
+        }
         $booker = $this->u->booking($book_id);
         if(!isset($booker->user_email)) return false;
 
         // Event ID
         $event_id = get_post_meta($book_id, 'mec_event_id', true);
 
-        $subject = isset($this->notif_settings['booking_reminder']['subject']) ? __($this->notif_settings['booking_reminder']['subject'], 'modern-events-calendar-lite') : __('Booking Reminder', 'modern-events-calendar-lite');
+        $subject = isset($this->notif_settings['booking_reminder']['subject']) ? esc_html__($this->notif_settings['booking_reminder']['subject'], 'modern-events-calendar-lite') : esc_html__('Booking Reminder', 'modern-events-calendar-lite');
         $subject = $this->content($this->get_subject($subject, 'booking_reminder', $event_id, $book_id), $book_id);
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
@@ -930,6 +960,10 @@ class MEC_notifications extends MEC_base
      */
     public function new_event($event_id, $update = false)
     {
+        if( !$event_id ){
+
+            return false;
+        }
         // If this is an autosave, our form has not been submitted, so we don't want to do anything.
         if(defined('DOING_AUTOSAVE') and DOING_AUTOSAVE) return false;
 
@@ -950,7 +984,16 @@ class MEC_notifications extends MEC_base
         // Don't send the email if it is draft or an auto draft post
         if($status == 'auto-draft' or $status == 'draft') return false;
 
+        $already_sent = get_post_meta($event_id, 'mec_new_event_notif_sent', true);
+        if($already_sent) return false;
+
+        $event = get_post($event_id);
+
         $to = (!isset($this->notif_settings['new_event']['send_to_admin']) or (isset($this->notif_settings['new_event']['send_to_admin']) and $this->notif_settings['new_event']['send_to_admin'])) ? get_bloginfo('admin_email') : NULL;
+        $admin_user = get_user_by('email', $to);
+
+        $disabled_send_notification_if_current_user_or_author_is_superadmin = isset($this->notif_settings['new_event']['disable_send_notification_if_current_user_or_author_is_admin']) and $this->notif_settings['new_event']['disable_send_notification_if_current_user_or_author_is_admin'] ? true : false;
+        if($disabled_send_notification_if_current_user_or_author_is_superadmin && (get_current_user_id() === $admin_user->ID || get_current_user_id() === $event->post_author)) $to = NULL;
 
         $recipients_str = isset($this->notif_settings['new_event']['recipients']) ? $this->notif_settings['new_event']['recipients'] : '';
         $recipients = trim($recipients_str) ? explode(',', $recipients_str) : array();
@@ -974,7 +1017,7 @@ class MEC_notifications extends MEC_base
             unset($recipients[0]);
         }
 
-        $subject = (isset($this->notif_settings['new_event']['subject']) and trim($this->notif_settings['new_event']['subject'])) ? __($this->notif_settings['new_event']['subject'], 'modern-events-calendar-lite') : __('A new event is added.', 'modern-events-calendar-lite');
+        $subject = (isset($this->notif_settings['new_event']['subject']) and trim($this->notif_settings['new_event']['subject'])) ? esc_html__($this->notif_settings['new_event']['subject'], 'modern-events-calendar-lite') : esc_html__('A new event is added.', 'modern-events-calendar-lite');
         $subject = $this->get_subject($subject, 'new_event', $event_id);
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
@@ -992,7 +1035,6 @@ class MEC_notifications extends MEC_base
 
         // Date Format
         $date_format = get_option('date_format');
-        $time_format = get_option('time_format');
 
         $message = (isset($this->notif_settings['new_event']['content']) and trim($this->notif_settings['new_event']['content'])) ? $this->notif_settings['new_event']['content'] : '';
         $message = $this->get_content($message, 'new_event', $event_id);
@@ -1076,6 +1118,8 @@ class MEC_notifications extends MEC_base
         // Remove the HTML Email filter
         remove_filter('wp_mail_content_type', array($this->main, 'html_email_type'));
 
+        update_post_meta($event_id, 'mec_new_event_notif_sent', 1);
+
         return true;
     }
 
@@ -1114,7 +1158,7 @@ class MEC_notifications extends MEC_base
             $status = get_post_status($post->ID);
 
             $to = $email;
-            $subject = (isset($this->notif_settings['user_event_publishing']['subject']) and trim($this->notif_settings['user_event_publishing']['subject'])) ? __($this->notif_settings['user_event_publishing']['subject'], 'modern-events-calendar-lite') : __('Your event is published.', 'modern-events-calendar-lite');
+            $subject = (isset($this->notif_settings['user_event_publishing']['subject']) and trim($this->notif_settings['user_event_publishing']['subject'])) ? esc_html__($this->notif_settings['user_event_publishing']['subject'], 'modern-events-calendar-lite') : esc_html__('Your event is published.', 'modern-events-calendar-lite');
             $subject = $this->get_subject($subject, 'user_event_publishing', $post->ID);
 
             $headers = array('Content-Type: text/html; charset=UTF-8');
@@ -1181,10 +1225,10 @@ class MEC_notifications extends MEC_base
 
             if(!$mec_start_date and !$mec_end_date)
             {
-                $mec = isset($_POST['mec']) ? $_POST['mec'] : array();
+                $mec = isset($_POST['mec']) ? $this->main->sanitize_deep_array($_POST['mec']) : array();
 
-                $mec_start_date = (isset($mec['date']) and isset($mec['date']['start']) and isset($mec['date']['start']['date']) and trim($mec['date']['start']['date'])) ? $this->main->standardize_format($mec['date']['start']['date']) : NULL;
-                $mec_end_date = (isset($mec['date']) and isset($mec['date']['end']) and isset($mec['date']['end']['date']) and trim($mec['date']['end']['date'])) ? $this->main->standardize_format($mec['date']['end']['date']) : NULL;
+                $mec_start_date = (isset($mec['date']) and isset($mec['date']['start']) and isset($mec['date']['start']['date']) and trim($mec['date']['start']['date'])) ? $this->main->standardize_format(sanitize_text_field($mec['date']['start']['date'])) : NULL;
+                $mec_end_date = (isset($mec['date']) and isset($mec['date']['end']) and isset($mec['date']['end']['date']) and trim($mec['date']['end']['date'])) ? $this->main->standardize_format(sanitize_text_field($mec['date']['end']['date'])) : NULL;
             }
 
             $message = str_replace('%%event_link%%', get_post_permalink($post->ID), $message);
@@ -1249,6 +1293,11 @@ class MEC_notifications extends MEC_base
 
     public function event_soldout($event_id, $book_id)
     {
+        if( !$book_id ){
+
+            return false;
+        }
+
         $event_soldout = apply_filters('mec_event_soldout_notification', true);
         if(!$event_soldout) return;
 
@@ -1311,7 +1360,7 @@ class MEC_notifications extends MEC_base
             $headers[] = $CCBCC.': '.$recipient;
         }
 
-        $subject = isset($this->notif_settings['event_soldout']['subject']) ? __($this->notif_settings['event_soldout']['subject'], 'modern-events-calendar-lite') : __('Event is soldout!', 'modern-events-calendar-lite');
+        $subject = isset($this->notif_settings['event_soldout']['subject']) ? esc_html__($this->notif_settings['event_soldout']['subject'], 'modern-events-calendar-lite') : esc_html__('Event is soldout!', 'modern-events-calendar-lite');
         $subject = $this->content($this->get_subject($subject, 'event_soldout', $event_id, $book_id), $book_id);
 
         // Changing some sender email info.
@@ -1363,6 +1412,10 @@ class MEC_notifications extends MEC_base
 
     public function event_finished($event_id, $timestamps)
     {
+        if( !$event_id ){
+
+            return false;
+        }
         // Event Finished notification is disabled
         if(!isset($this->notif_settings['event_finished']['status']) or (isset($this->notif_settings['event_finished']['status']) and !$this->notif_settings['event_finished']['status'])) return false;
 
@@ -1423,7 +1476,7 @@ class MEC_notifications extends MEC_base
             if(!trim($to)) continue;
             if(in_array($to, $done_emails) or !filter_var($to, FILTER_VALIDATE_EMAIL)) continue;
 
-            $subject = isset($this->notif_settings['event_finished']['subject']) ? __($this->notif_settings['event_finished']['subject'], 'modern-events-calendar-lite') : __('Thanks for your attention!', 'modern-events-calendar-lite');
+            $subject = isset($this->notif_settings['event_finished']['subject']) ? esc_html__($this->notif_settings['event_finished']['subject'], 'modern-events-calendar-lite') : esc_html__('Thanks for your attention!', 'modern-events-calendar-lite');
             $subject = $this->content($this->get_subject($subject, 'event_finished', $event_id, $book_id), $book_id, $attendee, $timestamps);
 
             $message = isset($this->notif_settings['event_finished']['content']) ? $this->notif_settings['event_finished']['content'] : '';
@@ -1464,6 +1517,10 @@ class MEC_notifications extends MEC_base
 
     public function auto_email($book_id, $subject, $message, $timestamps = NULL)
     {
+        if( !$book_id ){
+
+            return false;
+        }
         $booker = $this->u->booking($book_id);
         if(!isset($booker->user_email)) return false;
 
@@ -1553,6 +1610,11 @@ class MEC_notifications extends MEC_base
      */
     public function content($message, $book_id, $attendee = array(), $timestamps = NULL)
     {
+        if( !$book_id ){
+
+            return false;
+        }
+
         $booker = $this->u->booking($book_id);
 
         $event_id = get_post_meta($book_id, 'mec_event_id', true);
@@ -1614,7 +1676,7 @@ class MEC_notifications extends MEC_base
         {
             if(trim($start_timestamp) != trim($end_timestamp) and date('Y-m-d', $start_timestamp) != date('Y-m-d', $end_timestamp))
             {
-                $book_date = sprintf(__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format, $start_timestamp), $this->main->date_i18n($date_format, $end_timestamp));
+                $book_date = sprintf(esc_html__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format, $start_timestamp), $this->main->date_i18n($date_format, $end_timestamp));
             }
             else $book_date = get_the_date($date_format, $book_id);
         }
@@ -1629,7 +1691,7 @@ class MEC_notifications extends MEC_base
         $allday = get_post_meta($event_id, 'mec_allday', true);
         $hide_time = get_post_meta($event_id, 'mec_hide_time', true);
         $hide_end_time = get_post_meta($event_id, 'mec_hide_end_time', true);
-        $event_time = $allday ? $this->main->m('all_day', __('All Day' , 'modern-events-calendar-lite')) : (!$hide_end_time ? sprintf(__('%s to %s', 'modern-events-calendar-lite'), $event_start_time, $event_end_time) : $event_start_time);
+        $event_time = $allday ? $this->main->m('all_day', esc_html__('All Day' , 'modern-events-calendar-lite')) : (!$hide_end_time ? sprintf(esc_html__('%s to %s', 'modern-events-calendar-lite'), $event_start_time, $event_end_time) : $event_start_time);
 
         // Condition for check some parameter simple hide event time
         if(!$hide_time) $message = str_replace('%%book_time%%', $event_time, $message);
@@ -1640,7 +1702,7 @@ class MEC_notifications extends MEC_base
         {
             if(trim($start_timestamp) != trim($end_timestamp))
             {
-                $book_datetime = sprintf(__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $start_timestamp), $this->main->date_i18n($date_format.((!$allday and !$hide_time and !$hide_end_time) ? ' '.$time_format : ''), $end_timestamp));
+                $book_datetime = sprintf(esc_html__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $start_timestamp), $this->main->date_i18n($date_format.((!$allday and !$hide_time and !$hide_end_time) ? ' '.$time_format : ''), $end_timestamp));
             }
             else $book_datetime = get_the_date($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $book_id);
         }
@@ -1656,7 +1718,7 @@ class MEC_notifications extends MEC_base
         {
             list($other_start_timestamp, $other_end_timestamp) = explode(':', $other_date);
 
-            if(trim($other_start_timestamp) != trim($other_end_timestamp)) $other_dates_datetime .= sprintf(__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $other_start_timestamp), $this->main->date_i18n($date_format.((!$allday and !$hide_time and !$hide_end_time) ? ' '.$time_format : ''), $other_end_timestamp))."<br>";
+            if(trim($other_start_timestamp) != trim($other_end_timestamp)) $other_dates_datetime .= sprintf(esc_html__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $other_start_timestamp), $this->main->date_i18n($date_format.((!$allday and !$hide_time and !$hide_end_time) ? ' '.$time_format : ''), $other_end_timestamp))."<br>";
             else $other_dates_datetime .= $this->main->date_i18n($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $other_start_timestamp)."<br>";
         }
 
@@ -1689,7 +1751,11 @@ class MEC_notifications extends MEC_base
         $mec_date = explode(':', get_post_meta($book_id, 'mec_date', true));
 
         // Booked Tickets
-        if(count($mec_date) == 2 and isset($mec_date[0])) $message = str_replace('%%amount_tickets%%', $this->book->get_tickets_availability($event_id, $mec_date[0], 'reservation'), $message);
+        if(count($mec_date) == 2 and isset($mec_date[0]))
+        {
+            $booked_tickets = ($this->book->get_tickets_availability($event_id, $mec_date[0], 'reservation') + $this->book->get_total_attendees($book_id));
+            $message = str_replace('%%amount_tickets%%', $booked_tickets, $message);
+        }
 
         // Attendee Full Information
         if(strpos($message, '%%attendee_full_info%%') !== false or strpos($message, '%%attendees_full_info%%') !== false)
@@ -1903,7 +1969,7 @@ class MEC_notifications extends MEC_base
                 $ticket_start_seconds = $this->main->time_to_seconds($this->main->to_24hours($ticket_start_hour, $ticket_start_ampm), $ticket_start_minute_s);
                 $ticket_end_seconds = $this->main->time_to_seconds($this->main->to_24hours($ticket_end_hour, $ticket_end_ampm), $ticket_end_minute_s);
 
-                $ticket_times[] = $this->main->get_time($ticket_start_seconds).' ' . esc_html__('to' , 'modern-events-calendar-lite') . ' ' .$this->main->get_time($ticket_end_seconds);
+                $ticket_times[] = $this->main->get_time($ticket_start_seconds).' ' . esc_html__('to' , 'modern-events-calendar-lite') . ' ' . $this->main->get_time($ticket_end_seconds);
             }
         }
 
@@ -1954,8 +2020,8 @@ class MEC_notifications extends MEC_base
         // Recurring Rules
         $rrule = $this->main->get_ical_rrules($event_id, true);
 
-        $google_calendar_link = '<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=' . $event_title . '&dates='. gmdate('Ymd\\THi00\\Z', ($start_timestamp - $gmt_offset_seconds)) . '/' . gmdate('Ymd\\THi00\\Z', ($end_timestamp - $gmt_offset_seconds)) . '&details=' . urlencode($event_content) . (trim($google_calendar_location) ? '&location=' . urlencode($google_calendar_location) : ''). ((trim($rrule) ? '&recur='.urlencode($rrule) : '')). '" target="_blank">' . __('+ Add to Google Calendar', 'modern-events-calendar-lite') . '</a>';
-        $ical_export_link  = '<a href="' . $this->main->ical_URL_email($event_id, $book_id, get_the_date('Y-m-d', $book_id)) . '">'. __('+ iCal / Outlook export', 'modern-events-calendar-lite') . '</a>';
+        $google_calendar_link = '<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=' . urlencode($event_title) . '&dates='. gmdate('Ymd\\THi00\\Z', ($start_timestamp - $gmt_offset_seconds)) . '/' . gmdate('Ymd\\THi00\\Z', ($end_timestamp - $gmt_offset_seconds)) . '&details=' . urlencode($event_content) . (trim($google_calendar_location) ? '&location=' . urlencode($google_calendar_location) : ''). ((trim($rrule) ? '&recur='.urlencode($rrule) : '')). '" target="_blank">' . esc_html__('+ Add to Google Calendar', 'modern-events-calendar-lite') . '</a>';
+        $ical_export_link  = '<a href="' . esc_url($this->main->ical_URL_email($event_id, $book_id, get_the_date('Y-m-d', $book_id))) . '">'. esc_html__('+ iCal / Outlook export', 'modern-events-calendar-lite') . '</a>';
 
         $message = str_replace('%%google_calendar_link%%', $google_calendar_link, $message);
         $message = str_replace('%%ics_link%%', $ical_export_link, $message);
@@ -1984,8 +2050,8 @@ class MEC_notifications extends MEC_base
             {
                 if(trim($next_occurrence['tstart']) != trim($next_occurrence['tend']))
                 {
-                    $book_date_next_occurrences .= sprintf(__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format, $next_occurrence['tstart']), $this->main->date_i18n($date_format, $next_occurrence['tend'])).'<br>';
-                    $book_datetime_next_occurrences .= sprintf(__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $next_occurrence['tstart']), $this->main->date_i18n($date_format.((!$allday and !$hide_time and !$hide_end_time) ? ' '.$time_format : ''), $next_occurrence['tend'])).'<br>';
+                    $book_date_next_occurrences .= sprintf(esc_html__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format, $next_occurrence['tstart']), $this->main->date_i18n($date_format, $next_occurrence['tend'])).'<br>';
+                    $book_datetime_next_occurrences .= sprintf(esc_html__('%s to %s', 'modern-events-calendar-lite'), $this->main->date_i18n($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $next_occurrence['tstart']), $this->main->date_i18n($date_format.((!$allday and !$hide_time and !$hide_end_time) ? ' '.$time_format : ''), $next_occurrence['tend'])).'<br>';
                 }
                 else
                 {
@@ -1999,7 +2065,7 @@ class MEC_notifications extends MEC_base
                 $book_datetime_next_occurrences .= $this->main->date_i18n($date_format.((!$allday and !$hide_time) ? ' '.$time_format : ''), $next_occurrence['tstart']).'<br>';
             }
 
-            $google_calendar_links .= '<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=' . $event_title . '&dates='. gmdate('Ymd\\THi00\\Z', ($next_occurrence['tstart'] - $gmt_offset_seconds)) . '/' . gmdate('Ymd\\THi00\\Z', ($next_occurrence['tend'] - $gmt_offset_seconds)) . '&details=' . urlencode($event_content) . (trim($google_calendar_location) ? '&location=' . urlencode($google_calendar_location) : ''). '" target="_blank">' . sprintf(__('+ %s to Google Calendar', 'modern-events-calendar-lite'), date($date_format .' '.$time_format, $next_occurrence['tstart'])) . '</a><br>';
+            $google_calendar_links .= '<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=' . urlencode($event_title) . '&dates='. gmdate('Ymd\\THi00\\Z', ($next_occurrence['tstart'] - $gmt_offset_seconds)) . '/' . gmdate('Ymd\\THi00\\Z', ($next_occurrence['tend'] - $gmt_offset_seconds)) . '&details=' . urlencode($event_content) . (trim($google_calendar_location) ? '&location=' . urlencode($google_calendar_location) : ''). '" target="_blank">' . sprintf(esc_html__('+ %s to Google Calendar', 'modern-events-calendar-lite'), date($date_format .' '.$time_format, $next_occurrence['tstart'])) . '</a><br>';
         }
 
         $message = str_replace('%%google_calendar_link_next_occurrences%%', $google_calendar_links, $message);
@@ -2087,8 +2153,8 @@ class MEC_notifications extends MEC_base
 
             $reg_form = isset($attendee['reg']) ? $attendee['reg'] : array();
 
-            $attendees_full_info .= __('Name', 'modern-events-calendar-lite').': '.((isset($attendee['name']) and trim($attendee['name'])) ? $attendee['name'] : '---')."\r\n";
-            $attendees_full_info .= __('Email', 'modern-events-calendar-lite').': '.((isset($attendee['email']) and trim($attendee['email'])) ? $attendee['email'] : '---')."\r\n";
+            $attendees_full_info .= esc_html__('Name', 'modern-events-calendar-lite').': '.((isset($attendee['name']) and trim($attendee['name'])) ? $attendee['name'] : '---')."\r\n";
+            $attendees_full_info .= esc_html__('Email', 'modern-events-calendar-lite').': '.((isset($attendee['email']) and trim($attendee['email'])) ? $attendee['email'] : '---')."\r\n";
 
             if(is_array($reg_form) and count($reg_form))
             {
@@ -2106,12 +2172,12 @@ class MEC_notifications extends MEC_base
 
                     if($type == 'agreement')
                     {
-                        $label = sprintf(__($label, 'modern-events-calendar-lite'), '<a href="'.get_the_permalink($reg_fields[$field_id]['page']).'">'.get_the_title($reg_fields[$field_id]['page']).'</a>');
-                        $attendees_full_info .= $label.': '.($value == '1' ? __('Yes', 'modern-events-calendar-lite') : __('No', 'modern-events-calendar-lite'))."\r\n";
+                        $label = sprintf(esc_html__($label, 'modern-events-calendar-lite'), '<a href="'.get_the_permalink($reg_fields[$field_id]['page']).'">'.get_the_title($reg_fields[$field_id]['page']).'</a>');
+                        $attendees_full_info .= $label.': '.($value == '1' ? esc_html__('Yes', 'modern-events-calendar-lite') : esc_html__('No', 'modern-events-calendar-lite'))."\r\n";
                     }
                     else
                     {
-                        $attendees_full_info .= __($label, 'modern-events-calendar-lite').': '.(is_string($value) ? $value : (is_array($value) ? implode(', ', $value) : '---'))."\r\n";
+                        $attendees_full_info .= esc_html__($label, 'modern-events-calendar-lite').': '.(is_string($value) ? $value : (is_array($value) ? implode(', ', $value) : '---'))."\r\n";
                     }
                 }
             }
@@ -2122,7 +2188,7 @@ class MEC_notifications extends MEC_base
         // Attachment
         if(count($attachments))
         {
-            $attendees_full_info .= __($attachment_field['label'], 'modern-events-calendar-lite').': <a href="'.esc_url($attachments[0]['url']).'" target="_blank">'.esc_url($attachments[0]['url']).'</a>'."\r\n";
+            $attendees_full_info .= esc_html__($attachment_field['label'], 'modern-events-calendar-lite').': <a href="'.esc_url($attachments[0]['url']).'" target="_blank">'.esc_url($attachments[0]['url']).'</a>'."\r\n";
         }
 
         return $attendees_full_info;
@@ -2173,11 +2239,11 @@ class MEC_notifications extends MEC_base
         $style = $this->main->get_styling();
         $bgnotifications = isset($style['notification_bg']) ? $style['notification_bg'] : '#f6f6f6';
 
-        return '<table border="0" cellpadding="0" cellspacing="0" class="wn-body" style="background-color: '.$bgnotifications.'; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Open Sans, sans-serif;border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+        return '<table border="0" cellpadding="0" cellspacing="0" class="wn-body" style="background-color: '.esc_attr($bgnotifications).'; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Open Sans, sans-serif;border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
             <tr>
                 <td class="wn-container" style="display: block; margin: 0 auto !important; max-width: 680px; padding: 10px;font-family: sans-serif; font-size: 14px; vertical-align: top;">
                     <div class="wn-wrapper" style="box-sizing: border-box; padding: 38px 9% 50px; width: 100%; height: auto; background: #fff; background-size: contain; margin-bottom: 25px; margin-top: 30px; border-radius: 4px; box-shadow: 0 3px 55px -18px rgba(0,0,0,0.1);">
-                        '.$content.'
+                        '.MEC_kses::page($content).'
                     </div>
                 </td>
             </tr>

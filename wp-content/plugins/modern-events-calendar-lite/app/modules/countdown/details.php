@@ -59,12 +59,12 @@ $disable_for_ongoing = (isset($settings['countdown_disable_for_ongoing_events'])
 
 if($d3 < $d2)
 {
-    echo '<div class="mec-end-counts"><h3>'.__('The event is finished.', 'modern-events-calendar-lite').'</h3></div>';
+    echo '<div class="mec-end-counts"><h3>'.esc_html__('The event is finished.', 'modern-events-calendar-lite').'</h3></div>';
     return;
 }
 elseif(($d1 < $d2 and !$ongoing) or ($d1 < $d2 and $disable_for_ongoing))
 {
-    echo '<div class="mec-end-counts"><h3>'.__('The event is ongoing.', 'modern-events-calendar-lite').'</h3></div>';
+    echo '<div class="mec-end-counts"><h3>'.esc_html__('The event is ongoing.', 'modern-events-calendar-lite').'</h3></div>';
     return;
 }
 
@@ -179,39 +179,39 @@ if(!function_exists('is_plugin_active')) include_once( ABSPATH . 'wp-admin/inclu
 ?>
 <?php if(!isset($settings['countdown_list']) or (isset($settings['countdown_list']) and $settings['countdown_list'] === 'default')): ?>
 <?php
-    if($this->is_ajax()) echo $defaultjs;
-    elseif (is_plugin_active( 'mec-single-builder/mec-single-builder.php')) echo $defaultjs;
+    if($this->is_ajax()) echo MEC_kses::full($defaultjs);
+    elseif (is_plugin_active( 'mec-single-builder/mec-single-builder.php')) echo MEC_kses::full($defaultjs);
     else $factory->params('footer', $defaultjs);
 ?>
-<div class="mec-countdown-details" id="mec_countdown_details" data-datetime="<?php echo $datetime; ?>" data-gmt_offset="<?php echo $gmt_offset ?>">
+<div class="mec-countdown-details" id="mec_countdown_details" data-datetime="<?php echo esc_attr($datetime); ?>" data-gmt_offset="<?php echo esc_attr($gmt_offset); ?>">
     <div class="countdown-w ctd-simple">
         <ul class="clockdiv" id="countdown">
             <div class="days-w block-w">
                 <li>
                     <i class="icon-w mec-li_calendar"></i>
                     <span class="mec-days">00</span>
-                    <p class="mec-timeRefDays label-w"><?php _e('days', 'modern-events-calendar-lite'); ?></p>
+                    <p class="mec-timeRefDays label-w"><?php esc_html_e('days', 'modern-events-calendar-lite'); ?></p>
                 </li>
             </div>
             <div class="hours-w block-w">
                 <li>
                     <i class="icon-w mec-fa-clock-o"></i>
                     <span class="mec-hours">00</span>
-                    <p class="mec-timeRefHours label-w"><?php _e('hours', 'modern-events-calendar-lite'); ?></p>
+                    <p class="mec-timeRefHours label-w"><?php esc_html_e('hours', 'modern-events-calendar-lite'); ?></p>
                 </li>
             </div>
             <div class="minutes-w block-w">
                 <li>
                     <i class="icon-w mec-li_clock"></i>
                     <span class="mec-minutes">00</span>
-                    <p class="mec-timeRefMinutes label-w"><?php _e('minutes', 'modern-events-calendar-lite'); ?></p>
+                    <p class="mec-timeRefMinutes label-w"><?php esc_html_e('minutes', 'modern-events-calendar-lite'); ?></p>
                 </li>
             </div>
             <div class="seconds-w block-w">
                 <li>
                     <i class="icon-w mec-li_heart"></i>
                     <span class="mec-seconds">00</span>
-                    <p class="mec-timeRefSeconds label-w"><?php _e('seconds', 'modern-events-calendar-lite'); ?></p>
+                    <p class="mec-timeRefSeconds label-w"><?php esc_html_e('seconds', 'modern-events-calendar-lite'); ?></p>
                 </li>
             </div>
         </ul>
@@ -219,11 +219,11 @@ if(!function_exists('is_plugin_active')) include_once( ABSPATH . 'wp-admin/inclu
 </div>
 <?php elseif(isset($settings['countdown_list']) and $settings['countdown_list'] === 'flip'): ?>
 <?php
-    if($this->is_ajax()) echo $flipjs;
-    elseif(is_plugin_active( 'mec-single-builder/mec-single-builder.php'))
+    if($this->is_ajax()) echo MEC_kses::full($flipjs);
+    elseif(is_plugin_active('mec-single-builder/mec-single-builder.php'))
     {
         wp_enqueue_script('mec-flipcount-script', $this->asset('js/flipcount.js'));
-        echo $flipjs;
+        echo MEC_kses::full($flipjs);
     }
     elseif(is_plugin_active( 'divi-single-builder/divi-single-builder.php'))
     {

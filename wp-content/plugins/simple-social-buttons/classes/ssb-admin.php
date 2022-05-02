@@ -88,12 +88,16 @@ if ( ! class_exists( 'SimpleSocialButtonsPR_Admin' ) ) :
 			$postType           = get_post_type( $postId );
 			$ssb_positions      = get_option( 'ssb_positions' );
 			$selected_post_type = array();
-			foreach ( $ssb_positions['position'] as $key => $value ) {
-				$options = get_option( 'ssb_' . $value );
 
-				if ( isset( $options['posts'] ) && $options['posts'] !== '' ) {
-					foreach ( $options['posts']  as $allow_post_type ) {
-						$selected_post_type[ $allow_post_type ] = $allow_post_type;
+			// Check if a SSB position is selected or not.
+			if ( isset( $ssb_positions['position'] ) && ! empty( $ssb_positions['position'] ) ) {
+				foreach ( $ssb_positions['position'] as $key => $value ) {
+					$options = get_option( 'ssb_' . $value );
+
+					if ( isset( $options['posts'] ) && ! empty( $options['posts'] ) ) {
+						foreach ( $options['posts']  as $allow_post_type ) {
+							$selected_post_type[ $allow_post_type ] = $allow_post_type;
+						}
 					}
 				}
 			}

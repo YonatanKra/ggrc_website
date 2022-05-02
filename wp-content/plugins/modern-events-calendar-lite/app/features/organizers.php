@@ -55,8 +55,8 @@ class MEC_feature_organizers extends MEC_base
      */
     public function register_taxonomy()
     {
-        $singular_label = $this->main->m('taxonomy_organizer', __('Organizer', 'modern-events-calendar-lite'));
-        $plural_label = $this->main->m('taxonomy_organizers', __('Organizers', 'modern-events-calendar-lite'));
+        $singular_label = $this->main->m('taxonomy_organizer', esc_html__('Organizer', 'modern-events-calendar-lite'));
+        $plural_label = $this->main->m('taxonomy_organizers', esc_html__('Organizers', 'modern-events-calendar-lite'));
 
         register_taxonomy(
             'mec_organizer',
@@ -66,16 +66,16 @@ class MEC_feature_organizers extends MEC_base
                 'labels'=>array(
                     'name'=>$plural_label,
                     'singular_name'=>$singular_label,
-                    'all_items'=>sprintf(__('All %s', 'modern-events-calendar-lite'), $plural_label),
-                    'edit_item'=>sprintf(__('Edit %s', 'modern-events-calendar-lite'), $singular_label),
-                    'view_item'=>sprintf(__('View %s', 'modern-events-calendar-lite'), $singular_label),
-                    'update_item'=>sprintf(__('Update %s', 'modern-events-calendar-lite'), $singular_label),
-                    'add_new_item'=>sprintf(__('Add New %s', 'modern-events-calendar-lite'), $singular_label),
-                    'new_item_name'=>sprintf(__('New %s Name', 'modern-events-calendar-lite'), $singular_label),
-                    'popular_items'=>sprintf(__('Popular %s', 'modern-events-calendar-lite'), $plural_label),
-                    'search_items'=>sprintf(__('Search %s', 'modern-events-calendar-lite'), $plural_label),
-                    'back_to_items'=>sprintf(__('← Back to %s', 'modern-events-calendar-lite'), $plural_label),
-                    'not_found'=>sprintf(__('no %s found.', 'modern-events-calendar-lite'), strtolower($plural_label)),
+                    'all_items'=>sprintf(esc_html__('All %s', 'modern-events-calendar-lite'), $plural_label),
+                    'edit_item'=>sprintf(esc_html__('Edit %s', 'modern-events-calendar-lite'), $singular_label),
+                    'view_item'=>sprintf(esc_html__('View %s', 'modern-events-calendar-lite'), $singular_label),
+                    'update_item'=>sprintf(esc_html__('Update %s', 'modern-events-calendar-lite'), $singular_label),
+                    'add_new_item'=>sprintf(esc_html__('Add New %s', 'modern-events-calendar-lite'), $singular_label),
+                    'new_item_name'=>sprintf(esc_html__('New %s Name', 'modern-events-calendar-lite'), $singular_label),
+                    'popular_items'=>sprintf(esc_html__('Popular %s', 'modern-events-calendar-lite'), $plural_label),
+                    'search_items'=>sprintf(esc_html__('Search %s', 'modern-events-calendar-lite'), $plural_label),
+                    'back_to_items'=>sprintf(esc_html__('← Back to %s', 'modern-events-calendar-lite'), $plural_label),
+                    'not_found'=>sprintf(esc_html__('no %s found.', 'modern-events-calendar-lite'), strtolower($plural_label)),
                 ),
                 'rewrite'=>array('slug'=>'events-organizer'),
                 'public'=>false,
@@ -101,37 +101,37 @@ class MEC_feature_organizers extends MEC_base
     ?>
         <tr class="form-field">
             <th scope="row">
-                <label for="mec_tel"><?php _e('Tel', 'modern-events-calendar-lite'); ?></label>
+                <label for="mec_tel"><?php esc_html_e('Tel', 'modern-events-calendar-lite'); ?></label>
             </th>
             <td>
-                <input type="text" placeholder="<?php esc_attr_e('Insert organizer phone number.', 'modern-events-calendar-lite'); ?>" name="tel" id="mec_tel" value="<?php echo $tel; ?>" />
+                <input type="text" placeholder="<?php esc_attr_e('Insert organizer phone number.', 'modern-events-calendar-lite'); ?>" name="tel" id="mec_tel" value="<?php echo esc_attr($tel); ?>" />
             </td>
         </tr>
         <tr class="form-field">
             <th scope="row">
-                <label for="mec_email"><?php _e('Email', 'modern-events-calendar-lite'); ?></label>
+                <label for="mec_email"><?php esc_html_e('Email', 'modern-events-calendar-lite'); ?></label>
             </th>
             <td>
-                <input type="text"  placeholder="<?php esc_attr_e('Insert organizer email address.', 'modern-events-calendar-lite'); ?>" name="email" id="mec_email" value="<?php echo $email; ?>" />
+                <input type="text"  placeholder="<?php esc_attr_e('Insert organizer email address.', 'modern-events-calendar-lite'); ?>" name="email" id="mec_email" value="<?php echo esc_attr($email); ?>" />
             </td>
         </tr>
         <tr class="form-field">
             <th scope="row">
-                <label for="mec_url"><?php _e('Link to organizer page', 'modern-events-calendar-lite'); ?></label>
+                <label for="mec_url"><?php esc_html_e('Link to organizer page', 'modern-events-calendar-lite'); ?></label>
             </th>
             <td>
-                <input type="text" placeholder="<?php esc_attr_e('Use this field to link organizer to other user profile pages', 'modern-events-calendar-lite'); ?>" name="url" id="mec_url" value="<?php echo $url; ?>" />
+                <input type="text" placeholder="<?php esc_attr_e('Use this field to link organizer to other user profile pages', 'modern-events-calendar-lite'); ?>" name="url" id="mec_url" value="<?php echo esc_attr($url); ?>" />
             </td>
         </tr>
         <tr class="form-field">
             <th scope="row">
-                <label for="mec_thumbnail_button"><?php _e('Thumbnail', 'modern-events-calendar-lite'); ?></label>
+                <label for="mec_thumbnail_button"><?php esc_html_e('Thumbnail', 'modern-events-calendar-lite'); ?></label>
             </th>
             <td>
-                <div id="mec_thumbnail_img"><?php if(trim($thumbnail) != '') echo '<img src="'.$thumbnail.'" />'; ?></div>
-                <input type="hidden" name="thumbnail" id="mec_thumbnail" value="<?php echo $thumbnail; ?>" />
-                <button type="button" class="mec_upload_image_button button" id="mec_thumbnail_button"><?php echo __('Upload/Add image', 'modern-events-calendar-lite'); ?></button>
-                <button type="button" class="mec_remove_image_button button <?php echo (!trim($thumbnail) ? 'mec-util-hidden' : ''); ?>"><?php echo __('Remove image', 'modern-events-calendar-lite'); ?></button>
+                <div id="mec_thumbnail_img"><?php if(trim($thumbnail) != '') echo '<img src="'.esc_url($thumbnail).'" />'; ?></div>
+                <input type="hidden" name="thumbnail" id="mec_thumbnail" value="<?php echo esc_attr($thumbnail); ?>" />
+                <button type="button" class="mec_upload_image_button button" id="mec_thumbnail_button"><?php echo esc_html__('Upload/Add image', 'modern-events-calendar-lite'); ?></button>
+                <button type="button" class="mec_remove_image_button button <?php echo (!trim($thumbnail) ? 'mec-util-hidden' : ''); ?>"><?php echo esc_html__('Remove image', 'modern-events-calendar-lite'); ?></button>
             </td>
         </tr>
         <?php do_action('mec_edit_organizer_extra_fields', $term); ?>
@@ -146,23 +146,23 @@ class MEC_feature_organizers extends MEC_base
     {
     ?>
         <div class="form-field">
-            <label for="mec_tel"><?php _e('Tel', 'modern-events-calendar-lite'); ?></label>
+            <label for="mec_tel"><?php esc_html_e('Tel', 'modern-events-calendar-lite'); ?></label>
             <input type="text" name="tel" placeholder="<?php esc_attr_e('Insert organizer phone number.', 'modern-events-calendar-lite'); ?>" id="mec_tel" value="" />
         </div>
         <div class="form-field">
-            <label for="mec_email"><?php _e('Email', 'modern-events-calendar-lite'); ?></label>
+            <label for="mec_email"><?php esc_html_e('Email', 'modern-events-calendar-lite'); ?></label>
             <input type="text" name="email" placeholder="<?php esc_attr_e('Insert organizer email address.', 'modern-events-calendar-lite'); ?>" id="mec_email" value="" />
         </div>
         <div class="form-field">
-            <label for="mec_url"><?php _e('Link to organizer page', 'modern-events-calendar-lite'); ?></label>
+            <label for="mec_url"><?php esc_html_e('Link to organizer page', 'modern-events-calendar-lite'); ?></label>
             <input type="text" name="url" placeholder="<?php esc_attr_e('Use this field to link organizer to other user profile pages', 'modern-events-calendar-lite'); ?>" id="mec_url" value="" />
         </div>
         <div class="form-field">
-            <label for="mec_thumbnail_button"><?php _e('Thumbnail', 'modern-events-calendar-lite'); ?></label>
+            <label for="mec_thumbnail_button"><?php esc_html_e('Thumbnail', 'modern-events-calendar-lite'); ?></label>
             <div id="mec_thumbnail_img"></div>
             <input type="hidden" name="thumbnail" id="mec_thumbnail" value="" />
-            <button type="button" class="mec_upload_image_button button" id="mec_thumbnail_button"><?php echo __('Upload/Add image', 'modern-events-calendar-lite'); ?></button>
-            <button type="button" class="mec_remove_image_button button mec-util-hidden"><?php echo __('Remove image', 'modern-events-calendar-lite'); ?></button>
+            <button type="button" class="mec_upload_image_button button" id="mec_thumbnail_button"><?php echo esc_html__('Upload/Add image', 'modern-events-calendar-lite'); ?></button>
+            <button type="button" class="mec_remove_image_button button mec-util-hidden"><?php echo esc_html__('Remove image', 'modern-events-calendar-lite'); ?></button>
         </div>
         <?php do_action('mec_add_organizer_extra_fields'); ?>
     <?php
@@ -180,7 +180,7 @@ class MEC_feature_organizers extends MEC_base
 
         $tel = isset($_POST['tel']) ? sanitize_text_field($_POST['tel']) : '';
         $email = isset($_POST['email']) ? sanitize_text_field($_POST['email']) : '';
-        $url = (isset($_POST['url']) and trim($_POST['url'])) ? (strpos($_POST['url'], 'http') === false ? 'http://'.sanitize_text_field($_POST['url']) : sanitize_text_field($_POST['url'])) : '';
+        $url = (isset($_POST['url']) and trim($_POST['url'])) ? sanitize_url($_POST['url']) : '';
         $thumbnail = isset($_POST['thumbnail']) ? sanitize_text_field($_POST['thumbnail']) : '';
         
         update_term_meta($term_id, 'tel', $tel);
@@ -204,11 +204,11 @@ class MEC_feature_organizers extends MEC_base
         unset($columns['description']);
         unset($columns['posts']);
         
-        $columns['id'] = __('ID', 'modern-events-calendar-lite');
-        $columns['name'] = $this->main->m('taxonomy_organizer', __('Organizer', 'modern-events-calendar-lite'));
-        $columns['contact'] = __('Contact info', 'modern-events-calendar-lite');
-        $columns['posts'] = __('Count', 'modern-events-calendar-lite');
-        $columns['slug'] = __('Slug', 'modern-events-calendar-lite');
+        $columns['id'] = esc_html__('ID', 'modern-events-calendar-lite');
+        $columns['name'] = $this->main->m('taxonomy_organizer', esc_html__('Organizer', 'modern-events-calendar-lite'));
+        $columns['contact'] = esc_html__('Contact info', 'modern-events-calendar-lite');
+        $columns['posts'] = esc_html__('Count', 'modern-events-calendar-lite');
+        $columns['slug'] = esc_html__('Slug', 'modern-events-calendar-lite');
         
         return apply_filters('organizer_filter_column', $columns);
     }
@@ -274,66 +274,66 @@ class MEC_feature_organizers extends MEC_base
         }
     ?>
         <div class="mec-meta-box-fields mec-event-tab-content" id="mec-organizer">
-            <h4><?php echo sprintf(__('Event Main %s', 'modern-events-calendar-lite'), $this->main->m('taxonomy_organizer', __('Organizer', 'modern-events-calendar-lite'))); ?></h4>
+            <h4><?php echo sprintf(esc_html__('Event Main %s', 'modern-events-calendar-lite'), $this->main->m('taxonomy_organizer', esc_html__('Organizer', 'modern-events-calendar-lite'))); ?></h4>
 			<div class="mec-form-row">
-				<select name="mec[organizer_id]" id="mec_organizer_id" title="<?php echo esc_attr__($this->main->m('taxonomy_organizer', __('Organizer', 'modern-events-calendar-lite')), 'modern-events-calendar-lite'); ?>">
-                    <option value="1"><?php _e('Hide organizer', 'modern-events-calendar-lite'); ?></option>
-					<option value="0"><?php _e('Insert a new organizer', 'modern-events-calendar-lite'); ?></option>
+				<select name="mec[organizer_id]" id="mec_organizer_id" title="<?php echo esc_attr__($this->main->m('taxonomy_organizer', esc_html__('Organizer', 'modern-events-calendar-lite')), 'modern-events-calendar-lite'); ?>">
+                    <option value="1"><?php esc_html_e('Hide organizer', 'modern-events-calendar-lite'); ?></option>
+					<option value="0"><?php esc_html_e('Insert a new organizer', 'modern-events-calendar-lite'); ?></option>
 					<?php foreach($organizers as $organizer): ?>
-					<option <?php if($organizer_id == $organizer->term_id) echo $selected = 'selected="selected"'; ?> value="<?php echo $organizer->term_id; ?>"><?php echo $organizer->name; ?></option>
+					<option <?php if($organizer_id == $organizer->term_id) echo ($selected = 'selected="selected"'); ?> value="<?php echo esc_attr($organizer->term_id); ?>"><?php echo esc_html($organizer->name); ?></option>
 					<?php endforeach; ?>
 				</select>
                 <span class="mec-tooltip">
                     <div class="box top">
-                        <h5 class="title"><?php _e('Organizer', 'modern-events-calendar-lite'); ?></h5>
-                        <div class="content"><p><?php esc_attr_e('Choose one of saved organizers or insert new one below.', 'modern-events-calendar-lite'); ?><a href="https://webnus.net/dox/modern-events-calendar/organizer-and-other-organizer/" target="_blank"><?php _e('Read More', 'modern-events-calendar-lite'); ?></a></p></div>    
+                        <h5 class="title"><?php esc_html_e('Organizer', 'modern-events-calendar-lite'); ?></h5>
+                        <div class="content"><p><?php esc_attr_e('Choose one of saved organizers or insert new one below.', 'modern-events-calendar-lite'); ?><a href="https://webnus.net/dox/modern-events-calendar/organizer-and-other-organizer/" target="_blank"><?php esc_html_e('Read More', 'modern-events-calendar-lite'); ?></a></p></div>
                     </div>
                     <i title="" class="dashicons-before dashicons-editor-help"></i>
                 </span>	                 
 			</div>
 			<div id="mec_organizer_new_container">
 				<div class="mec-form-row">
-					<input type="text" name="mec[organizer][name]" id="mec_organizer_name" value="" placeholder="<?php _e('Name', 'modern-events-calendar-lite'); ?>" />
-					<p class="description"><?php _e('eg. John Smith', 'modern-events-calendar-lite'); ?></p>
+					<input type="text" name="mec[organizer][name]" id="mec_organizer_name" value="" placeholder="<?php esc_html_e('Name', 'modern-events-calendar-lite'); ?>" />
+					<p class="description"><?php esc_html_e('eg. John Smith', 'modern-events-calendar-lite'); ?></p>
 				</div>
                 <div class="mec-form-row">
                     <input type="text" name="mec[organizer][tel]" id="mec_organizer_tel" value="" placeholder="<?php esc_attr_e('Phone number.', 'modern-events-calendar-lite'); ?>" />
-                    <p class="description"><?php _e('eg. +1 (234) 5678', 'modern-events-calendar-lite'); ?></p>
+                    <p class="description"><?php esc_html_e('eg. +1 (234) 5678', 'modern-events-calendar-lite'); ?></p>
                 </div>
                 <div class="mec-form-row">
                     <input type="text" name="mec[organizer][email]" id="mec_organizer_email" value="" placeholder="<?php esc_attr_e('Email address.', 'modern-events-calendar-lite'); ?>" />
-                    <p class="description"><?php _e('eg. john@smith.com', 'modern-events-calendar-lite'); ?></p>
+                    <p class="description"><?php esc_html_e('eg. john@smith.com', 'modern-events-calendar-lite'); ?></p>
                 </div>
 				<div class="mec-form-row">
-					<input type="text" name="mec[organizer][url]" id="mec_organizer_url" value="" placeholder="<?php _e('Link to organizer page', 'modern-events-calendar-lite'); ?>" />
-					<p class="description"><?php _e('eg. https://webnus.net', 'modern-events-calendar-lite'); ?></p>
+					<input type="text" name="mec[organizer][url]" id="mec_organizer_url" value="" placeholder="<?php esc_html_e('Link to organizer page', 'modern-events-calendar-lite'); ?>" />
+					<p class="description"><?php esc_html_e('eg. https://webnus.net', 'modern-events-calendar-lite'); ?></p>
 				</div>
                 <?php /* Don't show this section in FES */ if(is_admin()): ?>
 				<div class="mec-form-row mec-thumbnail-row">
 					<div id="mec_organizer_thumbnail_img"></div>
 					<input type="hidden" name="mec[organizer][thumbnail]" id="mec_organizer_thumbnail" value="" />
-                    <button type="button" class="mec_organizer_upload_image_button button" id="mec_organizer_thumbnail_button"><?php echo __('Choose image', 'modern-events-calendar-lite'); ?></button>
-					<button type="button" class="mec_organizer_remove_image_button button mec-util-hidden"><?php echo __('Remove image', 'modern-events-calendar-lite'); ?></button>
+                    <button type="button" class="mec_organizer_upload_image_button button" id="mec_organizer_thumbnail_button"><?php echo esc_html__('Choose image', 'modern-events-calendar-lite'); ?></button>
+					<button type="button" class="mec_organizer_remove_image_button button mec-util-hidden"><?php echo esc_html__('Remove image', 'modern-events-calendar-lite'); ?></button>
 				</div>
                 <?php else: ?>
                 <div class="mec-form-row mec-thumbnail-row">
                     <span id="mec_fes_organizer_thumbnail_img"></span>
 					<input type="hidden" name="mec[organizer][thumbnail]" id="mec_fes_organizer_thumbnail" value="" />
 					<input type="file" id="mec_fes_organizer_thumbnail_file" onchange="mec_fes_upload_organizer_thumbnail();" />
-                    <span class="mec_fes_organizer_remove_image_button button mec-util-hidden" id="mec_fes_organizer_remove_image_button"><?php echo __('Remove image', 'modern-events-calendar-lite'); ?></span>
+                    <span class="mec_fes_organizer_remove_image_button button mec-util-hidden" id="mec_fes_organizer_remove_image_button"><?php echo esc_html__('Remove image', 'modern-events-calendar-lite'); ?></span>
 				</div>
                 <?php endif; ?>
 			</div>
             <?php if($additional_organizers_status and count($organizers)): ?>
             <div id="mec-additional-organizer-wrap" class="<?php echo !isset($selected) ? 'mec-util-hidden' : ''; ?>">
-                <h4><?php echo $this->main->m('other_organizers', __('Other Organizers', 'modern-events-calendar-lite')); ?></h4>
+                <h4><?php echo esc_html($this->main->m('other_organizers', esc_html__('Other Organizers', 'modern-events-calendar-lite'))); ?></h4>
                 <div class="mec-form-row">
-                    <p><?php _e('You can select extra organizers in addition to main organizer if you like.', 'modern-events-calendar-lite'); ?></p>
+                    <p><?php esc_html_e('You can select extra organizers in addition to main organizer if you like.', 'modern-events-calendar-lite'); ?></p>
                     <div class="mec-additional-organizers">
                         <select class="mec-select2-dropdown">
                             <?php foreach($organizers as $organizer): ?>
-                            <option <?php if(in_array($organizer->term_id, $organizer_ids)) echo 'selected="selected"'; ?> value="<?php echo $organizer->term_id; ?>">
-                                <?php echo $organizer->name; ?>
+                            <option <?php if(in_array($organizer->term_id, $organizer_ids)) echo 'selected="selected"'; ?> value="<?php echo esc_attr($organizer->term_id); ?>">
+                                <?php echo esc_html($organizer->name); ?>
                             </option>
                             <?php endforeach; ?>
                         </select>
@@ -345,9 +345,9 @@ class MEC_feature_organizers extends MEC_base
                         <?php foreach($organizer_ids as $organizer_id): $organizer = get_term($organizer_id); ?>
                         <li>
                             <input type="hidden" name="mec[additional_organizer_ids][]" value="<?php echo esc_attr($organizer_id); ?>">
-                            <span class="mec-additional-organizer-sort"><?php echo __('Sort', 'modern-events-calendar-lite'); ?></span>
-                            <span onclick="mec_additional_organizers_remove(this);" class="mec-additional-organizer-remove"><?php echo __('Remove', 'modern-events-calendar-lite'); ?></span>
-                            <span class="mec_orgz_item_name"><?php echo $organizer->name; ?></span> 
+                            <span class="mec-additional-organizer-sort"><?php echo esc_html__('Sort', 'modern-events-calendar-lite'); ?></span>
+                            <span onclick="mec_additional_organizers_remove(this);" class="mec-additional-organizer-remove"><?php echo esc_html__('Remove', 'modern-events-calendar-lite'); ?></span>
+                            <span class="mec_orgz_item_name"><?php echo esc_html($organizer->name); ?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>
@@ -375,22 +375,22 @@ class MEC_feature_organizers extends MEC_base
         // If this is an autosave, our form has not been submitted, so we don't want to do anything.
         if(defined('DOING_AUTOSAVE') and DOING_AUTOSAVE) return false;
 
-        $action = (isset($_POST['action']) ? $_POST['action'] : '');
+        $action = (isset($_POST['action']) ? sanitize_text_field($_POST['action']) : '');
         if($action === 'mec_fes_form') return false;
 
         // Get Modern Events Calendar Data
-        $_mec = isset($_POST['mec']) ? $_POST['mec'] : array();
+        $_mec = isset($_POST['mec']) ? $this->main->sanitize_deep_array($_POST['mec']) : array();
         
         // Selected a saved organizer
         if(isset($_mec['organizer_id']) and $_mec['organizer_id'])
         {
             // Set term to the post
-            wp_set_object_terms($post_id, (int) $_mec['organizer_id'], 'mec_organizer');
+            wp_set_object_terms($post_id, (int) sanitize_text_field($_mec['organizer_id']), 'mec_organizer');
             
             return true;
         }
         
-        $name = (isset($_mec['organizer']['name']) and trim($_mec['organizer']['name'])) ? sanitize_text_field($_mec['organizer']['name']) : 'Organizer Name';
+        $name = (isset($_mec['organizer']['name']) and trim($_mec['organizer']['name'])) ? sanitize_text_field($_mec['organizer']['name']) : esc_html__('Organizer Name', 'modern-events-calendar-lite');
         
         $term = get_term_by('name', $name, 'mec_organizer');
         
@@ -406,11 +406,7 @@ class MEC_feature_organizers extends MEC_base
         $term = wp_insert_term($name, 'mec_organizer');
         
         // An error ocurred
-        if(is_wp_error($term))
-        {
-            #TODO show a message to user
-            return false;
-        }
+        if(is_wp_error($term)) return false;
         
         $organizer_id = $term['term_id'];
         
@@ -424,7 +420,7 @@ class MEC_feature_organizers extends MEC_base
             
         $tel = (isset($_mec['organizer']['tel']) and trim($_mec['organizer']['tel'])) ? sanitize_text_field($_mec['organizer']['tel']) : '';
         $email = (isset($_mec['organizer']['email']) and trim($_mec['organizer']['email'])) ? sanitize_text_field($_mec['organizer']['email']) : '';
-        $url = (isset($_mec['organizer']['url']) and trim($_mec['organizer']['url'])) ? (strpos($_mec['organizer']['url'], 'http') === false ? 'http://'.sanitize_text_field($_mec['organizer']['url']) : sanitize_text_field($_mec['organizer']['url'])) : '';
+        $url = (isset($_mec['organizer']['url']) and trim($_mec['organizer']['url'])) ? sanitize_url($_mec['organizer']['url']) : '';
         $thumbnail = (isset($_mec['organizer']['thumbnail']) and trim($_mec['organizer']['thumbnail'])) ? sanitize_text_field($_mec['organizer']['thumbnail']) : '';
         
         update_term_meta($organizer_id, 'tel', $tel);

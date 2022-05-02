@@ -107,13 +107,16 @@ class MEC_cart extends MEC_base
 
     public function get_cart_id()
     {
-        $cart_id = (isset($_COOKIE['mec_cart']) and trim($_COOKIE['mec_cart'])) ? $_COOKIE['mec_cart'] : NULL;
+        $cart_id = (isset($_COOKIE['mec_cart']) and trim($_COOKIE['mec_cart'])) ? sanitize_text_field($_COOKIE['mec_cart']) : NULL;
+        if(!$cart_id and !headers_sent()) $cart_id = $this->get_fresh_cart_id();
 
-        if(!$cart_id and !headers_sent())
-        {
-            $cart_id = mt_rand(100000000, 999999999);
-            setcookie('mec_cart', $cart_id, (time()+(30*86400)), '/');
-        }
+        return $cart_id;
+    }
+
+    public function get_fresh_cart_id()
+    {
+        $cart_id = mt_rand(100000000, 999999999);
+        setcookie('mec_cart', $cart_id, (time()+(30*86400)), '/');
 
         return $cart_id;
     }
@@ -193,6 +196,9 @@ class MEC_cart extends MEC_base
 
         // Make it empty
         $this->update_cart($cart_id, array());
+
+        // New Cart ID
+        $this->get_fresh_cart_id();
     }
 
     public function get_first_event_id($cart = NULL)

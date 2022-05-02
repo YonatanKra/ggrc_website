@@ -130,7 +130,7 @@ function wpbaw_get_blog_post( $atts, $content = null ){
 						</div>
 					</div>
 				<?php } ?>
-				<div class="blog-content" style="background: #ECEEF0;box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.13);border-radius: 3px;padding:10px">
+				<div class="blog-content">
 					<?php if($grid == '1') {
 						if($show_date){?>
 							<div class="date-post">
@@ -138,12 +138,21 @@ function wpbaw_get_blog_post( $atts, $content = null ){
 								<p><?php echo get_the_date('M y'); ?></p>
 							</div>
 						 <?php } ?>
-					<?php } else {
-						 ?>
+					<?php } else { ?>
 						<div class="grid-category-post">
 							<?php echo ($show_category_name && $cate_name != '') ? $cate_name : ""?>
 						</div>
-						<?php 
+						<?php if($show_author || $show_date){ ?>
+							<div class="blog-author">
+								<?php if($show_author) {?>
+									<span>
+										<?php esc_html_e( 'By', 'wp-blog-and-widgets' ); ?> <a href="<?php echo esc_url( get_author_posts_url( $post->post_author ) ); ?>" target="_self"><?php echo get_the_author(); ?></a>
+									</span>
+								<?php }?>
+								<?php echo ($show_author && $show_date) ? '/' : '' ?>
+								<?php echo ($show_date)? get_the_date() : "" ;?>
+							</div>
+						<?php } 
 					}?>
 					<div class="post-content-text">
 						<?php if($grid == '1'){ ?>
@@ -152,19 +161,8 @@ function wpbaw_get_blog_post( $atts, $content = null ){
 							</div>
 						<?php } ?>
 						<?php if($post_title) { ?>
-							<h3 class="blog-title" style="font-family: 'Lato';"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo $post_title; ?></a></h3>
-						<?php if($show_author || $show_date){ ?>
-							<div class="blog-author">
-								<?php if($show_author) {?>
-									<!-- <span>
-										<?php //esc_html_e( 'by: ', 'wp-blog-and-widgets' ); ?> <a href="<?php //echo esc_url( get_author_posts_url( $post->post_author ) ); ?>" target="_self"><?php //echo get_the_author(); ?></a>
-									</span> -->
-								<?php }?>
-								<?php echo ($show_author && $show_date) ? '' : '' ?>
-								<?php echo ($show_date)? get_the_date() : "" ;?>
-							</div>
-						<?php } 
-					} ?>
+							<h3 class="blog-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo $post_title; ?></a></h3>
+						<?php } ?>
 						<?php if($grid == '1'){ ?>
 							<div class="blog-cat">
 							  <?php if($show_author) { ?> <span class="grid-1-author"><?php _e( 'By', 'wp-blog-and-widgets' ); ?> <a href="<?php echo esc_url( get_author_posts_url( $post->post_author ) ); ?>" target="_self"><?php echo get_the_author(); ?></a></span>  <?php } echo ($show_author && $show_category_name) ? '/' : '' ?> <?php if($show_category_name) { echo $cate_name; } ?>

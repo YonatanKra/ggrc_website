@@ -2,8 +2,8 @@
 Contributors:  wponlinesupport, anoopranawat, pratik-jain, piyushpatel123, ridhimashukla, patelketan
 Tags: blog design, blog layout, wordpress blog , custom blog template, blog layout design, custom blog layout, Free WordPress blog, blog custom post type, blog tab, blog menu, blog page with custom post type, blog, latest blog, custom post type, CPT, widget, wponlinesupport
 Requires at least: 4.0
-Tested up to: 5.8.2
-Stable tag: trunk
+Tested up to: 5.9.2
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,18 +11,13 @@ A quick, easy way to add a Blog custom post type, Blog widget to WordPress. Also
 
 == Description ==
 
-WP Blog and Widget plugin add a Blog custom post type,  blog widget to your WordPress site. WP Blog adds a Blog tab to your admin menu, which allows you to enter Blog posts just as you would regular posts.
+[Explore WP Blog and Widget Pro Features](https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Read-Me) | [Bundle Deal](https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Read-Me#wpos-epb)
+
+[WP Blog and Widget](https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Read-Me) plugin add a Blog custom post type,  blog widget to your WordPress site. WP Blog adds a Blog tab to your admin menu, which allows you to enter Blog posts just as you would regular posts.
 
 > **Note:** WP Blog and Widget plugin is created with custom post type. If you are looking for a plugin that works with your WordPress existing  Post, please use our plugin [Blog Designer – Post and Widget](https://wordpress.org/plugins/blog-designer-for-post-and-widget/).
 
 WP Blog and widgets, manage and display blog, date archives, widget on your website. You can display the latest blog post on your homepage/frontpage as well as in the inner page.
-
-> Download & Explore "WP Blog and Widget" plugin and 50+ recommended plugin inside.
->
-> OR 
->
-> [Explore and check pro feature with Essential Plugin Bundle](https://www.essentialplugin.com/pricing/?utm_source=WP&utm_medium=Blog&utm_campaign=Read-Me)
->
 
 Also, work with the Gutenberg shortcode block.
 
@@ -140,7 +135,7 @@ Finally, the plugin adds a Recent Blog Post widget  which can be placed on any s
 > * 'Publicize' support with Jetpack to publish your Blog post on your social network.
 > * 100% Multilanguage.
 >
-> [Explore and check pro feature with Essential Plugin Bundle](https://www.essentialplugin.com/essential-bundle/?utm_source=WP&utm_medium=Blog&utm_campaign=Read-Me)
+> [Explore WP Blog and Widget Pro Features](https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Read-Me)
 >
 
 = Features include: =
@@ -190,6 +185,17 @@ add_filter( 'wpbaw_blog_registered_post_type_args', 'prefix_gutenberg_editor_sup
 6. Blog admin view
 
 == Changelog ==
+
+= 2.2.6 (28, March 2022) =
+* [+] Added demo link
+* [-] Removed some unwanted code and files.
+
+= 2.2.5 (11, Feb 2022) =
+* [-] Removed some unwanted code and files.
+
+= 2.2.4 (04, Feb 2022) =
+* [*] Tested up to: 5.9 
+* [*] Solved Gutenberg wp-editor widget issue.
 
 = 2.2.3.1 (15, Dec 2021) =
 * [*] Minor fix. 

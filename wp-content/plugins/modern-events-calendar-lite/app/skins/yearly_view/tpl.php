@@ -30,17 +30,17 @@ if($this->next_previous_button)
        (isset($this->atts['show_past_events']) and !$this->atts['show_past_events'] and date('Y', $_1year_before) >= current_time('Y'))
     )
     {
-        $navigator_html .= '<div class="mec-previous-year mec-load-year mec-color-hover" data-mec-year="'.date('Y', $_1year_before).'"><a href="#" class="mec-load-month-link"><i class="mec-sl-angle-left"></i> '.$this->main->date_i18n('Y', $_1year_before).'</a></div>';
+        $navigator_html .= '<div class="mec-previous-year mec-load-year mec-color-hover" data-mec-year="'.date('Y', $_1year_before).'"><a href="#" class="mec-load-month-link"><i class="mec-sl-angle-left"></i> '.esc_html($this->main->date_i18n('Y', $_1year_before)).'</a></div>';
     }
     
-    $navigator_html .= '<h2>'.$this->main->date_i18n('Y', $current_year_time).'</h2>';
+    $navigator_html .= '<h2>'.esc_html($this->main->date_i18n('Y', $current_year_time)).'</h2>';
     
     // Show next month handler if needed
     if(!$this->show_only_expired_events or
        ($this->show_only_expired_events and strtotime(date('Y-01-01', $_1year_after)) <= time())
     )
     {
-        $navigator_html .= '<div class="mec-next-year mec-load-year mec-color-hover" data-mec-year="'.date('Y', $_1year_after).'"><a href="#" class="mec-load-month-link">'.$this->main->date_i18n('Y', $_1year_after).' <i class="mec-sl-angle-right"></i></a></div>';
+        $navigator_html .= '<div class="mec-next-year mec-load-year mec-color-hover" data-mec-year="'.date('Y', $_1year_after).'"><a href="#" class="mec-load-month-link">'.esc_html($this->main->date_i18n('Y', $_1year_after)).' <i class="mec-sl-angle-right"></i></a></div>';
     }
 }
 
@@ -64,9 +64,9 @@ if($sed_method == 'new') $sed_method = '0';
 $javascript = '<script type="text/javascript">
 jQuery(document).ready(function()
 {
-    jQuery("#mec_yearly_view_year_'.$this->id.'_'.date('Y', $current_year_time).'").mecYearlyView(
+    jQuery("#mec_yearly_view_year_'.esc_js($this->id).'_'.date('Y', $current_year_time).'").mecYearlyView(
     {
-        id: "'.$this->id.'",
+        id: "'.esc_js($this->id).'",
         today: "'.date('Ymd', strtotime($this->active_day)).'",
         year_id: "'.date('Y', $current_year_time).'",
         next_year: {year: "'.date('Y', $_1year_after).'"},
@@ -75,11 +75,11 @@ jQuery(document).ready(function()
         year_navigator: '.($this->next_previous_button ? 1 : 0).',
         atts: "'.http_build_query(array('atts' => $this->atts), '', '&').'",
         ajax_url: "'.admin_url('admin-ajax.php', NULL).'",
-        sed_method: "'.$sed_method.'",
-        image_popup: "'.$this->image_popup.'",
+        sed_method: "'.esc_js($sed_method).'",
+        image_popup: "'.esc_js($this->image_popup).'",
         sf:
         {
-            container: "'.($this->sf_status ? '#mec_search_form_'.$this->id : '').'",
+            container: "'.($this->sf_status ? '#mec_search_form_'.esc_js($this->id) : '').'",
             reset: '.($this->sf_reset_button ? 1 : 0).',
             refine: '.($this->sf_refine ? 1 : 0).',
         },
@@ -88,7 +88,7 @@ jQuery(document).ready(function()
 </script>';
 
 // Include javascript code into the page
-if($this->main->is_ajax() or $this->main->preview()) echo $javascript;
+if($this->main->is_ajax() or $this->main->preview()) echo MEC_kses::full($javascript);
 else $this->factory->params('footer', $javascript);
 
 $styling = $this->main->get_styling();
@@ -101,29 +101,29 @@ else $set_dark = '';
 do_action('mec_start_skin', $this->id);
 do_action('mec_yearly_skin_head');
 ?>
-<div id="mec_skin_<?php echo $this->id; ?>" class="mec-wrap <?php echo $this->html_class . ' ' . $set_dark; ?>">
+<div id="mec_skin_<?php echo esc_attr($this->id); ?>" class="mec-wrap <?php echo esc_attr($this->html_class . ' ' . $set_dark); ?>">
     
-    <?php if($this->sf_status) echo $this->sf_search_form(); ?>
+    <?php if($this->sf_status) echo MEC_kses::full($this->sf_search_form()); ?>
     
     <div class="mec-wrap mec-yearly-view-wrap">
 
         <?php if($this->next_previous_button): ?>
         <div class="mec-yearly-title-sec">
-            <div class="mec-year-navigator" id="mec_year_navigator_<?php echo $this->id; ?>_<?php echo date('Y', $current_year_time); ?>">
-                <?php echo $navigator_html; ?>
+            <div class="mec-year-navigator" id="mec_year_navigator_<?php echo esc_attr($this->id); ?>_<?php echo date('Y', $current_year_time); ?>">
+                <?php echo MEC_kses::page($navigator_html); ?>
             </div>
         </div>
         <?php else: ?>
         <div class="mec-yearly-title-sec">
             <div class="mec-year-navigator">
-                <h2><?php echo $this->main->date_i18n('Y', $current_year_time); ?></h2>
+                <h2><?php echo esc_html($this->main->date_i18n('Y', $current_year_time)); ?></h2>
             </div>
         </div>
         <?php endif; ?>
 
-        <div id="mec_skin_events_<?php echo $this->id; ?>">
-            <div class="mec-year-container" id="mec_yearly_view_year_<?php echo $this->id; ?>_<?php echo date('Y', $current_year_time); ?>" data-year-id="<?php echo date('Y', $current_year_time); ?>">
-                <?php echo $year_html; ?>
+        <div id="mec_skin_events_<?php echo esc_attr($this->id); ?>">
+            <div class="mec-year-container" id="mec_yearly_view_year_<?php echo esc_attr($this->id); ?>_<?php echo date('Y', $current_year_time); ?>" data-year-id="<?php echo date('Y', $current_year_time); ?>">
+                <?php echo MEC_kses::full($year_html); ?>
             </div>
         </div>
         <div class="clearfix"></div>

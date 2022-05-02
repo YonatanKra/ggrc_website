@@ -26,7 +26,21 @@ class Content extends WidgetBase {
 			return '';
 		}
 
-		$content = wpautop( do_shortcode( get_the_content( '', false, $event_id ) ) );
+		$content = get_the_content( '', false, $event_id );
+		$content = wpautop( $content );
+		$content = do_shortcode( $content );
+
+		if( !$this->is_editor_mode() ){
+
+			$content = apply_filters( 'the_content', $content );
+			$content = str_replace( ']]>', ']]&gt;', $content );
+		}else{
+
+			if( 'yes' === get_post_meta( $event_id, '_elementor_edit_mode', true ) ){
+
+				$content = \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $event_id );
+			}
+		}
 
 		$html = '<div class="mec-single-event-description mec-events-content">'
 			. $content .

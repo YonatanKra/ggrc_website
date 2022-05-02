@@ -66,7 +66,6 @@ if( ! current_user_can('install_plugins') ) {
 			<ul class="filter-links espbw-filter-links">
 				<li class="espbw-plugin-all"><a href="javascript:void(0);" class="espbw-filter-link current"><?php esc_html_e('All Essential Plugins', 'espbw'); ?></a></li>
 				<li class="espbw-plugin-recommended"><a href="javascript:void(0);" class="espbw-filter-link" data-filter="recommended"><?php esc_html_e('Utility Plugins', 'espbw'); ?></a></li>
-				<li class="espbw-plugin-marketing"><a href="javascript:void(0);" class="espbw-filter-link" data-filter="marketing"><?php esc_html_e('Inbound Marketing', 'espbw'); ?></a></li>
 				<li class="espbw-plugin-sliders"><a href="javascript:void(0);" class="espbw-filter-link" data-filter="sliders"><?php esc_html_e('Sliders', 'espbw'); ?></a></li>
 				<li class="espbw-plugin-woo"><a href="javascript:void(0);" class="espbw-filter-link" data-filter="woocommerce"><?php esc_html_e('WooCommerce', 'espbw'); ?></a></li>
 			</ul>

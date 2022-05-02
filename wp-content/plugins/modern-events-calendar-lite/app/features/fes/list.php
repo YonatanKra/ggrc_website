@@ -69,7 +69,7 @@ $this->factory->params('footer', $javascript);
 <div class="mec-fes-list">
     <?php if($query->have_posts()): ?>
     <div class="mec-fes-list-top-actions">
-        <a href="<?php echo $this->link_add_event(); ?>"><?php echo __('Add new', 'modern-events-calendar-lite'); ?></a>
+        <a href="<?php echo esc_url($this->link_add_event()); ?>"><?php echo esc_html__('Add new', 'modern-events-calendar-lite'); ?></a>
     </div>
     <?php do_action('mec_fes_list'); ?>
     <ul>
@@ -81,13 +81,13 @@ $this->factory->params('footer', $javascript);
         ?>
         <li id="mec_fes_event_<?php echo get_the_ID(); ?>">
             <span class="mec-event-title">
-                <a href="<?php echo $this->link_edit_event(get_the_ID()); ?>"><?php the_title(); ?></a>
+                <a href="<?php echo esc_url($this->link_edit_event(get_the_ID())); ?>"><?php the_title(); ?></a>
                 <?php if($display_date): ?>
-                <span>(<?php echo $this->main->date_label(array(
+                <span>(<?php echo MEC_kses::element($this->main->date_label(array(
                     'date' => get_post_meta(get_the_ID(), 'mec_start_date', true)
                 ), array(
                     'date' => get_post_meta(get_the_ID(), 'mec_end_date', true)
-                ), $date_format); ?>)</span>
+                ), $date_format)); ?>)</span>
                 <?php endif; ?>
             </span>
             <?php 
@@ -101,7 +101,7 @@ $this->factory->params('footer', $javascript);
             <?php if(current_user_can('delete_post', get_the_ID())): ?>
             <span class="mec-fes-event-remove" data-confirmed="0" data-id="<?php echo get_the_ID(); ?>"><div class="wn-p-t-right"><div class="wn-p-t-text-content"><?php echo esc_html__('Remove Event', 'modern-events-calendar-lite'); ?></div><i></i></div></span>
             <?php endif; ?>
-            <span class="mec-fes-event-view mec-event-status <?php echo $status['status_class']; ?>"><?php echo $status['label']; ?></span>
+            <span class="mec-fes-event-view mec-event-status <?php echo esc_attr($status['status_class']); ?>"><?php echo esc_html($status['label']); ?></span>
             <div class="mec-fes-export-wrapper mec-modal-wrap lity-hide" id="mec-fes-export-wrapper-<?php echo get_the_ID(); ?>" data-event-id="<?php echo get_the_ID(); ?>">
                 <div class="mec-fes-btn-date">                    
                     <?php $mec_repeat_info = get_post_meta(get_the_ID(), 'mec_repeat', true); if(isset($mec_repeat_info['status']) and $mec_repeat_info['status']): ?>
@@ -125,7 +125,7 @@ $this->factory->params('footer', $javascript);
                                         $attendees_count += $book->get_total_attendees($booking->ID);
                                     }
                             ?>
-                                <li class="mec-export-list-item" data-time="<?php echo $date['start']['timestamp']; ?>"><?php echo $this->main->date_label($date['start'], $date['end'], $date_format); ?> <span class="mec-export-badge"><?php echo $attendees_count; ?></span></li>
+                                <li class="mec-export-list-item" data-time="<?php echo esc_attr($date['start']['timestamp']); ?>"><?php echo MEC_kses::element($this->main->date_label($date['start'], $date['end'], $date_format)); ?> <span class="mec-export-badge"><?php echo esc_html($attendees_count); ?></span></li>
                             <?php
                                 }
                             }
@@ -142,6 +142,6 @@ $this->factory->params('footer', $javascript);
         <?php endwhile; wp_reset_postdata(); // Restore original Post Data ?>
     </ul>
     <?php else: ?>
-    <p><?php echo sprintf(__('No events found! %s', 'modern-events-calendar-lite'), '<a href="'.$this->link_add_event().'">'.__('Add new', 'modern-events-calendar-lite').'</a>'); ?></p>
+    <p><?php echo sprintf(esc_html__('No events found! %s', 'modern-events-calendar-lite'), '<a href="'.esc_url($this->link_add_event()).'">'.esc_html__('Add new', 'modern-events-calendar-lite').'</a>'); ?></p>
     <?php endif; ?>
 </div>

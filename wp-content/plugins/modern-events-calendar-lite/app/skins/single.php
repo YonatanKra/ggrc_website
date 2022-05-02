@@ -186,7 +186,7 @@ class MEC_skin_single extends MEC_skins
         {
             ?>
             <div class="row mec-related-events-wrap">
-                <h3 class="mec-rec-events-title"><?php echo __('Related Events', 'modern-events-calendar-lite'); ?></h3>
+                <h3 class="mec-rec-events-title"><?php echo esc_html__('Related Events', 'modern-events-calendar-lite'); ?></h3>
                 <div class="mec-related-events">
                     <?php while($query->have_posts()): if($printed >= min($limit, 4)) break; $query->the_post(); ?>
                         <?php
@@ -212,22 +212,30 @@ class MEC_skin_single extends MEC_skins
                             $printed += 1;
                             $mec_date = (isset($d['start']) and isset($d['start']['date'])) ? $d['start']['date'] : get_post_meta(get_the_ID(), 'mec_start_date', true);
                             $date = $this->main->date_i18n(get_option('date_format'), strtotime($mec_date));
+
+                            $event_link = $this->main->get_event_date_permalink(get_the_permalink(), $mec_date);
+
+                            // Custom Link
+                            $read_more = get_post_meta(get_the_ID(), 'mec_read_more', true);
+                            $read_more_occ_url = MEC_feature_occurrences::param(get_the_ID(), $timestamp, 'read_more', $read_more);
+
+                            if($read_more_occ_url and filter_var($read_more_occ_url, FILTER_VALIDATE_URL)) $event_link = $read_more_occ_url;
                         ?>
                         <article class="mec-related-event-post col-md-3 col-sm-3">
                             <figure>
-                                <a href="<?php echo $this->main->get_event_date_permalink(get_the_permalink(), $mec_date); ?>">
+                                <a href="<?php echo esc_url($event_link); ?>">
                                     <?php
                                         if(get_the_post_thumbnail(get_the_ID(), 'thumblist')) echo get_the_post_thumbnail(get_the_ID(), 'thumblist');
-                                        else echo '<img src="' . $this->main->asset('img/no-image.png').'" />';
+                                        else echo '<img src="' . esc_url($this->main->asset('img/no-image.png')).'" />';
                                     ?>
                                 </a>
                             </figure>
                             <div class="mec-related-event-content">
-                                <span><?php echo $date; ?></span>
+                                <span><?php echo esc_html($date); ?></span>
                                 <h5>
-                                    <a class="mec-color-hover" href="<?php echo $this->main->get_event_date_permalink(get_the_permalink(), $mec_date); ?>"><?php echo get_the_title(); ?></a>
+                                    <a class="mec-color-hover" href="<?php echo esc_url($event_link); ?>"><?php echo get_the_title(); ?></a>
                                     <?php if($display_expired_events && $timestamp && $timestamp < $now): ?>
-                                    <span class="mec-holding-status mec-holding-status-expired"><?php _e('Expired!', 'modern-events-calendar-lite'); ?></span>
+                                    <span class="mec-holding-status mec-holding-status-expired"><?php esc_html_e('Expired!', 'modern-events-calendar-lite'); ?></span>
                                     <?php endif; ?>
                                 </h5>
                             </div>
@@ -254,10 +262,10 @@ class MEC_skin_single extends MEC_skins
         $p_exclude = array($event_id);
         $n_exclude = array($event_id);
 
-        $pskip = (isset($_REQUEST['pskip']) and is_numeric($_REQUEST['pskip']) and $_REQUEST['pskip'] > 0) ? $_REQUEST['pskip'] : NULL;
+        $pskip = (isset($_REQUEST['pskip']) and is_numeric($_REQUEST['pskip']) and $_REQUEST['pskip'] > 0) ? sanitize_text_field($_REQUEST['pskip']) : NULL;
         if($pskip) $p_exclude[] = $pskip;
 
-        $nskip = (isset($_REQUEST['nskip']) and is_numeric($_REQUEST['nskip']) and $_REQUEST['nskip'] > 0) ? $_REQUEST['nskip'] : NULL;
+        $nskip = (isset($_REQUEST['nskip']) and is_numeric($_REQUEST['nskip']) and $_REQUEST['nskip'] > 0) ? sanitize_text_field($_REQUEST['nskip']) : NULL;
         if($nskip) $n_exclude[] = $nskip;
 
         $date = $event->date;
@@ -386,7 +394,7 @@ class MEC_skin_single extends MEC_skins
             $p_url = $this->main->get_event_date_permalink(get_permalink($p['post_id']), date('Y-m-d', $p['tstart']));
             $p_url = $this->main->add_qs_var('pskip', $event_id, $p_url);
 
-            echo '<li class="mec-previous-event"><a class="mec-color mec-bg-color-hover mec-border-color" href="'.$p_url.'"><i class="mec-fa-long-arrow-left"></i>'. esc_html__('PRV Event', 'modern-events-calendar-lite') .'</a></li>';
+            echo '<li class="mec-previous-event"><a class="mec-color mec-bg-color-hover mec-border-color" href="'.esc_url($p_url).'"><i class="mec-fa-long-arrow-left"></i>'. esc_html__('PRV Event', 'modern-events-calendar-lite') .'</a></li>';
         }
 
         if(is_array($n) and isset($n['post_id']))
@@ -394,7 +402,7 @@ class MEC_skin_single extends MEC_skins
             $n_url = $this->main->get_event_date_permalink(get_permalink($n['post_id']), date('Y-m-d', $n['tstart']));
             $n_url = $this->main->add_qs_var('nskip', $event_id, $n_url);
 
-            echo '<li class="mec-next-event"><a class="mec-color mec-bg-color-hover mec-border-color" href="'.$n_url.'">'. esc_html__('NXT Event', 'modern-events-calendar-lite') .'<i class="mec-fa-long-arrow-right"></i></a></li>';
+            echo '<li class="mec-next-event"><a class="mec-color mec-bg-color-hover mec-border-color" href="'.esc_html($n_url).'">'. esc_html__('NXT Event', 'modern-events-calendar-lite') .'<i class="mec-fa-long-arrow-right"></i></a></li>';
         }
 
         echo '</ul>';
@@ -490,7 +498,7 @@ class MEC_skin_single extends MEC_skins
             <div class="mec-related-events-wrap">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3 class="mec-rec-events-title"><?php echo __('Related Events', 'modern-events-calendar-lite'); ?></h3>
+                        <h3 class="mec-rec-events-title"><?php echo esc_html__('Related Events', 'modern-events-calendar-lite'); ?></h3>
                     </div>
                 </div>
                 <div class="mec-related-events row">
@@ -503,7 +511,7 @@ class MEC_skin_single extends MEC_skins
                                             if (get_the_post_thumbnail(get_the_ID(), 'thumblist')){
                                                 echo MEC_Fluent\Core\pluginBase\MecFluent::generateThumbnail(MEC_Fluent\Core\pluginBase\MecFluent::generateThumbnailURL(get_the_ID(), 322, 250, true), 322, 250);
                                             } else {
-                                                echo '<img src="' . $this->main->asset('img/no-image.png') . '" />';
+                                                echo '<img src="' . esc_url($this->main->asset('img/no-image.png')) . '" />';
                                             }
                                         ?>
                                     </a>
@@ -521,18 +529,18 @@ class MEC_skin_single extends MEC_skins
                                         $event = $this->render->after_render($data, $this);
                                         ?>
                                         <div class="mec-event-date">
-                                            <span class="mec-event-day-num"><?php echo $this->main->date_i18n('d', strtotime($event->date['start']['date'])); ?></span>
-                                            <span><?php echo $this->main->date_i18n('F, Y', strtotime($event->date['start']['date'])); ?></span>
+                                            <span class="mec-event-day-num"><?php echo esc_html($this->main->date_i18n('d', strtotime($event->date['start']['date']))); ?></span>
+                                            <span><?php echo esc_html($this->main->date_i18n('F, Y', strtotime($event->date['start']['date']))); ?></span>
                                         </div>
                                         <div class="mec-event-day">
-                                            <span><?php echo $this->main->date_i18n('l', strtotime($event->date['start']['date'])); ?></span>
+                                            <span><?php echo esc_html($this->main->date_i18n('l', strtotime($event->date['start']['date']))); ?></span>
                                         </div>
                                     </div>
                                 </figure>
                                 <div class="mec-related-content">
                                     <div class="mec-related-event-content">
                                         <h5 class="mec-event-title">
-                                            <a class="mec-color-hover" href="<?php echo $this->main->get_event_date_permalink($event, $event->date['start']['date'], false, $event->data->time); ?>"><?php echo get_the_title(); ?></a>
+                                            <a class="mec-color-hover" href="<?php echo esc_url($this->main->get_event_date_permalink($event, $event->date['start']['date'], false, $event->data->time)); ?>"><?php echo get_the_title(); ?></a>
                                         </h5>
 
                                         <?php
@@ -542,15 +550,15 @@ class MEC_skin_single extends MEC_skins
                                         <?php if(isset($location['address']) and trim($location['address'])): ?>
                                             <div class="mec-event-location">
                                                 <i class="mec-sl-location-pin"></i>
-                                                <address class="mec-events-address"><span class="mec-address"><?php echo (isset($location['address']) ? $location['address'] : ''); ?></span></address>
+                                                <address class="mec-events-address"><span class="mec-address"><?php echo (isset($location['address']) ? esc_html($location['address']) : ''); ?></span></address>
                                             </div>
                                         <?php endif; ?>
 
-                                        <?php echo $this->main->display_time($event->data->time['start'], $event->data->time['end']); ?>
+                                        <?php echo MEC_kses::element($this->main->display_time($event->data->time['start'], $event->data->time['end'])); ?>
                                     </div>
                                     <div class="mec-event-footer">
                                         <?php $soldout = $this->main->get_flags($event); ?>
-                                        <a class="mec-booking-button" href="<?php echo $this->main->get_event_date_permalink($event, $event->date['start']['date'], false, $event->data->time); ?>"><?php echo (is_array($event->data->tickets) and count($event->data->tickets) and !strpos($soldout, '%%soldout%%')) ? $this->main->m('register_button', __('REGISTER', 'modern-events-calendar-lite')) : $this->main->m('view_detail', __('View Detail', 'modern-events-calendar-lite')) ; ?></a>
+                                        <a class="mec-booking-button" href="<?php echo esc_url($this->main->get_event_date_permalink($event, $event->date['start']['date'], false, $event->data->time)); ?>"><?php echo (is_array($event->data->tickets) and count($event->data->tickets) and !strpos($soldout, '%%soldout%%')) ? $this->main->m('register_button', esc_html__('REGISTER', 'modern-events-calendar-lite')) : $this->main->m('view_detail', esc_html__('View Detail', 'modern-events-calendar-lite')) ; ?></a>
                                         <?php if(isset($this->settings['social_network_status']) and $this->settings['social_network_status'] != '0') : ?>
                                             <ul class="mec-event-sharing-wrap">
                                                 <li class="mec-event-share">
@@ -560,7 +568,7 @@ class MEC_skin_single extends MEC_skins
                                                 </li>
                                                 <li>
                                                     <ul class="mec-event-sharing">
-                                                        <?php echo $this->main->module('links.list', array('event' => $event)); ?>
+                                                        <?php echo MEC_kses::full($this->main->module('links.list', array('event' => $event))); ?>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -585,13 +593,11 @@ class MEC_skin_single extends MEC_skins
      */
     public function display_breadcrumb_widget($page_id)
     {
-        $breadcrumbs_icon = '<i class="mec-color mec-sl-arrow-right"></i>'; // breadcrumbs_icon between crumbs
-
         /**
          * Home Page
          */
         $homeURL = esc_url(home_url('/'));
-        echo '<div class="mec-address"><a href="' . esc_url($homeURL) . '"> ' . __('Home', 'modern-events-calendar-lite') . ' </a> ' . $breadcrumbs_icon . ' ';
+        echo '<div class="mec-address"><a href="' . esc_url($homeURL) . '"> ' . esc_html__('Home', 'modern-events-calendar-lite') . ' </a> <i class="mec-color mec-sl-arrow-right"></i> ';
 
         $archive_title = $this->main->get_archive_title();
         $archive_link = $this->main->get_archive_url();
@@ -610,7 +616,7 @@ class MEC_skin_single extends MEC_skins
         /**
          * Archive Page
          */
-        if($archive_link) echo '<a href="' . $archive_link . '">' . $archive_title . '</a> ' . $breadcrumbs_icon . ' ';
+        if($archive_link) echo '<a href="' . esc_url($archive_link) . '">' . esc_html($archive_title) . '</a> <i class="mec-color mec-sl-arrow-right"></i> ';
 
         /**
          * Category Page
@@ -620,7 +626,7 @@ class MEC_skin_single extends MEC_skins
             $categories = wp_get_post_terms($page_id, 'mec_category');
             if(!is_array($categories)) $categories = array();
 
-            foreach($categories as $category) echo '<a href="' . esc_url(get_term_link($category)) . '">' . $category->name . '</a> ' . $breadcrumbs_icon . ' ';
+            foreach($categories as $category) echo '<a href="' . esc_url(get_term_link($category)) . '">' . esc_html($category->name) . '</a> <i class="mec-color mec-sl-arrow-right"></i> ';
         }
 
         /**
@@ -667,6 +673,7 @@ class MEC_skin_single extends MEC_skins
 
         $data = new stdClass();
         $data->ID = $this->id;
+        $data->requested_id = $this->id;
         $data->data = $rendered;
 
         // Get Event Dates
@@ -675,52 +682,59 @@ class MEC_skin_single extends MEC_skins
         // Remove First Date if it is already started!
         if(count($dates) > 1 and (!isset($_GET['occurrence']) or (isset($_GET['occurrence']) and !trim($_GET['occurrence']))))
         {
-            $start_date = (isset($dates[0]['start']) and isset($dates[0]['start']['date'])) ? $dates[0]['start']['date'] : current_time('Y-m-d H:i:s');
-            $end_date = (isset($dates[0]['end']) and isset($dates[0]['end']['date'])) ? $dates[0]['end']['date'] : current_time('Y-m-d H:i:s');
-
-            $s_time = '';
-            if(!empty($dates))
-            {
-                $s_time .= sprintf("%02d", $dates[0]['start']['hour']).':';
-                $s_time .= sprintf("%02d", $dates[0]['start']['minutes']);
-                $s_time .= trim($dates[0]['start']['ampm']);
-            }
-
-            $start_time = date('D M j Y G:i:s', strtotime($start_date.' '.$s_time));
-
-            $e_time = '';
-            if(!empty($dates))
-            {
-                $e_time .= sprintf("%02d", $dates[0]['end']['hour']).':';
-                $e_time .= sprintf("%02d", $dates[0]['end']['minutes']);
-                $e_time .= trim($dates[0]['end']['ampm']);
-            }
-
-            $end_time = date('D M j Y G:i:s', strtotime($end_date.' '.$e_time));
-
-            $d1 = new DateTime($start_time);
-            $d2 = new DateTime(current_time("D M j Y G:i:s"));
-            $d3 = new DateTime($end_time);
+            $all_dates = $dates;
 
             // MEC Settings
             $settings = $this->main->get_settings();
 
-            // Booking OnGoing Event Option
-            $ongoing_event_book = (isset($settings['booking_ongoing']) and $settings['booking_ongoing'] == '1') ? true : false;
-            if($ongoing_event_book)
+            foreach($dates as $d => $date)
             {
-                if($d3 < $d2)
+                $start_date = (isset($dates[$d]['start']) and isset($dates[$d]['start']['date'])) ? $dates[$d]['start']['date'] : current_time('Y-m-d H:i:s');
+                $end_date = (isset($dates[$d]['end']) and isset($dates[$d]['end']['date'])) ? $dates[$d]['end']['date'] : current_time('Y-m-d H:i:s');
+
+                $s_time = '';
+                if(!empty($dates))
                 {
-                    unset($dates[0]);
+                    $s_time .= sprintf("%02d", $dates[$d]['start']['hour']).':';
+                    $s_time .= sprintf("%02d", $dates[$d]['start']['minutes']);
+                    $s_time .= trim($dates[$d]['start']['ampm']);
+                }
+
+                $start_time = date('D M j Y G:i:s', strtotime($start_date.' '.$s_time));
+
+                $e_time = '';
+                if(!empty($dates))
+                {
+                    $e_time .= sprintf("%02d", $dates[$d]['end']['hour']).':';
+                    $e_time .= sprintf("%02d", $dates[$d]['end']['minutes']);
+                    $e_time .= trim($dates[$d]['end']['ampm']);
+                }
+
+                $end_time = date('D M j Y G:i:s', strtotime($end_date.' '.$e_time));
+
+                $d1 = new DateTime($start_time);
+                $d2 = new DateTime(current_time("D M j Y G:i:s"));
+                $d3 = new DateTime($end_time);
+
+                // Booking OnGoing Event Option
+                $ongoing_event_book = (isset($settings['booking_ongoing']) and $settings['booking_ongoing'] == '1') ? true : false;
+                if($ongoing_event_book)
+                {
+                    if($d3 < $d2)
+                    {
+                        unset($dates[$d]);
+                    }
+                }
+                else
+                {
+                    if($d1 < $d2)
+                    {
+                        unset($dates[$d]);
+                    }
                 }
             }
-            else
-            {
-                if($d1 < $d2)
-                {
-                    unset($dates[0]);
-                }
-            }
+
+            if(count($dates) === 0) $dates = array(end($all_dates));
         }
 
         $data->dates = array_values($dates);
@@ -806,6 +820,7 @@ class MEC_skin_single extends MEC_skins
 
         $data = new stdClass();
         $data->ID = $event_ID;
+        $data->requested_id = $event_ID;
         $data->data = $rendered;
 
         $maximum_dates = $this->maximum_dates;
@@ -815,57 +830,58 @@ class MEC_skin_single extends MEC_skins
         $dates = $this->render->dates($event_ID, $rendered, $maximum_dates, ($occurrence_time ? date('Y-m-d H:i:s', $occurrence_time) : $occurrence));
 
         // Remove First Date if it is already started!
-        if(!isset($_GET['occurrence']) or (isset($_GET['occurrence']) and !trim($_GET['occurrence'])))
+        if(count($dates) > 1 and (!isset($_GET['occurrence']) or (isset($_GET['occurrence']) and !trim($_GET['occurrence']))))
         {
-            $start_date = (isset($dates[0]['start']) and isset($dates[0]['start']['date'])) ? $dates[0]['start']['date'] : current_time('Y-m-d H:i:s');
-            $end_date = (isset($dates[0]['end']) and isset($dates[0]['end']['date'])) ? $dates[0]['end']['date'] : current_time('Y-m-d H:i:s');
+            $all_dates = $dates;
 
-            $s_time = '';
-            if(!empty($dates))
+            foreach($dates as $d => $date)
             {
-                $s_time .= sprintf("%02d", $dates[0]['start']['hour']).':';
-                $s_time .= sprintf("%02d", $dates[0]['start']['minutes']);
-                $s_time .= trim($dates[0]['start']['ampm']);
-            }
+                $start_date = (isset($dates[$d]['start']) and isset($dates[$d]['start']['date'])) ? $dates[$d]['start']['date'] : current_time('Y-m-d H:i:s');
+                $end_date = (isset($dates[$d]['end']) and isset($dates[$d]['end']['date'])) ? $dates[$d]['end']['date'] : current_time('Y-m-d H:i:s');
 
-            $start_time = date('D M j Y G:i:s', strtotime($start_date.' '.$s_time));
-
-            $e_time = '';
-            if(!empty($dates))
-            {
-                $e_time .= sprintf("%02d", $dates[0]['end']['hour']).':';
-                $e_time .= sprintf("%02d", $dates[0]['end']['minutes']);
-                $e_time .= trim($dates[0]['end']['ampm']);
-            }
-
-            $end_time = date('D M j Y G:i:s', strtotime($end_date.' '.$e_time));
-
-            $d1 = new DateTime($start_time);
-            $d2 = new DateTime(current_time("D M j Y G:i:s"));
-            $d3 = new DateTime($end_time);
-
-            // Booking OnGoing Event Option
-            $ongoing_event_book = (isset($settings['booking_ongoing']) and $settings['booking_ongoing'] == '1') ? true : false;
-            if($ongoing_event_book)
-            {
-                if($d3 < $d2)
+                $s_time = '';
+                if(!empty($dates))
                 {
-                    unset($dates[0]);
+                    $s_time .= sprintf("%02d", $dates[$d]['start']['hour']).':';
+                    $s_time .= sprintf("%02d", $dates[$d]['start']['minutes']);
+                    $s_time .= trim($dates[$d]['start']['ampm']);
+                }
 
-                    // Get Event Dates
-                    $dates = $this->render->dates($event_ID, $rendered, $maximum_dates);
+                $start_time = date('D M j Y G:i:s', strtotime($start_date.' '.$s_time));
+
+                $e_time = '';
+                if(!empty($dates))
+                {
+                    $e_time .= sprintf("%02d", $dates[$d]['end']['hour']).':';
+                    $e_time .= sprintf("%02d", $dates[$d]['end']['minutes']);
+                    $e_time .= trim($dates[$d]['end']['ampm']);
+                }
+
+                $end_time = date('D M j Y G:i:s', strtotime($end_date.' '.$e_time));
+
+                $d1 = new DateTime($start_time);
+                $d2 = new DateTime(current_time("D M j Y G:i:s"));
+                $d3 = new DateTime($end_time);
+
+                // Booking OnGoing Event Option
+                $ongoing_event_book = (isset($settings['booking_ongoing']) and $settings['booking_ongoing'] == '1') ? true : false;
+                if($ongoing_event_book)
+                {
+                    if($d3 < $d2)
+                    {
+                        unset($dates[$d]);
+                    }
+                }
+                else
+                {
+                    if($d1 < $d2)
+                    {
+                        unset($dates[$d]);
+                    }
                 }
             }
-            else
-            {
-                if($d1 < $d2)
-                {
-                    unset($dates[0]);
 
-                    // Get Event Dates
-                    $dates = $this->render->dates($event_ID, $rendered, $maximum_dates);
-                }
-            }
+            if(count($dates) === 0) $dates = array(end($all_dates));
         }
 
         $data->dates = $dates;
@@ -930,7 +946,7 @@ class MEC_skin_single extends MEC_skins
         $this->fetch();
 
         // Return the output
-        echo $this->output();
+        echo MEC_kses::full($this->output());
 
         do_action('mec-ajax-load-single-page-after', $id);
         exit;
@@ -967,7 +983,7 @@ class MEC_skin_single extends MEC_skins
      */
     public function display_next_prev_widget($event)
     {
-        echo $this->main->module('next-event.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('next-event.details', array('event' => $event)));
     }
 
     /**
@@ -983,7 +999,7 @@ class MEC_skin_single extends MEC_skins
         $socials = $this->main->get_social_networks();
         ?>
         <div class="mec-event-social mec-frontbox">
-            <h3 class="mec-social-single mec-frontbox-title"><?php _e('Share this event', 'modern-events-calendar-lite'); ?></h3>
+            <h3 class="mec-social-single mec-frontbox-title"><?php esc_html_e('Share this event', 'modern-events-calendar-lite'); ?></h3>
             <div class="mec-event-sharing">
                 <div class="mec-links-details">
                     <ul>
@@ -1016,13 +1032,13 @@ class MEC_skin_single extends MEC_skins
             ?>
             <div class="mec-single-event-location">
                 <?php if($location['thumbnail']): ?>
-                    <img class="mec-img-location" src="<?php echo esc_url($location['thumbnail']); ?>" alt="<?php echo (isset($location['name']) ? $location['name'] : ''); ?>">
+                    <img class="mec-img-location" src="<?php echo esc_url($location['thumbnail']); ?>" alt="<?php echo (isset($location['name']) ? esc_attr($location['name']) : ''); ?>">
                 <?php endif; ?>
                 <i class="mec-sl-location-pin"></i>
-                <h3 class="mec-events-single-section-title mec-location"><?php echo $this->main->m('taxonomy_location', __('Location', 'modern-events-calendar-lite')); ?></h3>
+                <h3 class="mec-events-single-section-title mec-location"><?php echo esc_html($this->main->m('taxonomy_location', esc_html__('Location', 'modern-events-calendar-lite'))); ?></h3>
                 <dl>
-                    <dd class="author fn org"><?php echo $this->get_location_html($location); ?></dd>
-                    <dd class="location"><address class="mec-events-address"><span class="mec-address"><?php echo (isset($location['address']) ? $location['address'] : ''); ?></span></address></dd>
+                    <dd class="author fn org"><?php echo MEC_kses::element($this->get_location_html($location)); ?></dd>
+                    <dd class="location"><address class="mec-events-address"><span class="mec-address"><?php echo (isset($location['address']) ? esc_html($location['address']) : ''); ?></span></address></dd>
                 </dl>
             </div>
             <?php
@@ -1048,7 +1064,7 @@ class MEC_skin_single extends MEC_skins
     public function display_local_time_widget($event)
     {
         echo '<div class="mec-event-meta mec-local-time-details mec-frontbox">';
-        echo $this->main->module('local-time.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('local-time.details', array('event' => $event)));
         echo '</div>';
     }
 
@@ -1058,7 +1074,7 @@ class MEC_skin_single extends MEC_skins
      */
     public function display_attendees_widget($event)
     {
-        echo $this->main->module('attendees-list.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('attendees-list.details', array('event' => $event)));
     }
 
     /**
@@ -1070,12 +1086,12 @@ class MEC_skin_single extends MEC_skins
     {
         if($this->main->is_sold($event) and count($event->dates) <= 1):
         ?>
-            <div class="mec-sold-tickets warning-msg"><?php _e('Sold out!', 'modern-events-calendar-lite'); do_action('mec_booking_sold_out',$event, NULL, NULL, array($event->date)); ?></div>
+            <div class="mec-sold-tickets warning-msg"><?php esc_html_e('Sold out!', 'modern-events-calendar-lite'); do_action('mec_booking_sold_out',$event, NULL, NULL, array($event->date)); ?></div>
         <?php elseif($this->main->can_show_booking_module($event)):
             $data_lity_class = '';
             if(isset($this->settings['single_booking_style']) and $this->settings['single_booking_style'] == 'modal') $data_lity_class = 'lity-hide '; ?>
-            <div id="mec-events-meta-group-booking-<?php echo $this->uniqueid; ?>" class="<?php echo $data_lity_class; ?>mec-events-meta-group mec-events-meta-group-booking">
-                <?php echo $this->main->module('booking.default', array('event' => $event_m)); ?>
+            <div id="mec-events-meta-group-booking-<?php echo esc_attr($this->uniqueid); ?>" class="<?php echo esc_attr($data_lity_class); ?>mec-events-meta-group mec-events-meta-group-booking">
+                <?php echo MEC_kses::full($this->main->module('booking.default', array('event' => $event_m))); ?>
             </div>
         <?php
         endif;
@@ -1092,7 +1108,7 @@ class MEC_skin_single extends MEC_skins
             echo '<div class="mec-single-event-category mec-event-meta mec-frontbox">';
             ?>
             <i class="mec-sl-folder"></i>
-            <dt><?php echo $this->main->m('taxonomy_categories', __('Category', 'modern-events-calendar-lite')); ?></dt>
+            <dt><?php echo esc_html($this->main->m('taxonomy_categories', esc_html__('Category', 'modern-events-calendar-lite'))); ?></dt>
             <?php
             foreach($event->data->categories as $category)
             {
@@ -1102,8 +1118,8 @@ class MEC_skin_single extends MEC_skins
                 if($color) $color_html .= '<span class="mec-event-category-color" style="--background-color: '.esc_attr($color).';background-color: '.esc_attr($color).'">&nbsp;</span>';
 
                 $icon = (isset($category['icon']) ? $category['icon'] : '');
-                $icon = isset($icon) && $icon != '' ? '<i class="' . $icon . ' mec-color"></i>' : '<i class="mec-fa-angle-right"></i>';
-                echo '<dl><dd class="mec-events-event-categories"><a href="' . get_term_link($category['id'], 'mec_category') . '" class="mec-color-hover" rel="tag">' . $icon . $category['name'] . $color_html . '</a></dd></dl>';
+                $icon = isset($icon) && $icon != '' ? '<i class="' . esc_attr($icon) . ' mec-color"></i>' : '<i class="mec-fa-angle-right"></i>';
+                echo '<dl><dd class="mec-events-event-categories"><a href="' . get_term_link($category['id'], 'mec_category') . '" class="mec-color-hover" rel="tag">' . MEC_kses::element($icon . esc_html($category['name']) . $color_html) . '</a></dd></dl>';
             }
 
             echo '</div>';
@@ -1123,7 +1139,7 @@ class MEC_skin_single extends MEC_skins
             ?>
             <div class="mec-event-cost">
                 <i class="mec-sl-wallet"></i>
-                <h3 class="mec-cost"><?php echo $this->main->m('cost', __('Cost', 'modern-events-calendar-lite')); ?></h3>
+                <h3 class="mec-cost"><?php echo esc_html($this->main->m('cost', esc_html__('Cost', 'modern-events-calendar-lite'))); ?></h3>
                 <dl><dd class="mec-events-event-cost">
                     <?php
                     if(is_numeric($cost)) $rendered_cost = $this->main->render_price($cost, $event->ID);
@@ -1145,7 +1161,7 @@ class MEC_skin_single extends MEC_skins
     public function display_countdown_widget($event)
     {
         echo '<div class="mec-events-meta-group mec-events-meta-group-countdown">';
-        echo $this->main->module('countdown.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('countdown.details', array('event' => $event)));
         echo '</div>';
     }
 
@@ -1155,7 +1171,7 @@ class MEC_skin_single extends MEC_skins
      */
     public function display_export_widget($event)
     {
-        echo $this->main->module('export.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('export.details', array('event' => $event)));
     }
 
     /**
@@ -1165,7 +1181,7 @@ class MEC_skin_single extends MEC_skins
     public function display_map_widget($event)
     {
         echo '<div class="mec-events-meta-group mec-events-meta-group-gmap">';
-        echo $this->main->module('googlemap.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('googlemap.details', array('event' => $event)));
         echo '</div>';
     }
 
@@ -1188,12 +1204,12 @@ class MEC_skin_single extends MEC_skins
             ?>
             <div class="mec-single-event-date">
                 <i class="mec-sl-calendar"></i>
-                <h3 class="mec-date"><?php _e('Date', 'modern-events-calendar-lite'); ?></h3>
+                <h3 class="mec-date"><?php esc_html_e('Date', 'modern-events-calendar-lite'); ?></h3>
                 <dl>
                 <?php if($midnight_event): ?>
-                <dd><abbr class="mec-events-abbr"><?php echo $this->main->dateify($event, $this->date_format1); ?></abbr></dd>
+                <dd><abbr class="mec-events-abbr"><?php echo MEC_kses::element($this->main->dateify($event, $this->date_format1)); ?></abbr></dd>
                 <?php else: ?>
-                <dd><abbr class="mec-events-abbr"><?php echo $this->main->date_label((trim($occurrence) ? array('date' => $occurrence) : $event->date['start']), (trim($occurrence_end_date) ? array('date' => $occurrence_end_date) : (isset($event->date['end']) ? $event->date['end'] : NULL)), $this->date_format1, ' - ', true, 0, $event); ?></abbr></dd>
+                <dd><abbr class="mec-events-abbr"><?php echo MEC_kses::element($this->main->date_label((trim($occurrence) ? array('date' => $occurrence) : $event->date['start']), (trim($occurrence_end_date) ? array('date' => $occurrence_end_date) : (isset($event->date['end']) ? $event->date['end'] : NULL)), $this->date_format1, ' - ', true, 0, $event)); ?></abbr></dd>
                 <?php endif; ?>
                 </dl>
             </div>
@@ -1215,13 +1231,13 @@ class MEC_skin_single extends MEC_skins
         if($more_info)
         {
             $more_info_target = MEC_feature_occurrences::param($event->ID, $event->date['start']['timestamp'], 'more_info_target', (isset($event->data->meta['mec_more_info_target']) ? $event->data->meta['mec_more_info_target'] : '_self'));
-            $more_info_title = MEC_feature_occurrences::param($event->ID, $event->date['start']['timestamp'], 'more_info_title', ((isset($event->data->meta['mec_more_info_title']) and trim($event->data->meta['mec_more_info_title'])) ? $event->data->meta['mec_more_info_title'] : __('Read More', 'modern-events-calendar-lite')));
+            $more_info_title = MEC_feature_occurrences::param($event->ID, $event->date['start']['timestamp'], 'more_info_title', ((isset($event->data->meta['mec_more_info_title']) and trim($event->data->meta['mec_more_info_title'])) ? $event->data->meta['mec_more_info_title'] : esc_html__('Read More', 'modern-events-calendar-lite')));
             ?>
             <div class="mec-event-meta">
                 <div class="mec-event-more-info">
                     <i class="mec-sl-info"></i>
-                    <h3 class="mec-cost"><?php echo $this->main->m('more_info_link', __('More Info', 'modern-events-calendar-lite')); ?></h3>
-                    <dl><dd class="mec-events-event-more-info"><a class="mec-more-info-button a mec-color-hover" target="<?php echo $more_info_target; ?>" href="<?php echo esc_url($more_info); ?>"><?php echo $more_info_title; ?></a></dd></dl>
+                    <h3 class="mec-cost"><?php echo esc_html($this->main->m('more_info_link', esc_html__('More Info', 'modern-events-calendar-lite'))); ?></h3>
+                    <dl><dd class="mec-events-event-more-info"><a class="mec-more-info-button a mec-color-hover" target="<?php echo esc_attr($more_info_target); ?>" href="<?php echo esc_url($more_info); ?>"><?php echo esc_html($more_info_title); ?></a></dd></dl>
                 </div>
             </div>
             <?php
@@ -1234,7 +1250,7 @@ class MEC_skin_single extends MEC_skins
      */
     public function display_speakers_widget($event)
     {
-        echo $this->main->module('speakers.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('speakers.details', array('event' => $event)));
     }
 
     /**
@@ -1250,10 +1266,10 @@ class MEC_skin_single extends MEC_skins
             $mec_i = 0; ?>
             <div class="mec-single-event-label">
                 <i class="mec-fa-bookmark-o"></i>
-                <h3 class="mec-cost"><?php echo $this->main->m('taxonomy_labels', __('Labels', 'modern-events-calendar-lite')); ?></h3>
+                <h3 class="mec-cost"><?php echo esc_html($this->main->m('taxonomy_labels', esc_html__('Labels', 'modern-events-calendar-lite'))); ?></h3>
                 <?php foreach ($event->data->labels as $labels => $label) :
                     $seperator = (++$mec_i === $mec_items) ? '' : ',';
-                    echo '<dl><dd style="color:' . $label['color'] . '">' . $label["name"] . $seperator . '</dd></dl>';
+                    echo '<dl><dd style="color:' . esc_attr($label['color']) . '">' . esc_html($label["name"] . $seperator) . '</dd></dl>';
                 endforeach; ?>
             </div>
             <?php
@@ -1267,7 +1283,7 @@ class MEC_skin_single extends MEC_skins
      */
     public function display_qrcode_widget($event)
     {
-        echo $this->main->module('qrcode.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('qrcode.details', array('event' => $event)));
     }
 
     /**
@@ -1276,7 +1292,7 @@ class MEC_skin_single extends MEC_skins
      */
     public function display_weather_widget($event)
     {
-        echo $this->main->module('weather.details', array('event' => $event));
+        echo MEC_kses::full($this->main->module('weather.details', array('event' => $event)));
     }
 
     /**
@@ -1294,13 +1310,13 @@ class MEC_skin_single extends MEC_skins
                 ?>
                     <div class="mec-single-event-time">
                         <i class="mec-sl-clock " style=""></i>
-                        <h3 class="mec-time"><?php _e('Time', 'modern-events-calendar-lite'); ?></h3>
-                        <i class="mec-time-comment"><?php echo (isset($time_comment) ? $time_comment : ''); ?></i>
+                        <h3 class="mec-time"><?php esc_html_e('Time', 'modern-events-calendar-lite'); ?></h3>
+                        <i class="mec-time-comment"><?php echo (isset($time_comment) ? esc_html($time_comment) : ''); ?></i>
                         <dl>
-                        <?php if ($allday == '0' and isset($event->data->time) and trim($event->data->time['start'])) : ?>
-                            <dd><abbr class="mec-events-abbr"><?php echo $event->data->time['start']; ?><?php echo (trim($event->data->time['end']) ? ' - ' . $event->data->time['end'] : ''); ?></abbr></dd>
-                        <?php else : ?>
-                            <dd><abbr class="mec-events-abbr"><?php echo $this->main->m('all_day', __('All Day' , 'modern-events-calendar-lite')); ?></abbr></dd>
+                        <?php if($allday == '0' and isset($event->data->time) and trim($event->data->time['start'])): ?>
+                            <dd><abbr class="mec-events-abbr"><?php echo esc_html($event->data->time['start']); ?><?php echo esc_html(trim($event->data->time['end']) ? ' - ' . $event->data->time['end'] : ''); ?></abbr></dd>
+                        <?php else: ?>
+                            <dd><abbr class="mec-events-abbr"><?php echo esc_html($this->main->m('all_day', esc_html__('All Day' , 'modern-events-calendar-lite'))); ?></abbr></dd>
                         <?php endif; ?>
                         </dl>
                     </div>
@@ -1325,19 +1341,19 @@ class MEC_skin_single extends MEC_skins
         if($this->main->can_show_booking_module($event)):
         ?>
             <div class="mec-reg-btn mec-frontbox">
-                <?php $data_lity = $data_lity_class = ''; if(isset($settings['single_booking_style']) and $settings['single_booking_style'] == 'modal' ){ /* $data_lity = 'onclick="openBookingModal();"'; */  $data_lity_class = 'mec-booking-data-lity'; }  ?>
-                <a class="mec-booking-button mec-bg-color <?php echo $data_lity_class; ?> <?php if(isset($this->settings['single_booking_style']) and $this->settings['single_booking_style'] != 'modal' ) echo 'simple-booking'; ?>" href="#mec-events-meta-group-booking-<?php echo $this->uniqueid; ?>" <?php echo $data_lity; ?>><?php echo esc_html($this->main->m('register_button', __('REGISTER', 'modern-events-calendar-lite'))); ?></a>
+                <?php $data_lity_class = ''; if(isset($settings['single_booking_style']) and $settings['single_booking_style'] == 'modal' ){ $data_lity_class = 'mec-booking-data-lity'; }  ?>
+                <a class="mec-booking-button mec-bg-color <?php echo esc_attr($data_lity_class); ?> <?php if(isset($this->settings['single_booking_style']) and $this->settings['single_booking_style'] != 'modal' ) echo 'simple-booking'; ?>" href="#mec-events-meta-group-booking-<?php echo esc_attr($this->uniqueid); ?>"><?php echo esc_html($this->main->m('register_button', esc_html__('REGISTER', 'modern-events-calendar-lite'))); ?></a>
             </div>
         <?php elseif($more_info): ?>
             <?php
                 $more_info_target = MEC_feature_occurrences::param($event->ID, $event->date['start']['timestamp'], 'more_info_target', (isset($event->data->meta['mec_more_info_target']) ? $event->data->meta['mec_more_info_target'] : '_self'));
-                $more_info_title = MEC_feature_occurrences::param($event->ID, $event->date['start']['timestamp'], 'more_info_title', ((isset($event->data->meta['mec_more_info_title']) and trim($event->data->meta['mec_more_info_title'])) ? $event->data->meta['mec_more_info_title'] : __('Read More', 'modern-events-calendar-lite')));
+                $more_info_title = MEC_feature_occurrences::param($event->ID, $event->date['start']['timestamp'], 'more_info_title', ((isset($event->data->meta['mec_more_info_title']) and trim($event->data->meta['mec_more_info_title'])) ? $event->data->meta['mec_more_info_title'] : esc_html__('Read More', 'modern-events-calendar-lite')));
             ?>
             <div class="mec-reg-btn mec-frontbox">
-                <a class="mec-booking-button mec-bg-color" target="<?php echo $more_info_target; ?>" href="<?php echo esc_url($more_info); ?>">
+                <a class="mec-booking-button mec-bg-color" target="<?php echo esc_attr($more_info_target); ?>" href="<?php echo esc_url($more_info); ?>">
                     <?php
                         if($more_info_title) echo esc_html__($more_info_title, 'modern-events-calendar-lite');
-                        else echo esc_html($this->main->m('register_button', __('REGISTER', 'modern-events-calendar-lite')));
+                        else echo esc_html($this->main->m('register_button', esc_html__('REGISTER', 'modern-events-calendar-lite')));
                     ?>
                 </a>
             </div>
@@ -1376,35 +1392,35 @@ class MEC_skin_single extends MEC_skins
             ?>
             <div class="mec-single-event-organizer">
                 <?php if(isset($organizer['thumbnail']) and trim($organizer['thumbnail'])): ?>
-                    <img class="mec-img-organizer" src="<?php echo esc_url($organizer['thumbnail']); ?>" alt="<?php echo (isset($organizer['name']) ? $organizer['name'] : ''); ?>">
+                    <img class="mec-img-organizer" src="<?php echo esc_url($organizer['thumbnail']); ?>" alt="<?php echo (isset($organizer['name']) ? esc_attr($organizer['name']) : ''); ?>">
                 <?php endif; ?>
-                <h3 class="mec-events-single-section-title"><?php echo $this->main->m('taxonomy_organizer', __('Organizer', 'modern-events-calendar-lite')); ?></h3>
+                <h3 class="mec-events-single-section-title"><?php echo esc_html($this->main->m('taxonomy_organizer', esc_html__('Organizer', 'modern-events-calendar-lite'))); ?></h3>
                 <dl>
                 <?php if(isset($organizer['thumbnail'])): ?>
                     <dd class="mec-organizer">
                         <i class="mec-sl-home"></i>
-                        <h6><?php echo (isset($organizer['name']) ? $organizer['name'] : ''); ?></h6>
+                        <h6><?php echo (isset($organizer['name']) ? esc_html($organizer['name']) : ''); ?></h6>
                     </dd>
                 <?php endif;
                 if(isset($organizer['tel']) && !empty($organizer['tel'])): ?>
                 <dd class="mec-organizer-tel">
                     <i class="mec-sl-phone"></i>
-                    <h6><?php _e('Phone', 'modern-events-calendar-lite'); ?></h6>
-                    <a href="tel:<?php echo $organizer['tel']; ?>"><?php echo $organizer['tel']; ?></a>
+                    <h6><?php esc_html_e('Phone', 'modern-events-calendar-lite'); ?></h6>
+                    <a href="tel:<?php echo esc_attr($organizer['tel']); ?>"><?php echo esc_html($organizer['tel']); ?></a>
                 </dd>
                 <?php endif;
                 if(isset($organizer['email']) && !empty($organizer['email'])): ?>
                 <dd class="mec-organizer-email">
                     <i class="mec-sl-envelope"></i>
-                    <h6><?php _e('Email', 'modern-events-calendar-lite'); ?></h6>
-                    <a href="mailto:<?php echo $organizer['email']; ?>"><?php echo $organizer['email']; ?></a>
+                    <h6><?php esc_html_e('Email', 'modern-events-calendar-lite'); ?></h6>
+                    <a href="mailto:<?php echo esc_attr($organizer['email']); ?>"><?php echo esc_html($organizer['email']);; ?></a>
                 </dd>
                 <?php endif;
                 if(isset($organizer['url']) && !empty($organizer['url']) and $organizer['url'] != 'http://'): ?>
                 <dd class="mec-organizer-url">
                     <i class="mec-sl-sitemap"></i>
-                    <h6><?php _e('Website', 'modern-events-calendar-lite'); ?></h6>
-                    <span><a href="<?php echo (strpos($organizer['url'], 'http') === false ? 'http://'.$organizer['url'] : $organizer['url']); ?>" class="mec-color-hover" target="_blank"><?php echo $organizer['url']; ?></a></span>
+                    <h6><?php esc_html_e('Website', 'modern-events-calendar-lite'); ?></h6>
+                    <span><a href="<?php echo esc_url($organizer['url']); ?>" class="mec-color-hover" target="_blank"><?php echo esc_html($organizer['url']); ?></a></span>
                 </dd>
                 <?php endif; ?>
                 </dl>
@@ -1436,48 +1452,48 @@ class MEC_skin_single extends MEC_skins
         $organizer_ids = array_unique($organizer_ids);
         ?>
         <div class="mec-single-event-additional-organizers">
-            <h3 class="mec-events-single-section-title"><?php echo $this->main->m('other_organizers', __('Other Organizers', 'modern-events-calendar-lite')); ?></h3>
+            <h3 class="mec-events-single-section-title"><?php echo esc_html($this->main->m('other_organizers', esc_html__('Other Organizers', 'modern-events-calendar-lite'))); ?></h3>
             <?php foreach($organizer_ids as $o_id): $o_id = apply_filters('wpml_object_id', $o_id, 'mec_organizer', true); if($o_id == $organizer_id) continue; $organizer = (isset($organizers[$o_id]) ? $organizers[$o_id] : NULL); if(!$organizer) continue; ?>
                 <div class="mec-single-event-additional-organizer">
                     <?php if(isset($organizer['thumbnail']) and trim($organizer['thumbnail'])): ?>
                         <?php if (class_exists('MEC_Fluent\Core\pluginBase\MecFluent') && (isset($this->settings['single_single_style']) and $this->settings['single_single_style'] == 'fluent')) { ?>
-                            <img class="mec-img-organizer" src="<?php echo esc_url(MEC_Fluent\Core\pluginBase\MecFluent::generateCustomThumbnailURL($organizer['thumbnail'], 83, 83, true)); ?>" alt="<?php echo (isset($organizer['name']) ? $organizer['name'] : ''); ?>">
+                            <img class="mec-img-organizer" src="<?php echo esc_url(MEC_Fluent\Core\pluginBase\MecFluent::generateCustomThumbnailURL($organizer['thumbnail'], 83, 83, true)); ?>" alt="<?php echo (isset($organizer['name']) ? esc_attr($organizer['name']) : ''); ?>">
                         <?php } else { ?>
-                            <img class="mec-img-organizer" src="<?php echo esc_url($organizer['thumbnail']); ?>" alt="<?php echo (isset($organizer['name']) ? $organizer['name'] : ''); ?>">
+                            <img class="mec-img-organizer" src="<?php echo esc_url($organizer['thumbnail']); ?>" alt="<?php echo (isset($organizer['name']) ? esc_attr($organizer['name']) : ''); ?>">
                         <?php } ?>
                     <?php endif; ?>
                     <dl>
                     <?php if(isset($organizer['thumbnail'])): ?>
                         <dd class="mec-organizer">
                             <i class="mec-sl-home"></i>
-                            <h6><?php echo (isset($organizer['name']) ? $organizer['name'] : ''); ?></h6>
+                            <h6><?php echo (isset($organizer['name']) ? esc_html($organizer['name']) : ''); ?></h6>
                         </dd>
                     <?php endif;
                     if(isset($organizer['tel']) && !empty($organizer['tel'])): ?>
                         <dd class="mec-organizer-tel">
                             <i class="mec-sl-phone"></i>
-                            <h6><?php _e('Phone', 'modern-events-calendar-lite'); ?></h6>
-                            <a href="tel:<?php echo $organizer['tel']; ?>"><?php echo $organizer['tel']; ?></a>
+                            <h6><?php esc_html_e('Phone', 'modern-events-calendar-lite'); ?></h6>
+                            <a href="tel:<?php echo esc_attr($organizer['tel']); ?>"><?php echo esc_html($organizer['tel']); ?></a>
                         </dd>
                     <?php endif;
                     if(isset($organizer['email']) && !empty($organizer['email'])): ?>
                         <dd class="mec-organizer-email">
                             <i class="mec-sl-envelope"></i>
-                            <h6><?php _e('Email', 'modern-events-calendar-lite'); ?></h6>
-                            <a href="mailto:<?php echo $organizer['email']; ?>"><?php echo $organizer['email']; ?></a>
+                            <h6><?php esc_html_e('Email', 'modern-events-calendar-lite'); ?></h6>
+                            <a href="mailto:<?php echo esc_attr($organizer['email']); ?>"><?php echo esc_html($organizer['email']);; ?></a>
                         </dd>
                     <?php endif;
                     if(isset($organizer['url']) && !empty($organizer['url']) and $organizer['url'] != 'http://'): ?>
                         <dd class="mec-organizer-url">
                             <i class="mec-sl-sitemap"></i>
-                            <h6><?php _e('Website', 'modern-events-calendar-lite'); ?></h6>
-                            <span><a href="<?php echo (strpos($organizer['url'], 'http') === false ? 'http://'.$organizer['url'] : $organizer['url']); ?>" class="mec-color-hover" target="_blank"><?php echo $organizer['url']; ?></a></span>
+                            <h6><?php esc_html_e('Website', 'modern-events-calendar-lite'); ?></h6>
+                            <span><a href="<?php echo esc_url($organizer['url']); ?>" class="mec-color-hover" target="_blank"><?php echo esc_html($organizer['url']); ?></a></span>
                         </dd>
                     <?php endif;
                     $organizer_description_setting = isset( $this->settings['addintional_organizers_description'] ) ? $this->settings['addintional_organizers_description'] : ''; $organizer_terms = get_the_terms($event->data, 'mec_organizer');  if($organizer_description_setting == '1'):
                     foreach($organizer_terms as $organizer_term) { if ($organizer_term->term_id == $organizer['id'] ) {  if(isset($organizer_term->description) && !empty($organizer_term->description)): ?>
                         <dd class="mec-organizer-description">
-                            <p><?php echo $organizer_term->description;?></p>
+                            <p><?php echo esc_html($organizer_term->description); ?></p>
                         </dd>
                     <?php endif; } } endif; ?>
                     </dl>
@@ -1517,22 +1533,22 @@ class MEC_skin_single extends MEC_skins
             <?php foreach($location_ids as $l_id): $l_id = apply_filters('wpml_object_id', $l_id, 'mec_location', true); if($l_id == $location_id) continue; $location = (isset($locations[$l_id]) ? $locations[$l_id] : NULL); if(!$location) continue; ?>
                 <div class="mec-single-event-location">
                     <?php if($location['thumbnail']): ?>
-                    <img class="mec-img-location" src="<?php echo esc_url($location['thumbnail'] ); ?>" alt="<?php echo (isset($location['name']) ? $location['name'] : ''); ?>">
+                    <img class="mec-img-location" src="<?php echo esc_url($location['thumbnail'] ); ?>" alt="<?php echo (isset($location['name']) ? esc_attr($location['name']) : ''); ?>">
                     <?php endif; ?>
 
                     <?php if($display_title): ?>
                     <i class="mec-sl-location-pin"></i>
-                    <h3 class="mec-events-single-section-title mec-location"><?php echo $this->main->m('taxonomy_location', __('Location', 'modern-events-calendar-lite')); ?> <?php echo $i; ?></h3>
+                    <h3 class="mec-events-single-section-title mec-location"><?php echo esc_html($this->main->m('taxonomy_location', esc_html__('Location', 'modern-events-calendar-lite'))); ?> <?php echo esc_html($i); ?></h3>
                     <?php endif; ?>
 
                     <dl>
-                        <dd class="author fn org"><?php echo $this->get_location_html($location); ?></dd>
-                        <dd class="location"><address class="mec-events-address"><span class="mec-address"><?php echo (isset($location['address']) ? $location['address'] : ''); ?></span></address></dd>
+                        <dd class="author fn org"><?php echo MEC_kses::element($this->get_location_html($location)); ?></dd>
+                        <dd class="location"><address class="mec-events-address"><span class="mec-address"><?php echo (isset($location['address']) ? esc_html($location['address']) : ''); ?></span></address></dd>
                         <?php
                         $location_description_setting = isset( $this->settings['addintional_locations_description'] ) ? $this->settings['addintional_locations_description'] : ''; $location_terms = get_the_terms($event->data, 'mec_location');  if($location_description_setting == '1'):
                         foreach($location_terms as $location_term) { if ($location_term->term_id == $location['id'] ) {  if(isset($location_term->description) && !empty($location_term->description)): ?>
                             <dd class="mec-location-description">
-                                <p><?php echo $location_term->description;?></p>
+                                <p><?php echo esc_html($location_term->description); ?></p>
                             </dd>
                         <?php endif; } } endif; ?>
                     </dl>
@@ -1562,7 +1578,7 @@ class MEC_skin_single extends MEC_skins
         $speakers = array();
         ?>
         <div class="mec-event-schedule mec-frontbox">
-            <h3 class="mec-schedule-head mec-frontbox-title"><?php _e('Hourly Schedule','modern-events-calendar-lite'); ?></h3>
+            <h3 class="mec-schedule-head mec-frontbox-title"><?php esc_html_e('Hourly Schedule','modern-events-calendar-lite'); ?></h3>
             <?php foreach($hourly_schedules as $day): ?>
                 <?php if(count($hourly_schedules) >= 1 and isset($day['title'])): ?>
                     <h4 class="mec-schedule-part"><?php echo esc_html($day['title']); ?></h4>
@@ -1576,10 +1592,10 @@ class MEC_skin_single extends MEC_skins
 
                         <?php if($speakers_status and isset($schedule['speakers']) and is_array($schedule['speakers']) and count($schedule['speakers'])): ?>
                         <dt class="mec-schedule-speakers">
-                            <h6><?php echo $this->main->m('taxonomy_speakers', __('Speakers:', 'modern-events-calendar-lite')); ?></h6>
+                            <h6><?php echo esc_html($this->main->m('taxonomy_speakers', esc_html__('Speakers:', 'modern-events-calendar-lite'))); ?></h6>
                             <?php $speaker_count = count($schedule['speakers']); $i = 0; ?>
                             <?php foreach($schedule['speakers'] as $speaker_id): $speaker = get_term($speaker_id); array_push($speakers, $speaker_id); ?>
-                            <a class="mec-color-hover mec-hourly-schedule-speaker-lightbox" href="#mec_hourly_schedule_speaker_lightbox_<?php echo $speaker->term_id; ?>" data-lity><?php echo esc_html($speaker->name); ?></a><?php if(++$i != $speaker_count ) echo ","; ?>
+                            <a class="mec-color-hover mec-hourly-schedule-speaker-lightbox" href="#mec_hourly_schedule_speaker_lightbox_<?php echo esc_attr($speaker->term_id); ?>" data-lity><?php echo esc_html($speaker->name); ?></a><?php if(++$i != $speaker_count ) echo ","; ?>
                             <?php endforeach; ?>
                         </dt>
                         <?php endif; ?>
@@ -1589,11 +1605,11 @@ class MEC_skin_single extends MEC_skins
             <?php endforeach; ?>
 
             <?php if(count($speakers)): $speakers = array_unique($speakers); foreach($speakers as $speaker_id): $speaker = get_term($speaker_id); ?>
-            <div class="lity-hide mec-hourly-schedule-speaker-info" id="mec_hourly_schedule_speaker_lightbox_<?php echo $speaker->term_id; ?>">
+            <div class="lity-hide mec-hourly-schedule-speaker-info" id="mec_hourly_schedule_speaker_lightbox_<?php echo esc_attr($speaker->term_id); ?>">
                 <!-- Speaker Thumbnail -->
                 <?php if($thumbnail = trim(get_term_meta($speaker->term_id, 'thumbnail', true))): ?>
                 <div class="mec-hourly-schedule-speaker-thumbnail">
-                    <img src="<?php echo $thumbnail; ?>" alt="<?php echo esc_attr($speaker->name); ?>">
+                    <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php echo esc_attr($speaker->name); ?>">
                 </div>
                 <?php endif; ?>
                 <div class="mec-hourly-schedule-speaker-details">
@@ -1640,7 +1656,7 @@ class MEC_skin_single extends MEC_skins
                     <!-- Speaker Description -->
                     <?php if(trim($speaker->description)): ?>
                     <div class="mec-hourly-schedule-speaker-description">
-                        <?php echo esc_html($speaker->description); ?>
+                        <?php echo MEC_kses::element($speaker->description); ?>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -1718,7 +1734,7 @@ class MEC_skin_single extends MEC_skins
                                 if(!count($value)) continue;
                             }
                         ?>
-                        <li class="mec-event-data-field-item mec-field-item-<?php echo $type ?>">
+                        <li class="mec-event-data-field-item mec-field-item-<?php echo esc_attr($type); ?>">
                             <?php if(isset($field['label'])): ?>
                             <span class="mec-event-data-field-name"><?php esc_html_e(stripslashes($field['label']), 'modern-events-calendar-lite'); ?>: </span>
                             <?php endif; ?>
@@ -1752,7 +1768,7 @@ class MEC_skin_single extends MEC_skins
         $location_name = (isset($location['name']) ? $location['name'] : '');
 
         $location_link = apply_filters('mec_location_single_page_link', '', $location_id, $location_name, $location);
-        if(!empty($location_link)) $location_html ='<a href="'.$location_link.'">'.$location_name .'</a>';
+        if(!empty($location_link)) $location_html ='<a href="'.esc_url($location_link).'">'.esc_html($location_name).'</a>';
         else $location_html = $location_name;
 
         return $location_html;
@@ -1769,9 +1785,9 @@ class MEC_skin_single extends MEC_skins
         $title = ($event and isset($event->data) and isset($event->data->meta) and isset($event->data->meta['mec_public_dl_title']) and $event->data->meta['mec_public_dl_title']) ? $event->data->meta['mec_public_dl_title'] : NULL;
         $description = ($event and isset($event->data) and isset($event->data->meta) and isset($event->data->meta['mec_public_dl_description']) and $event->data->meta['mec_public_dl_description']) ? $event->data->meta['mec_public_dl_description'] : NULL;
 
-        echo '<div class="mec-public-download-details mec-frontbox">
+        echo MEC_kses::element('<div class="mec-public-download-details mec-frontbox">
             '.($description ? '<p>'.wp_kses(wpautop($description), array('p' => array(), 'br' => array())).'</p>' : '').'
             <a class="button" href="'.esc_url($url).'">'.(trim($title) ? esc_html($title) : esc_html__('Download', 'modern-events-calendar-lite')).'</a>
-        </div>';
+        </div>');
     }
 }

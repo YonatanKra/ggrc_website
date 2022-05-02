@@ -8,12 +8,12 @@ wp_enqueue_script('mec-lity-script', $this->main->asset('packages/lity/lity.min.
     <div class="welcome-head w-clearfix">
         <div class="w-row">
             <div class="w-col-sm-9">
-                <h1> <?php echo __('Addons', 'modern-events-calendar-lite'); ?> </h1>
+                <h1> <?php echo esc_html__('Addons', 'modern-events-calendar-lite'); ?> </h1>
             </div>
             <div class="w-col-sm-3">
                 <?php $styling = $this->main->get_styling(); $darkadmin_mode = ( isset($styling['dark_mode']) ) ? $styling['dark_mode'] : ''; if ($darkadmin_mode == 1): $darklogo = plugin_dir_url(__FILE__ ) . '../../../assets/img/mec-logo-w2.png'; else: $darklogo = plugin_dir_url(__FILE__ ) . '../../../assets/img/mec-logo-w.png'; endif; ?>
-                <img src="<?php echo $darklogo; ?>" />
-                <span class="w-theme-version"><?php echo __('Version', 'modern-events-calendar-lite'); ?> <?php echo MEC_VERSION; ?></span>
+                <img src="<?php echo esc_url($darklogo); ?>" />
+                <span class="w-theme-version"><?php echo esc_html__('Version', 'modern-events-calendar-lite'); ?> <?php echo MEC_VERSION; ?></span>
             </div>
         </div>
     </div>
@@ -21,29 +21,17 @@ wp_enqueue_script('mec-lity-script', $this->main->asset('packages/lity/lity.min.
     <?php if(current_user_can('read')): ?>
         <?php
         $data_url = 'https://webnus.net/modern-events-calendar/addons-api/addons-api.json';
-        if(function_exists('file_get_contents') && ini_get('allow_url_fopen') )
-        {
-            $ctx = stream_context_create(array('http'=> array( 'timeout' => 20 ),'ssl'=>array( 'verify_peer'=>false, 'verify_peer_name'=>false)));
-            $get_data = file_get_contents($data_url, false, $ctx);
-            if ( $get_data !== false AND !empty($get_data) )
-            {
-                $obj = json_decode($get_data);
-                $i = count((array)$obj);
-            }
-        }
-        elseif ( function_exists('curl_version') )
-        {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_URL, $data_url);
-            $result = curl_exec($ch);
-            curl_close($ch);
-            $obj = json_decode($result);
-            $i = count((array)$obj);
-        } else {
-            $obj = '';
-        }
+        $args = array(
+            'timeout'     => '5',
+            'redirection' => '5',
+            'httpversion' => '1.0',
+            'blocking'    => true,
+            'headers'     => array(),
+            'cookies'     => array(),
+        );
+        $response = wp_remote_get( $data_url,$args );
+        $body     = wp_remote_retrieve_body( $response );
+        $obj = json_decode($body);
         ?>
         <div class="w-row">
         <?php if ( !empty( $obj ) ) :  ?>
@@ -87,7 +75,7 @@ wp_enqueue_script('mec-lity-script', $this->main->asset('packages/lity/lity.min.
             <div class="w-col-sm-12">
                 <div class="addons-page-error">
                     <p>
-                    <?php echo __( '<strong>"file_get_contents"</strong> and <strong>"Curl"</strong> functions are <strong>not activated</strong> on your server. Please contact your host provider in this regard.', 'modern-events-calendar-lite'); ?>
+                    <?php echo esc_html__( '<strong>"file_get_contents"</strong> and <strong>"Curl"</strong> functions are <strong>not activated</strong> on your server. Please contact your host provider in this regard.', 'modern-events-calendar-lite'); ?>
                     </p>
                 </div>
             </div>

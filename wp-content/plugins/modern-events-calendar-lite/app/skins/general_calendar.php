@@ -45,6 +45,20 @@ class MEC_skin_general_calendar extends MEC_skins
         ));
     }
 
+    public function switch_language( $locale ){
+
+        $language = false;
+        if( function_exists('PLL') ){
+
+            $language =  PLL()->curlang->locale;
+        }
+
+        if( $language ){
+
+            switch_to_locale( $language );
+        }
+    }
+
     public function get_general_calendar_events($request)
     {
         //Params
@@ -74,6 +88,9 @@ class MEC_skin_general_calendar extends MEC_skins
         $filter_tag = $request->get_param('filter_tag') ? explode(',', $request->get_param('filter_tag')) : NULL;
         $filter_author = $request->get_param('filter_author') ? explode(',', $request->get_param('filter_author')) : NULL;
         $locale = $request->get_param('locale') ;
+        $language = $request->get_param('lang') ;
+
+        $this->switch_language( $locale );
 
         // Attributes
         $atts = array(
@@ -109,19 +126,18 @@ class MEC_skin_general_calendar extends MEC_skins
                 if (isset($event->data->labels) && !empty($event->data->labels) && $display_label) {
                     foreach($event->data->labels as $label)
                     {
-                        $labels .= '<span class="mec-general-calendar-label" style="background-color:'.$label['color'].';">' . trim($label['name']) . '</span>';
+                        $labels .= '<span class="mec-general-calendar-label" style="background-color:'.esc_attr($label['color']).';">' . trim($label['name']) . '</span>';
                     }
                 }
-                
                 $location_id = $this->main->get_master_location_id($event);
                 $event_title = $event->data->title;
                 $event_link = $this->main->get_event_date_permalink($event, $event->date['start']['date']);
                 $event_color = '#'.$event->data->color;
                 $event_content = $event->data->content;
-                $event_date_start = $this->main->date_i18n('c', $event->date['start']['timestamp']);
-                $event_date_start_str = $event->date['start']['timestamp'];
-                $event_date_end = $this->main->date_i18n('c', $event->date['end']['timestamp']);
-                $event_date_end_str = $event->date['end']['timestamp'];
+                $event_date_start = $this->main->date_i18n('c', strtotime($event->data->meta['mec_start_datetime']));
+                $event_date_start_str = strtotime($event->data->meta['mec_start_datetime']);
+                $event_date_end = $this->main->date_i18n('c', strtotime($event->data->meta['mec_end_datetime']));
+                $event_date_end_str = strtotime($event->data->meta['mec_end_datetime']);
                 $event_image = $event->data->featured_image['full'];
                 $gridsquare = get_the_post_thumbnail($event->data->ID, 'gridsquare' , array('data-mec-postid' => $event->data->ID));
                 $event_a['id']=  $event->data->ID;
@@ -284,7 +300,7 @@ class MEC_skin_general_calendar extends MEC_skins
 
         // Show Past Events
         $this->args['mec-past-events'] = isset($this->atts['show_past_events']) ? $this->atts['show_past_events'] : '0';
-        
+
         // Start Date
         list($this->year, $this->month, $this->day) = $this->get_start_date();
 
@@ -497,7 +513,7 @@ class MEC_skin_general_calendar extends MEC_skins
 
             // Include Available Events
             $this->args['post__in'] = $IDs;
-            
+
             // Count of events per day
             $IDs_count = array_count_values($IDs);
 
@@ -514,15 +530,16 @@ class MEC_skin_general_calendar extends MEC_skins
             }
 
             // The Query
+            $this->args['posts_per_page'] = 1000;
             $this->args = apply_filters('mec_skin_query_args', $this->args, $this);
             $query = new WP_Query($this->args);
             if($query->have_posts())
             {
                 if(!isset($events[$date])) $events[$date] = array();
-                
+
                 // Day Events
                 $d = array();
-                
+
                 // The Loop
                 while($query->have_posts())
                 {
@@ -553,11 +570,11 @@ class MEC_skin_general_calendar extends MEC_skins
                             'end' => array('date' => $this->main->get_end_date($date, $rendered))
                         );
                         $d[] = $this->render->after_render($data, $this, $i);
-                        
+
                         $found++;
                     }
 
-                    if($found >= $this->limit)
+                    if($found >= 1000)
                     {
                         // Next Offset
                         $this->next_offset = ($query->post_count-($query->current_post+1)) >= 0 ? ($query->current_post+1)+$this->offset : 0;
@@ -575,7 +592,7 @@ class MEC_skin_general_calendar extends MEC_skins
                 usort($d, array($this, 'sort_day_events'));
                 $events[$date] = $d;
             }
-        
+
             // Restore original Post Data
             wp_reset_postdata();
             $i++;
@@ -590,7 +607,7 @@ class MEC_skin_general_calendar extends MEC_skins
             // Next Offset
             $this->next_offset = $found + ((isset($date) and $this->start_date === $date) ? $this->offset : 0);
         }
-   
+
         // Set found events
         $this->found = $found;
         return $events;
@@ -629,3 +646,8 @@ class MEC_skin_general_calendar extends MEC_skins
         return array(date('Y', $time), date('m', $time), date('d', $time));
     }
 }
+
+// add_action('init',function(){
+
+//     wp_die(date_i18n('Y-M-d'));
+// });

@@ -4,7 +4,7 @@ Donate link: https://webnus.net
 Tags: Event, Events, Calendar, Booking, Schedule, Organizer, Venue
 Requires at least: 4.0.0
 Tested up to: 5.9
-Stable tag: 6.4.1
+Stable tag: 6.5.4
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -217,6 +217,7 @@ You can see [plugin documentation](https://webnus.net/dox/modern-events-calendar
 - [Developer documentation](https://webnus.net/dox/modern-events-calendar/category/developer-document/)
 
 == Key Features ==
+- Dynamic content shortcode
 - MEC Cart System (*pro*)
 - Skip the first step of booking (*pro*)
 - Book Multiple Dates (*pro*)
@@ -472,8 +473,117 @@ You can see [plugin documentation](https://webnus.net/dox/modern-events-calendar
 
 == Changelog ==
 
-= 6.4.1 – 25 February 2022 =
-- Fixed: minor issue
+= 6.5.4 – 27 April 2022 =
+- Added: An option to prevent sending new event notifications after creating an event with super admin email
+- Added: The download link on the checkout page will be open in a new tab (_blank) (pro)
+- Added: Event filter based on start time (main time) in admin area
+- Added: An option to control the inclusion of script.js (pro)
+- Added: Thank you page feature for MEC Cart (pro)
+- Added: An ability to add custom characters into the single date format
+- Added: An option to control the decimal number of prices (pro)
+- Added: A notice message to admin when the single sidebar is empty
+- Added: Loading for MEC Checkout (pro)
+- Improved: The social share buttons
+- Improved: Changing the iCal export to optimize and fix some bugs
+- Improved: Flip countdown display in mobile devices
+- Changed: Select image input design in wizard mode
+- Fixed: The issue with removal of fees in MEC Cart payment gateway
+- Fixed: Date translation issue in general calendar
+- Fixed: Notice error translation issue
+- Fixed: Telegram icon style
+- Fixed: Notification sending error while using WooCommerce payment gateway (pro)
+- Fixed: Not overwriting the Booking Success Message from settings in MEC Cart (pro)
+- Fixed: Not disabling automatic confirm for payment gateways in MEC Cart (pro)
+- Fixed: Bookings filter by repetition select box display issue (pro)
+- Fixed: New Event notification
+- Fixed: An issue in PayPal classic gateway (pro)
+- Fixed: reCAPTCHA feature of Frontend Event Submission
+- Fixed: An issue in Stripe gateway (pro)
+- Fixed: Custom day repeating events
+- Fixed: XML Export / Import
+- Fixed: An issue in lazy loading
+- Fixed: An issue with HTML markups
+- Fixed: Some issues in MEC Cart (pro)
+- Fixed: Some other issues
+
+= 6.5.3 – 17 April 2022 =
+- Improved: the performance and security
+- Improved: the WhatsApp share
+- Fixed: a very rare issue on the booking module (pro)
+- Fixed: some issues on event structured data (schema)
+- Fixed: an issue on showing expired events on the event manager of the backend
+- Fixed: HTML markup issue on some skins
+- Fixed: some PHP notices and warnings
+- Fixed: some apostrophe issues
+
+= 6.5.2 – 12 April 2022 =
+- Fixed: An issue on event bulk edit and saving locations, organizers
+- Fixed: A security issue
+- Fixed: HTML support of gateway comment
+- Fixed: An issue on block themes
+- Fixed: An issue on notification placeholders
+- Fixed: An issue on calculating end date of some certain events in rare cases
+- Escaped: Many parameters to improve the security
+
+= 6.5.1 – 3 April 2022 =
+- Improved: The security and output escapes
+- Fixed: An issue in displaying event tags on the block editor
+- Fixed: An issue on the public file module
+- Fixed: Some issues regarding event filters
+- Fixed: An issue with displaying end dates for multiple-day events
+- Fixed: An issue with displaying the cost of events
+- Fixed: A multilingual issue
+
+= 6.5.0 – 31 March 2022 =
+- Fixed: An issue on shortcode filter options
+- Fixed: The remove button for the inner form builder
+- Fixed: An issue on the single event date method option
+- Fixed: An issue on the hide event option
+- Fixed: Some minor issues
+
+= 6.4.9 – 30 March 2022 =
+- Fixed: Some minor issue
+- Removed: PUC folder
+
+= 6.4.8 – 28 March 2022 =
+- Fixed: No event found issue in special conditions
+
+= 6.4.7 – 27 March 2022 =
+- Fixed: An issue on PayPal Standard Gateway (pro)
+- Fixed: An issue in the “Related Events” module when a link is set for an event
+- Fixed: Some issues in notification placeholders
+- Fixed: An issue in manual import from Google Calendar
+- Fixed: Some PHP issues and warnings
+- Fixed: An issue on displaying cancellation reason (pro)
+- Removed: PHP curl and used WordPress remote API instead
+- Escaped and Sanitized: Many parts of the project to improve security and performance
+
+= 6.4.5 – 15 March 2022 =
+- Added: Dynamic content shortcode
+- Added: View bookings link to the classic event list in WordPress backend (pro)
+- Updated: Some language files
+- Updated: Charts library
+- Improved: The “Frontend Submission” form
+- Improved: The code security
+- Removed: An encrypted code
+- Fixed: An issue in booking form (pro)
+- Fixed: An issue in full calendar when loaded as category archive
+- Fixed: Some issues regarding search module
+
+= 6.4.2 – 3 March 2022 =
+- Improved: The XML export
+- Improved: The skin load in full calendar shortcode
+- Improved: The Stripe gateway by adding some booking fields into the meta fields (pro)
+- Improved: The search functionality on shortcodes
+- Improved: The XML import to store event fields too
+- Improved: Some options on the lite version
+- Improved: The speaker feature in “Frontend Event Submission”
+- Fixed: An issue on event and booking filter in WP backend (pro)
+- Fixed: An issue on the next event module
+- Fixed: Some issues in “Frontend Event Submission”
+- Fixed: An issue in year and month selection on month navigation
+- Fixed: A potential memory issue
+- Fixed: An issue on independent tags
 
 = 6.4.0 – 23 February 2022 =
 - Improved: The MEC backend

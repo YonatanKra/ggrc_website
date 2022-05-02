@@ -91,7 +91,7 @@ class MEC_addon_PMP extends MEC_base
                 $post_membership_levels_names = $response[2];
 
                 $content = pmpro_get_no_access_message('', $post_membership_levels_ids, $post_membership_levels_names);
-                $status = '<div class="mec-wrap mec-no-access-error"><h1>'.get_the_title($event_id).'</h1>'.$content.'</div>';
+                $status = '<div class="mec-wrap mec-no-access-error"><h1>'.get_the_title($event_id).'</h1>'.MEC_kses::page($content).'</div>';
             }
         }
 

@@ -79,6 +79,7 @@ class MEC_feature_update extends MEC_base
         if(version_compare($version, '6.0.0', '<')) $this->version600();
         if(version_compare($version, '6.2.6', '>')) $this->version626();
         if(version_compare($version, '6.4.0', '<')) $this->version640();
+        if(version_compare($version, '6.5.3', '<')) $this->version653();
 
         // Update to latest version to prevent running the code twice
         update_option('mec_version', $this->main->get_version());
@@ -704,5 +705,10 @@ class MEC_feature_update extends MEC_base
     public function version640()
     {
         $this->db->q("ALTER TABLE `#__mec_dates` ADD `status` VARCHAR(20) NOT NULL DEFAULT 'publish' AFTER `tend`;");
+    }
+
+    public function version653()
+    {
+        $this->db->q("ALTER TABLE `#__mec_bookings` CHANGE `ticket_ids` `ticket_ids` VARCHAR(655) NOT NULL;");
     }
 }

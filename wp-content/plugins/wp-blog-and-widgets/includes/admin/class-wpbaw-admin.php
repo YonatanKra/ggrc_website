@@ -25,12 +25,18 @@ class Wpbaw_Admin {
 		// Init Processes
 		add_action( 'admin_init', array($this, 'wpbaw_admin_init_process') );
 
+		// Admin for the Solutions & Features
+		add_action( 'admin_init', array($this, 'wpbaw_admin_init_sf_process') );
+
 		// Get Posts Filter
 		add_filter( 'pre_get_posts', array($this, 'wpbaw_blog_display_tags') );
 
 		// Manage Category Shortcode Columns
 		add_filter("manage_edit-".WPBAW_CAT."_columns", array($this, 'blog_category_manage_columns')); 
 		add_filter("manage_".WPBAW_CAT."_custom_column", array($this, 'blog_category_columns'), 10, 3);
+
+		// Action to add little JS code in admin footer
+		//add_action( 'admin_footer', array($this, 'wpbaw_upgrade_page_link_blank') );
 	}
 
 	/**
@@ -44,8 +50,23 @@ class Wpbaw_Admin {
 		// How it work page
 		add_submenu_page( 'edit.php?post_type='.WPBAW_POST_TYPE, __('How it works, our plugins and offers', 'wp-blog-and-widgets'), __('How It Works', 'wp-blog-and-widgets'), 'manage_options', 'wpbawh-designs', array($this, 'wpbawh_designs_page') );
 
+		// Setting page
+		add_submenu_page( 'edit.php?post_type='.WPBAW_POST_TYPE, __('Solutions & Features - WP Blog and Widget', 'wp-blog-and-widgets'), '<span style="color:#2ECC71">'. __('Solutions & Features', 'wp-blog-and-widgets').'</span>', 'manage_options', 'wpbaw-solutions-features', array($this, 'wpbaw_solutions_features_page') );
+
 		// Plugin features menu
-		add_submenu_page( 'edit.php?post_type='.WPBAW_POST_TYPE, __('Upgrade to PRO - WP Blog and Widget', 'wp-blog-and-widgets'), '<span style="color:#ff2700">'.__('Upgrade to PRO', 'wp-blog-and-widgets').'</span>', 'edit_posts', 'wpbawh-premium', array($this, 'wpbaw_premium_page') );
+		add_submenu_page( 'edit.php?post_type='.WPBAW_POST_TYPE, __('Upgrade To PRO - WP Blog and Widget', 'wp-blog-and-widgets'), '<span style="color:#ff2700">'.__('Upgrade To PRO', 'wp-blog-and-widgets').'</span>', 'edit_posts', 'wpbawh-premium', array($this, 'wpbaw_premium_page') );
+		//add_submenu_page( 'edit.php?post_type='.WPBAW_POST_TYPE, __('Upgrade To PRO - WP Blog and Widget', 'wp-blog-and-widgets'), '<span class="wpos-upgrade-pro" style="color:#ff2700">' . __('Upgrade To Premium ', 'wp-blog-and-widgets') . '</span>', 'manage_options', 'wpbawh-upgrade-pro', array($this, 'wpbaw_redirect_page') );
+		//add_submenu_page( 'edit.php?post_type='.WPBAW_POST_TYPE, __('Bundle Deal - WP Blog and Widget', 'wp-blog-and-widgets'), '<span class="wpos-upgrade-pro" style="color:#ff2700">' . __('Bundle Deal', 'wp-blog-and-widgets') . '</span>', 'manage_options', 'wpbawh-bundle-deal', array($this, 'wpbaw_redirect_page') );
+	}
+
+	/**
+	 * Function to display plugin design HTML
+	 * 
+	 * @package WP Blog and Widget
+	 * @since 2.0
+	 */
+	function wpbaw_solutions_features_page() {
+		include_once( WPBAW_DIR . '/includes/admin/settings/solutions-features.php' );
 	}
 
 	/**
@@ -67,6 +88,14 @@ class Wpbaw_Admin {
 	function wpbaw_premium_page() {
 		include_once( WPBAW_DIR . '/includes/admin/settings/premium.php' );
 	}
+
+	/**
+	 * Redirect
+	 * 
+	 * @since 1.0
+	 */
+	// function wpbaw_redirect_page() {
+	// }
 
 	/**
 	 * Post Settings Metabox
@@ -95,10 +124,45 @@ class Wpbaw_Admin {
 	 * @since 1.3.2
 	 */
 	function wpbaw_admin_init_process() {
+
+		//global $typenow, $pagenow;
+
+		//$current_page = isset( $_REQUEST['page'] ) ? $_REQUEST['page'] : '';
+
 		// If plugin notice is dismissed
 	    if( isset($_GET['message']) && $_GET['message'] == 'wpbawh-plugin-notice' ) {
 	    	set_transient( 'wpbawh_install_notice', true, 604800 );
 	    }
+
+	    // Redirect to external page for upgrade to menu
+	    // if( $typenow == WPBAW_POST_TYPE ) {
+
+	    // 	if( $current_page == 'wpbawh-upgrade-pro' ) {
+
+	    // 		wp_redirect( WPBAW_PLUGIN_LINK_UPGRADE );
+	    // 		exit;
+	    // 	}
+
+	    // 	if( $current_page == 'wpbawh-bundle-deal' ) {
+
+	    // 		wp_redirect( WPBAW_PLUGIN_BUNDLE_LINK );
+	    // 		exit;
+	    // 	}
+	    // }
+	}
+
+	function wpbaw_admin_init_sf_process() {
+
+		if ( get_option( 'wpbaw_sf_optin', false ) ) {
+
+			delete_option( 'wpbaw_sf_optin' );
+
+			$redirect_link = add_query_arg( array('post_type' => WPBAW_POST_TYPE, 'page' => 'wpbaw-solutions-features' ), admin_url( 'edit.php' ) );
+
+			wp_safe_redirect( $redirect_link );
+
+			exit;
+		}
 	}
 
 	/**
@@ -156,6 +220,29 @@ class Wpbaw_Admin {
 		}
 		return $out;
 	}
+
+	/**
+	 * Add JS snippet to admin footer to add target _blank in upgrade link
+	 * 
+	 * @package WP Blog and Widgets
+	 * @since 1.0.0
+	 */
+	/*function wpbaw_upgrade_page_link_blank() {
+
+		global $wpos_upgrade_link_snippet;
+
+		// Redirect to external page
+		if( empty( $wpos_upgrade_link_snippet ) ) {
+
+			$wpos_upgrade_link_snippet = 1;
+	?>
+		<script type="text/javascript">
+			(function ($) {
+				$('.wpos-upgrade-pro').parent().attr( { target: '_blank', rel: 'noopener noreferrer' } );
+			})(jQuery);
+		</script>
+	<?php }
+	} */
 }
 
 $wpbaw_Admin = new Wpbaw_Admin();

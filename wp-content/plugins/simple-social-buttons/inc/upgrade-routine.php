@@ -76,12 +76,12 @@ function ssb_upgrade_routine_2() {
 		update_option( 'ssb_inline', $_default_inline );
 		// End of Inline Icons.
 
-		$_default_postion = array(
+		$_default_position = array(
 			'position' => array(
 				'inline' => 'inline',
 			),
 		);
-		update_option( 'ssb_positions', $_default_postion );
+		update_option( 'ssb_positions', $_default_position );
 
 		$_default_theme = array(
 			'icon_style' => 'sm-round',

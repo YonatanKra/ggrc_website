@@ -49,7 +49,7 @@ class EventDate extends WidgetBase {
 						<?php if($midnight_event): ?>
 							<dd><abbr class="mec-events-abbr"><?php echo Base::get_main()->dateify( $event_detail, $date_format ); ?></abbr></dd>
 						<?php else: ?>
-							<dd><abbr class="mec-events-abbr"><?php echo $date_label; ?></abbr></dd>
+							<dd><abbr class="mec-events-abbr"><?php echo wp_kses( $date_label, array('span' => array( 'class' => array(), 'itemprop' => array() ) ) ); ?></abbr></dd>
 						<?php endif; ?>
 					</dl>
 					<?php echo Base::get_main()->holding_status( $event_detail ); ?>

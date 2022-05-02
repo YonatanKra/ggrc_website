@@ -5,37 +5,57 @@
  * Text Domain: wp-blog-and-widgets
  * Domain Path: /languages/
  * Description: Display Blog on your website with list and in grid view. Also work with Gutenberg shortcode block.
- * Version: 2.2.3.1
+ * Version: 2.2.6
  * Author: WP OnlineSupport, Essential Plugin
- * Author URI: https://www.essentialplugin.com/
+ * Author URI: https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/
  * Contributors: WP OnlineSupport
 */
 
-if( !defined( 'WPBAW_VERSION' ) ) {
-	define( 'WPBAW_VERSION', '2.2.3.1' ); // Version of plugin
+if( ! defined( 'WPBAW_VERSION' ) ) {
+	define( 'WPBAW_VERSION', '2.2.6' ); // Version of plugin
 }
-if( !defined( 'WPBAW_Name' ) ) {
+
+if( ! defined( 'WPBAW_Name' ) ) {
 	define( 'WPBAW_Name', 'Blog and Widget' ); // Version of plugin
 }
-if( !defined( 'WPBAW_DIR' ) ) {
+
+if( ! defined( 'WPBAW_DIR' ) ) {
 	define( 'WPBAW_DIR', dirname( __FILE__ ) ); // Plugin dir
 }
-if( !defined( 'WPBAW_URL' ) ) {
+
+if( ! defined( 'WPBAW_URL' ) ) {
 	define( 'WPBAW_URL', plugin_dir_url( __FILE__ ) ); // Plugin url
 }
-if( !defined( 'WPBAW_PLUGIN_BASENAME' ) ) {
+
+if( ! defined( 'WPBAW_PLUGIN_BASENAME' ) ) {
 	define( 'WPBAW_PLUGIN_BASENAME', plugin_basename( __FILE__ ) ); // Plugin base name
 }
-if( !defined( 'WPBAW_POST_TYPE' ) ) {
+
+if( ! defined( 'WPBAW_POST_TYPE' ) ) {
 	define( 'WPBAW_POST_TYPE', 'blog_post' ); // Plugin post type
 }
-if( !defined( 'WPBAW_CAT' ) ) {
+
+if( ! defined( 'WPBAW_CAT' ) ) {
 	define( 'WPBAW_CAT', 'blog-category' ); // Plugin category name
 }
-if(!defined( 'WPBAW_PLUGIN_LINK' ) ) {
-	define( 'WPBAW_PLUGIN_LINK', 'https://www.essentialplugin.com/pricing/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Features-PRO' ); // Plugin link
+
+if( ! defined( 'WPBAW_PLUGIN_BUNDLE_LINK' ) ) {
+	define('WPBAW_PLUGIN_BUNDLE_LINK','https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Bundle-Banner#wpos-epb'); // Plugin link
 }
-if(!defined( 'WPBAW_SITE_LINK' ) ) {
+
+if( ! defined( 'WPBAW_PLUGIN_LINK_UNLOCK' ) ) {
+	define('WPBAW_PLUGIN_LINK_UNLOCK','https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Features-PRO#wpos-epb'); // Plugin link
+}
+
+if( ! defined( 'WPBAW_PLUGIN_LINK_UPGRADE' ) ) {
+	define('WPBAW_PLUGIN_LINK_UPGRADE','https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Upgrade-PRO#wpos-epb'); // Plugin Check link
+}
+
+if( ! defined( 'WPBAW_PLUGIN_LINK_WELCOME' ) ) {
+	define('WPBAW_PLUGIN_LINK_WELCOME','https://www.essentialplugin.com/wordpress-plugin/wp-blog-and-widgets/?utm_source=WP&utm_medium=Blog-Widget&utm_campaign=Welcome-Screen#wpos-epb'); // Plugin Check link
+}
+
+if( ! defined( 'WPBAW_SITE_LINK' ) ) {
 	define('WPBAW_SITE_LINK','https://www.essentialplugin.com'); // Plugin link
 }
 /**
@@ -115,6 +135,9 @@ function wpbaw_blog_install(){
 	if( is_plugin_active('wp-blog-and-widgets-pro/wp-blog-and-widgets.php') ){
 	 	add_action('update_option_active_plugins', 'wpbaw_blog_deactivate_version');
 	}
+
+	// Add option for solutions & features
+	add_option( 'wpbaw_sf_optin', true );
 }
 
 /**

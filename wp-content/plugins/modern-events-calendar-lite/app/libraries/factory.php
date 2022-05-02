@@ -59,7 +59,8 @@ class MEC_factory extends MEC_base
         
         // Register MEC function to be called in WordPress footer hook
         $this->action('wp_footer', array($this, 'load_footer'), 9999);
-        
+        $this->action('admin_footer', array($this, 'load_footer'), 9999);
+
         // Parse WordPress query
         $this->action('parse_query', array($this->parser, 'WPQ_parse'), 99);
         
@@ -174,7 +175,7 @@ class MEC_factory extends MEC_base
      */
     public function load_menus()
     {
-        add_menu_page(__('M.E. Calendar', 'modern-events-calendar-lite'), __('M.E. Calendar', 'modern-events-calendar-lite'), 'edit_posts', 'mec-intro', array($this->main, 'dashboard'), plugin_dir_url(__FILE__ ) . '../../assets/img/mec.svg', 26);
+        add_menu_page(__('M.E. Calendar', 'modern-events-calendar-lite'), esc_html__('M.E. Calendar', 'modern-events-calendar-lite'), 'edit_posts', 'mec-intro', array($this->main, 'dashboard'), plugin_dir_url(__FILE__ ) . '../../assets/img/mec.svg', 26);
     }
 
     /**
@@ -213,10 +214,8 @@ class MEC_factory extends MEC_base
         {
             if(!$this->getPRO())
             {
-                $upgrade = '<a href="'.$this->main->get_pro_link().'" target="_blank"><b>'._x('Upgrade to Pro Version', 'plugin link', 'modern-events-calendar-lite').'</b></a>';
-                $rate    =  '<a href="https://wordpress.org/support/plugin/modern-events-calendar-lite/reviews/#new-post" target="_blank">'._x('Rate the plugin ★★★★★', 'plugin rate', 'modern-events-calendar-lite').'</a>';
+                $upgrade = '<a href="'.esc_url($this->main->get_pro_link()).'" target="_blank"><b>'._x('Upgrade to Pro Version', 'plugin link', 'modern-events-calendar-lite').'</b></a>';
                 $links[] = $upgrade;
-                $links[] = $rate;
             }
         }
         
@@ -231,12 +230,12 @@ class MEC_factory extends MEC_base
      */
     public function load_plugin_action_links($links)
     {
-        $settings = '<a href="'.$this->main->add_qs_vars(array('page'=>'MEC-settings'), $this->main->URL('admin').'admin.php').'">'._x('Settings', 'plugin link', 'modern-events-calendar-lite').'</a>';
+        $settings = '<a href="'.esc_url($this->main->add_qs_vars(array('page'=>'MEC-settings'), $this->main->URL('admin').'admin.php')).'">'._x('Settings', 'plugin link', 'modern-events-calendar-lite').'</a>';
         array_unshift($links, $settings);
 
         if(!$this->getPRO())
         {
-            $upgrade = '<a href="'.$this->main->get_pro_link().'" target="_blank"><b>'._x('Upgrade', 'plugin link', 'modern-events-calendar-lite').'</b></a>';
+            $upgrade = '<a href="'.esc_url($this->main->get_pro_link()).'" target="_blank"><b>'._x('Upgrade', 'plugin link', 'modern-events-calendar-lite').'</b></a>';
             array_unshift($links, $upgrade);
         }
         
@@ -474,8 +473,8 @@ class MEC_factory extends MEC_base
         // register mec side bar
         register_sidebar(array(
             'id' => 'mec-single-sidebar',
-            'name' => __('MEC Single Sidebar', 'modern-events-calendar-lite'),
-            'description' => __('Custom sidebar for single and modal page of MEC.', 'modern-events-calendar-lite'),
+            'name' => esc_html__('MEC Single Sidebar', 'modern-events-calendar-lite'),
+            'description' => esc_html__('Custom sidebar for single and modal page of MEC.', 'modern-events-calendar-lite'),
             'before_widget' => '<div id="%1$s" class="widget %2$s">',
             'after_widget' => '</div>',
             'before_title' => '<h4 class="widget-title">',
@@ -523,7 +522,7 @@ class MEC_factory extends MEC_base
         
         ob_start();
         include $path;
-        echo $output = ob_get_clean();
+        echo ob_get_clean();
     }
     
     /**
@@ -636,12 +635,20 @@ class MEC_factory extends MEC_base
      * Add strings (CSS, JavaScript, etc.) to website sections such as footer etc.
      * @author Webnus <info@webnus.biz>
      * @param string $key
-     * @param string $string
+     * @param string|closure $string
      * @return boolean
      */
     public function params($key, $string)
 	{
-        $key = (string) $key;
+	    $key = (string) $key;
+
+        if($string instanceof Closure)
+        {
+            ob_start();
+            call_user_func($string);
+            $string = ob_get_clean();
+        }
+
 		$string = (string) $string;
 
 		// No Key or No String
@@ -653,6 +660,19 @@ class MEC_factory extends MEC_base
         // Add it to the MEC params
         array_push(self::$params[$key], $string);
         return true;
+	}
+
+    public function printOnAjaxOrFooter($string)
+    {
+        if($string instanceof Closure)
+        {
+            ob_start();
+            call_user_func($string);
+            $string = ob_get_clean();
+        }
+
+        if(defined('DOING_AJAX') && DOING_AJAX) echo $string;
+        else $this->params('footer', $string);
 	}
     
     /**
@@ -1146,7 +1166,7 @@ class MEC_factory extends MEC_base
             $screen = get_current_screen();
 
             $base = $screen->base;
-            $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
+            $page = isset($_REQUEST['page']) ? sanitize_text_field($_REQUEST['page']) : '';
             $post_type = $screen->post_type;
             $taxonomy = $screen->taxonomy;
 

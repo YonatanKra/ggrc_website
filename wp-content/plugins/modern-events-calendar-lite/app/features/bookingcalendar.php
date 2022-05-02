@@ -66,16 +66,13 @@ class MEC_feature_bookingcalendar extends MEC_base
      */
     public function load_month()
     {
-        // Request
-        $request = $this->getRequest();
-
         // Render
         $render = $this->getRender();
 
-        $event_id = $request->getVar('event_id');
-        $uniqueid = $request->getVar('uniqueid');
-        $year = $request->getVar('year');
-        $month = $request->getVar('month');
+        $event_id = isset($_REQUEST['event_id']) ? sanitize_text_field($_REQUEST['event_id']) : NULL;
+        $uniqueid = isset($_REQUEST['uniqueid']) ? sanitize_text_field($_REQUEST['uniqueid']) : NULL;
+        $year = isset($_REQUEST['year']) ? sanitize_text_field($_REQUEST['year']) : NULL;
+        $month = isset($_REQUEST['month']) ? sanitize_text_field($_REQUEST['month']) : NULL;
 
         // Start Date
         $start = $year.'-'.$month.'-01';

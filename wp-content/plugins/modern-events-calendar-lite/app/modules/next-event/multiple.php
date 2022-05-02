@@ -53,16 +53,16 @@ $hide_time = isset($event->data->meta['mec_hide_time']) ? $event->data->meta['me
 $hide_end_time = isset($event->data->meta['mec_hide_end_time']) ? $event->data->meta['mec_hide_end_time'] : 0;
 ?>
 <div class="mec-next-event-details mec-frontbox" id="mec_next_event_details">
-    <div class="mec-next-<?php echo $method; ?>">
+    <div class="mec-next-<?php echo esc_attr($method); ?>">
         <h3 class="mec-frontbox-title"><?php echo esc_html__('Next Occurrences', 'modern-events-calendar-lite'); ?></h3>
         <ul>
             <?php foreach($dates as $date): ?>
             <li>
-                <a href="<?php echo $this->get_event_date_permalink($event, $date['start']['date'], true, array('start_raw' => date($time_format, $date['start']['timestamp']))); ?>">
+                <a href="<?php echo esc_url($this->get_event_date_permalink($event, $date['start']['date'], true, array('start_raw' => date($time_format, $date['start']['timestamp'])))); ?>">
                     <?php if($midnight): $date['end']['date'] = date('Y-m-d', strtotime('Yesterday', strtotime($date['end']['date']))); ?>
-                    <span class="mec-date"><?php echo $this->date_label($date['start'], (isset($date['end']) ? $date['end'] : NULL), $date_format1); ?></span>
+                    <span class="mec-date"><?php echo MEC_kses::element($this->date_label($date['start'], (isset($date['end']) ? $date['end'] : NULL), $date_format1)); ?></span>
                     <?php else: ?>
-                    <span class="mec-date"><?php echo $this->date_label($date['start'], (isset($date['end']) ? $date['end'] : NULL), $date_format1); ?></span>
+                    <span class="mec-date"><?php echo MEC_kses::element($this->date_label($date['start'], (isset($date['end']) ? $date['end'] : NULL), $date_format1)); ?></span>
                     <?php endif; ?>
 
                     <?php if(!$hide_time): ?>
@@ -71,7 +71,7 @@ $hide_end_time = isset($event->data->meta['mec_hide_end_time']) ? $event->data->
                         <?php if($allday == '0' and isset($event->data->time) and trim($event->data->time['start'])): ?>
                         <dd><abbr class="mec-events-abbr"><?php echo date($time_format, $date['start']['timestamp']); ?> - <?php echo ($hide_end_time ? '' : ' '.date($time_format, $date['end']['timestamp'])); ?></abbr></dd>
                         <?php else: ?>
-                        <dd><abbr class="mec-events-abbr"><?php echo $this->m('all_day', __('All Day' , 'modern-events-calendar-lite')); ?></abbr></dd>
+                        <dd><abbr class="mec-events-abbr"><?php echo esc_html($this->m('all_day', esc_html__('All Day' , 'modern-events-calendar-lite'))); ?></abbr></dd>
                         <?php endif; ?>
                         </dl>
                     </span>

@@ -4,7 +4,7 @@
 *	Plugin URI: http://webnus.net/modern-events-calendar/
 *	Description: An awesome plugin for events calendar
 *	Author: Webnus
-*	Version: 6.4.1
+*	Version: 6.5.4
 *   Text Domain: modern-events-calendar-lite
 *   Domain Path: /languages
 *	Author URI: http://webnus.net
@@ -29,11 +29,9 @@ if(!defined('MECEXEC'))
 
     /** Plugin Base Name **/
     define('MEC_BASENAME', plugin_basename(__FILE__)); // modern-events-calendar/mec.php
-    
-    define('MEC_API_URL', 'https://webnus.net/api/v3');
 
     /** Plugin Version **/
-    define('MEC_VERSION', '6.4.1');
+    define('MEC_VERSION', '6.5.4');
 
     /** Include Webnus MEC class if not included before **/
     if(!class_exists('MEC')) require_once MEC_ABSPATH.'mec-init.php';

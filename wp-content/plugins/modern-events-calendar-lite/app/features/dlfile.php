@@ -135,13 +135,13 @@ class MEC_feature_dlfile extends MEC_base
         });
         </script>
         <div class="mec-meta-box-fields mec-booking-tab-content" id="mec-downloadable-file">
-            <h4><?php _e('Downloadable File', 'modern-events-calendar-lite'); ?></h4>
+            <h4><?php esc_html_e('Downloadable File', 'modern-events-calendar-lite'); ?></h4>
             <div id="mec_meta_box_downloadable_file_options">
-                <input type="hidden" id="mec_downloadable_file" name="mec[downloadable_file]" value="<?php echo $file_id; ?>">
+                <input type="hidden" id="mec_downloadable_file" name="mec[downloadable_file]" value="<?php echo esc_attr($file_id); ?>">
                 <input type="file" id="mec_downloadable_file_uploader">
                 <p class="description"><?php esc_html_e('pdf,zip,png,jpg and gif files are allowed.', 'modern-events-calendar-lite'); ?></p>
-                <div id="mec_downloadable_file_link" class="<?php echo (trim($file_id) ? '' : 'mec-util-hidden'); ?>"><?php echo ($file_id ? '<a href="'.$file_url.'" target="_blank">'.$file_url.'</a>' : ''); ?></div>
-                <button type="button" id="mec_downloadable_file_remove_image_button" class="<?php echo (trim($file_id) ? '' : 'mec-util-hidden'); ?>"><?php _e('Remove File', 'modern-events-calendar-lite'); ?></button>
+                <div id="mec_downloadable_file_link" class="<?php echo (trim($file_id) ? '' : 'mec-util-hidden'); ?>"><?php echo ($file_id ? '<a href="'.esc_url($file_url).'" target="_blank">'.esc_html($file_url).'</a>' : ''); ?></div>
+                <button type="button" id="mec_downloadable_file_remove_image_button" class="<?php echo (trim($file_id) ? '' : 'mec-util-hidden'); ?>"><?php esc_html_e('Remove File', 'modern-events-calendar-lite'); ?></button>
                 <div class="mec-error mec-util-hidden" id="mec_downloadable_file_error"></div>
             </div>
         </div>
@@ -203,7 +203,7 @@ class MEC_feature_dlfile extends MEC_base
         if($attach_id and (!isset($upload['error']) or (isset($upload['error']) and !$upload['error'])))
         {
             $success = 1;
-            $message = __('File uploaded!', 'modern-events-calendar-lite');
+            $message = esc_html__('File uploaded!', 'modern-events-calendar-lite');
 
             $data['url'] = $upload['url'];
             $data['id'] = $attach_id;
@@ -284,21 +284,21 @@ class MEC_feature_dlfile extends MEC_base
         });
         </script>
         <div class="mec-meta-box-fields mec-event-tab-content" id="mec-public-download-module-file">
-            <h4><?php _e('Public File to Download', 'modern-events-calendar-lite'); ?></h4>
+            <h4><?php esc_html_e('Public File to Download', 'modern-events-calendar-lite'); ?></h4>
             <div id="mec_meta_box_downloadable_file_options">
-                <input type="hidden" id="mec_public_download_module_file" name="mec[public_download_module_file]" value="<?php echo $file_id; ?>">
+                <input type="hidden" id="mec_public_download_module_file" name="mec[public_download_module_file]" value="<?php echo esc_attr($file_id); ?>">
                 <input type="file" id="mec_public_download_module_file_uploader">
                 <p class="description"><?php esc_html_e('pdf,zip,png,jpg and gif files are allowed.', 'modern-events-calendar-lite'); ?></p>
-                <div id="mec_public_download_module_file_link" class="<?php echo (trim($file_id) ? '' : 'mec-util-hidden'); ?>"><?php echo ($file_id ? '<a href="'.$file_url.'" target="_blank">'.$file_url.'</a>' : ''); ?></div>
-                <button type="button" id="mec_public_download_module_file_remove_image_button" class="<?php echo (trim($file_id) ? '' : 'mec-util-hidden'); ?>"><?php _e('Remove File', 'modern-events-calendar-lite'); ?></button>
+                <div id="mec_public_download_module_file_link" class="<?php echo (trim($file_id) ? '' : 'mec-util-hidden'); ?>"><?php echo ($file_id ? '<a href="'.esc_url($file_url).'" target="_blank">'.esc_html($file_url).'</a>' : ''); ?></div>
+                <button type="button" id="mec_public_download_module_file_remove_image_button" class="<?php echo (trim($file_id) ? '' : 'mec-util-hidden'); ?>"><?php esc_html_e('Remove File', 'modern-events-calendar-lite'); ?></button>
                 <div class="mec-error mec-util-hidden" id="mec_public_download_module_file_error"></div>
             </div>
             <div class="mec-form-row" style="margin-top: 30px;">
-                <label for="mec_public_download_module_title" class="mec-col-2"><?php _e('Title', 'modern-events-calendar-lite'); ?></label>
+                <label for="mec_public_download_module_title" class="mec-col-2"><?php esc_html_e('Title', 'modern-events-calendar-lite'); ?></label>
                 <input class="mec-col-5" type="text" id="mec_public_download_module_title" name="mec[public_download_module_title]" value="<?php echo esc_attr($title); ?>">
             </div>
             <div class="mec-form-row">
-                <label for="mec_public_download_module_description" class="mec-col-2"><?php _e('Description', 'modern-events-calendar-lite'); ?></label>
+                <label for="mec_public_download_module_description" class="mec-col-2"><?php esc_html_e('Description', 'modern-events-calendar-lite'); ?></label>
                 <textarea class="mec-col-5" id="mec_public_download_module_description" name="mec[public_download_module_description]" rows="5"><?php echo esc_textarea($description); ?></textarea>
             </div>
         </div>
@@ -360,7 +360,7 @@ class MEC_feature_dlfile extends MEC_base
         if($attach_id and (!isset($upload['error']) or (isset($upload['error']) and !$upload['error'])))
         {
             $success = 1;
-            $message = __('File uploaded!', 'modern-events-calendar-lite');
+            $message = esc_html__('File uploaded!', 'modern-events-calendar-lite');
 
             $data['url'] = $upload['url'];
             $data['id'] = $attach_id;

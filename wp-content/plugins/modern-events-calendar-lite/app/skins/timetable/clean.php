@@ -28,16 +28,16 @@ if($sed_method == 'new') $sed_method = '0';
 $javascript = '<script type="text/javascript">
 jQuery(document).ready(function()
 {
-    jQuery("#mec_skin_'.$this->id.'").mecWeeklyProgram(
+    jQuery("#mec_skin_'.esc_js($this->id).'").mecWeeklyProgram(
     {
-        id: "'.$this->id.'",
+        id: "'.esc_js($this->id).'",
         ajax_url: "'.admin_url('admin-ajax.php', NULL).'",
         atts: "'.http_build_query(array('atts' => $this->atts), '', '&').'",
-        sed_method: "'.$sed_method.'",
-        image_popup: "'.$this->image_popup.'",
+        sed_method: "'.esc_js($sed_method).'",
+        image_popup: "'.esc_js($this->image_popup).'",
         sf:
         {
-            container: "'.($this->sf_status ? '#mec_search_form_'.$this->id : '').'",
+            container: "'.($this->sf_status ? '#mec_search_form_'.esc_js($this->id) : '').'",
             reset: '.($this->sf_reset_button ? 1 : 0).',
             refine: '.($this->sf_refine ? 1 : 0).',
         },
@@ -46,18 +46,18 @@ jQuery(document).ready(function()
 </script>';
 
 // Include javascript code into the page
-if($this->main->is_ajax() or $this->main->preview()) echo $javascript;
+if($this->main->is_ajax() or $this->main->preview()) echo MEC_kses::full($javascript);
 else $this->factory->params('footer', $javascript);
 
 $styling = $this->main->get_styling();
 $event_colorskin = (isset($styling['mec_colorskin']) || isset($styling['color'])) ? 'colorskin-custom' : '';
 ?>
-<div id="mec_skin_<?php echo $this->id; ?>" class="mec-timetable-wrap mec-wrap <?php echo $event_colorskin . ' ' . $this->html_class; ?>">
+<div id="mec_skin_<?php echo esc_attr($this->id); ?>" class="mec-timetable-wrap mec-wrap <?php echo esc_attr($event_colorskin . ' ' . $this->html_class); ?>">
 
-    <?php if($this->sf_status) echo $this->sf_search_form(); ?>
+    <?php if($this->sf_status) echo MEC_kses::full($this->sf_search_form()); ?>
 
-    <div id="mec_skin_events_<?php echo $this->id; ?>">
-        <?php echo $date_events; ?>
+    <div id="mec_skin_events_<?php echo esc_attr($this->id); ?>">
+        <?php echo MEC_kses::full($date_events); ?>
     </div>
 
 </div>

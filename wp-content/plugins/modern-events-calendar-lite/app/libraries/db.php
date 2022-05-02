@@ -119,7 +119,7 @@ class MEC_db extends MEC_base
 		}
 		
         // Generate the condition
-		if(trim($condition) == '') $condition = "`$field`='$value'";
+		if(trim($condition) == '') $condition = "`$field`='".esc_sql($value)."'";
         
         // Generate the query
 		$query = "SELECT $fields FROM `#__$table` WHERE $condition";

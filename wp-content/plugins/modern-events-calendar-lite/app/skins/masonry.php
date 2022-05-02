@@ -177,7 +177,8 @@ class MEC_skin_masonry extends MEC_skins
         }
         
         // Apply Maximum Date
-        if($this->request->getVar('apply_sf_date', 0) == 1 and isset($this->sf) and isset($this->sf['month']) and trim($this->sf['month'])) $this->maximum_date = date('Y-m-t', strtotime($this->start_date));
+        $apply_sf_date = isset($_REQUEST['apply_sf_date']) ? sanitize_text_field($_REQUEST['apply_sf_date']) : 0;
+        if($apply_sf_date == 1 and isset($this->sf) and isset($this->sf['month']) and trim($this->sf['month'])) $this->maximum_date = date('Y-m-t', strtotime($this->start_date));
         
         // Found Events
         $this->found = 0;
@@ -227,22 +228,22 @@ class MEC_skin_masonry extends MEC_skins
      */
     public function load_more()
     {
-        $this->sf = $this->request->getVar('sf', array());
+        $this->sf = (isset($_REQUEST['sf']) and is_array($_REQUEST['sf'])) ? $this->main->sanitize_deep_array($_REQUEST['sf']) : array();
 
-        $mec_filter_by = $this->request->getVar('mec_filter_by', '');
-        $mec_filter_value = $this->request->getVar('mec_filter_value', '');
+        $mec_filter_by = isset($_REQUEST['mec_filter_by']) ? sanitize_text_field($_REQUEST['mec_filter_by']) : '';
+        $mec_filter_value = isset($_REQUEST['mec_filter_value']) ? sanitize_text_field($_REQUEST['mec_filter_value']) : '';
         if($mec_filter_by and ($mec_filter_value and $mec_filter_value != '*')) $this->sf[$mec_filter_by] = $mec_filter_value;
 
-        $apply_sf_date = $this->request->getVar('apply_sf_date', 1);
-        $atts = $this->sf_apply($this->request->getVar('atts', array()), $this->sf, $apply_sf_date);
+        $apply_sf_date = isset($_REQUEST['apply_sf_date']) ? sanitize_text_field($_REQUEST['apply_sf_date']) : 1;
+        $atts = $this->sf_apply(((isset($_REQUEST['atts']) and is_array($_REQUEST['atts'])) ? $this->main->sanitize_deep_array($_REQUEST['atts']) : array()), $this->sf, $apply_sf_date);
         
         // Initialize the skin
         $this->initialize($atts);
         
         // Override variables
-        $this->start_date = sanitize_text_field($this->request->getVar('mec_start_date', date('y-m-d')));
+        $this->start_date = isset($_REQUEST['mec_start_date']) ? sanitize_text_field($_REQUEST['mec_start_date']) : date('y-m-d');
         $this->end_date = $this->start_date;
-        $this->offset = $this->request->getVar('mec_offset', 0);
+        $this->offset = isset($_REQUEST['mec_offset']) ? sanitize_text_field($_REQUEST['mec_offset']) : 0;
 		
         // Apply Maximum Date
         if($apply_sf_date == 1 and isset($this->sf) and isset($this->sf['month']) and trim($this->sf['month'])) $this->maximum_date = date('Y-m-t', strtotime($this->start_date));
@@ -262,7 +263,7 @@ class MEC_skin_masonry extends MEC_skins
 
     public function filter_by()
     {
-        $output = '<div class="mec-events-masonry-cats"><a href="#" class="mec-masonry-cat-selected" data-filter="*">'.__('All', 'modern-events-calendar-lite').'</a>';
+        $output = '<div class="mec-events-masonry-cats"><a href="#" class="mec-masonry-cat-selected" data-filter="*">'.esc_html__('All', 'modern-events-calendar-lite').'</a>';
 
         $taxonomy = $this->filter_by_get_taxonomy();
         $terms = get_terms($taxonomy, array
@@ -271,7 +272,7 @@ class MEC_skin_masonry extends MEC_skins
             'include' => ((isset($this->atts[$this->filter_by]) and trim($this->atts[$this->filter_by])) ? $this->atts[$this->filter_by] : ''),
         ));
 
-        foreach($terms as $term) $output .= '<a href="#" data-filter=".mec-t'.$term->term_id.'">'.$term->name.'</a>';
+        foreach($terms as $term) $output .= '<a href="#" data-filter=".mec-t'.esc_attr($term->term_id).'">'.esc_html($term->name).'</a>';
 
         $output .= '</div>';
         return $output;

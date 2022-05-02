@@ -49,23 +49,23 @@ $archive_url = $this->main->get_archive_url();
         </thead>
         <tbody>
             <?php foreach($cart as $transaction_id): $TO = $this->book->get_TO($transaction_id); ?>
-            <tr id="mec_cart_transactions_<?php echo $transaction_id; ?>">
-                <td><span class="mec-cart-remove-transactions" data-transaction-id="<?php echo $transaction_id; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="8.999" viewBox="0 0 9 8.999"><path id="close" d="M6.079,5.647l4.067,4.067-.433.433L5.646,6.079,1.579,10.146l-.433-.433L5.214,5.647,1.146,1.58l.433-.433L5.646,5.214,9.713,1.147l.433.433Z" transform="translate(-1.146 -1.147)" fill="#949596"></path></svg></span></td>
+            <tr id="mec_cart_transactions_<?php echo esc_attr($transaction_id); ?>">
+                <td><span class="mec-cart-remove-transactions" data-transaction-id="<?php echo esc_attr($transaction_id); ?>"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="8.999" viewBox="0 0 9 8.999"><path id="close" d="M6.079,5.647l4.067,4.067-.433.433L5.646,6.079,1.579,10.146l-.433-.433L5.214,5.647,1.146,1.58l.433-.433L5.646,5.214,9.713,1.147l.433.433Z" transform="translate(-1.146 -1.147)" fill="#949596"></path></svg></span></td>
                 <td>
-                    <?php echo $transaction_id; ?>
-                    <?php echo ($TO->get_coupon() ? '<br><code class="mec-cart-coupon-code" title="'.esc_attr__('Applied Coupon', 'modern-events-calendar-lite').'">'.$TO->get_coupon().'</code>' : ''); ?>
+                    <?php echo esc_html($transaction_id); ?>
+                    <?php echo ($TO->get_coupon() ? '<br><code class="mec-cart-coupon-code" title="'.esc_attr__('Applied Coupon', 'modern-events-calendar-lite').'">'.esc_html($TO->get_coupon()).'</code>' : ''); ?>
                 </td>
-                <td class="mec-cart-event-info"><?php echo $TO->get_event_featured_image(); ?><?php echo $TO->get_event_link(); ?></td>
-                <td><?php echo $TO->get_tickets_html(); ?></td>
-                <td><?php echo $TO->get_dates_html(); ?></td>
-                <td><?php echo $TO->get_price_html(); ?></td>
+                <td class="mec-cart-event-info"><?php echo MEC_kses::element($TO->get_event_featured_image()); ?><?php echo MEC_kses::element($TO->get_event_link()); ?></td>
+                <td><?php echo MEC_kses::element($TO->get_tickets_html()); ?></td>
+                <td><?php echo MEC_kses::element($TO->get_dates_html()); ?></td>
+                <td><?php echo MEC_kses::element($TO->get_price_html()); ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
         <tfoot>
             <tr>
                 <th colspan="5"></th>
-                <th id="mec_cart_total_payable"><?php echo $this->main->render_price($this->cart->get_payable($cart)); ?></th>
+                <th id="mec_cart_total_payable"><?php echo MEC_kses::element($this->main->render_price($this->cart->get_payable($cart))); ?></th>
             </tr>
         </tfoot>
     </table>
