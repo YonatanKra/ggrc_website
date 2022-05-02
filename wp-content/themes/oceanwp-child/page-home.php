@@ -35,7 +35,7 @@ get_header(); ?>
 					</div>
 					<div class="col-12 col-lg-4 mb-5 mb-md-0">
 						<div class="how-it-works">
-							<?php echo wp_get_attachment_image( 1756 , 'medium', "", array( "class" => "img-responsive" ) );  ?>
+							<?php echo wp_get_attachment_image( 1756 , 'card-medium', "", array( "class" => "img-responsive" ) );  ?>
 							<div class="home-learn">
 								<h1 class="banner-title inline-display">1.</h1>
 								<h2 class="home-learn-title">Learn</h2>
@@ -45,7 +45,7 @@ get_header(); ?>
 					</div>
 					<div class="col-12 col-lg-4 mb-5 mb-md-0">
 						<div class="how-it-works">
-							<?php echo wp_get_attachment_image( 1754 , 'medium', "", array( "class" => "img-responsive" ) );  ?>
+							<?php echo wp_get_attachment_image( 1754 , 'card-medium', "", array( "class" => "img-responsive" ) );  ?>
 							<div class="home-learn">
 								<h1 class="banner-title inline-display">2.</h1>
 								<h2 class="home-learn-title">Act</h2>
@@ -55,7 +55,7 @@ get_header(); ?>
 					</div>
 					<div class="col-12 col-lg-4">
 						<div class="how-it-works">
-							<?php echo wp_get_attachment_image( 1757 , 'medium', "", array( "class" => "img-responsive" ) );  ?>
+							<?php echo wp_get_attachment_image( 1757 , 'card-medium', "", array( "class" => "img-responsive" ) );  ?>
 							<div class="home-learn">
 								<h1 class="banner-title inline-display">3.</h1>
 								<h2 class="home-learn-title">Collaborate</h2>
@@ -121,7 +121,7 @@ get_header(); ?>
 									<div class="col-12 col-md-4">
 										<div class="card initiative-list">
 											<a href="<?php the_permalink(); ?>">
-												<?php the_post_thumbnail('medium', ['class' => 'initiative-cover', ]); ?>
+												<?php the_post_thumbnail('card-medium', ['class' => 'initiative-cover', ]); ?>
 											</a>
 											<div class="initiative-list-detail">
 												<?php 
@@ -239,7 +239,7 @@ get_header(); ?>
 								<div class="row">										
 									<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="news-box">
-									<?php the_post_thumbnail('medium', ['class' => 'initiative-cover', ]); ?>
+									<?php the_post_thumbnail('card-medium', ['class' => 'initiative-cover', ]); ?>
 								<p class="m-0"><b><?php the_title(); ?></b></p> 
 								<?php the_content(); ?>
 								<?php 
@@ -302,7 +302,7 @@ get_header(); ?>
 							<?php if($the_query2->have_posts()){ while($the_query2->have_posts()) { $the_query2->the_post(); ?>
 									<div class="col-lg-12 col-md-12 col-sm-12">
 										<div class="card blog">
-											<?php the_post_thumbnail('medium', ['class' => 'blog-cover', ]); ?>
+											<?php the_post_thumbnail('card-medium', ['class' => 'blog-cover', ]); ?>
 												
 											<div class="initiative-list-detail">
 											<?php 
