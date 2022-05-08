@@ -44,24 +44,6 @@ h3 {
     background-size: cover;
 }
 
-/* button, input[type="button"], input[type="reset"], input[type="submit"], button[type="submit"], .button, 
-body div.wpforms-container-full .wpforms-form input[type=submit], 
-body div.wpforms-container-full .wpforms-form button[type=submit], 
-body div.wpforms-container-full .wpforms-form .wpforms-page-button {
-    background: linear-gradient(80.63deg, #0B4F6D 26.04%, #0F7AA9 99.31%);
-    box-shadow: 2px 3px 9px rgba(11, 79, 109, 0.2);
-    border-radius: 30px;
-    padding: 16px 46px;
-    font-family: Lato;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
-    color: #ffffff;
-    white-space: nowrap;
-    border: 0;
-} */
-
 #comment{
     border-radius:5px;
     border: 1px solid rgba(11, 79, 109, 0.6);
@@ -72,16 +54,3 @@ body div.wpforms-container-full .wpforms-form .wpforms-page-button {
 .align-center{
     text-align:center;
 }
-
-@media (min-width: 1400px){
-    .container, .container-sm, .container-md, .container-lg, .container-xl {
-        max-width: 1300px !important;
-    }
-}
-
-@media (min-width: 1700px){
-    .container, .container-sm, .container-md, .container-lg, .container-xl {
-        max-width: 1550px !important;
-    }
-}
-
