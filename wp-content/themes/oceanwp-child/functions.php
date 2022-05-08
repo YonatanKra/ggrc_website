@@ -50,6 +50,16 @@ function theme_assets() {
 	
 add_image_size( 'card-medium', 400, 300, true );
 
+/* Layout - Remove Sidebar */
+
+function remove_search_sidebar( $layout ) {
+	if ( is_search() ) {
+		$layout = 'full-width';
+	}
+	return $layout;
+}
+add_filter( 'ocean_post_layout_class', 'remove_search_sidebar', 20 );
+
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);
 
