@@ -4810,6 +4810,18 @@ class MEC_main extends MEC_base
         // No Dates or no Tickets
         if(!count($dates) or !count($tickets)) return false;
 
+        $start_timestamp = isset($next_date['start']['timestamp']) ? $next_date['start']['timestamp'] : NULL;
+        if($start_timestamp)
+        {
+            // All Params
+            $params = MEC_feature_occurrences::param($event->ID, $start_timestamp, '*');
+
+            $event_status = (isset($event->data->meta['mec_event_status']) and trim($event->data->meta['mec_event_status'])) ? $event->data->meta['mec_event_status'] : 'EventScheduled';
+            $event_status = (isset($params['event_status']) and trim($params['event_status']) != '') ? $params['event_status'] : $event_status;
+
+            if($event_status == 'EventCancelled') return false;
+        }
+
         // Booking Options
         $booking_options = (isset($event->data->meta['mec_booking']) and is_array($event->data->meta['mec_booking'])) ? $event->data->meta['mec_booking'] : array();
 

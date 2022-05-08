@@ -580,6 +580,11 @@ class MEC_factory extends MEC_base
         $this->import('app.addons.PMP');
         $MEC_addon_PMP = new MEC_addon_PMP();
         $MEC_addon_PMP->init();
+
+        // Import The Newsletter Plugin addon
+        $this->import('app.addons.TNP');
+        $MEC_addon_TNP = new MEC_addon_TNP();
+        $MEC_addon_TNP->init();
     }
     
     /**

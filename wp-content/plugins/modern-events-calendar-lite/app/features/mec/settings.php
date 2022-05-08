@@ -998,6 +998,12 @@ $shortcodes = get_posts(array(
                                 </div>
                                 <div class="mec-form-row">
                                     <label>
+                                        <input type="hidden" name="mec[settings][fes_section_booking_mtpb]" value="0" />
+                                        <input value="1" type="checkbox" name="mec[settings][fes_section_booking_mtpb]" <?php if(!isset($settings['fes_section_booking_mtpb']) or (isset($settings['fes_section_booking_mtpb']) and $settings['fes_section_booking_mtpb'])) echo 'checked="checked"'; ?> /> <?php esc_html_e('Minimum Tickets Per Booking', 'modern-events-calendar-lite'); ?>
+                                    </label>
+                                </div>
+                                <div class="mec-form-row">
+                                    <label>
                                         <input type="hidden" name="mec[settings][fes_section_booking_dpur]" value="0" />
                                         <input value="1" type="checkbox" name="mec[settings][fes_section_booking_dpur]" <?php if(!isset($settings['fes_section_booking_dpur']) or (isset($settings['fes_section_booking_dpur']) and $settings['fes_section_booking_dpur'])) echo 'checked="checked"'; ?> /> <?php esc_html_e('Discount Per User Roles', 'modern-events-calendar-lite'); ?>
                                     </label>

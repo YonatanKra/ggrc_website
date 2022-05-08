@@ -506,11 +506,11 @@ class MEC_book extends MEC_base
     {
         update_post_meta($book_id, 'mec_confirmed', -1);
 
-        // Fires after rejecting a booking to send notifications etc.
-        do_action('mec_booking_rejected', $book_id);
-
         // Booking Records
         $this->getBookingRecord()->reject($book_id);
+
+        // Fires after rejecting a booking to send notifications etc.
+        do_action('mec_booking_rejected', $book_id);
 
         return true;
     }
@@ -525,11 +525,12 @@ class MEC_book extends MEC_base
     {
         update_post_meta($book_id, 'mec_confirmed', 0);
 
+        // Booking Records
+        $this->getBookingRecord()->pending($book_id);
+
         // Fires after pending a booking to send notifications etc.
         do_action('mec_booking_pended', $book_id);
 
-        // Booking Records
-        $this->getBookingRecord()->pending($book_id);
 
         return true;
     }
@@ -544,11 +545,11 @@ class MEC_book extends MEC_base
     {
         update_post_meta($book_id, 'mec_verified', 1);
 
-        // Fires after verifying a booking to send notifications etc.
-        do_action('mec_booking_verified', $book_id);
-
         // Booking Records
         $this->getBookingRecord()->verify($book_id);
+
+        // Fires after verifying a booking to send notifications etc.
+        do_action('mec_booking_verified', $book_id);
 
         return true;
     }
@@ -581,11 +582,12 @@ class MEC_book extends MEC_base
             do_action('mec_booking_refunded', $book_id);
         }
 
+        // Booking Records
+        $this->getBookingRecord()->cancel($book_id);
+
         // Fires after canceling a booking to send notifications etc.
         do_action('mec_booking_canceled', $book_id);
 
-        // Booking Records
-        $this->getBookingRecord()->cancel($book_id);
 
         return true;
     }
@@ -600,11 +602,12 @@ class MEC_book extends MEC_base
     {
         update_post_meta($book_id, 'mec_verified', 0);
 
+        // Booking Records
+        $this->getBookingRecord()->waiting($book_id);
+
         // Fires after waiting a booking to send notifications etc.
         do_action('mec_booking_waiting', $book_id);
 
-        // Booking Records
-        $this->getBookingRecord()->waiting($book_id);
 
         return true;
     }
@@ -1317,6 +1320,14 @@ class MEC_book extends MEC_base
         }
 
         return array($limit, $unlimited);
+    }
+
+    public function get_minimum_tickets_per_booking($event_id)
+    {
+        $booking_options = get_post_meta($event_id, 'mec_booking', true);
+
+        $bookings_minimum_per_booking = (isset($booking_options['bookings_minimum_per_booking']) and trim($booking_options['bookings_minimum_per_booking'])) ? (int) $booking_options['bookings_minimum_per_booking'] : 1;
+        return max($bookings_minimum_per_booking, 1);
     }
 
     public function timestamp($start, $end)

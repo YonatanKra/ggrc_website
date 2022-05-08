@@ -619,9 +619,9 @@ class MEC_skin_single extends MEC_skins
         if($archive_link) echo '<a href="' . esc_url($archive_link) . '">' . esc_html($archive_title) . '</a> <i class="mec-color mec-sl-arrow-right"></i> ';
 
         /**
-         * Category Page
+         * Categories Page
          */
-        if(isset($this->settings['breadcrumbs_category']) and $this->settings['breadcrumbs_category'])
+        if(!isset($this->settings['breadcrumbs_category']) or (isset($this->settings['breadcrumbs_category']) and $this->settings['breadcrumbs_category']))
         {
             $categories = wp_get_post_terms($page_id, 'mec_category');
             if(!is_array($categories)) $categories = array();
@@ -885,7 +885,7 @@ class MEC_skin_single extends MEC_skins
         }
 
         $data->dates = $dates;
-        $data->date = isset($data->dates[0]) ? $data->dates[0] : array();
+        $data->date = count($data->dates) ? current($data->dates) : array();
 
         // Set some data from original event in multilingual websites
         if($event_ID != $original_event_id)

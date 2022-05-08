@@ -696,8 +696,14 @@ class MEC_feature_update extends MEC_base
                 else
                 {
                     update_option('mec_license_status', 'faild');
+                    update_option('reActivationOption', '1');
+
                     return;
                 }
+            }  else {
+                update_option('reActivationOption', '1');
+
+                return;
             }
         }
     }
