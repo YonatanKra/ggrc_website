@@ -603,19 +603,6 @@ function check_users_advisor_request() {
 	
 }
 
-
-/* Blog Functions */
-function add_blog_category($classes) {
-	$blogcat = wp_get_post_terms(get_the_ID(), 'blog-category', ['']);
-	if (empty($blogcat)) {
-        return $classes;
-    }
-	$classes[] = strtolower($blogcat[0]->name);
-
-	return $classes;
-}
-add_filter('body_class', 'add_blog_category');
-
 /* Add featured image to topics */
 add_post_type_support('topic', array('thumbnail'));
 
