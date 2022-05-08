@@ -155,7 +155,7 @@ $event_fields = $this->main->get_event_fields();
                                     <div class="mec-col-9">
                                         <label>
                                             <input type="hidden" name="mec[settings][breadcrumbs_category]" value="0" />
-                                            <input type="checkbox" name="mec[settings][breadcrumbs_category]" id="mec_settings_breadcrumbs_category" <?php echo ((isset($settings['breadcrumbs_category']) and $settings['breadcrumbs_category']) ? 'checked="checked"' : ''); ?> value="1" /><?php esc_html_e('Include Category in Breadcrumbs.', 'modern-events-calendar-lite'); ?>
+                                            <input type="checkbox" name="mec[settings][breadcrumbs_category]" id="mec_settings_breadcrumbs_category" <?php echo ((!isset($settings['breadcrumbs_category']) or (isset($settings['breadcrumbs_category']) and $settings['breadcrumbs_category'])) ? 'checked="checked"' : ''); ?> value="1" /><?php esc_html_e('Include Category in Breadcrumbs.', 'modern-events-calendar-lite'); ?>
                                         </label>
                                     </div>
                                 </div>

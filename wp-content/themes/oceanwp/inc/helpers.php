@@ -322,7 +322,7 @@ if ( ! function_exists( 'oceanwp_body_classes' ) ) {
 		/**
 		 * Performance Section
 		 */
-		if ( get_theme_mod( 'ocean_disable_lightbox', false ) ) {
+		if ( ! oceanwp_gallery_is_lightbox_enabled() && get_theme_mod( 'ocean_performance_lightbox', 'enabled' ) === 'disabled' ) {
 			$classes[] = 'no-lightbox';
 		}
 
@@ -335,7 +335,7 @@ if ( ! function_exists( 'oceanwp_body_classes' ) ) {
 
 }
 
-if ( get_theme_mod( 'ocean_disable_emoji', false ) ) {
+if ( get_theme_mod( 'ocean_performance_emoji', 'enabled' ) === 'disabled' ) {
 	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
@@ -1310,7 +1310,7 @@ if ( ! function_exists( 'oceanwp_header_retina_logo' ) ) {
 		// Get logo
 		$custom_logo = oceanwp_header_logo_setting();
 
-		if ( $custom_logo === $attachment->ID ) {
+		if ( (int) $custom_logo === $attachment->ID ) {
 
 				// Logo data
 				$logo_data = array(
@@ -2003,9 +2003,12 @@ if ( ! function_exists( 'oceanwp_mobile_menu_style' ) ) {
 if ( ! function_exists( 'oceanwp_page_header_template' ) ) {
 
 	function oceanwp_page_header_template() {
-
-		get_template_part( 'partials/page-header' );
-
+		if ( is_singular( 'post' ) ) {
+			get_template_part( ocean_single_post_header_template() );
+		}
+		else {
+			get_template_part( 'partials/page-header' );
+		}
 	}
 
 	add_action( 'ocean_page_header', 'oceanwp_page_header_template' );
@@ -3276,6 +3279,7 @@ if ( ! function_exists( 'oceanwp_comment' ) ) {
 							?>
 
 							<?php edit_comment_link( __( 'edit', 'oceanwp' ) ); ?>
+							<?php ocean_delete_comment_link(); ?>
 
 							<?php if ( is_rtl() ) { ?>
 									<span class="comment-date"><?php comment_date( 'j M Y' ); ?></span>

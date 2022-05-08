@@ -96,7 +96,7 @@
 			value.bind( function( to ) {
 				var $child = $( '.customizer-ocean_hover_primary_color' );
 				if ( to ) {
-					var style = '<style class="customizer-ocean_hover_primary_color">input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,input[type="button"]:focus,input[type="reset"]:focus,input[type="submit"]:focus,.button:hover,#site-navigation-wrap .dropdown-menu > li.btn > a:hover > span,.post-quote-author,.oceanwp-modal .oceanwp-close-modal:hover,.woocommerce div.product div.images .open-image:hover,.woocommerce-error a:hover,.woocommerce-info a:hover,.woocommerce-message a:hover{ background-color: ' + to + '; }</style>';
+					var style = '<style class="customizer-ocean_hover_primary_color">input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,input[type="button"]:focus,input[type="reset"]:focus,input[type="submit"]:focus,.button:hover,.button:focus,#site-navigation-wrap .dropdown-menu > li.btn > a:hover > span,.post-quote-author,.oceanwp-modal .oceanwp-close-modal:hover,.woocommerce div.product div.images .open-image:hover,.woocommerce-error a:hover,.woocommerce-info a:hover,.woocommerce-message a:hover, .woocommerce-message a:focus, .woocommerce .button:focus{ background-color: ' + to + '; }</style>';
 					if ( $child.length ) {
 						$child.replaceWith( style );
 					} else {
@@ -935,6 +935,91 @@
 				}
 			} );
 		} );
+
+		api("oceanwp_single_post_header_background", function($swipe) {
+			$swipe.bind(function(to) {
+				var $child = $(".customizer-oceanwp_single_post_header_background");
+				if (to) {
+					/** @type {string} */
+					var img = '<style class="customizer-oceanwp_single_post_header_background">.single-post-header-wrap, .single-header-ocean-6 .blog-post-title, .single-header-ocean-7 .blog-post-title{ background-color: ' + to + "; }</style>";
+					if ($child.length) {
+						$child.replaceWith(img);
+					} else {
+						$("head").append(img);
+					}
+				} else {
+					$child.remove();
+				}
+			});
+		});
+
+		api("oceanwp_single_post_header_background_cover", function($swipe) {
+			$swipe.bind(function(to) {
+				var $child = $(".customizer-oceanwp_single_post_header_background_cover");
+				if (to) {
+					/** @type {string} */
+					var img = '<style class="customizer-oceanwp_single_post_header_background_cover">.single-post-header-wrap .header-color-overlay{ background-color: ' + to + "; }</style>";
+					if ($child.length) {
+						$child.replaceWith(img);
+					} else {
+						$("head").append(img);
+					}
+				} else {
+					$child.remove();
+				}
+			});
+		});
+
+		api("oceanwp_single_post_header_author_color", function($swipe) {
+			$swipe.bind(function(to) {
+				var $child = $(".customizer-oceanwp_single_post_header_author_color");
+				if (to) {
+					/** @type {string} */
+					var img = '<style class="customizer-oceanwp_single_post_header_author_color">.ocean-single-post-header .post-author-name, .ocean-single-post-header .post-author-name a{color: ' + to + "; }</style>";
+					if ($child.length) {
+						$child.replaceWith(img);
+					} else {
+						$("head").append(img);
+					}
+				} else {
+					$child.remove();
+				}
+			});
+		});
+
+		api("oceanwp_single_post_header_author_bio_color", function($swipe) {
+			$swipe.bind(function(to) {
+				var $child = $(".customizer-oceanwp_single_post_header_author_bio_color");
+				if (to) {
+					/** @type {string} */
+					var img = '<style class="customizer-oceanwp_single_post_header_author_bio_color">.ocean-single-post-header .post-author-description{color: ' + to + "; }</style>";
+					if ($child.length) {
+						$child.replaceWith(img);
+					} else {
+						$("head").append(img);
+					}
+				} else {
+					$child.remove();
+				}
+			});
+		});
+
+		api("oceanwp_single_post_meta_icon_clr", function($swipe) {
+			$swipe.bind(function(to) {
+				var $child = $(".customizer-oceanwp_single_post_meta_icon_clr");
+				if (to) {
+					/** @type {string} */
+					var img = '<style class="customizer-oceanwp_single_post_meta_icon_clr">.ocean-single-post-header ul.meta-item li i { color: ' + to + '; } .ocean-single-post-header ul.meta-item li .owp-icon use { stroke: ' + to + "; }</style>";
+					if ($child.length) {
+						$child.replaceWith(img);
+					} else {
+						$("head").append(img);
+					}
+				} else {
+					$child.remove();
+				}
+			});
+		});
 
 	/******** Footer *********/
 

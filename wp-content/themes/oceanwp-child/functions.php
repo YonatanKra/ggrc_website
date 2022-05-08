@@ -645,7 +645,7 @@ function add_loginout_link( $items, $args ) {
         $items .= '<li><a href="'. wp_logout_url(site_url()) .'">Log Out</a></li>';
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'main_menu') {
-        $items .= '<li><a href="'. site_url('user-login') .'">Log In</a></li>';
+        $items .= '<li><a href="'. site_url('log-in') .'">Log In</a></li>';
     }
     return $items;
 }

@@ -89,8 +89,8 @@ class MEC_kses extends MEC_base
             self::$allowed_html_full = apply_filters('mec_kses_tags', $allowed, 'full');
         }
 
-        if(defined('DOING_AJAX') && DOING_AJAX) return $html;
-        else return wp_kses($html, self::$allowed_html_full);
+        if(defined('MEC_NO_JS_CSS_IN_HTML') && MEC_NO_JS_CSS_IN_HTML) return wp_kses($html, self::$allowed_html_full);
+        else return $html;
     }
 
     public static function page($html)

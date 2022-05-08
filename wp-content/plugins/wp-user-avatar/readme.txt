@@ -5,7 +5,7 @@ Tags: user registration, user profile, registration form, membership, login form
 Requires at least: 4.7
 Requires PHP: 7.1.0
 Tested up to: 5.9
-Stable tag: 3.2.10
+Stable tag: 3.2.11
 License: GPLv2 or later
 
 Modern membership plugin for user registration, login form, user profile, member directories & content restriction.
@@ -117,6 +117,10 @@ No. You can create and manage your forms, user profiles and member directories w
 10. Admin Bar and Dashboard Access
 
 == Changelog ==
+
+= 3.2.11 =
+* Fixed PHP Fatal error:  Uncaught Error: Call to a member function wpua_get_default_avatar_url() on null
+* Upgrade jbox and flatpickr libs.
 
 = 3.2.10 =
 * Added noncache to temporary redirects.

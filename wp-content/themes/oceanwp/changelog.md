@@ -1,5 +1,47 @@
 # OceanWP Changelog
 
+### _2022.05.02._ - 3.2.2
+- **Added**: Accessibility: Buttons: focus option.
+- **Added**: Accessibility: Header: Mega Menu.
+- **Improved**: Accessibility: Skip to Content functionality.
+- **Fixed**: Accessibility: Header: Menu: focus outline missing.
+- **Fixed**: PHP 7.2 Compatibility.
+- **Fixed**: Blog: Single Post: New Post Title Styles: Double author name in some occasions.
+- **Modified**: Template: woocommerce/mini-cart
+- **Added**: Filter: Mini Cart: oceanwp_mini_cart_shop_link.
+- **Fixed**: Customizer: Typography: Chosen font always displaying the Default option in the select menu after saving changes.
+
+### _2022.03.31._ - 3.2.1
+- **Improved**: Accessibility: Mobile icon.
+- **Updated**: Templates: partials/mobile/mobile icon.
+- **Fixed**: Blog: Single Post: Post Title Cover Style: Featured image not displayed on boxed website layout.
+- **Fixed**: Blog: Single Post: New Post Title Styles: Author avatar image not displayed.
+- **Added**: Blog: Single Post: Post Title Cover Style: color overlay settings.
+
+### _2022.03.30._ - 3.2.0
+
+- **New**: Blog: Single Post: Page Title Styles: Intro, Cover, Card, Card Invert, Screen and Screen Invert.
+- **New**: Blog: Single Post: Comments: Delete comment option. Available on frontend and visible to admins only.
+- **New**: Blog: Blog Entries: Edit post button. Visible to admins only.
+- **New**: Template: partials/single/headers/header-2
+- **New**: Template: partials/single/headers/header-3
+- **New**: Template: partials/single/headers/header-4
+- **New**: Template: partials/single/headers/header-5
+- **New**: Template: partials/single/headers/header-6
+- **New**: Template: partials/single/headers/header-7
+- **New**: Template: partials/single/metas/meta-2
+- **New**: Template: partials/single/metas/meta-3
+- **New**: Template: partials/single/metas/meta-4
+- **New**: Typography: Host Google fonts locally via Customize > Typography > General. No font upload required.
+- **Fixed**: Header: Vertical Style: Dropdown options not displayed.
+
+### _2022.03.07._ - 3.1.4
+
+-   **Fixed** Logo: Retinal Logo: display issue.
+-   **Fixed** WooCommerce: Checkout: Multi-Step Checkout: guest checkout issue.
+-   **Fixed** Customizer: Color settings missing localize script.
+-   **Improved** Script performance
+
 ### _2022.02.02._ - 3.1.3
 
 -   **Fixed** Customizer: Missing Typography Class.

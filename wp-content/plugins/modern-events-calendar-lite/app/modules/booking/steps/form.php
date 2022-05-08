@@ -380,6 +380,10 @@ wp_enqueue_script('mec-nice-select', $this->main->asset('js/jquery.nice-select.m
     <input type="hidden" name="translated_event_id" value="<?php echo esc_attr($translated_event_id); ?>" />
     <input type="hidden" name="uniqueid" value="<?php echo esc_attr($uniqueid); ?>" />
     <input type="hidden" name="step" value="2" />
+
+    <?php do_action( 'mec_booking_end_form_step_2', $event_id, $tickets, $all_dates, $date ) ?>
+
+
     <?php wp_nonce_field('mec_book_form_' . $event_id); ?>
     <div class="mec-book-form-btn-wrap" style="overflow: hidden;">
 

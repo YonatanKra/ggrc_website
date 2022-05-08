@@ -1613,6 +1613,7 @@ class MEC_feature_events extends MEC_base
 
         $bookings_limit = isset($booking_options['bookings_limit']) ? $booking_options['bookings_limit'] : '';
         $bookings_limit_unlimited = isset($booking_options['bookings_limit_unlimited']) ? $booking_options['bookings_limit_unlimited'] : 0;
+        $bookings_minimum_per_booking = (isset($booking_options['bookings_minimum_per_booking']) and trim($booking_options['bookings_minimum_per_booking'])) ? (int) $booking_options['bookings_minimum_per_booking'] : 1;
         $bookings_user_limit = isset($booking_options['bookings_user_limit']) ? $booking_options['bookings_user_limit'] : '';
         $bookings_user_limit_unlimited = isset($booking_options['bookings_user_limit_unlimited']) ? $booking_options['bookings_user_limit_unlimited'] : true;
         $bookings_all_occurrences = isset($booking_options['bookings_all_occurrences']) ? $booking_options['bookings_all_occurrences'] : 0;
@@ -1673,6 +1674,14 @@ class MEC_feature_events extends MEC_base
                     </label>
                     <input class="mec-col-4 <?php echo ($bookings_limit_unlimited == 1) ? 'mec-util-hidden' : ''; ?>" type="text" name="mec[booking][bookings_limit]" id="mec_bookings_limit"
                            value="<?php echo esc_attr($bookings_limit); ?>" placeholder="<?php esc_html_e('100', 'modern-events-calendar-lite'); ?>"/>
+                </div>
+                <?php endif; ?>
+
+                <?php if(!$FES or ($FES and (!isset($this->settings['fes_section_booking_mtpb']) or (isset($this->settings['fes_section_booking_mtpb']) and $this->settings['fes_section_booking_mtpb'])))): ?>
+                <h4 class="mec-title"><label for="mec_bookings_mtpb"><?php esc_html_e('Minimum ticket per booking', 'modern-events-calendar-lite'); ?></label></h4>
+                <div class="mec-form-row">
+                    <input class="mec-col-4" type="number" name="mec[booking][bookings_minimum_per_booking]" id="mec_bookings_mtpb"
+                           value="<?php echo esc_attr($bookings_minimum_per_booking); ?>" placeholder="<?php esc_html_e('1', 'modern-events-calendar-lite'); ?>" min="1" step="1">
                 </div>
                 <?php endif; ?>
 
