@@ -54,3 +54,9 @@ h3 {
 .align-center{
     text-align:center;
 }
+
+/* GENERAL - LAYOUT */
+
+#main #content-wrap {
+	padding-top: 0;
+}
