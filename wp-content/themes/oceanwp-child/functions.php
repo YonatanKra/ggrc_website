@@ -49,6 +49,7 @@ function theme_assets() {
 /* General - Registering New Post Thumbnails */
 	
 add_image_size( 'card-medium', 400, 300, true );
+add_image_size( 'card-initiative', 500, 90, true);
 
 /* Layout - Remove Sidebar */
 
@@ -64,6 +65,10 @@ function my_post_layout_class( $class ) {
 
 }
 add_filter( 'ocean_post_layout_class', 'my_post_layout_class', 20 );
+
+/* BB Press - Remove Breadcrumbs */
+
+add_filter( 'bbp_no_breadcrumb', '__return_true' );
 
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);
