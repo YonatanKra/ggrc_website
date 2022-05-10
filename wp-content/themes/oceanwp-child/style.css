@@ -60,3 +60,19 @@ h3 {
 #main #content-wrap {
 	padding-top: 0;
 }
+
+/* FOOTER */
+
+.elementor-location-footer .menu-item {
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	.elementor-location-footer .menu-item {
+		width: auto;
+	}
+}
+
+.elementor-location-footer .menu-item .elementor-item {
+	justify-content: center;
+}
