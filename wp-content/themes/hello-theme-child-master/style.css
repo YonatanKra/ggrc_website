@@ -1,0 +1,56 @@
+/* 
+Theme Name: Hello Elementor Child
+Theme URI: https://github.com/elementor/hello-theme/
+Description: Hello Elementor Child is a child theme of Hello Elementor, created by Elementor team
+Author: Elementor Team
+Author URI: https://elementor.com/
+Template: hello-elementor
+Version: 1.0.1
+Text Domain: hello-elementor-child
+License: GNU General Public License v3 or later.
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready
+*/
+
+/*
+    Add your custom styles here
+*/
+
+p.small_header {
+    font-weight: bold;
+}
+
+.small_header {
+    padding-top: 50px;
+    padding: 0px 9.5rem;
+    height: auto;
+    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
+    background-size: cover;
+}
+
+#comment{
+    border-radius:5px;
+    border: 1px solid rgba(11, 79, 109, 0.6);
+    box-sizing: border-box;
+    min-height:77px;
+}
+
+.align-center{
+    text-align:center;
+}
+
+/* FOOTER */
+
+.elementor-location-footer .menu-item {
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	.elementor-location-footer .menu-item {
+		width: auto;
+	}
+}
+
+.elementor-location-footer .menu-item .elementor-item {
+	justify-content: center;
+}
