@@ -39,17 +39,38 @@ function theme_assets() {
 
 	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
 	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
-	wp_register_style( 'bbpress', get_stylesheet_directory_uri() . '/assets/css/third/bbpress.min.css' );
 
     wp_enqueue_style( 'font-awesome' );
 	wp_enqueue_style( 'template-styling');
-	wp_enqueue_style( 'bbpress' );
 }
 
 /* General - Registering New Post Thumbnails */
 	
 add_image_size( 'card-medium', 400, 300, true );
-add_image_size( 'card-initiative', 500, 90, true);
+add_image_size( 'card-initiative', 500, 128, true);
+
+/* General - Hide admin bar for users */
+
+add_action('after_setup_theme', 'remove_admin_bar');
+
+function remove_admin_bar() {
+  if (!current_user_can('administrator') && !is_admin()) {
+    show_admin_bar(false);
+  }
+}
+
+/* General - Remove Confirmation Log Out */
+
+add_action('check_admin_referer', 'logout_without_confirm', 10, 2);
+
+function logout_without_confirm($action, $result) {
+    if ($action == "log-out" && !isset($_GET['_wpnonce'])) {
+        $redirect_to = isset($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : 'url-you-want-to-redirect';
+        $location = str_replace('&amp;', '&', wp_logout_url($redirect_to));
+        header("Location: $location");
+        die;
+    }
+}
 
 /* Layout - Remove Sidebar */
 
@@ -643,20 +664,6 @@ function save_my_custom_user_profile_field( ) {
     update_user_meta( absint( get_current_user_id() ), 'region', wp_kses_post( $_POST['region'] ) );
 }
 
-
-// Login In/ Log Out
-
-add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
-function add_loginout_link( $items, $args ) {
-    if (is_user_logged_in() && $args->theme_location == 'main_menu') {
-        $items .= '<li><a href="'. wp_logout_url(site_url()) .'">Log Out</a></li>';
-    }
-    elseif (!is_user_logged_in() && $args->theme_location == 'main_menu') {
-        $items .= '<li><a href="'. site_url('log-in') .'">Log In</a></li>';
-    }
-    return $items;
-}
-
 add_filter( 'wp_nav_menu_objects', 'username_in_menu_items' );
 function username_in_menu_items( $menu_items ) {
     foreach ( $menu_items as $menu_item ) {
@@ -664,22 +671,12 @@ function username_in_menu_items( $menu_items ) {
              if ( is_user_logged_in() )     {
                 $current_user = wp_get_current_user();
                  $user_public_name = $current_user->display_name;
-                $menu_item->title =  str_replace("#profile_name#",  " <a href=". site_url('forums/users/'.$current_user->user_nicename.'/favorites/') .">Hey, ". $user_public_name, $menu_item->title . "!</a>");
+                $menu_item->title =  str_replace("#profile_name#",  " <a class='elementor-item' href=". site_url('forums/users/'.$current_user->user_nicename.'/favorites/') .">Hey, ". $user_public_name, $menu_item->title . "!</a>");
              }
         }
     }
  
     return $menu_items;
 } 
-
-/* General - Hide admin bar for users */
-
-add_action('after_setup_theme', 'remove_admin_bar');
-
-function remove_admin_bar() {
-  if (!current_user_can('administrator') && !is_admin()) {
-    show_admin_bar(false);
-  }
-}
 
 ?>
