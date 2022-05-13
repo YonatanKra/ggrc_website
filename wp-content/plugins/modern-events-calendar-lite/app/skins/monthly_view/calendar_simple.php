@@ -70,7 +70,7 @@ elseif($week_start == 5) // Friday
                 echo '<dt class="mec-calendar-day '.esc_attr($selected_day).'" data-mec-cell="'.esc_attr($day_id).'" data-day="'.esc_attr($list_day).'" data-month="'.date('Ym', $time).'"><div class="'.esc_attr($selected_day_date).'">'.apply_filters('mec_filter_list_day_value', $list_day, $today, $this).'</div>';
                 foreach($events[$today] as $event)
                 {
-                    $event_color = isset($event->data->meta['mec_color']) ? '#'.$event->data->meta['mec_color'] : '';
+                    $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '#'.$event->data->meta['mec_color'] : '';
                     $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
                     $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
 

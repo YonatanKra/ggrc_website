@@ -20,7 +20,7 @@ $items_html = ob_get_clean();
 $this->main->load_owl_assets();
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_'.esc_js($this->id).'").mecSliderView(
@@ -43,7 +43,7 @@ do_action('mec_start_skin', $this->id);
 do_action('mec_slider_skin_head');
 ?>
 <div class="mec-wrap mec-skin-slider-container<?php echo esc_attr($this->html_class . ' ' . $set_dark); ?>" id="mec_skin_<?php echo esc_attr($this->id); ?>">
-    
+
     <?php if($this->found): ?>
     <div class="mec-skin-slider-events-container" id="mec_skin_events_<?php echo esc_attr($this->id); ?>">
         <?php echo MEC_kses::full($items_html); ?>
@@ -53,5 +53,5 @@ do_action('mec_slider_skin_head');
         <?php esc_html_e('No event found!', 'modern-events-calendar-lite'); ?>
     </div>
     <?php endif; ?>
-    
+
 </div>

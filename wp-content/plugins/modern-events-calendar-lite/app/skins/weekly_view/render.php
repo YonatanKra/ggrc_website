@@ -27,11 +27,11 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
 
                 $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
                 $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
-                $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+                $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
                 $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
 
                 $mec_data = $this->display_custom_data($event);
-                $custom_data_class = !empty($mec_data) ? 'mec-custom-data' : ''; 
+                $custom_data_class = !empty($mec_data) ? 'mec-custom-data' : '';
 
                 // MEC Schema
                 do_action('mec_schema', $event);

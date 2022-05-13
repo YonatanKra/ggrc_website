@@ -37,7 +37,7 @@ else $set_dark = '';
 
                 $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
                 $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
-                $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+                $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
                 $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
 
                 // MEC Schema
@@ -56,7 +56,7 @@ else $set_dark = '';
                     <?php echo MEC_kses::element($this->get_label_captions($event,'mec-fc-style')); ?>
                     <?php if($this->localtime) echo MEC_kses::full($this->main->module('local-time.type3', array('event' => $event))); ?>
                 </span>
-                
+
                 <span class="mec-timetable-event-span mec-timetable-event-location">
                     <i class="mec-sl-location-pin"></i>
                     <?php if(isset($location['name']) and trim($location['name'])): ?>
@@ -73,7 +73,7 @@ else $set_dark = '';
             <?php do_action('mec_timetable_view_content', $event, $this, $date); ?>
         <?php endforeach; ?>
     </div>
-    
+
     <?php elseif(!isset($has_events[$week])): $has_events[$week] = 'printed'; ?>
     <div class="mec-timetable-events-list mec-weekly-view-date-events mec-util-hidden mec-calendar-day-events mec-clear mec-weekly-view-week-<?php echo esc_attr($this->id); ?>-<?php echo date('Ym', strtotime($date)).$week; ?> mec_weekly_view_date_events<?php echo esc_attr($this->id); ?>_<?php echo date('Ymd', strtotime($date)); ?>" id="mec_weekly_view_date_events<?php echo esc_attr($this->id); ?>_<?php echo date('Ymd', strtotime($date)); ?>" data-week-number="<?php echo esc_attr($week); ?>">
         <article class="mec-event-article"><h4 class="mec-event-title"><?php esc_html_e('No Events', 'modern-events-calendar-lite'); ?></h4><div class="mec-event-detail"></div></article>
@@ -97,7 +97,7 @@ else $set_dark = '';
 
             $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
             $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
-            $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+            $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
             $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
 
             $mec_data = $this->display_custom_data($event);
@@ -166,7 +166,7 @@ else $set_dark = '';
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </tr>
-            <?php endfor; ?>  
+            <?php endfor; ?>
         </tbody>
     </table>
 </div>

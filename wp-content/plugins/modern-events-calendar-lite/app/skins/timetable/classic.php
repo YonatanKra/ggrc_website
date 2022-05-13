@@ -22,7 +22,7 @@ if(isset($this->atts['return_items']) and $this->atts['return_items'])
 }
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_'.esc_js($this->id).'").mecWeeklyProgram(

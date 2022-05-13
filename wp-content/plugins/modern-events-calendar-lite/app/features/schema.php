@@ -234,7 +234,7 @@ class MEC_feature_schema extends MEC_base
         $moved_online_link = (isset($event->data->meta['mec_moved_online_link']) and trim($event->data->meta['mec_moved_online_link'])) ? $event->data->meta['mec_moved_online_link'] : '';
         $moved_online_link = (isset($params['moved_online_link']) and trim($params['moved_online_link']) != '') ? $params['moved_online_link'] : $moved_online_link;
 
-        $content = apply_filters('the_content', $event->data->post->post_content);
+        $content = strip_tags($event->data->post->post_content);
 
         $this->factory->printOnAjaxOrFooter(function() use($event, $event_status, $start_date, $end_date, $moved_online_link, $event_link, $location, $organizer, $cost, $soldout, $content, $speakers)
         {
@@ -273,7 +273,7 @@ class MEC_feature_schema extends MEC_base
                     "validFrom": "<?php echo date('Y-m-d\TH:i', strtotime($event->date['start']['date'])); ?>"
                 },
                 "performer": <?php echo (count($speakers) ? json_encode($speakers) : '""'); ?>,
-                "description": "<?php echo esc_js(preg_replace('/<p>\\s*?(<a .*?><img.*?><\\/a>|<img.*?>)?\\s*<\\/p>/s', '<div class="figure">$1</div>', preg_replace('/\s/u', ' ', $content))); ?>",
+                "description": "<?php echo esc_js(preg_replace('/\s/u', ' ', $content)); ?>",
                 "image": "<?php echo (!empty($event->data->featured_image['full']) ? $event->data->featured_image['full'] : ''); ?>",
                 "name": "<?php esc_html_e($event->data->title); ?>",
                 "url": "<?php echo esc_js(esc_url($event_link)); ?>"

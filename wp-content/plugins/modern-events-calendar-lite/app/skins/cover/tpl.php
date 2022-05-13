@@ -26,8 +26,8 @@ $event_organizer = ($organizer_id ? $this->main->get_organizer_data($organizer_i
 
 $event_date = (isset($event->date['start']) ? $event->date['start']['date'] : $event->data->meta['mec_start_date']);
 $event_link = (isset($event->data->permalink) and trim($event->data->permalink)) ? $this->main->get_event_date_permalink($event, $event_date) : get_permalink($event->data->ID);
-$event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_html($event->data->meta['mec_color']).'"></span>' : '';
-$event_thumb = $event->data->thumbnails['large']; 
+$event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_html($event->data->meta['mec_color']).'"></span>' : '';
+$event_thumb = $event->data->thumbnails['large'];
 $event_thumb_url = $event->data->featured_image['large'];
 $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
 

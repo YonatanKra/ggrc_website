@@ -581,7 +581,7 @@ $event_fields = $this->main->get_event_fields();
 
 </div>
 
-<?php $this->factory->params('footer', '<script type="text/javascript">
+<?php $this->factory->params('footer', '<script>
 jQuery(document).ready(function()
 {
     jQuery(".dpr-save-btn").on("click", function(event)

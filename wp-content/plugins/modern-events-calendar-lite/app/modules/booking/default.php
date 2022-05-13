@@ -47,12 +47,12 @@ $book = $this->getBook();
 list($user_ticket_limit, $user_ticket_unlimited) = $book->get_user_booking_limit($event->data->ID);
 
 // Generate JavaScript code of Booking Module
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 var mec_tickets_availability_ajax'.esc_js($uniqueid).' = false;
 function mec_get_tickets_availability'.esc_js($uniqueid).'(event_id, date)
 {
     if(!date) return;
-    
+
     // Add loading Class to the ticket list
     jQuery(".mec-event-tickets-list").addClass("loading");
     jQuery("#mec_booking'.esc_js($uniqueid).' .mec-event-tickets-list input").prop("disabled", true);
@@ -83,7 +83,7 @@ function mec_get_tickets_availability'.esc_js($uniqueid).'(event_id, date)
             for(ticket_id in data.availability)
             {
                 var limit = data.availability[ticket_id];
-                
+
                 if(ticket_id != "total")
                 {
                     if(limit != "-1" && available_spots != "-1") available_spots += parseInt(limit);
@@ -133,7 +133,7 @@ function mec_get_tickets_availability'.esc_js($uniqueid).'(event_id, date)
             // Remove Preloader
             jQuery(".mec-loader").remove();
             jQuery(".mec-event-tickets-list").removeClass("mec-cover-loader");
-            
+
             // Disable or Enable Button
             if(available_spots == "0") jQuery("#mec_booking'.esc_js($uniqueid).' #mec-book-form-btn-step-1").hide();
             else jQuery("#mec_booking'.esc_js($uniqueid).' #mec-book-form-btn-step-1").show();
@@ -149,7 +149,7 @@ function mec_get_tickets_availability'.esc_js($uniqueid).'(event_id, date)
 function mec_get_tickets_availability_multiple'.esc_js($uniqueid).'(event_id)
 {
     var $ticket_list = jQuery("#mec_booking'.esc_js($uniqueid).' .mec-event-tickets-list");
-    
+
     // Add loading Class to the ticket list
     $ticket_list.addClass("loading");
     jQuery("#mec_booking'.esc_js($uniqueid).' .mec-event-tickets-list input").prop("disabled", true);
@@ -160,15 +160,15 @@ function mec_get_tickets_availability_multiple'.esc_js($uniqueid).'(event_id)
     // Start Preloader
     $ticket_list.addClass("mec-cover-loader");
     $ticket_list.append("<div class=\"mec-loader\"></div>");
-    
+
     var date = "";
     jQuery("#mec_booking'.esc_js($uniqueid).' .mec-booking-dates-checkboxes input[type=checkbox]:checked").each(function()
     {
         date += "date[]="+jQuery(this).val()+"&";
     });
-    
+
     date = date.slice(0, -1);
-    
+
     mec_tickets_availability_ajax'.esc_js($uniqueid).' = jQuery.ajax(
     {
         type: "GET",
@@ -180,7 +180,7 @@ function mec_get_tickets_availability_multiple'.esc_js($uniqueid).'(event_id)
             // Remove the loading Class to the ticket list
             $ticket_list.removeClass("loading");
             jQuery("#mec_booking'.esc_js($uniqueid).' .mec-event-tickets-list input").prop("disabled", false);
-            
+
             // Set Total Booking Limit
             if(typeof data.availability.total != "undefined") jQuery("#mec_booking'.esc_js($uniqueid).' #mec_book_form_tickets_container'.esc_js($uniqueid).'").data("total-booking-limit", data.availability.total);
 
@@ -188,7 +188,7 @@ function mec_get_tickets_availability_multiple'.esc_js($uniqueid).'(event_id)
             for(ticket_id in data.availability)
             {
                 var limit = data.availability[ticket_id];
-                
+
                 if(ticket_id != "total")
                 {
                     if(limit != "-1" && available_spots != "-1") available_spots += parseInt(limit);
@@ -227,7 +227,7 @@ function mec_get_tickets_availability_multiple'.esc_js($uniqueid).'(event_id)
                     jQuery("#mec_booking'.esc_js($uniqueid).' #mec_event_ticket"+ticket_id+" .mec-event-ticket-available span").html(limit);
                 }
             }
-            
+
             // Disable or Enable Button
             if(available_spots == "0") jQuery("#mec_booking'.esc_js($uniqueid).' #mec-book-form-btn-step-1").hide();
             else jQuery("#mec_booking'.esc_js($uniqueid).' #mec-book-form-btn-step-1").show();
@@ -312,7 +312,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -331,7 +331,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -351,7 +351,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -371,13 +371,13 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
             }
         });
-        
+
         jQuery("#mec_book_form'.esc_js($uniqueid).' .mec-book-ticket-container .mec-book-reg-field-radio.mec-reg-mandatory").filter(":visible").each(function(i)
         {
             var ticket_id = jQuery(this).data("ticket-id");
@@ -391,7 +391,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -411,7 +411,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -431,7 +431,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -451,7 +451,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -471,13 +471,13 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
             }
         });
-        
+
         // Fixed Fields
         jQuery("#mec_book_form'.esc_js($uniqueid).' .mec-book-bfixed-fields-container .mec-book-bfixed-field-text.mec-reg-mandatory, #mec_book_form'.esc_js($uniqueid).' .mec-book-bfixed-fields-container .mec-book-bfixed-field-date.mec-reg-mandatory, #mec_book_form'.esc_js($uniqueid).' .mec-book-bfixed-fields-container .mec-book-bfixed-field-email.mec-reg-mandatory, #mec_book_form'.esc_js($uniqueid).' .mec-book-bfixed-fields-container .mec-book-bfixed-field-tel.mec-reg-mandatory").filter(":visible").each(function(i)
         {
@@ -491,13 +491,13 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
             }
         });
-        
+
         jQuery("#mec_book_form'.esc_js($uniqueid).' .mec-book-bfixed-fields-container .mec-book-bfixed-field-checkbox.mec-reg-mandatory").filter(":visible").each(function(i)
         {
             var field_id = jQuery(this).data("field-id");
@@ -510,13 +510,13 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
             }
         });
-        
+
         jQuery("#mec_book_form'.esc_js($uniqueid).' .mec-book-bfixed-fields-container .mec-book-bfixed-field-radio.mec-reg-mandatory").filter(":visible").each(function(i)
         {
             var field_id = jQuery(this).data("field-id");
@@ -529,7 +529,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -548,13 +548,13 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
             }
         });
-        
+
         jQuery("#mec_book_form'.esc_js($uniqueid).' .mec-book-bfixed-fields-container .mec-book-bfixed-field-select.mec-reg-mandatory").filter(":visible").each(function(i)
         {
             var field_id = jQuery(this).data("field-id");
@@ -567,7 +567,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -586,13 +586,13 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
             }
         });
-        
+
         // Manual Username and Password
         jQuery("#mec_book_form'.esc_js($uniqueid).' #mec_book_form_username, #mec_book_form'.esc_js($uniqueid).' #mec_book_form_password").filter(":visible").each(function(i)
         {
@@ -604,7 +604,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                     jQuery(this).find("label").append("<span class=\'mec-booking-field-required\'>'.esc_html__('This field is required.', 'modern-events-calendar-lite').'</span>");
                 }
             }
-            else 
+            else
             {
                 jQuery(this).find(".mec-booking-field-required").remove();
                 jQuery(this).removeClass("mec-red-notification");
@@ -630,7 +630,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
         processData: false,
         contentType: false,
         cache: false,
-        headers: { 
+        headers: {
             "Accept-Language": "'.esc_js($this->get_current_lang_code()).'"
         },
         success: function(data)
@@ -645,7 +645,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                 {
                     if(data.data.next.type === "url")
                     {
-                        window.parent.location.href = data.data.next.url; 
+                        window.parent.location.href = data.data.next.url;
                         return;
                     }
                     else
@@ -654,7 +654,7 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                         return;
                     }
                 }
-                
+
                 jQuery("#mec_booking'.esc_js($uniqueid).'").html(data.output);
 
                 // Show Invoice Link
@@ -668,14 +668,14 @@ function mec_book_form_submit'.esc_js($uniqueid).'()
                 {
                     setTimeout(function(){window.location.href = data.data.redirect_to;}, 2000);
                 }
-                
+
                 if(!jQuery("#mec_booking'.esc_js($uniqueid).'").hasClass("mec-util-hidden"))
                 {
                     jQuery("html,body").animate({
                         scrollTop: jQuery("#mec_booking'.esc_js($uniqueid).'").offset().top - 100
                     }, "slow");
                 }
-                
+
                 jQuery("#mec_booking'.esc_js($uniqueid).'").removeClass("loading");
 
                 if(jQuery(".mec-single-fluent-wrap").length>0 && typeof jQuery.fn.niceSelect !== "undefined")
@@ -784,7 +784,7 @@ function mec_book_free'.esc_js($uniqueid).'()
                 }
             }
             else
-            {   
+            {
                 jQuery("#mec_booking_message'.esc_js($uniqueid).'").addClass("mec-error").html(data.message).show();
                 jQuery("#mec_book_form_free_booking'.esc_js($uniqueid).'").find("button").prop("disabled", false);
             }
@@ -812,7 +812,7 @@ function mec_adjust_booking_fees'.esc_js($uniqueid).'(gateway_id, transaction_id
 {
     // Add loading class to the wrapper
     jQuery("#mec_booking'.esc_js($uniqueid).' .mec-book-form-price").addClass("loading");
-    
+
     jQuery.ajax(
     {
         type: "POST",
@@ -857,7 +857,7 @@ if($skip_step1 and count($tickets) === 1 and count($dates) === 1 and $user_ticke
     {
         setTimeout(function()
         {
-           jQuery("#mec_book_form'.esc_js($uniqueid).'").trigger("submit"); 
+           jQuery("#mec_book_form'.esc_js($uniqueid).'").trigger("submit");
         }, 500);
     });
     </script>';

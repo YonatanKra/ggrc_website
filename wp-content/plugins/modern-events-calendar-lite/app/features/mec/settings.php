@@ -1606,7 +1606,7 @@ $shortcodes = get_posts(array(
 
 </div>
 
-<?php $this->factory->params('footer', '<script type="text/javascript">
+<?php $this->factory->params('footer', '<script>
 jQuery(document).ready(function()
 {
     jQuery(".dpr-save-btn").on("click", function(event)

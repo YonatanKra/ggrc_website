@@ -16,7 +16,7 @@ $values = $this->main->get_messages_options(($multilingual ? $locale : NULL));
         <div class="mec-search-settings-wrap">
             <i class="mec-sl-magnifier"></i>
             <input id="mec-search-settings" type="text" placeholder="<?php esc_html_e('Search...' ,'modern-events-calendar-lite'); ?>">
-        </div>        
+        </div>
         <a href="" id="" class="dpr-btn dpr-save-btn"><?php esc_html_e('Save Changes', 'modern-events-calendar-lite'); ?></a>
     </div>
 
@@ -76,7 +76,7 @@ $values = $this->main->get_messages_options(($multilingual ? $locale : NULL));
 $this->getFactory()->params('footer', function()
 {
     ?>
-    <script type="text/javascript">
+    <script>
     jQuery(document).ready(function()
     {
         jQuery(".dpr-save-btn").on('click', function(event)

@@ -1874,7 +1874,7 @@ $additional_organizers = (isset($settings['additional_organizers']) and $setting
 $this->getFactory()->params('footer', function()
 {
     ?>
-    <script type="text/javascript">
+    <script>
     jQuery(document).ready(function()
     {
         jQuery(".dpr-save-btn").on('click', function(event)
@@ -1922,7 +1922,7 @@ $this->getFactory()->params('footer', function()
     });
     </script>
 
-    <script type="text/javascript">
+    <script>
     jQuery("#mec_notifications_form").on('submit', function(event)
     {
         event.preventDefault();

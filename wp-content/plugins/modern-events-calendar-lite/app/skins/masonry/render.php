@@ -23,14 +23,14 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
             $organizer_id = $this->main->get_master_organizer_id($event);
             $organizer = ($organizer_id ? $this->main->get_organizer_data($organizer_id) : array());
 
-            $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+            $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
 
             $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
             $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
             $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
 
             $mec_data = $this->display_custom_data($event);
-            $custom_data_class = !empty($mec_data) ? 'mec-custom-data' : ''; 
+            $custom_data_class = !empty($mec_data) ? 'mec-custom-data' : '';
 
             // MEC Schema
             do_action('mec_schema', $event);
@@ -80,7 +80,7 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
                     $masonry_filter = str_replace(",]", "]", $masonry_filter);
                 }
             }
-            
+
             if(empty($masonry_filter)) $masonry_filter = "[\"\"]";
             ?>
             <div data-sort-masonry="<?php echo esc_attr($event->date['start']['date']); ?>" class="<?php echo (isset($event->data->meta['event_past']) and trim($event->data->meta['event_past'])) ? 'mec-past-event ' : ''; ?>mec-masonry-item-wrap <?php echo esc_attr($this->filter_by_classes($event->data->ID)); ?>">
@@ -121,7 +121,7 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
                                     </div>
                                 </div>
                                 <?php endif; ?>
-                                
+
                             </div>
                             <?php do_action('print_extra_fields_masonry', $event); ?>
                             <?php

@@ -12,7 +12,7 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
 ?>
 <div class="mec-wrap <?php echo esc_attr($event_colorskin); ?>">
     <div class="mec-event-carousel-<?php echo esc_attr($this->style); ?>">
-        <?php 
+        <?php
             if($this->style == 'type4') $carousel_type = 'type4';
             elseif($this->style == 'type1') $carousel_type = 'type1';
             else $carousel_type = 'type2';
@@ -28,7 +28,7 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
                 $organizer_id = $this->main->get_master_organizer_id($event);
                 $organizer = ($organizer_id ? $this->main->get_organizer_data($organizer_id) : array());
 
-                $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+                $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
                 $event_date = (isset($event->date['start']) ? $event->date['start']['date'] : $event->data->meta['mec_start_date']);
                 $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
                 $event_end_date = !empty($event->date['end']['date']) ? $event->date['end']['date'] : '';
@@ -66,7 +66,7 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
                 <?php elseif($this->style == 'type2'): ?>
                 <div class="event-carousel-type2-head clearfix">
                     <div class="mec-event-image">
-                        <?php 
+                        <?php
                             if($event->data->thumbnails['meccarouselthumb']) echo MEC_kses::element($this->display_link($event, $event->data->thumbnails['meccarouselthumb'], ''));
                             else echo '<img src="'. $this->main->asset('img/no-image.png') .'" />';
                         ?>
@@ -148,7 +148,7 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
                 <?php elseif($this->style == 'type4'): ?>
                 <div class="event-carousel-type4-head clearfix">
                     <div class="mec-event-image">
-                        <?php 
+                        <?php
                             if($event->data->thumbnails['full']) echo MEC_kses::element($this->display_link($event, $event->data->thumbnails['full'], ''));
                             else echo '<img src="'. $this->main->asset('img/no-image.png') .'" />';
                         ?>

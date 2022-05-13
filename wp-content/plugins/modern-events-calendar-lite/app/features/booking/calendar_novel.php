@@ -21,7 +21,7 @@ $ml_settings = $this->main->get_ml_settings();
 $booking_ongoing = (isset($settings['booking_ongoing']) and $settings['booking_ongoing']);
 
 // Options
-$event_color = isset($event->data->meta['mec_color']) ? '#'.$event->data->meta['mec_color'] : '';
+$event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '#'.$event->data->meta['mec_color'] : '';
 $allday = isset($event->data->meta['mec_allday']) ? $event->data->meta['mec_allday'] : 0;
 $date_format = (isset($ml_settings['booking_date_format1']) and trim($ml_settings['booking_date_format1'])) ? $ml_settings['booking_date_format1'] : 'Y-m-d';
 $date_format = trim(str_replace(['H', 'h', 'i', 's', 'A', 'a', 'G', 'g', 'B', 'u', 'v', ':'], '', $date_format), ': ');
@@ -82,7 +82,7 @@ if(strtotime(date('Y-m-01', $_1month_after)) >= time())
 }
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_booking_calendar_'.esc_js($uniqueid).'").mecBookingCalendar(

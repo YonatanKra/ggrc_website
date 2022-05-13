@@ -19,7 +19,7 @@ $sed_method = $this->sed_method;
 if($sed_method == 'new') $sed_method = '0';
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_'.esc_js($this->id).'").mecCustomView(
@@ -51,14 +51,14 @@ do_action('mec_start_skin', $this->id);
 do_action('mec_custom_skin_head');
 ?>
 <div class="mec-wrap mec-skin-custom-container <?php echo esc_attr($this->html_class); ?>" id="mec_skin_<?php echo esc_attr($this->id); ?>">
-    
+
     <?php if($this->sf_status) echo MEC_kses::full($this->sf_search_form()); ?>
-    
+
     <?php if($this->found): ?>
     <?php if($this->map_on_top == '1'): ?>
         <div class="mec-wrap mec-skin-map-container <?php echo esc_attr($this->html_class); ?>" id="mec_skin_<?php echo esc_attr($this->id); ?>">
             <div class="mec-googlemap-skin" id="mec_googlemap_canvas<?php echo esc_attr($this->id); ?>" style="height: 500px;">
-            <?php 
+            <?php
             $map = isset($this->settings['default_maps_view'])?$this->settings['default_maps_view']:'google';
             do_action('mec_map_inner_element_tools', array('map' => $map));
             ?>
@@ -77,9 +77,9 @@ do_action('mec_custom_skin_head');
         <?php esc_html_e('No event found!', 'modern-events-calendar-lite'); ?>
     </div>
     <?php endif; ?>
-    
+
     <?php if($this->load_more_button and $this->found >= $this->limit): ?>
-    <div class="mec-load-more-wrap"><div class="mec-load-more-button <?php echo ($this->has_more_events ? '' : 'mec-util-hidden'); ?>"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
+    <div class="mec-load-more-wrap"><div tabindex="0" class="mec-load-more-button <?php echo ($this->has_more_events ? '' : 'mec-util-hidden'); ?>"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
     <?php endif; ?>
-    
+
 </div>

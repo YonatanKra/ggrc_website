@@ -87,7 +87,7 @@ if(isset($map_eventss) and !empty($map_eventss))
     // Include Map Assets such as JS and CSS libraries
     $this->main->load_map_assets();
 
-    $map_javascript = '<script type="text/javascript">
+    $map_javascript = '<script>
     jQuery(document).ready(function()
     {
         var jsonPush = gmapSkin('.json_encode($this->render->markers($map_eventss)).');

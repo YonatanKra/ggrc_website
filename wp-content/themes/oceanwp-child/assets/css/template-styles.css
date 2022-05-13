@@ -532,16 +532,6 @@ hr{
     margin-right:auto
 }
 
-.initiative-form, .discussion-form{
-    width:65%;
-    position:relative;
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-    padding-right: 15px;
-    padding-left: 15px
-}
-
 .initiative-list-area{
     padding-left: 30px;
     border-left-width: 1px;

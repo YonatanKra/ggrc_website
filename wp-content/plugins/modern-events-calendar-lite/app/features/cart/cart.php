@@ -8,7 +8,7 @@ $cart_id = $this->cart->get_cart_id();
 $cart = $this->cart->get_cart($cart_id);
 
 // Javascript Code
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery(".mec-cart").mecCart(

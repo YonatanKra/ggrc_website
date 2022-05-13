@@ -80,7 +80,7 @@ $map_data->events = apply_filters('mec_location_load_additional', $current_event
 $scrollwheel = apply_filters( 'mec_google_map_scroll_wheel', false );
 
 // Initialize MEC Google Maps jQuery plugin
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 var p'.esc_js($uniqueid).';
 jQuery(document).ready(function()
 {

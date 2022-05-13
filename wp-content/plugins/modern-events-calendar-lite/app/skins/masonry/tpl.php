@@ -24,7 +24,7 @@ if($sed_method == 'new') $sed_method = '0';
 $this->main->load_isotope_assets();
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_'.esc_js($this->id).'").mecMasonryView(
@@ -78,9 +78,9 @@ do_action('mec_masonry_skin_head');
         <?php esc_html_e('No event found!', 'modern-events-calendar-lite'); ?>
     </div>
     <?php endif; ?>
-    
+
     <?php if($this->load_more_button and $this->found >= $this->limit): ?>
-    <div class="mec-load-more-wrap"><div class="mec-load-more-button <?php echo ($this->has_more_events ? '' : 'mec-util-hidden'); ?>"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
+    <div class="mec-load-more-wrap"><div tabindex="0" class="mec-load-more-button <?php echo ($this->has_more_events ? '' : 'mec-util-hidden'); ?>"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
     <?php endif; ?>
 </div>
 <?php do_action('mec_masonry_customization'); ?>

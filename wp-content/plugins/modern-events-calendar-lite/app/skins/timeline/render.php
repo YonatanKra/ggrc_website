@@ -32,7 +32,7 @@ $sed_method = isset($this->skin_options['sed_method']) ? $this->skin_options['se
 
                 $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
                 $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
-                $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+                $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
                 $excerpt = trim($event->data->post->post_excerpt) ? $event->data->post->post_excerpt : '';
                 $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
 
@@ -41,7 +41,7 @@ $sed_method = isset($this->skin_options['sed_method']) ? $this->skin_options['se
                 {
                     $ex = explode(' ', strip_tags(strip_shortcodes($event->data->post->post_content)));
                     $words = array_slice($ex, 0, 16);
-                    
+
                     $excerpt = implode(' ', $words);
                 }
 
@@ -89,9 +89,9 @@ $sed_method = isset($this->skin_options['sed_method']) ? $this->skin_options['se
                         <?php if($sed_method != 'no') echo MEC_kses::element($this->display_link($event, ((is_array($event->data->tickets) and count($event->data->tickets) and !strpos($soldout, '%%soldout%%') and !$this->booking_button and !$this->main->is_expired($event)) ? $this->main->m('register_button', esc_html__('Register for event', 'modern-events-calendar-lite')) : $this->main->m('view_detail', esc_html__('View Details', 'modern-events-calendar-lite'))).'<i class="mec-sl-arrow-right"></i>', 'mec-booking-button mec-timeline-readmore mec-bg-color')); ?>
                     </div>
                 </div>
-                
+
         <?php } ?>
     </div>
-    
+
 <?php endforeach; ?>
 </div>

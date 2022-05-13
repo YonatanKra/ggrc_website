@@ -26,7 +26,7 @@ foreach($gateways as $gateway)
 }
 
 // Javascript Code
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery(".mec-checkout").mecCheckout(

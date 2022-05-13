@@ -4085,7 +4085,7 @@ class MEC_feature_events extends MEC_base
 
         if ($post_type == $this->PT) {
             ?>
-            <script type="text/javascript">
+            <script>
                 jQuery(document).ready(function () {
                     jQuery('<option>').val('ical-export').text('<?php echo esc_html__('iCal / Outlook Export', 'modern-events-calendar-lite'); ?>').appendTo("select[name='action']");
                     jQuery('<option>').val('ical-export').text('<?php echo esc_html__('iCal / Outlook Export', 'modern-events-calendar-lite'); ?>').appendTo("select[name='action2']");

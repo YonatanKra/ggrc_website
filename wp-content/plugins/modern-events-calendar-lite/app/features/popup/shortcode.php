@@ -566,7 +566,7 @@ if(!isset($post_type)) $post_type = NULL;
 $this->getFactory()->params('footer', function() use($main_page, $wizard_page, $post_type, $fluent)
 {
     ?>
-    <script type="text/javascript">
+    <script>
     jQuery(document).ready(function()
     {
         var redirect = true;
