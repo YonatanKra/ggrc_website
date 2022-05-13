@@ -415,7 +415,7 @@ if(!is_array($categories)) $categories = array();
 $this->getFactory()->params('footer', function()
 {
     ?>
-    <script type="text/javascript">
+    <script>
         jQuery(document).ready(function()
         {
             jQuery(".dpr-save-btn").on('click', function(event)

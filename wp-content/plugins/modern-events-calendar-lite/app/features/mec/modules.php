@@ -44,7 +44,7 @@ $pages = get_pages();
                                                 <div class="content"><p><?php esc_attr_e("Enable this option to have speaker in Hourly Schedule in Single. Refresh after enabling it to see the Speakers menu under MEC dashboard.", 'modern-events-calendar-lite'); ?><a href="https://webnus.net/dox/modern-events-calendar/speaker/" target="_blank"><?php esc_html_e('Read More', 'modern-events-calendar-lite'); ?></a></p></div>
                                             </div>
                                             <i title="" class="dashicons-before dashicons-editor-help"></i>
-                                        </span>                                        
+                                        </span>
                                     </label>
                                     <p><?php esc_attr_e("After enabling and saving the settings, you should reload the page to see a new menu on the Dashboard > MEC", 'modern-events-calendar-lite'); ?></p>
                                 </div>
@@ -292,7 +292,7 @@ $pages = get_pages();
                                                     <?php else : ?>
                                                     <input class="mec-status" type="hidden" name="mec[settings][sn][<?php echo esc_attr($social['id']); ?>]" value="<?php echo (isset($settings['sn'][$social['id']]) ? esc_attr($settings['sn'][$social['id']]) : '1'); ?>" />
                                                     <label for="mec[settings][sn][<?php echo esc_attr($social['id']); ?>]"></label>
-                                                    <?php endif; ?>    
+                                                    <?php endif; ?>
                                                 </div>
                                             </li>
                                         <?php endforeach; ?>
@@ -380,7 +380,7 @@ $pages = get_pages();
 $this->getFactory()->params('footer', function()
 {
     ?>
-    <script type="text/javascript">
+    <script>
     jQuery(document).ready(function()
     {
         jQuery(".dpr-save-btn").on('click', function(event)

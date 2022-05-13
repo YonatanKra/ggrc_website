@@ -20,7 +20,7 @@ class MEC_feature_admincalendar extends MEC_base
     {
         // Import MEC Factory
         $this->factory = $this->getFactory();
-        
+
         // Import MEC Main
         $this->main = $this->getMain();
 
@@ -30,7 +30,7 @@ class MEC_feature_admincalendar extends MEC_base
         // Admin Calendar Status
         $this->status = (isset($_GET['admincalendar']) and (boolean) sanitize_text_field($_GET['admincalendar']));
     }
-    
+
     /**
      * Initialize admin calendar feature
      * @author Webnus <info@webnus.biz>
@@ -64,7 +64,7 @@ class MEC_feature_admincalendar extends MEC_base
             {
                 ?>
                 <style>#posts-filter, ul.subsubsub{display: none;}</style>
-                <script type="text/javascript">
+                <script>
                 jQuery(document).ready(function($)
                 {
                     $('hr.wp-header-end').before('<a href="<?php echo esc_url($this->main->remove_qs_var('admincalendar')); ?>" class="add-new-h2"><?php esc_html_e('Classic View', 'modern-events-calendar-lite'); ?></a>');
@@ -79,7 +79,7 @@ class MEC_feature_admincalendar extends MEC_base
             $this->factory->params('footer', function()
             {
                 ?>
-                <script type="text/javascript">
+                <script>
                 jQuery(document).ready(function($)
                 {
                     $('hr.wp-header-end').before('<a href="<?php echo esc_url($this->main->add_qs_vars(array('admincalendar'=>1))); ?>" class="add-new-h2"><?php esc_html_e('Calendar View', 'modern-events-calendar-lite'); ?></a>');

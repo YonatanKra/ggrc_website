@@ -134,10 +134,10 @@ class MEC_skin_general_calendar extends MEC_skins
                 $event_link = $this->main->get_event_date_permalink($event, $event->date['start']['date']);
                 $event_color = '#'.$event->data->color;
                 $event_content = $event->data->content;
-                $event_date_start = isset($event->data->meta['mec_start_datetime']) ? $this->main->date_i18n('c', strtotime($event->data->meta['mec_start_datetime'])) : $this->main->date_i18n('c', $event->date['start']['timestamp']);
-                $event_date_start_str = isset($event->data->meta['mec_start_datetime']) ? strtotime($event->data->meta['mec_start_datetime']) : $event->date['start']['timestamp'];
-                $event_date_end = isset($event->data->meta['mec_end_datetime']) ? $this->main->date_i18n('c', strtotime($event->data->meta['mec_end_datetime'])) : $this->main->date_i18n('c', $event->date['end']['timestamp']);
-                $event_date_end_str = isset($event->data->meta['mec_end_datetime']) ? strtotime($event->data->meta['mec_end_datetime']) : $event->date['end']['timestamp'];
+                $event_date_start = $this->main->date_i18n('c', $event->date['start']['timestamp']);
+                $event_date_start_str = $event->date['start']['timestamp'];
+                $event_date_end = $this->main->date_i18n('c', $event->date['end']['timestamp']);
+                $event_date_end_str = $event->date['end']['timestamp'];
                 $event_image = $event->data->featured_image['full'];
                 $gridsquare = get_the_post_thumbnail($event->data->ID, 'gridsquare' , array('data-mec-postid' => $event->data->ID));
                 $event_a['id']=  $event->data->ID;

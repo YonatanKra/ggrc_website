@@ -974,7 +974,7 @@ class MEC_main extends MEC_base
                 </a>
             </li>
         </ul>  <!-- close wns-be-group-menu -->
-        <script type="text/javascript">
+        <script>
         jQuery(document).ready(function()
         {
             if(jQuery('.mec-settings-menu').hasClass('active'))
@@ -2124,7 +2124,7 @@ class MEC_main extends MEC_base
         $event->data->title = str_replace('&', '%26', $event->data->title);
         $event->data->title = str_replace('#038;', '', $event->data->title);
 
-        return '<li class="mec-event-social-icon"><a class="email" href="mailto:?subject='.esc_attr($event->data->title).'&body='.rawurlencode($url).'" title="'.esc_attr__('Email', 'modern-events-calendar-lite').'"><i class="mec-fa-envelope"></i></a></li>';
+        return '<li class="mec-event-social-icon"><a class="email" href="mailto:?subject='.rawurlencode($event->data->title).'&body='.rawurlencode($url).'" title="'.esc_attr__('Email', 'modern-events-calendar-lite').'"><i class="mec-fa-envelope"></i></a></li>';
     }
 
     /**
@@ -2154,7 +2154,7 @@ class MEC_main extends MEC_base
     {
         $occurrence = (isset($_GET['occurrence']) ? sanitize_text_field($_GET['occurrence']) : '');
         if(trim($occurrence) != '') $url = $this->add_qs_var('occurrence', $occurrence, $url);
-        return '<li class="mec-event-social-icon"><a class="tumblr" href="https://www.tumblr.com/widgets/share/tool?canonicalUrl='.rawurlencode($url).'&title'.esc_attr($event->data->title).'&caption='.esc_attr($event->data->title).'" target="_blank" title="'.esc_attr__('Share on Tumblr', 'modern-events-calendar-lite').'"><i class="mec-fa-tumblr"></i></a></li>';
+        return '<li class="mec-event-social-icon"><a class="tumblr" href="https://www.tumblr.com/widgets/share/tool?canonicalUrl='.rawurlencode($url).'&title'.rawurlencode($event->data->title).'&caption='.rawurlencode($event->data->title).'" target="_blank" title="'.esc_attr__('Share on Tumblr', 'modern-events-calendar-lite').'"><i class="mec-fa-tumblr"></i></a></li>';
     }
 
     /**
@@ -3528,100 +3528,104 @@ class MEC_main extends MEC_base
      */
     public function ical_single($event_id, $occurrence = '', $occurrence_time = '')
     {
+        // Valid Line Separator
+        $crlf = "\r\n";
+
         // MEC Render Library
         $render = $this->getRender();
 
         // Event Data
         $event = $render->data($event_id);
 
-        $repeat_status = (isset($event->meta['mec_repeat_status']) ? (boolean) $event->meta['mec_repeat_status'] : false);
-        $repeat_type = (isset($event->meta['mec_repeat_type']) ? $event->meta['mec_repeat_type'] : '');
+        $occurrence_end_date = (trim($occurrence) ? $this->get_end_date_by_occurrence($event_id, $occurrence) : '');
 
-        // Custom Days Event
-        if($repeat_status and $repeat_type === 'custom_days')
+        // Event Dates
+        $dates = $this->get_event_next_occurrences($event, $occurrence, 2, $occurrence_time);
+
+        $start_time = strtotime(((isset($dates[0]) and trim($dates[0]['start']['date'])) ? $dates[0]['start']['date'] : $occurrence).' '.sprintf("%02d", $dates[0]['start']['hour']).':'.sprintf("%02d", $dates[0]['start']['minutes']).' '.$dates[0]['start']['ampm']);
+        $end_time = strtotime((trim($occurrence_end_date) ? $occurrence_end_date : $dates[0]['end']['date']).' '.sprintf("%02d", $dates[0]['end']['hour']).':'.sprintf("%02d", $dates[0]['end']['minutes']).' '.$dates[0]['end']['ampm']);
+
+        $gmt_offset_seconds = $this->get_gmt_offset_seconds($start_time, $event);
+        $stamp = strtotime($event->post->post_date);
+        $modified = strtotime($event->post->post_modified);
+
+        $rrules = $this->get_ical_rrules($event);
+        $time_format = 'Ymd\\THi00\\Z';
+
+        // All Day Event
+        if(isset($event->meta['mec_date']) and isset($event->meta['mec_date']['allday']) and $event->meta['mec_date']['allday'])
         {
-            $mec_periods = explode(',', trim($event->mec->days, ','));
-            $timezone = $this->get_timezone($event->ID);
-
-            $datetimes = array();
-
-            if(isset($event->meta) and isset($event->meta['mec_start_datetime']) and isset($event->meta['mec_end_datetime']))
-            {
-                $datetimes[] = array(
-                    'start' => strtotime($event->meta['mec_start_datetime']),
-                    'end' => strtotime($event->meta['mec_end_datetime']),
-                );
-            }
-
-            $days = '';
-            foreach($mec_periods as $mec_period)
-            {
-                $mec_days = explode(':', trim($mec_period, ': '));
-                if(!isset($mec_days[1])) continue;
-
-                $time_start = $event->time['start'];
-                if(isset($mec_days[2])) $time_start = str_replace('-', ':', str_replace('-AM', ' AM', str_replace('-PM', ' PM', $mec_days[2])));
-
-                $time_end = $event->time['end'];
-                if(isset($mec_days[3])) $time_end = str_replace('-', ':', str_replace('-AM', ' AM', str_replace('-PM', ' PM', $mec_days[3])));
-
-                $start_time = strtotime($mec_days[0].' '.$time_start);
-                $end_time = strtotime($mec_days[1].' '.$time_end);
-
-                if(count($datetimes)) $days .= date('Ymd\\THi00', $start_time).',';
-
-                $datetimes[] = array(
-                    'start' => $start_time,
-                    'end' => $end_time,
-                );
-            }
-
-            $rrules = array();
-            if(trim($days)) $rrules[] = trim('RDATE;TZID='.$timezone.':'.trim($days, ', '), '; ');
-
-            $now = current_time('timestamp');
-            if($occurrence_time) $now = $occurrence_time;
-
-            $j = 1;
-            $ical = '';
-            foreach($datetimes as $datetime)
-            {
-                // Expired
-                if($datetime['start'] < $now) continue;
-
-                $lines = array();
-                $lines[] = 'RECURRENCE-ID;TZID='.$timezone.':'.date('Ymd\\THi00', $datetime['start']);
-                $lines[] = 'SEQUENCE:0';
-
-                if($j === 1) $ical .= $this->ical_single_occurrence($datetime['start'], $datetime['end'], $event, $rrules, $lines);
-                else $ical .= $this->ical_single_occurrence($datetime['start'], $datetime['end'], $event, array(), $lines);
-
-                $j++;
-            }
-        }
-        else
-        {
-            $occurrence_end_date = (trim($occurrence) ? $this->get_end_date_by_occurrence($event_id, $occurrence) : '');
-
-            // Event Dates
-            $dates = $this->get_event_next_occurrences($event, $occurrence, 2, $occurrence_time);
-
-            $start_time = strtotime(((isset($dates[0]) and trim($dates[0]['start']['date'])) ? $dates[0]['start']['date'] : $occurrence).' '.sprintf("%02d", $dates[0]['start']['hour']).':'.sprintf("%02d", $dates[0]['start']['minutes']).' '.$dates[0]['start']['ampm']);
-            $end_time = strtotime((trim($occurrence_end_date) ? $occurrence_end_date : $dates[0]['end']['date']).' '.sprintf("%02d", $dates[0]['end']['hour']).':'.sprintf("%02d", $dates[0]['end']['minutes']).' '.$dates[0]['end']['ampm']);
-
-            $rrules = $this->get_ical_rrules($event);
-            $ical = $this->ical_single_occurrence($start_time, $end_time, $event, $rrules);
+            $time_format = 'Ymd\\T000000\\Z';
+            $end_time = strtotime('+1 Day', $end_time);
         }
 
-        return $ical;
+        $ical  = "BEGIN:VEVENT".$crlf;
+        $ical .= "CLASS:PUBLIC".$crlf;
+        $ical .= "UID:MEC-".md5($event_id)."@".$this->get_domain().$crlf;
+        $ical .= "DTSTART:".gmdate($time_format, ($start_time - $gmt_offset_seconds)).$crlf;
+        $ical .= "DTEND:".gmdate($time_format, ($end_time - $gmt_offset_seconds)).$crlf;
+        $ical .= "DTSTAMP:".gmdate($time_format, ($stamp - $gmt_offset_seconds)).$crlf;
+
+        if(is_array($rrules) and count($rrules))
+        {
+            foreach($rrules as $rrule) $ical .= $rrule.$crlf;
+        }
+
+        $event_content = preg_replace('#<a[^>]*href="((?!/)[^"]+)">[^<]+</a>#', '$0 ( $1 )', $event->content);
+        $event_content = strip_shortcodes(strip_tags($event_content));
+        $event_content = str_replace("\r\n", "\\n", $event_content);
+        $event_content = str_replace("\n", "\\n", $event_content);
+        $event_content = preg_replace('/(<script[^>]*>.+?<\/script>|<style[^>]*>.+?<\/style>)/s', '', $event_content);
+
+        $ical .= "CREATED:".date('Ymd', $stamp).$crlf;
+        $ical .= "LAST-MODIFIED:".date('Ymd', $modified).$crlf;
+        $ical .= "PRIORITY:5".$crlf;
+        $ical .= "TRANSP:OPAQUE".$crlf;
+        $ical .= "SUMMARY:".html_entity_decode(apply_filters('mec_ical_single_summary', $event->title, $event_id), ENT_NOQUOTES, 'UTF-8').$crlf;
+        $ical .= "DESCRIPTION:".html_entity_decode(apply_filters('mec_ical_single_description', $event_content, $event_id), ENT_NOQUOTES, 'UTF-8').$crlf;
+        $ical .= "URL:".apply_filters('mec_ical_single_url', $event->permalink, $event_id).$crlf;
+
+        // Organizer
+        $organizer_id = $this->get_master_organizer_id($event->ID, $start_time);
+        $organizer = isset($event->organizers[$organizer_id]) ? $event->organizers[$organizer_id] : array();
+        $organizer_name = (isset($organizer['name']) and trim($organizer['name'])) ? $organizer['name'] : NULL;
+        $organizer_email = (isset($organizer['email']) and trim($organizer['email'])) ? $organizer['email'] : NULL;
+
+        if($organizer_name or $organizer_email) $ical .= "ORGANIZER;CN=".$organizer_name.":MAILTO:".$organizer_email.$crlf;
+
+        // Categories
+        $categories = '';
+        if(isset($event->categories) and is_array($event->categories) and count($event->categories))
+        {
+            foreach($event->categories as $category) $categories .= $category['name'].',';
+        }
+
+        if(trim($categories) != '') $ical .= "CATEGORIES:".trim($categories, ', ').$crlf;
+
+        // Location
+        $location_id = $this->get_master_location_id($event->ID, $start_time);
+        $location = isset($event->locations[$location_id]) ? $event->locations[$location_id] : array();
+        $address = ((isset($location['address']) and trim($location['address'])) ? $location['address'] : (isset($location['name']) ? $location['name'] : ''));
+
+        if(trim($address) != '') $ical .= "LOCATION:".$address.$crlf;
+
+        // Featured Image
+        if(trim($event->featured_image['full']) != '')
+        {
+            $ex = explode('/', $event->featured_image['full']);
+            $filename = end($ex);
+            $ical .= "ATTACH;FMTTYPE=".$this->get_mime_content_type($filename).":".$event->featured_image['full'].$crlf;
+        }
+
+        $ical .= "END:VEVENT".$crlf;
+
+        return apply_filters('mec_ical_single', $ical);
     }
 
     public function ical_single_occurrence($start_time, $end_time, $event, $rrules = array(), $extra_lines = array())
     {
         // Valid Line Separator
         $crlf = "\r\n";
-
-        $gmt_offset_seconds = $this->get_gmt_offset_seconds($start_time, $event);
 
         $stamp_gmt = strtotime($event->post->post_date_gmt);
         $stamp = strtotime($event->post->post_date);
@@ -5553,7 +5557,7 @@ class MEC_main extends MEC_base
             $format = trim($format, ': ');
         }
 
-        if($start_timestamp >= $end_timestamp) return '<span class="mec-start-date-label" itemprop="startDate">' . esc_html($this->date_i18n($format, $start_timestamp, $event)) . '</span>';
+        if($start_timestamp >= $end_timestamp) return '<span class="mec-start-date-label">' . esc_html($this->date_i18n($format, $start_timestamp, $event)) . '</span>';
         elseif($start_timestamp < $end_timestamp)
         {
             // Remove custom escaped characters like \o\f which is escaped version of "of"
@@ -5562,7 +5566,7 @@ class MEC_main extends MEC_base
             $start_date = $this->date_i18n($format, $start_timestamp, $event);
             $end_date = $this->date_i18n($format, $end_timestamp, $event);
 
-            if($start_date == $end_date) return '<span class="mec-start-date-label" itemprop="startDate">' . esc_html($start_date) . '</span>';
+            if($start_date == $end_date) return '<span class="mec-start-date-label">' . esc_html($start_date) . '</span>';
             else
             {
                 $start_m = date('m', $start_timestamp);
@@ -5612,9 +5616,9 @@ class MEC_main extends MEC_base
                         else $date_label .= $char;
                     }
 
-                    return '<span class="mec-start-date-label" itemprop="startDate">' .esc_html($date_label). '</span>';
+                    return '<span class="mec-start-date-label">' .esc_html($date_label). '</span>';
                 }
-                else return '<span class="mec-start-date-label" itemprop="startDate">'.esc_html($this->date_i18n($format, $start_timestamp, $event)).'</span><span class="mec-end-date-label" itemprop="endDate">'.esc_html($separator.$this->date_i18n($format, $end_timestamp, $event)).'</span>';
+                else return '<span class="mec-start-date-label">'.esc_html($this->date_i18n($format, $start_timestamp, $event)).'</span><span class="mec-end-date-label" itemprop="endDate">'.esc_html($separator.$this->date_i18n($format, $end_timestamp, $event)).'</span>';
             }
         }
     }
@@ -7288,6 +7292,35 @@ class MEC_main extends MEC_base
     {
         // IncludeS files
         wp_enqueue_style('mec-month-picker-style', $this->asset('packages/month-picker/MonthPicker.css'));
+
+        $dates = array();
+        $d = array(
+            'days' => ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            'months' => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        );
+
+        foreach( $d as $type => $values ){
+            foreach( $values as $k => $value ){
+
+                switch( $type ){
+                    case 'days':
+                        $dates[ 'days' ][ $k ] = date_i18n( 'l', strtotime( $value ));
+                        $dates[ 'daysShort' ][ $k ] = date_i18n( 'D', strtotime( $value ));
+                        $day_min = date_i18n( 'D', strtotime( $value ));
+                        $dates[ 'daysMin' ][ $k ] = !empty( substr( $day_min, 0, 2 ) ) ? substr( $day_min, 0, 2 ) : $day_min;
+                        break;
+                    case 'months':
+                        $dates[ 'months' ][ $k ] = date_i18n( 'F', strtotime( $value ));
+                        $dates[ 'monthsShort' ][ $k ] = date_i18n( 'M', strtotime( $value ));
+                        break;
+                }
+            }
+        }
+
+        $data = array(
+            'dates' => $dates,
+        );
+        echo '<script>var MEC_Month_Picker_Data = '. json_encode( $data ) .' </script>';
         wp_enqueue_script('mec-month-picker-js', $this->asset('packages/month-picker/MonthPicker.js'));
     }
 

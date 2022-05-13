@@ -19,14 +19,14 @@ $weeks = '';
 foreach($this->weeks as $week_number=>$week)
 {
     $first_week_day = $week[0];
-    
+
     $i = 1;
     while(strtotime($first_week_day) < $current_month_time)
     {
         $first_week_day = $week[$i];
         $i++;
     }
-    
+
     $weeks .= '<dl class="mec-weekly-view-week" id="mec_weekly_view_week_'.esc_attr($this->id.'_'.date('Ym', strtotime($first_week_day)).$week_number).'" data-week-id="'.esc_attr(date('Ym', strtotime($first_week_day)).$week_number).'" data-week-number="' . esc_attr($week_number) . '" data-max-weeks="'.count($this->weeks).'">';
     foreach($week as $day)
     {
@@ -37,7 +37,7 @@ foreach($this->weeks as $week_number=>$week)
                 .'<span class="mec-weekly-view-monthday">'.esc_html($this->main->date_i18n('j', $time)).'</span> '
                 .'</dt>';
     }
-    
+
     $weeks .= '</dl>';
 }
 
@@ -52,16 +52,16 @@ $navigator_html = '';
 if($this->next_previous_button)
 {
     // Show previous month handler if showing past events allowed
-    if(!isset($this->atts['show_past_events']) or 
+    if(!isset($this->atts['show_past_events']) or
        (isset($this->atts['show_past_events']) and $this->atts['show_past_events']) or
        (isset($this->atts['show_past_events']) and !$this->atts['show_past_events'] and strtotime(date('Y-m-t', $_1month_before)) >= time())
     )
     {
         $navigator_html .= '<div class="mec-previous-month mec-load-month mec-color" data-mec-year="'.date('Y', $_1month_before).'" data-mec-month="'.date('m', $_1month_before).'"><a href="#" class="mec-load-month-link"><i class="mec-sl-angle-left"></i></a></div>';
     }
-    
+
     $navigator_html .= '<h4 class="mec-month-label">'.esc_html($this->main->date_i18n('Y F', $current_month_time)).'</h4>';
-    
+
     // Show next month handler if needed
     if(!$this->show_only_expired_events or
        ($this->show_only_expired_events and strtotime(date('Y-m-01', $_1month_after)) <= time())
@@ -94,7 +94,7 @@ $sed_method = $this->sed_method;
 if($sed_method == 'new') $sed_method = '0';
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_weekly_view_month_'.esc_js($this->id).'_'.date('Ym', $current_month_time).'").mecWeeklyView(
@@ -136,9 +136,9 @@ do_action('mec_start_skin', $this->id);
 do_action('mec_weekly_skin_head');
 ?>
 <div id="mec_skin_<?php echo esc_attr($this->id); ?>" class="mec-wrap <?php echo esc_attr($event_colorskin . ' ' . $this->html_class . ' ' . $set_dark); ?>">
-    
+
     <?php if($this->sf_status) echo MEC_kses::full($this->sf_search_form()); ?>
-    
+
     <div class="mec-calendar mec-calendar-daily mec-calendar-weekly">
         <?php if($this->next_previous_button): ?>
         <div class="mec-skin-weekly-view-month-navigator-container mec-calendar-a-month mec-clear">
@@ -156,5 +156,5 @@ do_action('mec_weekly_skin_head');
             </div>
         </div>
     </div>
-    
+
 </div>

@@ -62,7 +62,7 @@ $sed_method = $this->sed_method;
 if($sed_method == 'new') $sed_method = '0';
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_monthly_view_month_'.esc_js($this->id).'_'.date('Ym', $current_month_time).'").mecMonthlyView(

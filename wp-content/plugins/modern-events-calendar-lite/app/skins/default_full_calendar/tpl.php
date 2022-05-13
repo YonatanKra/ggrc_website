@@ -9,7 +9,7 @@ $sed_method = $this->sed_method;
 if($sed_method == 'new') $sed_method = '0';
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_'.esc_js($this->id).'").mecFullCalendar(
@@ -45,10 +45,10 @@ do_action('mec_start_skin', $this->id);
 do_action('mec_full_skin_head');
 ?>
 <div id="mec_skin_<?php echo esc_attr($this->id); ?>" class="mec-wrap <?php echo esc_attr($event_colorskin . ' ' . $set_dark); ?> mec-full-calendar-wrap">
-    
+
     <div class="mec-search-form mec-totalcal-box">
         <?php
-        if($this->sf_status): ?>        
+        if($this->sf_status): ?>
         <?php
             $sf_month_filter = array("type"=> "dropdown");
             $sf_text_search = array( "type"=> "text_input" );
@@ -68,7 +68,7 @@ do_action('mec_full_skin_head');
                 <?php if($sf_text_search_status): ?>
                     <?php echo MEC_kses::form($this->sf_search_field('text_search', $sf_text_search , 0)); ?>
                 <?php endif; ?>
-            </div>        
+            </div>
         <?php endif; ?>
         </div>
         <div class="col-md-5">
@@ -81,11 +81,11 @@ do_action('mec_full_skin_head');
             </div>
         </div>
     </div>
-    
+
     <div id="mec_full_calendar_container_<?php echo esc_attr($this->id); ?>" class="mec-full-calendar-skin-container">
         <?php echo MEC_kses::full($this->load_skin($this->default_view)); ?>
     </div>
-    
+
 </div>
 <style type="text/css">
 #mec_skin_<?php echo esc_attr($this->id); ?> .mec-search-form .mec-date-search{width: 100%;}

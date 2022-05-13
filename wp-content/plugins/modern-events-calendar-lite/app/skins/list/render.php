@@ -32,7 +32,7 @@ $map_events = array();
                     $organizer = ($organizer_id ? $this->main->get_organizer_data($organizer_id) : array());
                     $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
                     $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
-                    $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+                    $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
                     $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
                     $mec_data = $this->display_custom_data($event);
                     $custom_data_class = !empty($mec_data) ? 'mec-custom-data' : '';
@@ -145,13 +145,13 @@ $map_events = array();
                 <?php elseif($this->style == 'standard'): ?>
                     <?php
                         $excerpt = trim($event->data->post->post_excerpt) ? $event->data->post->post_excerpt : '';
-                        
+
                         // Safe Excerpt for UTF-8 Strings
                         if(!trim($excerpt))
                         {
                             $ex = explode(' ', strip_tags(strip_shortcodes($event->data->post->post_content)));
                             $words = array_slice($ex, 0, 10);
-                            
+
                             $excerpt = implode(' ', $words);
                         }
                     ?>
@@ -256,7 +256,7 @@ if(isset($this->map_on_top) and $this->map_on_top and isset($map_events) and !em
     // It changing geolocation focus, because after done filtering, if it doesn't. then the map position will not set correctly.
     if((isset($_REQUEST['action']) and sanitize_text_field($_REQUEST['action']) == 'mec_list_load_more') and isset($_REQUEST['sf'])) $this->geolocation_focus = true;
 
-    $map_javascript = '<script type="text/javascript">
+    $map_javascript = '<script>
     var mecmap'.esc_js($this->id).';
     jQuery(document).ready(function()
     {
@@ -276,7 +276,7 @@ if(isset($this->map_on_top) and $this->map_on_top and isset($map_events) and !em
             geolocation: "'.esc_js($this->geolocation).'",
             geolocation_focus: '.esc_js($this->geolocation_focus).'
         });
-        
+
         var mecinterval'.esc_js($this->id).' = setInterval(function()
         {
             if(jQuery("#mec_googlemap_canvas'.esc_js($this->id).'").is(":visible"))

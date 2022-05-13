@@ -4,7 +4,7 @@ Donate link: https://webnus.net
 Tags: Event, Events, Calendar, Booking, Schedule, Organizer, Venue
 Requires at least: 4.0.0
 Tested up to: 5.9
-Stable tag: 6.5.5
+Stable tag: 6.5.6
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -473,7 +473,16 @@ You can see [plugin documentation](https://webnus.net/dox/modern-events-calendar
 
 == Changelog ==
 
-= v 6.5.5 – 2 May 2022 =
+= 6.5.6 – 10 May 2022 =
+- Improved: Ability to translate datepicker in the General Calendar skin
+- Improved: The iCal code
+- Fixed: An issue in Google schema
+- Fixed: Some conflicts with other plugins
+- Fixed: Some HTML code issues
+- Fixed: An issue in the social widget
+- Fixed: Some issues with the w3c standard
+
+= 6.5.5 – 2 May 2022 =
 - Fixed: The content of third party plugin on single event pages
 - Fixed: Some PHP notices
 
@@ -2234,7 +2243,7 @@ You can see [plugin documentation](https://webnus.net/dox/modern-events-calendar
 - Fixed: Some minor issues
 
 = 4.3.2 – 17 June 2019 =
-Fixed: Notification tabs in settings
+- Fixed: Notification tabs in settings
 
 = 4.3.1 – 17 June 2019 =
 - Added: "Number of Days" and "Week Start Day" options to clean style of timetable skin

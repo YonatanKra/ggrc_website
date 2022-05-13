@@ -76,7 +76,7 @@ if(isset($_SERVER['HTTP_USER_AGENT']) and strpos($_SERVER['HTTP_USER_AGENT'], 'T
 $datetime = $ongoing ? $end_time : $start_time;
 
 // Generating javascript code of countdown default module
-$defaultjs = '<script type="text/javascript">
+$defaultjs = '<script>
 jQuery(document).ready(function($)
 {
     jQuery.each(jQuery(".mec-countdown-details"),function(i,el)
@@ -95,7 +95,7 @@ jQuery(document).ready(function($)
 </script>';
 
 // Generating javascript code of countdown flip module
-$flipjs = '<script type="text/javascript">
+$flipjs = '<script>
 var clock;
 jQuery(document).ready(function()
 {
@@ -135,7 +135,7 @@ jQuery(document).ready(function()
     });
 });
 </script>';
-$flipjsDivi = '<script type="text/javascript">
+$flipjsDivi = '<script>
 var clock;
 jQuery(document).ready(function()
 {
@@ -186,34 +186,26 @@ if(!function_exists('is_plugin_active')) include_once( ABSPATH . 'wp-admin/inclu
 <div class="mec-countdown-details" id="mec_countdown_details" data-datetime="<?php echo esc_attr($datetime); ?>" data-gmt_offset="<?php echo esc_attr($gmt_offset); ?>">
     <div class="countdown-w ctd-simple">
         <ul class="clockdiv" id="countdown">
-            <div class="days-w block-w">
-                <li>
-                    <i class="icon-w mec-li_calendar"></i>
-                    <span class="mec-days">00</span>
-                    <p class="mec-timeRefDays label-w"><?php esc_html_e('days', 'modern-events-calendar-lite'); ?></p>
-                </li>
-            </div>
-            <div class="hours-w block-w">
-                <li>
-                    <i class="icon-w mec-fa-clock-o"></i>
-                    <span class="mec-hours">00</span>
-                    <p class="mec-timeRefHours label-w"><?php esc_html_e('hours', 'modern-events-calendar-lite'); ?></p>
-                </li>
-            </div>
-            <div class="minutes-w block-w">
-                <li>
-                    <i class="icon-w mec-li_clock"></i>
-                    <span class="mec-minutes">00</span>
-                    <p class="mec-timeRefMinutes label-w"><?php esc_html_e('minutes', 'modern-events-calendar-lite'); ?></p>
-                </li>
-            </div>
-            <div class="seconds-w block-w">
-                <li>
-                    <i class="icon-w mec-li_heart"></i>
-                    <span class="mec-seconds">00</span>
-                    <p class="mec-timeRefSeconds label-w"><?php esc_html_e('seconds', 'modern-events-calendar-lite'); ?></p>
-                </li>
-            </div>
+            <li class="days-w block-w">
+                <i class="icon-w mec-li_calendar"></i>
+                <span class="mec-days">00</span>
+                <p class="mec-timeRefDays label-w"><?php esc_html_e('days', 'modern-events-calendar-lite'); ?></p>
+            </li>
+            <li class="hours-w block-w">
+                <i class="icon-w mec-fa-clock-o"></i>
+                <span class="mec-hours">00</span>
+                <p class="mec-timeRefHours label-w"><?php esc_html_e('hours', 'modern-events-calendar-lite'); ?></p>
+            </li>
+            <li class="minutes-w block-w">
+                <i class="icon-w mec-li_clock"></i>
+                <span class="mec-minutes">00</span>
+                <p class="mec-timeRefMinutes label-w"><?php esc_html_e('minutes', 'modern-events-calendar-lite'); ?></p>
+            </li>
+            <li class="seconds-w block-w">
+                <i class="icon-w mec-li_heart"></i>
+                <span class="mec-seconds">00</span>
+                <p class="mec-timeRefSeconds label-w"><?php esc_html_e('seconds', 'modern-events-calendar-lite'); ?></p>
+            </li>
         </ul>
     </div>
 </div>

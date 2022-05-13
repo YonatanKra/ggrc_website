@@ -17,19 +17,19 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
             <?php
                 foreach($this->events as $date):
                 foreach($date as $event):
-                
+
                 // Featured Image
                 $src = $event->data->featured_image['large'];
 
                 $location_id = $this->main->get_master_location_id($event);
                 $location = ($location_id ? $this->main->get_location_data($location_id) : array());
 
-                $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+                $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
 
                 $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
                 $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
                 $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
-                
+
                 $excerpt = trim($event->data->post->post_excerpt) ? $event->data->post->post_excerpt : '';
 
                 // Safe Excerpt for UTF-8 Strings

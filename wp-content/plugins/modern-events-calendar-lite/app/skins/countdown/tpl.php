@@ -77,7 +77,7 @@ if(isset($_SERVER['HTTP_USER_AGENT']) and strpos($_SERVER['HTTP_USER_AGENT'], 'E
 if(isset($_SERVER['HTTP_USER_AGENT']) and strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') == true) $gmt_offset = substr(trim($gmt_offset), 2 , 3);
 
 // Generating javascript code of countdown module
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_countdown'.esc_js($this->id).'").mecCountDown(
@@ -122,30 +122,22 @@ do_action('mec_countdown_skin_head');
             </div>
             <div class="mec-event-countdown" id="mec_skin_countdown<?php echo esc_attr($this->id); ?>">
                 <ul class="clockdiv" id="countdown">
-                    <div class="days-w block-w">
-                        <li>
-                            <span class="mec-days">00</span>
-                            <p class="mec-timeRefDays label-w"><?php esc_html_e('days', 'modern-events-calendar-lite'); ?></p>
-                        </li>
-                    </div>
-                    <div class="hours-w block-w">
-                        <li>
-                            <span class="mec-hours">00</span>
-                            <p class="mec-timeRefHours label-w"><?php esc_html_e('hours', 'modern-events-calendar-lite'); ?></p>
-                        </li>
-                    </div>  
-                    <div class="minutes-w block-w">
-                        <li>
-                            <span class="mec-minutes">00</span>
-                            <p class="mec-timeRefMinutes label-w"><?php esc_html_e('minutes', 'modern-events-calendar-lite'); ?></p>
-                        </li>
-                    </div>
-                    <div class="seconds-w block-w">
-                        <li>
-                            <span class="mec-seconds">00</span>
-                            <p class="mec-timeRefSeconds label-w"><?php esc_html_e('seconds', 'modern-events-calendar-lite'); ?></p>
-                        </li>
-                    </div>
+                    <li class="days-w block-w">
+                        <span class="mec-days">00</span>
+                        <p class="mec-timeRefDays label-w"><?php esc_html_e('days', 'modern-events-calendar-lite'); ?></p>
+                    </li>
+                    <li class="hours-w block-w">
+                        <span class="mec-hours">00</span>
+                        <p class="mec-timeRefHours label-w"><?php esc_html_e('hours', 'modern-events-calendar-lite'); ?></p>
+                    </li>
+                    <li class="minutes-w block-w">
+                        <span class="mec-minutes">00</span>
+                        <p class="mec-timeRefMinutes label-w"><?php esc_html_e('minutes', 'modern-events-calendar-lite'); ?></p>
+                    </li>
+                    <li class="seconds-w block-w">
+                        <span class="mec-seconds">00</span>
+                        <p class="mec-timeRefSeconds label-w"><?php esc_html_e('seconds', 'modern-events-calendar-lite'); ?></p>
+                    </li>
                 </ul>
             </div>
             <?php if($this->localtime) echo MEC_kses::full($this->main->module('local-time.type3', array('event' => $event))); ?>
@@ -174,12 +166,12 @@ do_action('mec_countdown_skin_head');
                             <p class="mec-timeRefDays label-w"><?php esc_html_e('days', 'modern-events-calendar-lite'); ?></p>
                         </li>
                     </div>
-                    <div class="hours-w block-w">    
+                    <div class="hours-w block-w">
                         <li>
                             <span class="mec-hours">00</span>
                             <p class="mec-timeRefHours label-w"><?php esc_html_e('hours', 'modern-events-calendar-lite'); ?></p>
                         </li>
-                    </div>  
+                    </div>
                     <div class="minutes-w block-w">
                         <li>
                             <span class="mec-minutes">00</span>
@@ -225,12 +217,12 @@ do_action('mec_countdown_skin_head');
                                 <p class="mec-timeRefDays label-w"><?php esc_html_e('days', 'modern-events-calendar-lite'); ?></p>
                             </li>
                         </div>
-                        <div class="hours-w block-w">    
+                        <div class="hours-w block-w">
                             <li>
                                 <span class="mec-hours">00</span>
                                 <p class="mec-timeRefHours label-w"><?php esc_html_e('hours', 'modern-events-calendar-lite'); ?></p>
                             </li>
-                        </div>  
+                        </div>
                         <div class="minutes-w block-w">
                             <li>
                                 <span class="mec-minutes">00</span>

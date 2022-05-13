@@ -33,10 +33,10 @@ if(is_array($fonts))
         <div class="mec-search-settings-wrap">
             <i class="mec-sl-magnifier"></i>
             <input id="mec-search-settings" type="text" placeholder="<?php esc_html_e('Search...' ,'modern-events-calendar-lite'); ?>">
-        </div>        
+        </div>
         <a href="" id="" class="dpr-btn dpr-save-btn"><?php esc_html_e('Save Changes', 'modern-events-calendar-lite'); ?></a>
     </div>
-    
+
     <div class="wns-be-sidebar">
         <?php $this->main->get_sidebar_menu('styling'); ?>
     </div>
@@ -47,7 +47,7 @@ if(is_array($fonts))
 
         <div id="wns-be-content">
             <div class="wns-be-group-tab">
-                
+
                 <div class="mec-container">
                     <form id="mec_styling_form">
                         <div class="mec-options-fields">
@@ -137,7 +137,7 @@ if(is_array($fonts))
                                     <input type="text" class="wp-color-picker-field" id="mec_settings_title_color" name="mec[styling][title_color]" value="<?php echo (isset($styling['title_color']) ? esc_attr($styling['title_color']) : ''); ?>" data-default-color="" />
                                 </div>
                             </div>
-                            
+
                             <div class="mec-form-row">
                                 <div class="mec-col-3">
                                     <span><?php esc_html_e('Title Hover', 'modern-events-calendar-lite' ); ?></span>
@@ -199,7 +199,7 @@ if(is_array($fonts))
                                                 $variants .= $variant;
                                                 if(next($google_font['variants']) == true) $variants .= ",";
                                             }
-                                            
+
                                             $value = (isset($google_font['value']) ? $google_font['value'] : '['. $google_font['label'] .','. $variants .']');
                                             if($value == '['.esc_html__('Default Font', 'modern-events-calendar-lite').',regular]') $value = '';
                                             ?>
@@ -311,14 +311,14 @@ if(is_array($fonts))
     <div id="wns-be-footer">
         <a href="" id="" class="dpr-btn dpr-save-btn"><?php esc_html_e('Save Changes', 'modern-events-calendar-lite'); ?></a>
     </div>
-    
+
 </div>
 
 <?php
 $this->getFactory()->params('footer', function()
 {
     ?>
-    <script type="text/javascript">
+    <script>
     jQuery(document).ready(function()
     {
         jQuery(".dpr-save-btn").on('click', function(event)

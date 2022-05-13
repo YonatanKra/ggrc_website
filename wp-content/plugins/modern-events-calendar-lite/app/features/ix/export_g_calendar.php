@@ -91,7 +91,7 @@ if(isset($ix_options['google_export_token']) && $ix_options['google_export_token
 <?php $this->factory->params('footer', function()
 {
     ?>
-    <script type="text/javascript">
+    <script>
     jQuery("#mec_g_calendar_export_form_authenticate").on('submit', function(e)
     {
         e.preventDefault();

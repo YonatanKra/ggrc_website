@@ -3,16 +3,16 @@
 defined('MECEXEC') or die();
 
 // Generating javascript code of countdown module
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     var mec_fes_form_ajax = false;
     jQuery("#mec_fes_form").on("submit", function(event)
     {
         event.preventDefault();
-        
+
         var $form = jQuery("#mec_fes_form");
-        
+
         // Hide the message
         jQuery("#mec_fes_form_message").removeClass("mec-error").removeClass("mec-success").html("").hide();
 
@@ -21,14 +21,14 @@ jQuery(document).ready(function()
         jQuery(".mec-fes-form-cntt").hide();
         jQuery(".mec-fes-form-sdbr").hide();
         jQuery(".mec-fes-submit-wide").hide();
-        
+
         // Fix WordPress editor issue
         jQuery("#mec_fes_content-html").click();
         jQuery("#mec_fes_content-tmce").click();
-        
+
         // Abort previous request
         if(mec_fes_form_ajax) mec_fes_form_ajax.abort();
-        
+
         var data = $form.serialize();
         mec_fes_form_ajax = jQuery.ajax(
         {
@@ -43,12 +43,12 @@ jQuery(document).ready(function()
                 jQuery(".mec-fes-form-cntt").show();
                 jQuery(".mec-fes-form-sdbr").show();
                 jQuery(".mec-fes-submit-wide").show();
-                
+
                 if(response.success == "1")
                 {
                     // Show the message
                     jQuery("#mec_fes_form_message").removeClass("mec-error").removeClass("mec-success").addClass("mec-success").html(response.message).css("display","inline-block");
-                    
+
                     // Set the event id
                     jQuery(".mec-fes-post-id").val(response.data.post_id);
 
@@ -68,7 +68,7 @@ jQuery(document).ready(function()
                     {
                         grecaptcha.reset();
                     }
-                    
+
                     // Show the message
                     jQuery("#mec_fes_form_message").removeClass("mec-error").addClass("mec-error").html(response.message).css("display","inline-block");
                 }
@@ -88,9 +88,9 @@ function mec_fes_upload_featured_image()
     fd.append("action", "mec_fes_upload_featured_image");
     fd.append("_wpnonce", "'.wp_create_nonce('mec_fes_upload_featured_image').'");
     fd.append("file", jQuery("#mec_featured_image_file").prop("files")[0]);
-    
+
     jQuery("#mec_fes_thumbnail_error").html("").addClass("mec-util-hidden");
-    
+
     jQuery.ajax(
     {
         url: "'.admin_url('admin-ajax.php', NULL).'",
@@ -114,18 +114,18 @@ function mec_fes_upload_featured_image()
             jQuery("#mec_fes_thumbnail_error").html(data.message).removeClass("mec-util-hidden");
         }
     });
-    
+
     return false;
 }
 
 function mec_fes_upload_location_thumbnail()
 {
     var fd = new FormData();
-    
+
     fd.append("action", "mec_fes_upload_featured_image");
     fd.append("_wpnonce", "'.wp_create_nonce('mec_fes_upload_featured_image').'");
     fd.append("file", jQuery("#mec_fes_location_thumbnail_file").prop("files")[0]);
-    
+
     jQuery.ajax(
     {
         url: "'.admin_url('admin-ajax.php', NULL).'",
@@ -142,18 +142,18 @@ function mec_fes_upload_location_thumbnail()
         jQuery("#mec_fes_location_thumbnail_img").html("<img src=\""+data.data.url+"\" />");
         jQuery("#mec_fes_location_remove_image_button").removeClass("mec-util-hidden");
     });
-    
+
     return false;
 }
 
 function mec_fes_upload_organizer_thumbnail()
 {
     var fd = new FormData();
-    
+
     fd.append("action", "mec_fes_upload_featured_image");
     fd.append("_wpnonce", "'.wp_create_nonce('mec_fes_upload_featured_image').'");
     fd.append("file", jQuery("#mec_fes_organizer_thumbnail_file").prop("files")[0]);
-    
+
     jQuery.ajax(
     {
         url: "'.admin_url('admin-ajax.php', NULL).'",
@@ -170,7 +170,7 @@ function mec_fes_upload_organizer_thumbnail()
         jQuery("#mec_fes_organizer_thumbnail_img").html("<img src=\""+data.data.url+"\" />");
         jQuery("#mec_fes_organizer_remove_image_button").removeClass("mec-util-hidden");
     });
-    
+
     return false;
 }
 </script>';
@@ -189,7 +189,7 @@ $this->factory->params('footer', $javascript);
         <?php endif; ?>
     </div>
     <?php endif; ?>
-    
+
     <div class="mec-util-hidden" id="mec_fes_form_message"></div>
     <form id="mec_fes_form" enctype="multipart/form-data">
         <?php
@@ -198,7 +198,7 @@ $this->factory->params('footer', $javascript);
             $comment = get_post_meta($post_id, 'mec_comment', true);
             $hide_time = get_post_meta($post_id, 'mec_hide_time', true);
             $hide_end_time = get_post_meta($post_id, 'mec_hide_end_time', true);
-        
+
             $start_date = get_post_meta($post_id, 'mec_start_date', true);
 
             // Advanced Repeating Day
@@ -235,10 +235,10 @@ $this->factory->params('footer', $javascript);
 
             $certain_weekdays = get_post_meta($post_id, 'mec_certain_weekdays', true);
             if($repeat_type != 'certain_weekdays') $certain_weekdays = array();
-            
+
             $in_days_str = get_post_meta($post_id, 'mec_in_days', true);
             $in_days = trim($in_days_str) ? explode(',', $in_days_str) : array();
-            
+
             $mec_repeat_end = get_post_meta($post_id, 'mec_repeat_end', true);
             if(trim($mec_repeat_end) == '') $mec_repeat_end = 'never';
 
@@ -773,7 +773,7 @@ $this->factory->params('footer', $javascript);
                                         <div class="content"><p><?php esc_attr_e('The event will finish after certain repeats. For example if you set it to 10, the event will finish after 10 repeats.', 'modern-events-calendar-lite'); ?><a href="https://webnus.net/dox/modern-events-calendar/event-detailssingle-event-page/" target="_blank"><?php esc_html_e('Read More', 'modern-events-calendar-lite'); ?></a></p></div>
                                     </div>
                                     <i title="" class="dashicons-before dashicons-editor-help"></i>
-                                </span>	                                
+                                </span>
                             </div>
                             <div class="mec-form-row">
                                 <input
@@ -789,9 +789,9 @@ $this->factory->params('footer', $javascript);
                     </div>
                 </div>
             </div>
-            
+
             <?php do_action('mec_fes_metabox_details', $post); ?>
-            
+
             <?php /* Note feature is enabled */ if($this->main->is_note_visible(get_post_status($post_id))): $note = get_post_meta($post_id, 'mec_note', true); ?>
             <div class="mec-meta-box-fields mec-fes-note" id="mec-event-note">
                 <h4><?php esc_html_e('Note to reviewer', 'modern-events-calendar-lite'); ?></h4>
@@ -800,11 +800,11 @@ $this->factory->params('footer', $javascript);
                 </div>
             </div>
             <?php endif; ?>
-            
+
         </div>
-        
+
         <div class="mec-fes-form-sdbr">
-            
+
             <!-- Guest Email and Name -->
             <?php if(!is_user_logged_in() and isset($this->settings['fes_guest_name_email']) and $this->settings['fes_guest_name_email']): ?>
             <?php
@@ -823,7 +823,7 @@ $this->factory->params('footer', $javascript);
                 </div>
             </div>
             <?php endif; ?>
-            
+
             <!-- Event Links Section -->
             <?php if(!isset($this->settings['fes_section_event_links']) or (isset($this->settings['fes_section_event_links']) and $this->settings['fes_section_event_links'])): ?>
             <?php
@@ -851,7 +851,7 @@ $this->factory->params('footer', $javascript);
                 </div>
             </div>
             <?php endif; ?>
-            
+
             <!-- Event Cost Section -->
             <?php if(!isset($this->settings['fes_section_cost']) or (isset($this->settings['fes_section_cost']) and $this->settings['fes_section_cost'])): ?>
             <?php
@@ -946,7 +946,7 @@ $this->factory->params('footer', $javascript);
                 <?php endif; ?>
             </div>
             <?php endif; ?>
-            
+
             <!-- Event Featured Image Section -->
             <?php if(!isset($this->settings['fes_section_featured_image']) or (isset($this->settings['fes_section_featured_image']) and $this->settings['fes_section_featured_image'])): ?>
             <?php
@@ -972,13 +972,13 @@ $this->factory->params('footer', $javascript);
                 <?php endif; ?>
             </div>
             <?php endif; ?>
-            
+
             <!-- Event Category Section -->
             <?php if(!isset($this->settings['fes_section_categories']) or (isset($this->settings['fes_section_categories']) and $this->settings['fes_section_categories'])): ?>
             <div class="mec-meta-box-fields mec-fes-category" id="mec-categories">
                 <h4><?php echo esc_html($this->main->m('taxonomy_categories', esc_html__('Categories', 'modern-events-calendar-lite'))); ?> <?php echo ((isset($this->settings['fes_required_category']) and $this->settings['fes_required_category']) ? '<span class="mec-required">*</span>' : ''); ?></h4>
                 <div class="mec-form-row">
-                    <?php 
+                    <?php
                         wp_list_categories(array(
                             'taxonomy' => 'mec_category',
                             'hide_empty' => false,
@@ -989,7 +989,7 @@ $this->factory->params('footer', $javascript);
                 </div>
             </div>
             <?php endif; ?>
-            
+
             <!-- Event Label Section -->
             <?php if(!isset($this->settings['fes_section_labels']) or (isset($this->settings['fes_section_labels']) and $this->settings['fes_section_labels'])): ?>
             <?php
@@ -997,7 +997,7 @@ $this->factory->params('footer', $javascript);
 
                 $labels = array();
                 if($post_labels) foreach($post_labels as $post_label) $labels[] = $post_label->term_id;
-                
+
                 $label_terms = get_terms(array('taxonomy'=>'mec_label', 'hide_empty'=>false));
             ?>
             <?php if(count($label_terms)): ?>
@@ -1015,7 +1015,7 @@ $this->factory->params('footer', $javascript);
             </div>
             <?php endif; ?>
             <?php endif; ?>
-            
+
             <!-- Event Color Section -->
             <?php if(!isset($this->settings['fes_section_event_color']) or (isset($this->settings['fes_section_event_color']) and $this->settings['fes_section_event_color'])): ?>
             <?php
@@ -1038,7 +1038,7 @@ $this->factory->params('footer', $javascript);
             </div>
             <?php endif; ?>
             <?php endif; ?>
-            
+
             <!-- Event Tags Section -->
             <?php if(!isset($this->settings['fes_section_tags']) or (isset($this->settings['fes_section_tags']) and $this->settings['fes_section_tags'])): ?>
             <?php

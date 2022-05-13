@@ -105,7 +105,7 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                     })();
                 </script>
             </div>
-        </div>                                   
+        </div>
         <?php if(!$this->getPRO()): ?>
         <div class="w-row mec-pro-notice"  style="margin-bottom: 30px;">
             <div class="w-col-sm-12">
@@ -117,7 +117,7 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                         <?php esc_html_e('GO PREMIUM', 'modern-events-calendar-lite'); ?>
                     </a>
                     <div class="info-msg-coupon">
-                        
+
                     </div>
                     <div class="socialfollow">
                         <a target="_blank" href="https://www.facebook.com/WebnusCo/" class="facebook">
@@ -150,7 +150,7 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                         <p><?php esc_html_e('In this short video, you can learn how to make an event and put a calendar on your website. Please watch this 2 minutes video to the end.' , 'modern-events-calendar-lite'); ?></p>
                     </div>
                     <div class="w-box-content mec-intro-section-ifarme">
-                        <iframe width="784" height="441" src="https://www.youtube.com/embed/FV_X341oyiw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+                        <iframe width="784" height="441" src="https://www.youtube.com/embed/FV_X341oyiw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div class="w-box-content mec-intro-section-links wp-core-ui">
                         <a class="mec-intro-section-link-tag button button-primary button-hero" href="<?php esc_html_e(admin_url( 'post-new.php?post_type=mec-events' )); ?>" target="_blank"><?php esc_html_e('Add New Event' , 'modern-events-calendar-lite'); ?>
@@ -189,13 +189,13 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                     <div class="w-box-head">
                         <?php esc_html_e('License Activation', 'modern-events-calendar-lite'); ?>
                     </div>
-                    <?php 
+                    <?php
                         if (current_user_can( 'administrator' )):
-                    ?>                    
+                    ?>
                     <div class="w-box-content">
                         <p><?php echo esc_html__('In order to use all plugin features and options, please enter your purchase code.', 'modern-events-calendar-lite'); ?></p>
                         <div class="box-mec-avtivation">
-                            <?php 
+                            <?php
                                 $mec_options = get_option('mec_options');
                                 $product_license = '';
                                 $license_status = '';
@@ -203,14 +203,14 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                                 $button_value = esc_html__('submit' , 'modern-events-calendar-lite');
 
                                 if(!empty($mec_options) and is_array($mec_options) and isset($mec_options['purchase_code'])) $product_license = $mec_options['purchase_code'];
-                                
+
                                 if(!empty($mec_options['purchase_code']) && $mec_license_status == 'active')
                                 {
                                     $license_status = 'PurchaseSuccess';
                                     $revoke = true;
                                     $class_name = 'mec_revoke';
                                     $button_value = esc_html__('revoke' , 'modern-events-calendar-lite');
-                                } 
+                                }
                                 elseif(!empty($mec_options['purchase_code']) && $mec_license_status == 'faild')
                                 {
                                     $license_status = 'PurchaseError';
@@ -244,9 +244,9 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                         <div class="w-box-content">
                             <p style="background: #f7f7f7f7;display: inline-block;padding: 17px 35px;border-radius: 3px;/* box-shadow: 0 1px 16px rgba(0,0,0,.034); */"><?php echo esc_html__('You cannot access this section.', 'modern-events-calendar-lite'); ?></p>
                         </div>
-                            <?php                            
+                            <?php
                         endif;
-                    ?>                    
+                    ?>
                 </div>
             </div>
             <?php endif; ?>
@@ -271,14 +271,14 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                         <p><?php echo '<p class="mec_dash_count">'.esc_html($user_location_count_l).'</p> '.esc_html__('Locations', 'modern-events-calendar-lite'); ?></p>
                     </div>
                 </div>
-            </div>            
+            </div>
             <div class="w-col-sm-3">
                 <div class="w-box doc">
                     <div class="w-box-child mec-count-child">
                         <p><?php echo '<p class="mec_dash_count">'.esc_html($user_organizer_count_l).'</p> '. esc_html__('Organizers', 'modern-events-calendar-lite'); ?></p>
                     </div>
                 </div>
-            </div>           
+            </div>
             <?php endif; ?>
         </div>
         <?php if($box_stats): ?>
@@ -336,7 +336,7 @@ $box_stats = apply_filters('mec_dashboard_box_stats', true);
                             }
                             echo '<canvas id="mec_gateways_chart" width="300" height="300"></canvas>';
 
-                            $this->getFactory()->params('footer', '<script type="text/javascript">
+                            $this->getFactory()->params('footer', '<script>
                             jQuery(document).ready(function()
                             {
                                 var ctx = document.getElementById("mec_gateways_chart");

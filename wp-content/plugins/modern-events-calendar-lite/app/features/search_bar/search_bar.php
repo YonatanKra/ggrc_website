@@ -54,7 +54,7 @@ else
 $output .= '</form></div>';
 echo MEC_kses::form($output);
 ?>
-<script type="text/javascript">
+<script>
 jQuery(document).ready(function($) {
     jQuery("#keyword").typeWatch(
     {

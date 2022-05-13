@@ -14,26 +14,26 @@ $date_format = get_option('date_format');
 $display_date = (isset($this->settings['fes_display_date_in_list']) ? (boolean) $this->settings['fes_display_date_in_list'] : false);
 
 // Generating javascript code of countdown module
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery(".mec-fes-event-remove").on("click", function(event)
     {
         var id = jQuery(this).data("id");
         var confirmed = jQuery(this).data("confirmed");
-        
+
         if(confirmed == "0")
         {
             jQuery(this).data("confirmed", "1");
             jQuery(this).addClass("mec-fes-waiting");
             jQuery(this).text("'.esc_attr__('Click again to remove!', 'modern-events-calendar-lite').'");
-            
+
             return false;
         }
 
         // Add loading class to the row
         jQuery("#mec_fes_event_"+id).addClass("loading");
-        
+
         jQuery.ajax(
         {
             type: "POST",
@@ -73,7 +73,7 @@ $this->factory->params('footer', $javascript);
     </div>
     <?php do_action('mec_fes_list'); ?>
     <ul>
-        <?php 
+        <?php
             while($query->have_posts()): $query->the_post();
             // Show Post Status
             global $post;
@@ -90,7 +90,7 @@ $this->factory->params('footer', $javascript);
                 ), $date_format)); ?>)</span>
                 <?php endif; ?>
             </span>
-            <?php 
+            <?php
                 $event_status = get_post_status(get_the_ID());
                 if(isset($event_status) and strtolower($event_status) == 'publish'):
             ?>
@@ -103,7 +103,7 @@ $this->factory->params('footer', $javascript);
             <?php endif; ?>
             <span class="mec-fes-event-view mec-event-status <?php echo esc_attr($status['status_class']); ?>"><?php echo esc_html($status['label']); ?></span>
             <div class="mec-fes-export-wrapper mec-modal-wrap lity-hide" id="mec-fes-export-wrapper-<?php echo get_the_ID(); ?>" data-event-id="<?php echo get_the_ID(); ?>">
-                <div class="mec-fes-btn-date">                    
+                <div class="mec-fes-btn-date">
                     <?php $mec_repeat_info = get_post_meta(get_the_ID(), 'mec_repeat', true); if(isset($mec_repeat_info['status']) and $mec_repeat_info['status']): ?>
                         <ul class="mec-export-list-wrapper">
                             <?php

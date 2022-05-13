@@ -22,7 +22,7 @@ if(count($this->events))
     // Include Map Assets such as JS and CSS libraries
     $this->main->load_map_assets(false, $settings);
 
-    $javascript = '<script type="text/javascript">
+    $javascript = '<script>
     jQuery(document).ready(function()
     {
         jQuery("#mec_map_canvas'.esc_js($this->id).'").mecGoogleMaps(

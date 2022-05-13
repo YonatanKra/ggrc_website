@@ -10,30 +10,8 @@ Version: 1.0
 
 /* Parent stylesheet should be loaded from functions.php not using @import */
 
-@import url('https://fonts.googleapis.com/css?family=Arvo&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-
-body {
-    color: #333333;
-}
-
-p {
-    font-family: Lato;
-    font-style: normal;
-    font-size: 16px;
-    line-height: 24px;
-}
-
 p.small_header {
     font-weight: bold;
-}
-
-h3 {
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 32px;
 }
 
 .small_header {
@@ -61,6 +39,27 @@ h3 {
 	padding-top: 0;
 }
 
+/* HEADER */
+
+.unclickable > a:hover {
+	cursor: default;
+}
+
+/* Initiative - Single */
+
+.box.contact {
+	display: flex;
+}
+
+.box.contact .box-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.box.contact .box-content span {
+	width: 100%;
+}
+
 /* FOOTER */
 
 .elementor-location-footer .menu-item {
@@ -75,4 +74,26 @@ h3 {
 
 .elementor-location-footer .menu-item .elementor-item {
 	justify-content: center;
+}
+
+/* Gravity Forms - General */
+
+.gform_wrapper .gform_heading {
+	margin-bottom: 4rem;
+}
+
+.gform_wrapper .gform_body .gfield {
+	margin-bottom: 2rem;
+}
+
+.gform_wrapper .gform_body .gfield .gfield_label .gfield_required {
+	color: #fb2727;
+	margin-left: 0.4rem;
+}
+
+.gform_wrapper .gform_footer .gform_button {
+	font-size: inherit;
+	letter-spacing: inherit;
+	padding: 20px 40px;
+	text-transform: capitalize;
 }

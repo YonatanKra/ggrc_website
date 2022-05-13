@@ -25,16 +25,16 @@ $navigator_html = '';
 if($this->next_previous_button)
 {
     // Show previous year handler if showing past events allowed
-    if(!isset($this->atts['show_past_events']) or 
+    if(!isset($this->atts['show_past_events']) or
        (isset($this->atts['show_past_events']) and $this->atts['show_past_events']) or
        (isset($this->atts['show_past_events']) and !$this->atts['show_past_events'] and date('Y', $_1year_before) >= current_time('Y'))
     )
     {
         $navigator_html .= '<div class="mec-previous-year mec-load-year mec-color-hover" data-mec-year="'.date('Y', $_1year_before).'"><a href="#" class="mec-load-month-link"><i class="mec-sl-angle-left"></i> '.esc_html($this->main->date_i18n('Y', $_1year_before)).'</a></div>';
     }
-    
+
     $navigator_html .= '<h2>'.esc_html($this->main->date_i18n('Y', $current_year_time)).'</h2>';
-    
+
     // Show next month handler if needed
     if(!$this->show_only_expired_events or
        ($this->show_only_expired_events and strtotime(date('Y-01-01', $_1year_after)) <= time())
@@ -61,7 +61,7 @@ $sed_method = $this->sed_method;
 if($sed_method == 'new') $sed_method = '0';
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_yearly_view_year_'.esc_js($this->id).'_'.date('Y', $current_year_time).'").mecYearlyView(
@@ -102,9 +102,9 @@ do_action('mec_start_skin', $this->id);
 do_action('mec_yearly_skin_head');
 ?>
 <div id="mec_skin_<?php echo esc_attr($this->id); ?>" class="mec-wrap <?php echo esc_attr($this->html_class . ' ' . $set_dark); ?>">
-    
+
     <?php if($this->sf_status) echo MEC_kses::full($this->sf_search_form()); ?>
-    
+
     <div class="mec-wrap mec-yearly-view-wrap">
 
         <?php if($this->next_previous_button): ?>
@@ -129,5 +129,5 @@ do_action('mec_yearly_skin_head');
         <div class="clearfix"></div>
 
     </div>
-    
+
 </div>

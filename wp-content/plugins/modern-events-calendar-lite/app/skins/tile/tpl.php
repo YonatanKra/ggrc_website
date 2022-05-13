@@ -31,16 +31,16 @@ $navigator_html = '';
 if($this->next_previous_button)
 {
     // Show previous month handler if showing past events allowed
-    if(!isset($this->atts['show_past_events']) or 
+    if(!isset($this->atts['show_past_events']) or
        (isset($this->atts['show_past_events']) and $this->atts['show_past_events']) or
        (isset($this->atts['show_past_events']) and !$this->atts['show_past_events'] and strtotime(date('Y-m-t', $_1month_before)) >= time())
     )
     {
         $navigator_html .= '<div class="mec-previous-month mec-load-month mec-previous-month" data-mec-year="'.date('Y', $_1month_before).'" data-mec-month="'.date('m', $_1month_before).'"><a href="#" class="mec-load-month-link"><i class="mec-sl-angle-left"></i> '.esc_html($this->main->date_i18n('F', $_1month_before)).'</a></div>';
     }
-    
+
     $navigator_html .= '<div class="mec-calendar-header"><h2>'.esc_html($this->main->date_i18n('F Y', $current_month_time)).'</h2></div>';
-    
+
     // Show next month handler if needed
     if(!$this->show_only_expired_events or
        ($this->show_only_expired_events and strtotime(date('Y-m-01', $_1month_after)) <= time())
@@ -67,7 +67,7 @@ $sed_method = $this->sed_method;
 if($sed_method == 'new') $sed_method = '0';
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_tile_month_'.esc_js($this->id).'_'.date('Ym', $current_month_time).'").mecTileView(
@@ -116,9 +116,9 @@ do_action('mec_start_skin', $this->id);
 do_action('mec_tile_head');
 ?>
 <div id="mec_skin_<?php echo esc_attr($this->id); ?>" class="mec-wrap <?php echo esc_attr($event_colorskin . ' ' . $this->html_class . ' ' . $set_dark); ?>">
-    
+
     <?php if($this->sf_status) echo MEC_kses::full($this->sf_search_form()); ?>
-    
+
     <div class="mec-tile">
         <div class="mec-calendar-topsec">
             <div class="mec-clear">
@@ -137,10 +137,10 @@ do_action('mec_tile_head');
                 </div>
 
                 <?php if($this->load_method === 'list' and $this->load_more_button and $this->found >= $this->limit): ?>
-                <div class="mec-load-more-wrap"><div class="mec-load-more-button <?php echo ($this->has_more_events ? '' : 'mec-util-hidden'); ?>"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
+                <div class="mec-load-more-wrap"><div tabindex="0" class="mec-load-more-button <?php echo ($this->has_more_events ? '' : 'mec-util-hidden'); ?>"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
                 <?php endif; ?>
             </div>
         </div>
     </div>
-    
+
 </div>

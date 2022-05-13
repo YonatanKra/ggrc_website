@@ -51,7 +51,7 @@ if($this->style == 'colorful')
         $organizer_id = $this->main->get_master_organizer_id($event);
         $organizer = ($organizer_id ? $this->main->get_organizer_data($organizer_id) : array());
 
-        $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+        $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
         $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
         $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
         $event_start_date = !empty($event->date['start']['date']) ? $event->date['start']['date'] : '';
@@ -292,7 +292,7 @@ if(isset($this->map_on_top) and $this->map_on_top and isset($map_events) and !em
     // It changing geolocation focus, because after done filtering, if it doesn't. then the map position will not set correctly.
     if((isset($_REQUEST['action']) and sanitize_text_field($_REQUEST['action']) == 'mec_grid_load_more') and isset($_REQUEST['sf'])) $this->geolocation_focus = true;
 
-    $map_javascript = '<script type="text/javascript">
+    $map_javascript = '<script>
     var mecmap'.esc_js($this->id).';
     jQuery(document).ready(function()
     {
@@ -312,7 +312,7 @@ if(isset($this->map_on_top) and $this->map_on_top and isset($map_events) and !em
             geolocation: "'.esc_js($this->geolocation).'",
             geolocation_focus: '.esc_js($this->geolocation_focus).',
         });
-        
+
         var mecinterval'.esc_js($this->id).' = setInterval(function()
         {
             if(jQuery("#mec_googlemap_canvas'.esc_js($this->id).'").is(":visible"))

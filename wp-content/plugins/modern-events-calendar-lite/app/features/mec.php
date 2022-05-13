@@ -587,7 +587,7 @@ class MEC_feature_mec extends MEC_base
         if(!$this->getPRO()) add_submenu_page('mec-intro', esc_html__('MEC - Go Pro', 'modern-events-calendar-lite'), esc_html__('Go Pro', 'modern-events-calendar-lite'), 'manage_options', 'MEC-go-pro', array($this, 'go_pro'));
         do_action('after_mec_submenu_action');
     }
-    
+
     /**
      * Get Wizard page
      * @author Webnus <info@webnus.biz>
@@ -734,7 +734,7 @@ class MEC_feature_mec extends MEC_base
         do_action('mec_shortcode_filters_save', $post_id, $terms );
 
         $mec = (isset($_POST['mec']) ? $this->main->sanitize_deep_array($_POST['mec']) : array());
-        
+
         $skin = (isset($mec['skin']) ? sanitize_text_field($mec['skin']) : '');
         $start_date_type = ((isset($mec['sk-options'][$skin]) and isset($mec['sk-options'][$skin]['start_date_type'])) ? sanitize_text_field($mec['sk-options'][$skin]['start_date_type']) : 'today');
         $end_date_type = ((isset($mec['sk-options'][$skin]) and isset($mec['sk-options'][$skin]['end_date_type'])) ? sanitize_text_field($mec['sk-options'][$skin]['end_date_type']) : 'date');
@@ -1475,7 +1475,7 @@ class MEC_feature_mec extends MEC_base
         echo '<div class="mec-metabox-footer"><a href="https://webnus.net/blog/" target="_blank">'.esc_html__('Blog', 'modern-events-calendar-lite').'<span aria-hidden="true" class="dashicons dashicons-external"></span></a><a href="https://webnus.net/dox/modern-events-calendar/" target="_blank">'.esc_html__('Help', 'modern-events-calendar-lite').'<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
         if($this->getPRO()) echo '<a href="https://webnus.net/mec-purchase" target="_blank">'.esc_html__('Go Pro', 'modern-events-calendar-lite').'<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
         echo '</div>';
-    }       
+    }
 
     public function dashboard_widget_total_booking_ajax_handler()
     {
@@ -1483,7 +1483,7 @@ class MEC_feature_mec extends MEC_base
         $end = isset($_REQUEST['end']) ? sanitize_text_field($_REQUEST['end']) : date('Y-m-d');
         $type = isset($_REQUEST['type']) ? sanitize_text_field($_REQUEST['type']) : 'daily';
         $chart = isset($_REQUEST['chart']) ? sanitize_text_field($_REQUEST['chart']) : 'bar';
-        
+
         ob_start();
         $this->display_total_booking_chart($start, $end, $type, $chart);
         $r = ob_get_clean();
@@ -1515,7 +1515,7 @@ class MEC_feature_mec extends MEC_base
         $currency = $this->main->get_currency_sign();
 
         echo '<canvas id="mec_total_bookings_chart" width="600" height="300"></canvas>';
-        echo '<script type="text/javascript">
+        echo '<script>
             jQuery(document).ready(function()
             {
                 var ctx = document.getElementById("mec_total_bookings_chart");
@@ -1582,7 +1582,7 @@ class MEC_feature_mec extends MEC_base
                                 'type' => 'monthly',
                             ))); ?>"><?php esc_html_e('Last Year', 'modern-events-calendar-lite'); ?></a></li>
                         </ul>
-                        <script>                        
+                        <script>
                         </script>
                         <?php
                             $start = date('Y-m-d', strtotime('-15 days'));

@@ -24,7 +24,7 @@ if($sed_method == 'new') $sed_method = '0';
 
 // Generating javascript code tpl
 $loop = ($this->found > 1 ? $this->loop : false);
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_'.esc_js($this->id).'").mecCarouselView(

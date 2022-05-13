@@ -42,7 +42,7 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
 
                 $start_time = (isset($event->data->time) ? $event->data->time['start'] : '');
                 $end_time = (isset($event->data->time) ? $event->data->time['end'] : '');
-                $event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+                $event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
 
                 // MEC Schema
                 do_action('mec_schema', $event);
@@ -77,6 +77,6 @@ $reason_for_cancellation = isset($this->skin_options['reason_for_cancellation'])
     <span class="mec-yearly-max" data-count="<?php echo esc_attr($count); ?>"></span>
 
     <?php if($count > 20): ?>
-    <div class="mec-load-more-wrap"><div class="mec-load-more-button"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
+    <div class="mec-load-more-wrap"><div tabindex="0" class="mec-load-more-button"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
     <?php endif; ?>
 </div>

@@ -69,7 +69,7 @@ if(isset($_SERVER['HTTP_USER_AGENT']) and strpos($_SERVER['HTTP_USER_AGENT'], 'S
 if(isset($_SERVER['HTTP_USER_AGENT']) and strpos($_SERVER['HTTP_USER_AGENT'], 'Edge') == true) $gmt_offset = '';
 
 // Generating javascript code of countdown module
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_available_spot'.esc_js($this->id).'").mecCountDown(
@@ -91,7 +91,7 @@ $occurrence_time = isset($event->date['start']['timestamp']) ? $event->date['sta
 
 $book = $this->getBook();
 $availability = $book->get_tickets_availability($event->data->ID, $occurrence_time);
-$event_color = isset($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
+$event_color = isset($event->data->meta['mec_color']) && !empty($event->data->meta['mec_color']) ? '<span class="event-color" style="background: #'.esc_attr($event->data->meta['mec_color']).'"></span>' : '';
 
 $spots = 0;
 $total_spots = -1;

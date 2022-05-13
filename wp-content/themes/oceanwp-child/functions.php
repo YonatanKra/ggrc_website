@@ -36,11 +36,9 @@ add_action( 'wp_enqueue_scripts', 'theme_assets' );
 function theme_assets() {
 	wp_enqueue_script( 'bootstrap_js', get_stylesheet_directory_uri() . '/assets/bootstrap/js/bootstrap.min.js' );
     wp_enqueue_style( 'bootstrap_css', get_stylesheet_directory_uri() . '/assets/bootstrap/css/bootstrap.min.css' );
-
-	wp_register_style( 'font-awesome', get_stylesheet_directory_uri() . '/assets/fontawesome-free-6.0.0-web/css/all.css' );
+	
 	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
 
-    wp_enqueue_style( 'font-awesome' );
 	wp_enqueue_style( 'template-styling');
 }
 
@@ -58,6 +56,30 @@ function remove_admin_bar() {
     show_admin_bar(false);
   }
 }
+
+/* General - Remove GF Nag */
+
+function remove_gravity_forms_nag() {
+
+    update_option( 'rg_gforms_message', '' );
+    remove_action( 'after_plugin_row_gravityforms/gravityforms.php', array( 'GFForms', 'plugin_row' ) );
+}
+
+add_action( 'admin_init', 'remove_gravity_forms_nag' );
+
+/* General - Auto Re-direct */
+
+function add_login_check()
+{
+    if (is_user_logged_in()) {
+        if (is_page(1770)){
+            wp_redirect( $url . '/forums/users/ggrc_admin/favorites/');
+            exit; 
+        }
+    }
+}
+
+add_action('wp', 'add_login_check');
 
 /* General - Remove Confirmation Log Out */
 
@@ -90,6 +112,37 @@ add_filter( 'ocean_post_layout_class', 'my_post_layout_class', 20 );
 /* BB Press - Remove Breadcrumbs */
 
 add_filter( 'bbp_no_breadcrumb', '__return_true' );
+
+/* Elementor - Escape Remove */
+
+add_filter( 'elementor_pro/dynamic_tags/shortcode/should_escape', '__return_false' ); 
+
+/* Shortcode - Display Initative People */
+
+add_shortcode('repeater', 'wporg_shortcode');
+
+function wporg_shortcode( $atts = [], $content = null) {
+
+	$repeater  = get_post_meta( get_the_ID() , 'initiative_contact', true);
+
+	ob_start();
+	
+	if(!empty($repeater) ) {
+			
+		echo '<div class="box contact">';
+		while( the_repeater_field('initiative_contact', get_the_ID()) ) { 
+			echo '<div class="box-content">';
+			echo '<h3 class="as-what-we-do-head">' . get_sub_field('initiative_contact_name') . '</h3>';
+			echo '<span>' . get_sub_field('initiative_contact_title') . '</span>';
+			echo '<span>' . get_sub_field('initiative_contact_organisation') . '</span>';
+			echo '<span>' . get_sub_field('initiative_contact_email') . '</span>';
+			echo '</div>';
+		}
+		echo '</div>';
+	}
+
+	return ob_get_clean();
+}
 
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);

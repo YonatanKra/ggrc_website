@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Modern Events Calendar Lite\n"
-"POT-Creation-Date: 2022-05-02 16:50+0430\n"
-"PO-Revision-Date: 2022-05-02 16:54+0430\n"
+"POT-Creation-Date: 2022-05-10 23:23+0430\n"
+"PO-Revision-Date: 2022-05-10 23:26+0430\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -130,24 +130,24 @@ msgid "Layout"
 msgstr ""
 
 #: app/core/src/Books/Book.php:106 app/features/ix.php:275
-#: app/libraries/main.php:7828 app/libraries/main.php:7855
+#: app/libraries/main.php:7861 app/libraries/main.php:7888
 msgid "Rejected"
 msgstr "Odmítnuto"
 
 #: app/core/src/Books/Book.php:111 app/features/ix.php:274
-#: app/libraries/main.php:3192 app/libraries/main.php:7827
-#: app/libraries/main.php:7847
+#: app/libraries/main.php:3192 app/libraries/main.php:7860
+#: app/libraries/main.php:7880
 msgid "Confirmed"
 msgstr "Potvrzeno"
 
 #: app/core/src/Books/Book.php:117 app/features/mec/settings.php:780
-#: app/libraries/main.php:7829 app/libraries/main.php:7851
+#: app/libraries/main.php:7862 app/libraries/main.php:7884
 msgid "Pending"
 msgstr "Nevyřízený"
 
 #: app/core/src/Books/Book.php:186 app/features/ix.php:280
 #: app/features/labels.php:119 app/features/labels.php:145
-#: app/libraries/main.php:7876
+#: app/libraries/main.php:7909
 msgid "Canceled"
 msgstr "Zrušená"
 
@@ -158,11 +158,11 @@ msgstr "Zrušená"
 #: app/features/mec/notifications.php:1934
 #: app/features/mec/notifications.php:1957 app/features/mec/settings.php:1643
 #: app/features/mec/settings.php:1665 app/features/mec/single.php:602
-#: app/features/mec/single.php:624 app/libraries/main.php:7875
+#: app/features/mec/single.php:624 app/libraries/main.php:7908
 msgid "Verified"
 msgstr "Ověřeno"
 
-#: app/core/src/Books/Book.php:197 app/libraries/main.php:7877
+#: app/core/src/Books/Book.php:197 app/libraries/main.php:7910
 msgid "Waiting"
 msgstr "Čekající"
 
@@ -199,7 +199,7 @@ msgstr "Název vstupenky"
 #: app/features/profile/profile.php:206 app/features/speakers.php:134
 #: app/features/speakers.php:211 app/libraries/main.php:650
 #: app/libraries/main.php:2058 app/libraries/main.php:2127
-#: app/libraries/main.php:4030 app/libraries/notifications.php:2157
+#: app/libraries/main.php:4034 app/libraries/notifications.php:2157
 #: app/modules/booking/steps/form.php:69 app/modules/booking/steps/form.php:223
 #: app/skins/single.php:1415 app/skins/single.php:1482
 #: app/skins/single/default.php:345 app/skins/single/m1.php:141
@@ -222,21 +222,21 @@ msgstr "Vložte štítek pro toto pole"
 #: app/core/src/Forms/FormFields.php:396 app/core/src/Forms/FormFields.php:442
 #: app/core/src/Forms/FormFields.php:488 app/core/src/Forms/FormFields.php:544
 #: app/core/src/Forms/FormFields.php:596 app/features/organizers.php:340
-#: app/features/organizers.php:348 app/libraries/main.php:3938
-#: app/libraries/main.php:3969 app/libraries/main.php:3999
-#: app/libraries/main.php:4029 app/libraries/main.php:4060
-#: app/libraries/main.php:4091 app/libraries/main.php:4121
-#: app/libraries/main.php:4152 app/libraries/main.php:4183
-#: app/libraries/main.php:4221 app/libraries/main.php:4245
-#: app/libraries/main.php:4293 app/libraries/main.php:4341
-#: app/libraries/main.php:4399 app/libraries/main.php:4449
+#: app/features/organizers.php:348 app/libraries/main.php:3942
+#: app/libraries/main.php:3973 app/libraries/main.php:4003
+#: app/libraries/main.php:4033 app/libraries/main.php:4064
+#: app/libraries/main.php:4095 app/libraries/main.php:4125
+#: app/libraries/main.php:4156 app/libraries/main.php:4187
+#: app/libraries/main.php:4225 app/libraries/main.php:4249
+#: app/libraries/main.php:4297 app/libraries/main.php:4345
+#: app/libraries/main.php:4403 app/libraries/main.php:4453
 msgid "Sort"
 msgstr "Seřadit"
 
 #: app/core/src/Forms/FormFields.php:52 app/core/src/Forms/SettingsForm.php:88
 #: app/features/events.php:2731 app/features/events.php:2820
 #: app/features/mec/booking.php:797 app/features/mec/booking.php:895
-#: app/features/mec/single.php:306 app/libraries/main.php:3939
+#: app/features/mec/single.php:306 app/libraries/main.php:3943
 #: app/libraries/skins.php:1411
 msgid "Text"
 msgstr "Text"
@@ -247,13 +247,13 @@ msgstr "Text"
 #: app/core/src/Forms/FormFields.php:286 app/core/src/Forms/FormFields.php:317
 #: app/core/src/Forms/FormFields.php:348 app/core/src/Forms/FormFields.php:403
 #: app/core/src/Forms/FormFields.php:449 app/core/src/Forms/FormFields.php:495
-#: app/core/src/Forms/FormFields.php:551 app/libraries/main.php:3946
-#: app/libraries/main.php:3977 app/libraries/main.php:4007
-#: app/libraries/main.php:4037 app/libraries/main.php:4068
-#: app/libraries/main.php:4099 app/libraries/main.php:4129
-#: app/libraries/main.php:4160 app/libraries/main.php:4192
-#: app/libraries/main.php:4253 app/libraries/main.php:4301
-#: app/libraries/main.php:4349 app/libraries/main.php:4407
+#: app/core/src/Forms/FormFields.php:551 app/libraries/main.php:3950
+#: app/libraries/main.php:3981 app/libraries/main.php:4011
+#: app/libraries/main.php:4041 app/libraries/main.php:4072
+#: app/libraries/main.php:4103 app/libraries/main.php:4133
+#: app/libraries/main.php:4164 app/libraries/main.php:4196
+#: app/libraries/main.php:4257 app/libraries/main.php:4305
+#: app/libraries/main.php:4353 app/libraries/main.php:4411
 msgid "Required Field"
 msgstr "Požadovaná pole"
 
@@ -272,14 +272,14 @@ msgstr "Požadovaná pole"
 #: app/features/organizers.php:340 app/features/organizers.php:349
 #: app/libraries/hourlyschedule.php:53 app/libraries/hourlyschedule.php:74
 #: app/libraries/hourlyschedule.php:102 app/libraries/hourlyschedule.php:130
-#: app/libraries/hourlyschedule.php:154 app/libraries/main.php:3949
-#: app/libraries/main.php:3980 app/libraries/main.php:4010
-#: app/libraries/main.php:4040 app/libraries/main.php:4071
-#: app/libraries/main.php:4102 app/libraries/main.php:4132
-#: app/libraries/main.php:4163 app/libraries/main.php:4201
-#: app/libraries/main.php:4223 app/libraries/main.php:4256
-#: app/libraries/main.php:4304 app/libraries/main.php:4359
-#: app/libraries/main.php:4410 app/libraries/main.php:4450
+#: app/libraries/hourlyschedule.php:154 app/libraries/main.php:3953
+#: app/libraries/main.php:3984 app/libraries/main.php:4014
+#: app/libraries/main.php:4044 app/libraries/main.php:4075
+#: app/libraries/main.php:4106 app/libraries/main.php:4136
+#: app/libraries/main.php:4167 app/libraries/main.php:4205
+#: app/libraries/main.php:4227 app/libraries/main.php:4260
+#: app/libraries/main.php:4308 app/libraries/main.php:4363
+#: app/libraries/main.php:4414 app/libraries/main.php:4454
 #: app/libraries/ticketVariations.php:72
 msgid "Remove"
 msgstr "Odstranit"
@@ -290,13 +290,13 @@ msgstr "Odstranit"
 #: app/core/src/Forms/FormFields.php:292 app/core/src/Forms/FormFields.php:323
 #: app/core/src/Forms/FormFields.php:354 app/core/src/Forms/FormFields.php:409
 #: app/core/src/Forms/FormFields.php:455 app/core/src/Forms/FormFields.php:508
-#: app/core/src/Forms/FormFields.php:557 app/libraries/main.php:3952
-#: app/libraries/main.php:3983 app/libraries/main.php:4013
-#: app/libraries/main.php:4043 app/libraries/main.php:4074
-#: app/libraries/main.php:4105 app/libraries/main.php:4135
-#: app/libraries/main.php:4166 app/libraries/main.php:4204
-#: app/libraries/main.php:4259 app/libraries/main.php:4307
-#: app/libraries/main.php:4362 app/libraries/main.php:4413
+#: app/core/src/Forms/FormFields.php:557 app/libraries/main.php:3956
+#: app/libraries/main.php:3987 app/libraries/main.php:4017
+#: app/libraries/main.php:4047 app/libraries/main.php:4078
+#: app/libraries/main.php:4109 app/libraries/main.php:4139
+#: app/libraries/main.php:4170 app/libraries/main.php:4208
+#: app/libraries/main.php:4263 app/libraries/main.php:4311
+#: app/libraries/main.php:4366 app/libraries/main.php:4417
 msgid "Insert a label for this field"
 msgstr "Vložte štítek pro toto pole"
 
@@ -313,24 +313,24 @@ msgid "MEC Last Name"
 msgstr "MEC Jméno"
 
 #: app/core/src/Forms/FormFields.php:93 app/features/events.php:2729
-#: app/features/mec/booking.php:795 app/libraries/main.php:3970
+#: app/features/mec/booking.php:795 app/libraries/main.php:3974
 msgid "MEC Name"
 msgstr "MEC Jméno"
 
 #: app/core/src/Forms/FormFields.php:158 app/core/src/Forms/SettingsForm.php:83
 #: app/features/events.php:2730 app/features/mec/booking.php:796
-#: app/libraries/main.php:4000
+#: app/libraries/main.php:4004
 msgid "MEC Email"
 msgstr "MEC Email"
 
 #: app/core/src/Forms/FormFields.php:219 app/features/mec/single.php:308
-#: app/libraries/main.php:4061
+#: app/libraries/main.php:4065
 msgid "URL"
 msgstr ""
 
 #: app/core/src/Forms/FormFields.php:250
 #: app/core/src/Forms/SettingsForm.php:108 app/features/events.php:2735
-#: app/features/mec/booking.php:801 app/libraries/main.php:4092
+#: app/features/mec/booking.php:801 app/libraries/main.php:4096
 msgid "File"
 msgstr "Soubor"
 
@@ -340,7 +340,7 @@ msgstr "Soubor"
 #: app/features/events.php:2822 app/features/fes.php:280
 #: app/features/mec/booking.php:799 app/features/mec/booking.php:897
 #: app/features/mec/single.php:309 app/features/profile/profile.php:59
-#: app/features/wc.php:89 app/libraries/main.php:4122
+#: app/features/wc.php:89 app/libraries/main.php:4126
 #: app/libraries/skins.php:1323 app/modules/booking/steps/tickets.php:137
 #: app/modules/next-event/details.php:145 app/skins/single.php:1207
 #: app/skins/single/default.php:169 app/skins/single/m1.php:40
@@ -354,7 +354,7 @@ msgstr "Datum"
 #: app/features/mec/booking.php:898 app/features/mec/single.php:310
 #: app/features/organizers.php:104 app/features/organizers.php:149
 #: app/features/speakers.php:126 app/features/speakers.php:207
-#: app/features/speakers.php:294 app/libraries/main.php:4153
+#: app/features/speakers.php:294 app/libraries/main.php:4157
 msgid "Tel"
 msgstr "Tel"
 
@@ -362,7 +362,7 @@ msgstr "Tel"
 #: app/core/src/Forms/SettingsForm.php:113 app/features/events.php:2736
 #: app/features/events.php:2824 app/features/mec/booking.php:802
 #: app/features/mec/booking.php:899 app/features/mec/single.php:311
-#: app/libraries/main.php:4184
+#: app/libraries/main.php:4188
 msgid "Textarea"
 msgstr "Plocha textu"
 
@@ -370,11 +370,11 @@ msgstr "Plocha textu"
 #: app/core/src/Forms/SettingsForm.php:138 app/features/events.php:2741
 #: app/features/events.php:2829 app/features/mec/booking.php:807
 #: app/features/mec/booking.php:904 app/features/mec/settings.php:366
-#: app/features/mec/single.php:312 app/libraries/main.php:4222
+#: app/features/mec/single.php:312 app/libraries/main.php:4226
 msgid "Paragraph"
 msgstr "Paragraf"
 
-#: app/core/src/Forms/FormFields.php:378 app/libraries/main.php:4228
+#: app/core/src/Forms/FormFields.php:378 app/libraries/main.php:4232
 msgid "HTML and shortcode are allowed."
 msgstr "HTML a zkrácené kódy jsou povoleny."
 
@@ -382,13 +382,13 @@ msgstr "HTML a zkrácené kódy jsou povoleny."
 #: app/core/src/Forms/SettingsForm.php:118 app/features/events.php:2737
 #: app/features/events.php:2825 app/features/mec/booking.php:131
 #: app/features/mec/booking.php:803 app/features/mec/booking.php:900
-#: app/features/mec/single.php:313 app/libraries/main.php:4246
+#: app/features/mec/single.php:313 app/libraries/main.php:4250
 msgid "Checkboxes"
 msgstr "Zatržítko"
 
 #: app/core/src/Forms/FormFields.php:421 app/core/src/Forms/FormFields.php:467
-#: app/core/src/Forms/FormFields.php:520 app/libraries/main.php:4273
-#: app/libraries/main.php:4321 app/libraries/main.php:4376
+#: app/core/src/Forms/FormFields.php:520 app/libraries/main.php:4277
+#: app/libraries/main.php:4325 app/libraries/main.php:4380
 msgid "Option"
 msgstr "Možnost"
 
@@ -396,7 +396,7 @@ msgstr "Možnost"
 #: app/core/src/Forms/SettingsForm.php:123 app/features/events.php:2738
 #: app/features/events.php:2826 app/features/mec/booking.php:804
 #: app/features/mec/booking.php:901 app/features/mec/single.php:314
-#: app/libraries/main.php:4294
+#: app/libraries/main.php:4298
 msgid "Radio Buttons"
 msgstr "Přepínače"
 
@@ -485,7 +485,7 @@ msgstr "Přepínače"
 #: app/features/mec/meta_boxes/search_form.php:1094
 #: app/features/mec/meta_boxes/search_form.php:1116
 #: app/features/mec/single.php:315 app/features/popup/settings.php:345
-#: app/libraries/main.php:4342
+#: app/libraries/main.php:4346
 msgid "Dropdown"
 msgstr "Rozbalovací"
 
@@ -496,44 +496,44 @@ msgstr ""
 #: app/core/src/Forms/FormFields.php:545
 #: app/core/src/Forms/SettingsForm.php:133 app/features/events.php:2740
 #: app/features/events.php:2828 app/features/mec/booking.php:806
-#: app/features/mec/booking.php:903 app/libraries/main.php:4400
+#: app/features/mec/booking.php:903 app/libraries/main.php:4404
 msgid "Agreement"
 msgstr "Smlouva"
 
-#: app/core/src/Forms/FormFields.php:557 app/libraries/main.php:4413
+#: app/core/src/Forms/FormFields.php:557 app/libraries/main.php:4417
 #, fuzzy, php-format
 #| msgid "Integrate with MEC"
 msgid "I agree with %s"
 msgstr "Integrovat s MEC"
 
-#: app/core/src/Forms/FormFields.php:557 app/libraries/main.php:4413
+#: app/core/src/Forms/FormFields.php:557 app/libraries/main.php:4417
 #, php-format
 msgid "Instead of %s, the page title with a link will be show."
 msgstr "Místo%s se zobrazí název stránky s odkazem."
 
 #: app/core/src/Forms/FormFields.php:559 app/features/mec/settings.php:1189
-#: app/libraries/main.php:4415
+#: app/libraries/main.php:4419
 msgid "Agreement Page"
 msgstr "Stránka smlouvy"
 
 #: app/core/src/Forms/FormFields.php:570 app/features/profile/profile.php:62
-#: app/libraries/main.php:4424
+#: app/libraries/main.php:4428
 msgid "Status"
 msgstr "Stav"
 
-#: app/core/src/Forms/FormFields.php:572 app/libraries/main.php:4426
+#: app/core/src/Forms/FormFields.php:572 app/libraries/main.php:4430
 msgid "Checked by default"
 msgstr "Ve výchozím nastavení zaškrtnuto"
 
-#: app/core/src/Forms/FormFields.php:573 app/libraries/main.php:4427
+#: app/core/src/Forms/FormFields.php:573 app/libraries/main.php:4431
 msgid "Unchecked by default"
 msgstr "Ve výchozím nastavení není zaškrtnuto"
 
-#: app/core/src/Forms/FormFields.php:598 app/libraries/main.php:4451
+#: app/core/src/Forms/FormFields.php:598 app/libraries/main.php:4455
 msgid "Insert a label for this option"
 msgstr "Vložte štítek pro tuto možnost"
 
-#: app/core/src/Forms/FormFields.php:606 app/libraries/main.php:9104
+#: app/core/src/Forms/FormFields.php:606 app/libraries/main.php:9137
 msgid "Mapping with Profile Fields"
 msgstr ""
 
@@ -908,8 +908,8 @@ msgstr "Skrýt místo"
 #: app/features/mec/settings.php:1209 app/features/mec/settings.php:1272
 #: app/features/mec/single.php:464 app/features/mec/single.php:517
 #: app/features/popup/settings.php:217 app/features/popup/settings.php:256
-#: app/features/search.php:91 app/libraries/main.php:7478
-#: app/libraries/main.php:7539 app/libraries/search.php:256
+#: app/features/search.php:91 app/libraries/main.php:7511
+#: app/libraries/main.php:7572 app/libraries/search.php:256
 #: app/libraries/skins.php:1124 app/skins/single.php:1111
 #: app/skins/single/default.php:297 app/skins/single/m1.php:231
 #: app/skins/single/m2.php:151 app/widgets/single/default.php:137
@@ -934,8 +934,8 @@ msgstr "Skrýt místo"
 #: app/core/src/SingleBuilder/Widgets/EventCost/EventCost.php:47
 #: app/features/events.php:432 app/features/events.php:1283
 #: app/features/fes/form.php:875 app/features/mec/settings.php:1206
-#: app/features/occurrences.php:514 app/libraries/main.php:7524
-#: app/libraries/main.php:7571 app/libraries/skins.php:1439
+#: app/features/occurrences.php:514 app/libraries/main.php:7557
+#: app/libraries/main.php:7604 app/libraries/skins.php:1439
 #: app/skins/single.php:1142 app/skins/single/default.php:213
 #: app/skins/single/m1.php:80 app/skins/single/modern.php:137
 #: app/widgets/single/default.php:55
@@ -1018,8 +1018,8 @@ msgstr "Skrýt místo"
 #: app/features/events.php:4234 app/features/fes/form.php:1005
 #: app/features/labels.php:61 app/features/labels.php:227
 #: app/features/mec.php:556 app/features/mec/meta_boxes/filter.php:68
-#: app/features/mec/meta_boxes/filter.php:131 app/libraries/main.php:7479
-#: app/libraries/main.php:7540 app/skins/single.php:1269
+#: app/features/mec/meta_boxes/filter.php:131 app/libraries/main.php:7512
+#: app/libraries/main.php:7573 app/skins/single.php:1269
 #: app/skins/single/default.php:245 app/skins/single/m1.php:95
 #: app/skins/single/modern.php:152 app/widgets/single/default.php:84
 msgid "Labels"
@@ -1074,8 +1074,8 @@ msgstr "Skrýt místo"
 #: app/features/popup/event.php:123 app/features/popup/event.php:131
 #: app/features/popup/settings.php:225 app/features/popup/settings.php:264
 #: app/features/search.php:97 app/libraries/main.php:2919
-#: app/libraries/main.php:3198 app/libraries/main.php:7482
-#: app/libraries/main.php:7543 app/libraries/search.php:294
+#: app/libraries/main.php:3198 app/libraries/main.php:7515
+#: app/libraries/main.php:7576 app/libraries/search.php:294
 #: app/libraries/skins.php:1179 app/skins/single.php:1038
 #: app/skins/single.php:1541 app/skins/single/default.php:266
 #: app/skins/single/m1.php:201 app/skins/single/m2.php:121
@@ -1111,7 +1111,7 @@ msgstr "Povolit drobečkovou navigaci."
 #: app/core/src/SingleBuilder/Widgets/EventMoreInfo/EventMoreInfo.php:48
 #: app/features/events.php:1525 app/features/events.php:1538
 #: app/features/fes/form.php:843 app/features/occurrences.php:528
-#: app/libraries/main.php:7522 app/libraries/main.php:7569
+#: app/libraries/main.php:7555 app/libraries/main.php:7602
 #: app/skins/single.php:1239 app/skins/single/default.php:230
 #: app/skins/single/m1.php:257 app/skins/single/m2.php:178
 #: app/widgets/single.php:126 app/widgets/single/default.php:69
@@ -1184,7 +1184,7 @@ msgstr "Skrýt organizátora"
 #: app/features/organizers.php:288 app/features/popup/event.php:172
 #: app/features/popup/event.php:180 app/features/popup/settings.php:221
 #: app/features/popup/settings.php:260 app/features/search.php:103
-#: app/libraries/main.php:7484 app/libraries/main.php:7545
+#: app/libraries/main.php:7517 app/libraries/main.php:7578
 #: app/libraries/search.php:314 app/libraries/skins.php:1208
 #: app/skins/single.php:1397 app/skins/single/default.php:327
 #: app/skins/single/m1.php:123 app/skins/single/m2.php:43
@@ -1227,7 +1227,7 @@ msgid "How to set register button"
 msgstr "Registrační tlačítko"
 
 #: app/core/src/SingleBuilder/Widgets/EventRegisterButton/EventRegisterButton.php:48
-#: app/libraries/main.php:7518 app/libraries/main.php:7565
+#: app/libraries/main.php:7551 app/libraries/main.php:7598
 #: app/skins/available_spot/tpl.php:204 app/skins/carousel/render.php:105
 #: app/skins/carousel/render.php:144 app/skins/grid/render.php:94
 #: app/skins/grid/render.php:153 app/skins/grid/render.php:214
@@ -1310,8 +1310,8 @@ msgstr "Čas"
 
 #: app/core/src/SingleBuilder/Widgets/EventTime/EventTime.php:50
 #: app/features/booking/calendar_novel.php:145
-#: app/features/search_bar/search_result.php:12 app/libraries/main.php:7527
-#: app/libraries/main.php:7574 app/libraries/notifications.php:1694
+#: app/features/search_bar/search_result.php:12 app/libraries/main.php:7560
+#: app/libraries/main.php:7607 app/libraries/notifications.php:1694
 #: app/libraries/render.php:556 app/libraries/render.php:761
 #: app/libraries/render.php:1001 app/libraries/render.php:1028
 #: app/libraries/skins.php:965 app/libraries/skins.php:970
@@ -1460,7 +1460,7 @@ msgstr "ID transakce"
 
 #: app/features/cart/cart.php:45 app/features/events.php:1564
 #: app/features/events.php:1939 app/libraries/book.php:172
-#: app/libraries/main.php:7512 app/modules/booking/steps/tickets.php:173
+#: app/libraries/main.php:7545 app/modules/booking/steps/tickets.php:173
 #: app/modules/booking/steps/tickets.php:179
 msgid "Tickets"
 msgstr "Vstupenky"
@@ -1511,8 +1511,8 @@ msgstr "Zdarma"
 #: app/features/mec/support-page.php:151 app/libraries/main.php:679
 #: app/libraries/main.php:680 app/libraries/main.php:684
 #: app/libraries/main.php:709 app/libraries/main.php:827
-#: app/libraries/main.php:2980 app/libraries/main.php:7502
-#: app/libraries/main.php:7504 app/modules/booking/steps/checkout.php:146
+#: app/libraries/main.php:2980 app/libraries/main.php:7535
+#: app/libraries/main.php:7537 app/modules/booking/steps/checkout.php:146
 msgid "Booking"
 msgstr "Rezervace"
 
@@ -1853,7 +1853,7 @@ msgstr "Další výskyt"
 
 #: app/features/emails/details.php:40 app/features/events.php:192
 #: app/features/ix/export.php:37 app/features/mec/dashboard.php:257
-#: app/libraries/main.php:6494 app/libraries/main.php:6514
+#: app/libraries/main.php:6498 app/libraries/main.php:6518
 #: app/skins/daily_view/tpl.php:84 app/skins/monthly_view/calendar_clean.php:46
 #: app/skins/monthly_view/tpl.php:76 app/skins/tile/tpl.php:85
 #: app/skins/yearly_view/tpl.php:73
@@ -1899,8 +1899,8 @@ msgstr "V koši nebyly nalezeny žádné události!"
 #: app/features/events.php:219 app/features/events.php:3850
 #: app/features/events.php:4235 app/features/fes/form.php:979
 #: app/features/mec.php:555 app/features/mec/meta_boxes/filter.php:65
-#: app/features/mec/meta_boxes/filter.php:77 app/libraries/main.php:7477
-#: app/libraries/main.php:7538
+#: app/features/mec/meta_boxes/filter.php:77 app/libraries/main.php:7510
+#: app/libraries/main.php:7571
 msgid "Categories"
 msgstr "Kategorie"
 
@@ -2412,7 +2412,7 @@ msgstr "Další výskyt dalších událostí"
 #: app/features/mec/notifications.php:1636
 #: app/features/mec/notifications.php:1786 app/features/mec/settings.php:898
 #: app/features/notifications.php:160 app/features/occurrences.php:511
-#: app/libraries/main.php:7523 app/libraries/main.php:7570
+#: app/libraries/main.php:7556 app/libraries/main.php:7603
 #: app/widgets/single.php:122
 msgid "Event Cost"
 msgstr "Cena události"
@@ -2519,8 +2519,8 @@ msgstr "Odkazy na událost"
 
 #: app/features/events.php:1507 app/features/events.php:1515
 #: app/features/fes/form.php:838 app/features/mec/settings.php:1207
-#: app/features/occurrences.php:523 app/libraries/main.php:7521
-#: app/libraries/main.php:7568
+#: app/features/occurrences.php:523 app/libraries/main.php:7554
+#: app/libraries/main.php:7601
 msgid "Event Link"
 msgstr "Odkaz na událost"
 
@@ -2600,7 +2600,7 @@ msgid "Organizer Payment"
 msgstr "Platba organizátora"
 
 #: app/features/events.php:1581 app/features/events.php:4336
-#: app/features/ix/export.php:58 app/libraries/main.php:7505
+#: app/features/ix/export.php:58 app/libraries/main.php:7538
 msgid "Bookings"
 msgstr "Rezervace"
 
@@ -3323,7 +3323,7 @@ msgstr "Tagy"
 #: app/features/popup/settings.php:296 app/features/speakers.php:67
 #: app/libraries/hourlyschedule.php:77 app/libraries/hourlyschedule.php:105
 #: app/libraries/hourlyschedule.php:157 app/libraries/main.php:691
-#: app/libraries/main.php:7485 app/libraries/main.php:7546
+#: app/libraries/main.php:7518 app/libraries/main.php:7579
 #: app/modules/speakers/details.php:18
 msgid "Speakers"
 msgstr "Řečníci"
@@ -3331,7 +3331,7 @@ msgstr "Řečníci"
 #: app/features/events.php:4496 app/features/fes.php:280
 #: app/features/profile/profile.php:209 app/libraries/cart.php:64
 #: app/libraries/main.php:3022 app/libraries/main.php:3270
-#: app/libraries/main.php:7511
+#: app/libraries/main.php:7544
 msgid "Ticket"
 msgstr "Vstupenka"
 
@@ -4560,8 +4560,8 @@ msgstr "Událost %s"
 
 #: app/features/locations.php:59 app/features/mec.php:557
 #: app/features/mec/dashboard.php:271 app/features/mec/meta_boxes/filter.php:66
-#: app/features/mec/meta_boxes/filter.php:95 app/libraries/main.php:7481
-#: app/libraries/main.php:7542
+#: app/features/mec/meta_boxes/filter.php:95 app/libraries/main.php:7514
+#: app/libraries/main.php:7575
 msgid "Locations"
 msgstr "Umístění"
 
@@ -4674,8 +4674,8 @@ msgstr "Vyberte obrázek"
 msgid "Don't show map in single event page"
 msgstr "Nezobrazovat mapu na jednostránkové události"
 
-#: app/features/locations.php:411 app/libraries/main.php:7526
-#: app/libraries/main.php:7573
+#: app/features/locations.php:411 app/libraries/main.php:7559
+#: app/libraries/main.php:7606
 msgid "Other Locations"
 msgstr "Další místa"
 
@@ -4767,7 +4767,7 @@ msgstr "Podpora"
 #: app/features/mec.php:558 app/features/mec/dashboard.php:278
 #: app/features/mec/meta_boxes/filter.php:67
 #: app/features/mec/meta_boxes/filter.php:113 app/features/organizers.php:59
-#: app/libraries/main.php:7483 app/libraries/main.php:7544
+#: app/libraries/main.php:7516 app/libraries/main.php:7577
 msgid "Organizers"
 msgstr "Organizátoři"
 
@@ -7461,7 +7461,7 @@ msgstr ""
 #: app/features/mec/single.php:530 app/features/popup/settings.php:230
 #: app/features/popup/settings.php:269 app/features/search.php:109
 #: app/features/speakers.php:66 app/features/speakers.php:292
-#: app/libraries/main.php:7486 app/libraries/main.php:7547
+#: app/libraries/main.php:7519 app/libraries/main.php:7580
 #: app/libraries/search.php:334 app/libraries/skins.php:1237
 #: app/modules/speakers/details.php:18
 msgid "Speaker"
@@ -8787,8 +8787,8 @@ msgstr ""
 msgid "only once per hour"
 msgstr "pouze jednou denně"
 
-#: app/features/mec/notifications.php:1314 app/libraries/main.php:8766
-#: app/libraries/main.php:8786
+#: app/features/mec/notifications.php:1314 app/libraries/main.php:8799
+#: app/libraries/main.php:8819
 #, fuzzy
 #| msgid "hours"
 msgid "Hours"
@@ -9131,8 +9131,8 @@ msgid "You can enable/disable Schema scripts"
 msgstr "Můžete povolit nebo zakázat skripty schématu"
 
 #: app/features/mec/settings.php:137 app/features/mec/settings.php:148
-#: app/features/popup/settings.php:38 app/libraries/main.php:7490
-#: app/libraries/main.php:7551
+#: app/features/popup/settings.php:38 app/libraries/main.php:7523
+#: app/libraries/main.php:7584
 msgid "Weekdays"
 msgstr "Pracovní dny"
 
@@ -9834,8 +9834,8 @@ msgstr "Ve výchozím nastavení zaškrtnuto"
 msgid "Required Fields"
 msgstr "Požadovaná pole"
 
-#: app/features/mec/settings.php:1208 app/libraries/main.php:7522
-#: app/libraries/main.php:7569
+#: app/features/mec/settings.php:1208 app/libraries/main.php:7555
+#: app/libraries/main.php:7602
 msgid "More Info Link"
 msgstr "Odkaz na více informací"
 
@@ -11220,8 +11220,8 @@ msgstr "např. info@itreseni.cz"
 msgid "eg. https://webnus.net"
 msgstr "např. https://webnus.net"
 
-#: app/features/organizers.php:329 app/libraries/main.php:7525
-#: app/libraries/main.php:7572 app/skins/single.php:1455
+#: app/features/organizers.php:329 app/libraries/main.php:7558
+#: app/libraries/main.php:7605 app/skins/single.php:1455
 msgid "Other Organizers"
 msgstr "Další organizátoři"
 
@@ -11300,7 +11300,7 @@ msgstr ""
 #: app/features/popup/event.php:270 app/features/popup/settings.php:533
 #: app/features/popup/shortcode.php:556 app/modules/booking/steps/form.php:394
 #: app/modules/booking/steps/tickets.php:219 app/skins/countdown/tpl.php:114
-#: app/skins/countdown/tpl.php:160 app/skins/countdown/tpl.php:207
+#: app/skins/countdown/tpl.php:152 app/skins/countdown/tpl.php:199
 msgid "Next"
 msgstr "Další"
 
@@ -11590,7 +11590,7 @@ msgstr ""
 msgid "Only %s slots remained for %s ticket so you cannot book %s ones."
 msgstr ""
 
-#: app/features/wc.php:256 app/libraries/main.php:7509
+#: app/features/wc.php:256 app/libraries/main.php:7542
 #, php-format
 msgid "Maximum allowed number of tickets that you can book is %s."
 msgstr ""
@@ -11656,9 +11656,9 @@ msgstr "Upgrade"
 msgid "day"
 msgstr "den"
 
-#: app/libraries/factory.php:393 app/modules/countdown/details.php:193
-#: app/skins/available_spot/tpl.php:143 app/skins/countdown/tpl.php:128
-#: app/skins/countdown/tpl.php:174 app/skins/countdown/tpl.php:225
+#: app/libraries/factory.php:393 app/modules/countdown/details.php:192
+#: app/skins/available_spot/tpl.php:143 app/skins/countdown/tpl.php:127
+#: app/skins/countdown/tpl.php:166 app/skins/countdown/tpl.php:217
 msgid "days"
 msgstr "dny"
 
@@ -11666,9 +11666,9 @@ msgstr "dny"
 msgid "hour"
 msgstr "hodina"
 
-#: app/libraries/factory.php:395 app/modules/countdown/details.php:200
-#: app/skins/available_spot/tpl.php:147 app/skins/countdown/tpl.php:134
-#: app/skins/countdown/tpl.php:180 app/skins/countdown/tpl.php:231
+#: app/libraries/factory.php:395 app/modules/countdown/details.php:197
+#: app/skins/available_spot/tpl.php:147 app/skins/countdown/tpl.php:131
+#: app/skins/countdown/tpl.php:172 app/skins/countdown/tpl.php:223
 msgid "hours"
 msgstr "hodiny"
 
@@ -11676,9 +11676,9 @@ msgstr "hodiny"
 msgid "minute"
 msgstr "minuta"
 
-#: app/libraries/factory.php:397 app/modules/countdown/details.php:207
-#: app/skins/available_spot/tpl.php:151 app/skins/countdown/tpl.php:140
-#: app/skins/countdown/tpl.php:186 app/skins/countdown/tpl.php:237
+#: app/libraries/factory.php:397 app/modules/countdown/details.php:202
+#: app/skins/available_spot/tpl.php:151 app/skins/countdown/tpl.php:135
+#: app/skins/countdown/tpl.php:178 app/skins/countdown/tpl.php:229
 msgid "minutes"
 msgstr "minuty"
 
@@ -11686,9 +11686,9 @@ msgstr "minuty"
 msgid "second"
 msgstr "vteřina"
 
-#: app/libraries/factory.php:399 app/modules/countdown/details.php:214
-#: app/skins/available_spot/tpl.php:155 app/skins/countdown/tpl.php:146
-#: app/skins/countdown/tpl.php:192 app/skins/countdown/tpl.php:243
+#: app/libraries/factory.php:399 app/modules/countdown/details.php:207
+#: app/skins/available_spot/tpl.php:155 app/skins/countdown/tpl.php:139
+#: app/skins/countdown/tpl.php:184 app/skins/countdown/tpl.php:235
 msgid "seconds"
 msgstr "vteřiny"
 
@@ -11811,38 +11811,38 @@ msgstr "Zobrazení rozvrhu"
 msgid "General Calendar"
 msgstr "Kalendář Google"
 
-#: app/libraries/main.php:448 app/libraries/main.php:7492
-#: app/libraries/main.php:7553
+#: app/libraries/main.php:448 app/libraries/main.php:7525
+#: app/libraries/main.php:7586
 msgid "SU"
 msgstr "NE"
 
-#: app/libraries/main.php:449 app/libraries/main.php:7493
-#: app/libraries/main.php:7554
+#: app/libraries/main.php:449 app/libraries/main.php:7526
+#: app/libraries/main.php:7587
 msgid "MO"
 msgstr "PO"
 
-#: app/libraries/main.php:450 app/libraries/main.php:7494
-#: app/libraries/main.php:7555
+#: app/libraries/main.php:450 app/libraries/main.php:7527
+#: app/libraries/main.php:7588
 msgid "TU"
 msgstr "ÚT"
 
-#: app/libraries/main.php:451 app/libraries/main.php:7495
-#: app/libraries/main.php:7556
+#: app/libraries/main.php:451 app/libraries/main.php:7528
+#: app/libraries/main.php:7589
 msgid "WE"
 msgstr "ST"
 
-#: app/libraries/main.php:452 app/libraries/main.php:7496
-#: app/libraries/main.php:7557
+#: app/libraries/main.php:452 app/libraries/main.php:7529
+#: app/libraries/main.php:7590
 msgid "TH"
 msgstr "ČT"
 
-#: app/libraries/main.php:453 app/libraries/main.php:7497
-#: app/libraries/main.php:7558
+#: app/libraries/main.php:453 app/libraries/main.php:7530
+#: app/libraries/main.php:7591
 msgid "FR"
 msgstr "PÁ"
 
-#: app/libraries/main.php:454 app/libraries/main.php:7498
-#: app/libraries/main.php:7559
+#: app/libraries/main.php:454 app/libraries/main.php:7531
+#: app/libraries/main.php:7592
 msgid "SA"
 msgstr "SO"
 
@@ -12183,133 +12183,133 @@ msgstr "Požadavek není platný."
 msgid "iCal export stopped!"
 msgstr "iCal export byl zastaven!"
 
-#: app/libraries/main.php:4198
+#: app/libraries/main.php:4202
 #, fuzzy
 #| msgid "Block Editor"
 msgid "HTML Editor"
 msgstr "Editor bloků"
 
-#: app/libraries/main.php:4356
+#: app/libraries/main.php:4360
 msgid "Consider the first item as a placeholder"
 msgstr ""
 
-#: app/libraries/main.php:4465
+#: app/libraries/main.php:4469
 msgid "Free"
 msgstr "Zdarma"
 
-#: app/libraries/main.php:5250 app/libraries/main.php:7890
+#: app/libraries/main.php:5254 app/libraries/main.php:7923
 msgid "M.E. Calender"
 msgstr "M.E. Kalendář"
 
-#: app/libraries/main.php:5429
+#: app/libraries/main.php:5433
 #, php-format
 msgid "Copy of %s"
 msgstr "Kopie %s"
 
-#: app/libraries/main.php:6418
+#: app/libraries/main.php:6422
 msgid "Booked an event."
 msgstr "Událost byla rezervována."
 
-#: app/libraries/main.php:6459
+#: app/libraries/main.php:6463
 #, php-format
 msgid "%s booked %s event."
 msgstr "%s zarezervoval %s událost."
 
-#: app/libraries/main.php:7475 app/libraries/main.php:7536
+#: app/libraries/main.php:7508 app/libraries/main.php:7569
 msgid "Taxonomies"
 msgstr "Taxonomie"
 
 # Mrknout na kontext
-#: app/libraries/main.php:7477 app/libraries/main.php:7538
+#: app/libraries/main.php:7510 app/libraries/main.php:7571
 msgid "Category Plural Label"
 msgstr "Štítek množné kategorie"
 
 # Mrknout na kontext
-#: app/libraries/main.php:7478 app/libraries/main.php:7539
+#: app/libraries/main.php:7511 app/libraries/main.php:7572
 msgid "Category Singular Label"
 msgstr "Štítek jednotné kategorie"
 
-#: app/libraries/main.php:7479 app/libraries/main.php:7540
+#: app/libraries/main.php:7512 app/libraries/main.php:7573
 msgid "Label Plural Label"
 msgstr "Štítek množného štítku"
 
-#: app/libraries/main.php:7480 app/libraries/main.php:7541
+#: app/libraries/main.php:7513 app/libraries/main.php:7574
 msgid "Label Singular Label"
 msgstr "Štítek jednotného štítku"
 
-#: app/libraries/main.php:7480 app/libraries/main.php:7541
+#: app/libraries/main.php:7513 app/libraries/main.php:7574
 msgid "label"
 msgstr "štítek"
 
-#: app/libraries/main.php:7481 app/libraries/main.php:7542
+#: app/libraries/main.php:7514 app/libraries/main.php:7575
 msgid "Location Plural Label"
 msgstr "Štítek množného umístění"
 
-#: app/libraries/main.php:7482 app/libraries/main.php:7543
+#: app/libraries/main.php:7515 app/libraries/main.php:7576
 msgid "Location Singular Label"
 msgstr "Štítek jednotného umístění"
 
-#: app/libraries/main.php:7483 app/libraries/main.php:7544
+#: app/libraries/main.php:7516 app/libraries/main.php:7577
 msgid "Organizer Plural Label"
 msgstr "Štítek množného organizátora"
 
-#: app/libraries/main.php:7484 app/libraries/main.php:7545
+#: app/libraries/main.php:7517 app/libraries/main.php:7578
 msgid "Organizer Singular Label"
 msgstr "Štítek jednotného organizátora"
 
-#: app/libraries/main.php:7485 app/libraries/main.php:7546
+#: app/libraries/main.php:7518 app/libraries/main.php:7579
 msgid "Speaker Plural Label"
 msgstr "Štítek množného řečníka"
 
-#: app/libraries/main.php:7486 app/libraries/main.php:7547
+#: app/libraries/main.php:7519 app/libraries/main.php:7580
 msgid "Speaker Singular Label"
 msgstr "Štítek jednotného řečníka"
 
-#: app/libraries/main.php:7492 app/libraries/main.php:7553
+#: app/libraries/main.php:7525 app/libraries/main.php:7586
 msgid "Sunday abbreviation"
 msgstr "Neděle zkratka"
 
-#: app/libraries/main.php:7493 app/libraries/main.php:7554
+#: app/libraries/main.php:7526 app/libraries/main.php:7587
 msgid "Monday abbreviation"
 msgstr "Pondělí zkratka"
 
-#: app/libraries/main.php:7494 app/libraries/main.php:7555
+#: app/libraries/main.php:7527 app/libraries/main.php:7588
 msgid "Tuesday abbreviation"
 msgstr "Úterý zkratka"
 
-#: app/libraries/main.php:7495 app/libraries/main.php:7556
+#: app/libraries/main.php:7528 app/libraries/main.php:7589
 msgid "Wednesday abbreviation"
 msgstr "Středa zkratka"
 
-#: app/libraries/main.php:7496 app/libraries/main.php:7557
+#: app/libraries/main.php:7529 app/libraries/main.php:7590
 msgid "Thursday abbreviation"
 msgstr "Čtvrtek zkratka"
 
-#: app/libraries/main.php:7497 app/libraries/main.php:7558
+#: app/libraries/main.php:7530 app/libraries/main.php:7591
 msgid "Friday abbreviation"
 msgstr "Pátek zkratka"
 
-#: app/libraries/main.php:7498 app/libraries/main.php:7559
+#: app/libraries/main.php:7531 app/libraries/main.php:7592
 msgid "Saturday abbreviation"
 msgstr "Sobota zkratka"
 
-#: app/libraries/main.php:7504
+#: app/libraries/main.php:7537
 #, fuzzy
 #| msgid "Ticket (Singular)"
 msgid "Booking (Singular)"
 msgstr "Vstupenka (Jednotné)"
 
-#: app/libraries/main.php:7505
+#: app/libraries/main.php:7538
 #, fuzzy
 #| msgid "Tickets (Plural)"
 msgid "Bookings (Plural)"
 msgstr "Vstupenky (Množné)"
 
-#: app/libraries/main.php:7506
+#: app/libraries/main.php:7539
 msgid "Booking Success Message"
 msgstr "Zpráva o úspěchu rezervace"
 
-#: app/libraries/main.php:7506
+#: app/libraries/main.php:7539
 #, fuzzy
 #| msgid ""
 #| "Thanks for your booking. Your tickets booked, booking verification might "
@@ -12321,72 +12321,72 @@ msgstr ""
 "Děkujeme za vaši rezervaci. Vaše vstupenky jsou rezervovány, může být nutné "
 "ověřit rezervaci. Zkontrolujte prosím svůj e-mail."
 
-#: app/libraries/main.php:7507
+#: app/libraries/main.php:7540
 #, fuzzy
 #| msgid "Booking Success Message"
 msgid "Booking Restriction Message 1"
 msgstr "Zpráva o úspěchu rezervace"
 
-#: app/libraries/main.php:7507
+#: app/libraries/main.php:7540
 #, php-format
 msgid ""
 "You selected %s tickets to book but maximum number of tikets per user is %s "
 "tickets."
 msgstr ""
 
-#: app/libraries/main.php:7508
+#: app/libraries/main.php:7541
 #, fuzzy
 #| msgid "Booking Success Message"
 msgid "Booking Restriction Message 2"
 msgstr "Zpráva o úspěchu rezervace"
 
-#: app/libraries/main.php:7508
+#: app/libraries/main.php:7541
 #, php-format
 msgid ""
 "You booked %s tickets till now but maximum number of tickets per user is %s "
 "tickets."
 msgstr ""
 
-#: app/libraries/main.php:7509
+#: app/libraries/main.php:7542
 #, fuzzy
 #| msgid "Booking Success Message"
 msgid "Booking IP Restriction Message"
 msgstr "Zpráva o úspěchu rezervace"
 
-#: app/libraries/main.php:7510
+#: app/libraries/main.php:7543
 #, fuzzy
 #| msgid "Booking Options"
 msgid "Booking Button"
 msgstr "Možnosti rezervace"
 
-#: app/libraries/main.php:7510
+#: app/libraries/main.php:7543
 #, fuzzy
 #| msgid "Booking Form"
 msgid "Book Now"
 msgstr "Rezervační formulář"
 
-#: app/libraries/main.php:7511
+#: app/libraries/main.php:7544
 msgid "Ticket (Singular)"
 msgstr "Vstupenka (Jednotné)"
 
-#: app/libraries/main.php:7512
+#: app/libraries/main.php:7545
 msgid "Tickets (Plural)"
 msgstr "Vstupenky (Množné)"
 
-#: app/libraries/main.php:7516 app/libraries/main.php:7563
+#: app/libraries/main.php:7549 app/libraries/main.php:7596
 msgid "Others"
 msgstr "Další"
 
-#: app/libraries/main.php:7518 app/libraries/main.php:7565
+#: app/libraries/main.php:7551 app/libraries/main.php:7598
 #: app/widgets/single.php:150
 msgid "Register Button"
 msgstr "Registrační tlačítko"
 
-#: app/libraries/main.php:7519 app/libraries/main.php:7566
+#: app/libraries/main.php:7552 app/libraries/main.php:7599
 msgid "View Detail Button"
 msgstr "Tlačítko Zobrazit detail"
 
-#: app/libraries/main.php:7519 app/libraries/main.php:7566
+#: app/libraries/main.php:7552 app/libraries/main.php:7599
 #: app/skins/carousel/render.php:105 app/skins/carousel/render.php:144
 #: app/skins/grid/render.php:94 app/skins/grid/render.php:153
 #: app/skins/grid/render.php:214 app/skins/grid/render.php:237
@@ -12398,148 +12398,148 @@ msgstr "Tlačítko Zobrazit detail"
 msgid "View Detail"
 msgstr "Zobrazit detail"
 
-#: app/libraries/main.php:7520 app/libraries/main.php:7567
+#: app/libraries/main.php:7553 app/libraries/main.php:7600
 msgid "Event Detail Button"
 msgstr "Tlačítko Detail události"
 
-#: app/libraries/main.php:7520 app/libraries/main.php:7567
+#: app/libraries/main.php:7553 app/libraries/main.php:7600
 msgid "Event Detail"
 msgstr "Zobrazit událost"
 
-#: app/libraries/main.php:7682
+#: app/libraries/main.php:7715
 msgid "EventON"
 msgstr "EventON"
 
-#: app/libraries/main.php:7683
+#: app/libraries/main.php:7716
 msgid "The Events Calendar"
 msgstr "The Events Calendar"
 
-#: app/libraries/main.php:7684
+#: app/libraries/main.php:7717
 msgid "Events Schedule WP Plugin"
 msgstr "Events Schedule WP Plugin"
 
-#: app/libraries/main.php:7685
+#: app/libraries/main.php:7718
 msgid "Calendarize It"
 msgstr "Calendarize It"
 
-#: app/libraries/main.php:7686
+#: app/libraries/main.php:7719
 #, fuzzy
 #| msgid "Event Speakers"
 msgid "Event Espresso"
 msgstr "Řečník události"
 
-#: app/libraries/main.php:7687
+#: app/libraries/main.php:7720
 #, fuzzy
 #| msgid "Event Repeating (Recurring events)"
 msgid "Events Manager (Recurring)"
 msgstr "Opakování události (opakující se události)"
 
-#: app/libraries/main.php:7688
+#: app/libraries/main.php:7721
 #, fuzzy
 #| msgid "Modern Events Calendar (Lite)"
 msgid "Events Manager (Single)"
 msgstr "Modern Events Calendar (Lite)"
 
-#: app/libraries/main.php:7689
+#: app/libraries/main.php:7722
 #, fuzzy
 #| msgid "Modern Events Calendar (Lite)"
 msgid "WP Event Manager"
 msgstr "Modern Events Calendar (Lite)"
 
-#: app/libraries/main.php:7920
+#: app/libraries/main.php:7953
 #, fuzzy
 #| msgid "Sunday"
 msgid "Sun"
 msgstr "Neděle"
 
-#: app/libraries/main.php:7920
+#: app/libraries/main.php:7953
 #, fuzzy
 #| msgid "Monday"
 msgid "Mon"
 msgstr "Pondělí"
 
-#: app/libraries/main.php:7920
+#: app/libraries/main.php:7953
 #, fuzzy
 #| msgid "Tel"
 msgid "Tue"
 msgstr "Tel"
 
-#: app/libraries/main.php:7920
+#: app/libraries/main.php:7953
 msgid "Wed"
 msgstr ""
 
-#: app/libraries/main.php:7920
+#: app/libraries/main.php:7953
 msgid "Thu"
 msgstr ""
 
-#: app/libraries/main.php:7920
+#: app/libraries/main.php:7953
 #, fuzzy
 #| msgid "Friday"
 msgid "Fri"
 msgstr "Pátek"
 
-#: app/libraries/main.php:7920
+#: app/libraries/main.php:7953
 #, fuzzy
 #| msgid "Start"
 msgid "Sat"
 msgstr "Začátek"
 
-#: app/libraries/main.php:8129 app/libraries/render.php:84
+#: app/libraries/main.php:8162 app/libraries/render.php:84
 #: app/libraries/render.php:469
 msgid "Skin controller does not exist."
 msgstr "Ovladač vzhledu neexistuje."
 
-#: app/libraries/main.php:8377
+#: app/libraries/main.php:8410
 msgid "Sold Out"
 msgstr "Vyprodáno"
 
-#: app/libraries/main.php:8414
+#: app/libraries/main.php:8447
 #, fuzzy
 #| msgid "Ticket"
 msgid "Last Few Tickets"
 msgstr "Vstupenka"
 
-#: app/libraries/main.php:8701
+#: app/libraries/main.php:8734
 #, fuzzy
 #| msgid "Upcoming Events"
 msgid "Ongoing"
 msgstr "Nadcházející události"
 
-#: app/libraries/main.php:8703
+#: app/libraries/main.php:8736
 #, fuzzy
 #| msgid "Expired Events"
 msgid "Expired"
 msgstr "Události vypršely"
 
-#: app/libraries/main.php:8772 app/libraries/main.php:8792
+#: app/libraries/main.php:8805 app/libraries/main.php:8825
 #, fuzzy
 #| msgid "minutes"
 msgid "Minutes"
 msgstr "minuty"
 
-#: app/libraries/main.php:8797
+#: app/libraries/main.php:8830
 msgid "AM / PM"
 msgstr ""
 
-#: app/libraries/main.php:8798
+#: app/libraries/main.php:8831
 msgid "AM"
 msgstr "dop."
 
-#: app/libraries/main.php:8799
+#: app/libraries/main.php:8832
 msgid "PM"
 msgstr "odp."
 
-#: app/libraries/main.php:8807
+#: app/libraries/main.php:8840
 msgid "Ongoing..."
 msgstr ""
 
-#: app/libraries/main.php:8808 app/skins/single.php:238
+#: app/libraries/main.php:8841 app/skins/single.php:238
 #, fuzzy
 #| msgid "Expired Events"
 msgid "Expired!"
 msgstr "Události vypršely"
 
-#: app/libraries/main.php:9376
+#: app/libraries/main.php:9409
 #, fuzzy
 #| msgid "Categories"
 msgid "Uncategorized"
@@ -12942,8 +12942,8 @@ msgstr "Načíst více"
 msgid "Available Spot(s):"
 msgstr "Dostupné spoty:"
 
-#: app/skins/carousel/render.php:168 app/skins/countdown/tpl.php:154
-#: app/skins/countdown/tpl.php:200 app/skins/countdown/tpl.php:218
+#: app/skins/carousel/render.php:168 app/skins/countdown/tpl.php:146
+#: app/skins/countdown/tpl.php:192 app/skins/countdown/tpl.php:210
 #: app/skins/cover/tpl.php:68 app/skins/list/render.php:144
 msgid "EVENT DETAIL"
 msgstr "DETAIL UDÁLOSTI"
@@ -12952,8 +12952,8 @@ msgstr "DETAIL UDÁLOSTI"
 msgid "View All Events"
 msgstr "Zobrazit všechny události"
 
-#: app/skins/countdown/tpl.php:114 app/skins/countdown/tpl.php:160
-#: app/skins/countdown/tpl.php:207
+#: app/skins/countdown/tpl.php:114 app/skins/countdown/tpl.php:152
+#: app/skins/countdown/tpl.php:199
 #, php-format
 msgid "%s Upcoming Event"
 msgstr "%s Nadcházející událost"

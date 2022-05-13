@@ -26,7 +26,7 @@ $sed_method = $this->sed_method;
 if($sed_method == 'new') $sed_method = '0';
 
 // Generating javascript code tpl
-$javascript = '<script type="text/javascript">
+$javascript = '<script>
 jQuery(document).ready(function()
 {
     jQuery("#mec_skin_'.esc_js($this->id).'").mecTimelineView(
@@ -58,9 +58,9 @@ do_action('mec_start_skin', $this->id);
 do_action('mec_timeline_skin_head');
 ?>
 <div class="mec-wrap mec-skin-timeline-container <?php echo esc_attr($this->html_class . ' ' . $set_dark); ?>" id="mec_skin_<?php echo esc_attr($this->id); ?>">
-    
+
     <?php if($this->sf_status) echo MEC_kses::full($this->sf_search_form()); ?>
-    
+
     <?php if($this->found): ?>
     <div class="mec-skin-timeline-events-container" id="mec_skin_events_<?php echo esc_attr($this->id); ?>">
         <?php echo MEC_kses::full($items_html); ?>
@@ -73,9 +73,9 @@ do_action('mec_timeline_skin_head');
         <?php esc_html_e('No event found!', 'modern-events-calendar-lite'); ?>
     </div>
     <?php endif; ?>
-    
+
     <?php if($this->load_more_button and $this->found >= $this->limit): ?>
-    <div class="mec-load-more-wrap"><div class="mec-load-more-button <?php echo ($this->has_more_events ? '' : 'mec-util-hidden'); ?>"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
+    <div class="mec-load-more-wrap"><div tabindex="0" class="mec-load-more-button <?php echo ($this->has_more_events ? '' : 'mec-util-hidden'); ?>"><?php echo esc_html__('Load More', 'modern-events-calendar-lite'); ?></div></div>
     <?php endif; ?>
-    
+
 </div>

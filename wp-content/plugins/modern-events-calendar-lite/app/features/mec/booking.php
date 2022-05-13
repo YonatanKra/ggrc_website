@@ -1200,7 +1200,7 @@ $gateways_options = $this->main->get_gateways_options();
 
 </div>
 
-<?php $this->factory->params('footer', '<script type="text/javascript">
+<?php $this->factory->params('footer', '<script>
 jQuery(document).ready(function()
 {
     jQuery(".dpr-save-btn").on("click", function(event)
