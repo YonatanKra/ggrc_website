@@ -4,3 +4,9 @@ May 13 2022 02:49:12
 May 13 2022 02:49:13
 {"type":8192,"message":"Required parameter $currentPage follows optional parameter $perPage","file":"C:\\xampp\\htdocs\\ggrc_website\\wp-content\\plugins\\wordpress-creation-kit-pro\\wordpress-creation-kit-api\\wck-stp\\stp-pagination-class.php","line":9}
 
+May 17 2022 08:11:02
+{"type":8192,"message":"Required parameter $currentPage follows optional parameter $perPage","file":"C:\\wamp64\\www\\ggrc_website\\wp-content\\plugins\\wordpress-creation-kit-pro\\wordpress-creation-kit-api\\wck-stp\\stp-pagination-class.php","line":9}
+
+May 17 2022 08:11:06
+{"type":8192,"message":"Required parameter $currentPage follows optional parameter $perPage","file":"C:\\wamp64\\www\\ggrc_website\\wp-content\\plugins\\wordpress-creation-kit-pro\\wordpress-creation-kit-api\\wck-stp\\stp-pagination-class.php","line":9}
+
