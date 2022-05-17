@@ -39,7 +39,119 @@ p.small_header {
     text-align:center;
 }
 
-/* FOOTER */
+/* General - Elementor */
+
+.elementor-icon-wrapper {
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header */
+
+.unclickable > a:hover {
+	cursor: default;
+}
+
+/* Comments */
+
+#comments {
+	margin-top: 0;
+}
+
+/* Initiative - Single */
+
+.section h2{
+	margin-bottom: 1.5rem;
+}
+
+.section .box {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.section .box .box-content {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.5rem;
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	.section .box .box-content {
+		width: 25%;
+	}
+}
+
+.section .box .box-content span {
+	width: 100%;
+}
+
+.section.resources .box .box-content {
+	align-items: center;
+	flex-direction: row;
+	width: 100%;
+}
+
+.section.resources .box .box-content.resource-item {
+	background: #ECEEF0;
+    border: 1px solid #D8DCE0;
+    box-shadow: 4px 4px 15px rgb(0 0 0 / 13%);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.section.resources .box .box-content.resource-item .elementor-icon {
+	font-size: 18px;
+}
+
+.section.resources .box .box-content.resource-item a {
+	margin-left: 10px;
+}
+
+.section.contact .box .box-content .contact-name {
+	font-size: 20px;
+	line-height: 24px;
+}
+
+/* News - List Layout */
+
+.section.news .box .box-content.news-article {
+	background: #EFF3F5;
+	border: 1px solid #AFC5CF;
+	border-radius: 5px;
+	box-shadow: 2px 3px 12px 0px rgba(0, 0, 0, 0.13);
+	margin-bottom: 0.5rem;
+	padding: 6px 10px;
+	
+	flex-direction: row;
+	gap: 12px;
+	width: 100%;
+}
+
+.section.news .box .box-content.news-article:last-child {
+	margin-bottom: 0;
+}
+
+.section.news .box .box-content.news-article .elementor-icon {
+	color: #618DA0;
+	font-size: 18px;
+}
+
+.section.news .box .box-content.news-article a {
+	display: inline-flex;
+	align-items: center;
+}
+
+.section.news .box .box-content.news-article a .news-logo {
+	display: inline-flex;
+	
+	height: auto;
+	max-width: 80px;
+	width: 100%;
+}
+
+/* Footer */
 
 .elementor-location-footer .menu-item {
 	width: 100%;
