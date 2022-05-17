@@ -29,19 +29,11 @@ add_action( 'wp_enqueue_scripts', 'theme_assets' );
 function theme_assets() {
 	wp_enqueue_script( 'bootstrap_js', get_stylesheet_directory_uri() . '/assets/bootstrap/js/bootstrap.min.js' );
     wp_enqueue_style( 'bootstrap_css', get_stylesheet_directory_uri() . '/assets/bootstrap/css/bootstrap.min.css' );
-
+	
 	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
 
 	wp_enqueue_style( 'template-styling');
 }
-
-/* General - Remove Page Titles */
-
-function ele_disable_page_title( $return ) {
-	return false;
-}
-
-add_filter( 'hello_elementor_page_title', 'ele_disable_page_title' );
 
 /* General - Registering New Post Thumbnails */
 	
@@ -57,6 +49,46 @@ function remove_admin_bar() {
     show_admin_bar(false);
   }
 }
+
+/* General - Remove Page Titles */
+
+function ele_disable_page_title( $return ) {
+	return false;
+}
+
+add_filter( 'hello_elementor_page_title', 'ele_disable_page_title');
+
+/* General - Remove GF Nag */
+
+function remove_gravity_forms_nag() {
+
+    update_option( 'rg_gforms_message', '' );
+    remove_action( 'after_plugin_row_gravityforms/gravityforms.php', array( 'GFForms', 'plugin_row' ) );
+}
+
+add_action( 'admin_init', 'remove_gravity_forms_nag' );
+
+/* General - Auto Re-direct */
+
+function add_login_check()
+{
+    if (is_user_logged_in()) {
+        if (is_page(1770)){
+            wp_redirect( $url . '/forums/users/ggrc_admin/favorites/');
+            exit; 
+        }
+    }
+}
+
+function check_if_user_logged_in() {
+	if ( !is_user_logged_in() ) {
+		$url = get_site_url();
+		wp_redirect($url);
+		exit;
+	}
+}
+
+add_action('wp', 'add_login_check');
 
 /* General - Remove Confirmation Log Out */
 
@@ -90,35 +122,103 @@ add_filter( 'ocean_post_layout_class', 'my_post_layout_class', 20 );
 
 add_filter( 'bbp_no_breadcrumb', '__return_true' );
 
+/* Elementor - Escape Remove */
+
+add_filter( 'elementor_pro/dynamic_tags/shortcode/should_escape', '__return_false' ); 
+
+/* Shortcode - Display Initative Additional Resources */
+
+add_shortcode('initiative_resources', 'initiative_resources_shortcode');
+
+function initiative_resources_shortcode( $atts = [], $content = null) {
+
+	$repeater  = get_post_meta( get_the_ID() , 'additional_resources', true);
+
+	ob_start();
+	
+	if(!empty($repeater) ) {
+			
+		echo '<div class="section resources">';
+		echo '<h4>Additional Resources</h4>';
+		echo '<div class="box">';
+		while( the_repeater_field('additional_resources', get_the_ID()) ) { 
+			echo '<div class="box-content resource-item">';
+			echo '<div class="elementor-icon-wrapper"><div class="elementor-icon"><i aria-hidden="true" class="fas fa-paperclip"></i></div></div>';
+			echo '<a target="_blank" href="' . get_sub_field('additional_resources_material')  . '">'. get_sub_field('additional_resources_name') . '</a>';
+			echo '</div>';
+		}
+		echo '</div>';
+		echo '</div>';
+	}
+
+	return ob_get_clean();
+}
+
+/* Shortcode - Display Initative Contacts */
+
+add_shortcode('initiative_contacts', 'initiative_contacts_shortcode');
+
+function initiative_contacts_shortcode( $atts = [], $content = null) {
+
+	$repeater  = get_post_meta( get_the_ID() , 'initiative_contact', true);
+
+	ob_start();
+	
+	if(!empty($repeater) ) {
+			
+		echo '<div class="section contact">';
+		echo '<h2>People For Initiative</h2>';
+		echo '<div class="box">';
+		while( the_repeater_field('initiative_contact', get_the_ID()) ) { 
+			echo '<div class="box-content">';
+			echo '<h4 class="contact-name">' . get_sub_field('initiative_contact_name') . '</h4>';
+			echo '<span class="contact-title">' . get_sub_field('initiative_contact_title') . '</span>';
+			echo '<span class="contact-organisation">' . get_sub_field('initiative_contact_organisation') . '</span>';
+			echo '<span class="contact-email"><a href="' . get_sub_field('initiative_contact_email') . '">' . get_sub_field('initiative_contact_email') . '</a></span>';
+			echo '</div>';
+		}
+		echo '</div>';
+		echo '</div>';
+	}
+
+	return ob_get_clean();
+}
+
+/* Shortcode - Display News Articles */
+
+add_shortcode('news_articles', 'news_articles_shortcode');
+
+function news_articles_shortcode( $atts = [], $content = null) {
+
+	$repeater  = get_post_meta( get_the_ID() , 'news_agencies', true);
+
+	ob_start();
+	
+	if(!empty($repeater) ) {
+			
+		echo '<div class="section news">';
+		echo '<div class="box">';
+		while( the_repeater_field('news_agencies', get_the_ID()) ) {
+			$agency_id = get_sub_field('news_agency');
+			echo '<div class="box-content news-article">';
+			echo '<div class="elementor-icon-wrapper"><div class="elementor-icon"><i aria-hidden="true" class="fas fa-external-link-alt"></i></div></div>';
+			echo '<a target="_blank" href="' . get_sub_field('news_article_link') . '">';
+			echo '<div class="news-logo"><img alt="Agency Logo" src="' . get_field('news_agency_logo', 'term_'.$agency_id) . '"/></div>';
+			echo '</a>';
+			echo '</div>';
+		}
+		echo '</div>';
+		echo '</div>';
+	}
+
+	return ob_get_clean();
+}
+
 function news_meta_boxes() {
 	add_action('admin_init', 'ggrc_add_news_meta_boxes', 2);
 
 	function ggrc_add_news_meta_boxes() {
 		add_meta_box( 'ggrc_news_agencies', 'News Agencies', 'Repeatable_meta_box_display', 'news', 'normal', 'default');
-	}
-
-	function agency_row_template($agencies, $field = null) {
-		?>
-			<tr>
-				<td>
-					<select required type="text" placeholder="Agency" title="Agency" name="Agency[]">
-					<option value="" disabled selected>Select a news agency</option>
-						<?php
-							foreach ( $agencies as $agency ) {
-								?>
-									<option value="<?php echo $agency->term_id; ?>" <?php if ($field && $agency->term_id == $field['Agency']) echo 'selected="selected"'?>> <?php echo $agency->name; ?></option>
-								<?php
-							}
-						?>
-					</select></td>
-				<td>
-					<input required type="text" placeholder="Link" name="Link[]" <?php if ($field) echo 'value="' . $field['Link'] . '"' ?>/>
-					</td>
-				<td>
-					<a class="button cmb-remove-row-button <?php if ($field === null) echo 'button-disabled'; ?>" href="#">Remove</a>
-				</td>
-			</tr>
-		<?php
 	}
 
 	function Repeatable_meta_box_display() {
@@ -512,18 +612,6 @@ function add_related_news_to_initiative_pages() {
     }
 }
 
-function check_if_user_logged_in() {
-	if ( !is_user_logged_in() ) {
-
-		$url = get_site_url();
-		wp_redirect($url);
-
-		exit;
-	}
-}
-
-
-
 add_action( 'wp_ajax_follow_post', 'follow_initiative' );
 function follow_initiative() {
 	global $wpdb;
@@ -670,7 +758,7 @@ function username_in_menu_items( $menu_items ) {
              if ( is_user_logged_in() )     {
                 $current_user = wp_get_current_user();
                  $user_public_name = $current_user->display_name;
-                $menu_item->title =  str_replace("#profile_name#",  " <a class='elementor-item' href=". site_url('forums/users/'.$current_user->user_nicename.'/favorites/') .">Hey, ". $user_public_name, $menu_item->title . "!</a>");
+                $menu_item->title =  str_replace("#profile_name#",  " <a class='elementor-item' href=". site_url('profile') .">Hey, ". $user_public_name, $menu_item->title . "!</a>");
              }
         }
     }
