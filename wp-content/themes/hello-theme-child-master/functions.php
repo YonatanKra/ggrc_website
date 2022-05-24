@@ -22,19 +22,6 @@ function hello_elementor_child_enqueue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts', 20 );
 
-/* General - Adding/Remove CSS & Scripts */
-
-add_action( 'wp_enqueue_scripts', 'theme_assets' );
-
-function theme_assets() {
-	wp_enqueue_script( 'bootstrap_js', get_stylesheet_directory_uri() . '/assets/bootstrap/js/bootstrap.min.js' );
-    wp_enqueue_style( 'bootstrap_css', get_stylesheet_directory_uri() . '/assets/bootstrap/css/bootstrap.min.css' );
-	
-	wp_register_style( 'template-styling', get_stylesheet_directory_uri() . '/assets/css/template-styles.css' );
-
-	wp_enqueue_style( 'template-styling');
-}
-
 /* General - Registering New Post Thumbnails */
 	
 add_image_size( 'card-medium', 400, 300, true );
@@ -126,6 +113,36 @@ add_filter( 'bbp_no_breadcrumb', '__return_true' );
 
 add_filter( 'elementor_pro/dynamic_tags/shortcode/should_escape', '__return_false' ); 
 
+/* Elementor - Query Team Members */
+
+function team_leadership_order( $query ) {
+	$query->set( 'post__in', [ 2485, 2488, 2490, 2492, 2494, 2496, 2498, 2500, 2502 ] );
+	$query->set( 'order', 'ASC' );
+}
+
+add_action( 'elementor/query/team_leadership', 'team_leadership_order' );
+
+function team_advisor_order( $query ) {
+	$query->set( 'post__in', [ 2505 ] );
+	$query->set( 'order', 'ASC' );
+}
+
+add_action( 'elementor/query/team_advisor', 'team_advisor_order' );
+
+function team_intern_order( $query ) {
+	$query->set( 'post__in', [ 2507, 2508 ] );
+	$query->set( 'order', 'ASC' );
+}
+
+add_action( 'elementor/query/team_intern', 'team_intern_order' );
+
+function team_web_order( $query ) {
+	$query->set( 'post__in', [ 2509, 2511, 2513, 2514, 2515 ] );
+	$query->set( 'order', 'ASC' );
+}
+
+add_action( 'elementor/query/team_web', 'team_web_order' );
+
 /* Shortcode - Display Initative Additional Resources */
 
 add_shortcode('initiative_resources', 'initiative_resources_shortcode');
@@ -143,7 +160,7 @@ function initiative_resources_shortcode( $atts = [], $content = null) {
 		echo '<div class="box">';
 		while( the_repeater_field('additional_resources', get_the_ID()) ) { 
 			echo '<div class="box-content resource-item">';
-			echo '<div class="elementor-icon-wrapper"><div class="elementor-icon"><i aria-hidden="true" class="fas fa-paperclip"></i></div></div>';
+			echo '<div class="elementor-icon-wrapper"><div class="elementor-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M364.2 83.8C339.8 59.39 300.2 59.39 275.8 83.8L91.8 267.8C49.71 309.9 49.71 378.1 91.8 420.2C133.9 462.3 202.1 462.3 244.2 420.2L396.2 268.2C407.1 257.3 424.9 257.3 435.8 268.2C446.7 279.1 446.7 296.9 435.8 307.8L283.8 459.8C219.8 523.8 116.2 523.8 52.2 459.8C-11.75 395.8-11.75 292.2 52.2 228.2L236.2 44.2C282.5-2.08 357.5-2.08 403.8 44.2C450.1 90.48 450.1 165.5 403.8 211.8L227.8 387.8C199.2 416.4 152.8 416.4 124.2 387.8C95.59 359.2 95.59 312.8 124.2 284.2L268.2 140.2C279.1 129.3 296.9 129.3 307.8 140.2C318.7 151.1 318.7 168.9 307.8 179.8L163.8 323.8C157.1 330.5 157.1 341.5 163.8 348.2C170.5 354.9 181.5 354.9 188.2 348.2L364.2 172.2C388.6 147.8 388.6 108.2 364.2 83.8V83.8z"/></svg></div></div>';
 			echo '<a target="_blank" href="' . get_sub_field('additional_resources_material')  . '">'. get_sub_field('additional_resources_name') . '</a>';
 			echo '</div>';
 		}
@@ -201,7 +218,7 @@ function news_articles_shortcode( $atts = [], $content = null) {
 		while( the_repeater_field('news_agencies', get_the_ID()) ) {
 			$agency_id = get_sub_field('news_agency');
 			echo '<div class="box-content news-article">';
-			echo '<div class="elementor-icon-wrapper"><div class="elementor-icon"><i aria-hidden="true" class="fas fa-external-link-alt"></i></div></div>';
+			echo '<div class="elementor-icon-wrapper icon-external"><div class="elementor-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 64C256 46.33 270.3 32 288 32H415.1C415.1 32 415.1 32 415.1 32C420.3 32 424.5 32.86 428.2 34.43C431.1 35.98 435.5 38.27 438.6 41.3C438.6 41.35 438.6 41.4 438.7 41.44C444.9 47.66 447.1 55.78 448 63.9C448 63.94 448 63.97 448 64V192C448 209.7 433.7 224 416 224C398.3 224 384 209.7 384 192V141.3L214.6 310.6C202.1 323.1 181.9 323.1 169.4 310.6C156.9 298.1 156.9 277.9 169.4 265.4L338.7 96H288C270.3 96 256 81.67 256 64V64zM0 128C0 92.65 28.65 64 64 64H160C177.7 64 192 78.33 192 96C192 113.7 177.7 128 160 128H64V416H352V320C352 302.3 366.3 288 384 288C401.7 288 416 302.3 416 320V416C416 451.3 387.3 480 352 480H64C28.65 480 0 451.3 0 416V128z"/></svg></div></div>';
 			echo '<a target="_blank" href="' . get_sub_field('news_article_link') . '">';
 			echo '<div class="news-logo"><img alt="Agency Logo" src="' . get_field('news_agency_logo', 'term_'.$agency_id) . '"/></div>';
 			echo '</a>';
@@ -755,10 +772,10 @@ add_filter( 'wp_nav_menu_objects', 'username_in_menu_items' );
 function username_in_menu_items( $menu_items ) {
     foreach ( $menu_items as $menu_item ) {
         if ( strpos($menu_item->title, '#profile_name#') !== false) {
-             if ( is_user_logged_in() )     {
-                $current_user = wp_get_current_user();
-                 $user_public_name = $current_user->display_name;
-                $menu_item->title =  str_replace("#profile_name#",  " <a class='elementor-item' href=". site_url('profile') .">Hey, ". $user_public_name, $menu_item->title . "!</a>");
+             if ( is_user_logged_in() ) {
+				 $current_user = wp_get_current_user();
+				 $user_public_name = $current_user->display_name;
+				 $menu_item->title =  str_replace("#profile_name#",  "Hey, ". $user_public_name, $menu_item->title . "!</a>");
              }
         }
     }

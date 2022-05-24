@@ -424,6 +424,23 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
 
             $total_users_found = $wp_user_query->get_total();
 
+            if ( ! empty($query_params['ppmd-search']) && is_array($users) && ! empty($users)) {
+
+                /**
+                 * @var int $key
+                 * @var \WP_User $user
+                 */
+                foreach ($users as $key => $user) {
+
+                    if (empty(array_intersect($user->roles, $roles))) {
+                        unset($users[$key]);
+                    }
+                }
+
+                $total_users_found = count($users);
+
+            }
+
             $cache[$this->form_id] = [
                 'users'             => $users,
                 'total_users_found' => $total_users_found
@@ -544,6 +561,8 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
 
             $filter_meta_fields = $parsed_args['filter_meta_fields'];
 
+            $roles = $parsed_args['roles'];
+
             $args['search'] = '*' . $search_term . '*';
 
             // we need to empty out the search column so wp user query doesn't restrict the search only
@@ -564,7 +583,7 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
              * Modifies the query so we can tactically include searching of $search_columns in wp_users table
              * @see https://wordpress.stackexchange.com/a/248674/59917
              */
-            add_filter('get_meta_sql', function ($sql) use ($search_term, $search_columns, $filter_meta_fields) {
+            add_filter('get_meta_sql', function ($sql) use ($search_term, $search_columns, $filter_meta_fields, $roles) {
 
                 global $wpdb;
 

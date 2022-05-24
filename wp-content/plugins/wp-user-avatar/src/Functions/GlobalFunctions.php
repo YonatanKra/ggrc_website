@@ -369,12 +369,12 @@ function ppress_login_url($redirect = '')
  */
 function ppress_registration_url()
 {
-    $reg_url = wp_registration_url();
-
     $page_id = ppress_get_setting('set_registration_url');
 
     if ( ! empty($page_id) && get_post_status($page_id)) {
         $reg_url = get_permalink($page_id);
+    } else {
+        $reg_url = wp_registration_url();
     }
 
     return apply_filters('ppress_registration_url', $reg_url);
