@@ -16,35 +16,19 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
     Add your custom styles here
 */
 
-p.small_header {
-    font-weight: bold;
-}
-
-.small_header {
-    padding-top: 50px;
-    padding: 0px 9.5rem;
-    height: auto;
-    background: linear-gradient(0deg, rgba(255 255 255 / 80%), rgba(255 255 255 / 80%)), url(../../uploads/2022/01/Arctic-Terns-Steven-Calcote-scaled.jpg);
-    background-size: cover;
-}
-
-#comment{
-    border-radius:5px;
-    border: 1px solid rgba(11, 79, 109, 0.6);
-    box-sizing: border-box;
-    min-height:77px;
-}
-
-.align-center{
-    text-align:center;
-}
-
 /* General - Elementor */
 
 .elementor-icon-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.elementor-widget-icon .elementor-widget-container {
+	display: flex;
+}
+
+.elementor-widget-icon .elementor-widget-container .elementor-icon-wrapper {
 	display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Header */
@@ -138,6 +122,10 @@ p.small_header {
 	font-size: 18px;
 }
 
+.elementor-icon-wrapper.icon-external svg {
+	fill: #618DA0;
+}
+
 .section.news .box .box-content.news-article a {
 	display: inline-flex;
 	align-items: center;
@@ -147,8 +135,32 @@ p.small_header {
 	display: inline-flex;
 	
 	height: auto;
-	max-width: 80px;
+	max-width: 90px;
 	width: 100%;
+}
+
+/* About - Team Members */
+
+.team-member-item .elementor-widget-container .elementor-toggle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.team-member-item .elementor-widget-container .elementor-toggle .elementor-tab-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.team-member-item .elementor-widget-container .elementor-toggle .elementor-tab-title .elementor-toggle-title {
+	order: 1;
+}
+
+.team-member-item .elementor-widget-container .elementor-toggle .elementor-tab-title .elementor-toggle-icon {
+	margin-left: 0.6rem;
+	order: 2;
+	float: none;
 }
 
 /* Footer */

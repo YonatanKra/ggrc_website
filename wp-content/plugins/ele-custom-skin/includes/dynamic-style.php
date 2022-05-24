@@ -78,6 +78,8 @@ function ECS_set_dynamic_style( \Elementor\Element_Base $element ) {
 add_action( 'elementor/frontend/section/before_render', 'ECS_set_dynamic_style' );
 add_action( 'elementor/frontend/column/before_render', 'ECS_set_dynamic_style' );
 
+add_action( 'elementor/frontend/container/before_render', 'ECS_set_dynamic_style' );
+
 add_action( 'elementor/frontend/widget/before_render', 'ECS_set_dynamic_style' );
 
 //keep track of index

@@ -5,7 +5,7 @@ Tags: user registration, user profile, registration form, membership, login form
 Requires at least: 4.7
 Requires PHP: 7.1.0
 Tested up to: 5.9
-Stable tag: 3.2.11
+Stable tag: 3.2.12
 License: GPLv2 or later
 
 Modern membership plugin for user registration, login form, user profile, member directories & content restriction.
@@ -117,6 +117,17 @@ No. You can create and manage your forms, user profiles and member directories w
 10. Admin Bar and Dashboard Access
 
 == Changelog ==
+
+= 3.2.12 =
+* Fixed user roles not recognized during member directory search.
+* Fixed fatal error caused by empty member directory search field.
+* Fixed bug with shortcodes not working in custom html.
+* Fixed conflict where media uploader was not working for other plugins.
+* Fixed Buddypress signup page override not working.
+* Fixed My Account page visitor redirect bug.
+* Improvement: scroll to member directory section after search.
+* Improved ajax login process.
+* Added Slim SEO compatibility.
 
 = 3.2.11 =
 * Fixed PHP Fatal error:  Uncaught Error: Call to a member function wpua_get_default_avatar_url() on null
