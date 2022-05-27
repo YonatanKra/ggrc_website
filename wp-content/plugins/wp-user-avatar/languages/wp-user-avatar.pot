@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the ProfilePress package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ProfilePress 3.2.11\n"
+"Project-Id-Version: ProfilePress 3.2.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-user-avatar\n"
-"POT-Creation-Date: 2022-05-03 09:31:19+00:00\n"
+"POT-Creation-Date: 2022-05-20 13:26:57+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -75,7 +75,7 @@ msgid "Default Profile Picture"
 msgstr ""
 
 #: deprecated/wp-user-avatar/includes/class-wp-user-avatar-admin.php:242
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:179
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:180
 msgid "Choose Image"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgid "Remove"
 msgstr ""
 
 #: deprecated/wp-user-avatar/includes/class-wp-user-avatar-admin.php:243
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:205
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:206
 msgid "Undo"
 msgstr ""
 
@@ -134,64 +134,64 @@ msgid "Cover Photo"
 msgstr ""
 
 #: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:73
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:185
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:186
 #: deprecated/wp-user-avatar/includes/tinymce/window.php:192
 msgid "Upload"
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:145
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:146
 #: src/RegisterScripts.php:73 src/RegisterScripts.php:128
 msgid "Are you sure?"
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:146
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:147
 #: src/RegisterScripts.php:74
 msgid "Deleting..."
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:147
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:148
 #: src/RegisterScripts.php:75
 msgid "An error occurred. Please try again."
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:188
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:189
 #: deprecated/wp-user-avatar/includes/wpua-options-page.php:38
 #: deprecated/wp-user-avatar/includes/wpua-options-page.php:70
 msgid "Maximum upload file size: %d%s."
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:189
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:190
 msgid "Allowed Files"
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:189
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:190
 msgid "<code>jpg jpeg png gif</code>"
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:195
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:196
 #: deprecated/wp-user-avatar/includes/tinymce/window.php:139
 msgid "Original Size"
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:199
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:200
 #: deprecated/wp-user-avatar/includes/tinymce/window.php:142
 msgid "Thumbnail"
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:202
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:203
 msgid "Remove Image"
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:252
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:253
 msgid "This file is not an image. Please try another."
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:256
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:283
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:257
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:284
 msgid "Memory exceeded. Please try another smaller file."
 msgstr ""
 
-#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:260
+#: deprecated/wp-user-avatar/includes/class-wp-user-avatar.php:261
 msgid "Unable to create directory %s. Is its parent directory writable by the server?"
 msgstr ""
 
@@ -687,7 +687,7 @@ msgstr ""
 #: src/Admin/SettingsPages/DragDropBuilder/FieldBase.php:232
 #: src/Admin/SettingsPages/GeneralSettings.php:38
 #: src/Admin/SettingsPages/GeneralSettings.php:39
-#: src/Classes/Miscellaneous.php:17
+#: src/Classes/Miscellaneous.php:20
 msgid "Settings"
 msgstr ""
 
@@ -982,7 +982,7 @@ msgstr ""
 #: src/Functions/GlobalFunctions.php:1279
 #: src/ShortcodeParser/Builder/FieldsShortcodeCallback.php:318
 #: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:208
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:460
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:477
 #: src/Themes/DragDrop/AbstractTheme.php:180
 #: src/Themes/DragDrop/MemberDirectory/DefaultTemplate.php:115
 #: src/Themes/DragDrop/UserProfile/DefaultTemplate.php:106
@@ -1017,7 +1017,7 @@ msgstr ""
 #: src/Functions/GlobalFunctions.php:1276
 #: src/ShortcodeParser/Builder/FieldsShortcodeCallback.php:350
 #: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:209
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:461
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:478
 #: src/Themes/DragDrop/AbstractTheme.php:183
 #: src/Themes/DragDrop/AbstractTheme.php:224
 msgid "First Name"
@@ -1037,7 +1037,7 @@ msgstr ""
 #: src/Functions/GlobalFunctions.php:1277
 #: src/ShortcodeParser/Builder/FieldsShortcodeCallback.php:383
 #: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:210
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:462
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:479
 #: src/Themes/DragDrop/AbstractTheme.php:186
 #: src/Themes/DragDrop/AbstractTheme.php:227
 msgid "Last Name"
@@ -1223,7 +1223,7 @@ msgstr ""
 #: src/Admin/SettingsPages/DragDropBuilder/Fields/Username.php:22
 #: src/Functions/GlobalFunctions.php:1275
 #: src/ShortcodeParser/Builder/FieldsShortcodeCallback.php:135
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:463
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:480
 #: src/Themes/DragDrop/AbstractTheme.php:159
 #: src/Themes/DragDrop/AbstractTheme.php:218
 #: src/Themes/DragDrop/UserProfile/DefaultTemplate.php:105
@@ -4446,11 +4446,11 @@ msgstr ""
 msgid "You are already logged in."
 msgstr ""
 
-#: src/ShortcodeParser/MemberDirectoryTag.php:46
+#: src/ShortcodeParser/MemberDirectoryTag.php:50
 msgid "No member directory ID specified."
 msgstr ""
 
-#: src/ShortcodeParser/MemberDirectoryTag.php:67
+#: src/ShortcodeParser/MemberDirectoryTag.php:71
 msgid "Member directory class not found. Please check it actually exist in ProfilePress."
 msgstr ""
 
@@ -4917,7 +4917,7 @@ msgid "Fields to show in sorting dropdown menu"
 msgstr ""
 
 #: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:244
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:825
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:844
 msgid "Search"
 msgstr ""
 
@@ -4981,19 +4981,19 @@ msgstr ""
 msgid "No Result Text"
 msgstr ""
 
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:458
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:475
 msgid "Newest Users First"
 msgstr ""
 
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:459
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:476
 msgid "Oldest Users First"
 msgstr ""
 
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:692
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:711
 msgid "Sort by"
 msgstr ""
 
-#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:729
+#: src/Themes/DragDrop/AbstractMemberDirectoryTheme.php:748
 msgid "More Filters"
 msgstr ""
 
