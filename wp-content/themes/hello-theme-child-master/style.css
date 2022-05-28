@@ -12,10 +12,6 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready
 */
 
-/*
-    Add your custom styles here
-*/
-
 /* General - Elementor */
 
 .elementor-icon-wrapper {
@@ -106,7 +102,7 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
 	border-radius: 5px;
 	box-shadow: 2px 3px 12px 0px rgba(0, 0, 0, 0.13);
 	margin-bottom: 0.5rem;
-	padding: 6px 10px;
+	padding: 10px 12px;
 	
 	flex-direction: row;
 	gap: 12px;
@@ -139,6 +135,10 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
 	width: 100%;
 }
 
+.section.news .box .box-content.news-article a .news-logo img {
+	display: flex;
+}
+
 /* About - Team Members */
 
 .team-member-item .elementor-widget-container .elementor-toggle {
@@ -161,6 +161,87 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
 	margin-left: 0.6rem;
 	order: 2;
 	float: none;
+}
+
+/* Blog */
+
+.post-icons-share .elementor-grid {
+	display: flex;
+}
+
+/* Events Calendar */
+
+.event-list .event-item {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	
+	color: #333;
+	margin-top: 2rem;
+	padding-left: 1.6rem;
+}
+
+.event-list .event-item:last-child {
+	margin-bottom: 0;
+}
+
+.event-list .event-item .event-photo {
+	position: relative;
+}
+
+.event-list .event-item .event-photo img {
+	border-radius: 3px;
+	max-width: 120px;
+	width: 100%;
+}
+
+.event-list .event-item .event-photo .event-day {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	background: #FFD670;
+	border-radius: 100%;
+	width: 52px;
+	height: 52px;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	top: 0;
+	left: 0;
+}
+
+.event-list .event-item .event-photo .event-day span {
+	color: #333333;
+}
+
+.event-list .event-item .event-info {
+	width: 60%;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.event-list .event-item .event-info .event-title {
+	color: #333;
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 24px;
+	margin: 0;
+}
+
+.event-list .event-item .event-info .event-time {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.event-list .event-item .event-info .event-time svg {
+	width: 20px;
 }
 
 /* Footer */
