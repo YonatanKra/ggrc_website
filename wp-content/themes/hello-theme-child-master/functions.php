@@ -45,37 +45,15 @@ function ele_disable_page_title( $return ) {
 
 add_filter( 'hello_elementor_page_title', 'ele_disable_page_title');
 
-/* General - Remove GF Nag */
+/* General - Redirect After Logout */
 
-function remove_gravity_forms_nag() {
+add_action('wp_logout','ps_redirect_after_logout');
 
-    update_option( 'rg_gforms_message', '' );
-    remove_action( 'after_plugin_row_gravityforms/gravityforms.php', array( 'GFForms', 'plugin_row' ) );
+function ps_redirect_after_logout(){
+		$home = get_site_url();
+        wp_redirect( $home );
+        exit();
 }
-
-add_action( 'admin_init', 'remove_gravity_forms_nag' );
-
-/* General - Auto Re-direct */
-
-function add_login_check()
-{
-    if (is_user_logged_in()) {
-        if (is_page(1770)){
-            wp_redirect( $url . '/forums/users/ggrc_admin/favorites/');
-            exit; 
-        }
-    }
-}
-
-function check_if_user_logged_in() {
-	if ( !is_user_logged_in() ) {
-		$url = get_site_url();
-		wp_redirect($url);
-		exit;
-	}
-}
-
-add_action('wp', 'add_login_check');
 
 /* General - Remove Confirmation Log Out */
 
@@ -775,7 +753,9 @@ function username_in_menu_items( $menu_items ) {
              if ( is_user_logged_in() ) {
 				 $current_user = wp_get_current_user();
 				 $user_public_name = $current_user->display_name;
-				 $menu_item->title =  str_replace("#profile_name#",  "Hey, ". $user_public_name, $menu_item->title . "!</a>");
+				 $user_username = '/members/' . $current_user->user_login;
+				 $greet = '<a class="elementor-item" href="'. site_url($user_username) .'">Hey, '. $user_public_name .'!</a>';
+				 $menu_item->title =  str_replace("#profile_name#", $greet, $menu_item->title );
              }
         }
     }
