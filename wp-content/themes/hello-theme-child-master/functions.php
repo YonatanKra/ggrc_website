@@ -22,20 +22,16 @@ function hello_elementor_child_enqueue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts', 20 );
 
+/* General - Hide Admin Bar for Non-Admins */
+
+if (!current_user_can('manage_options')) {
+	add_filter('show_admin_bar', '__return_false');
+}
+
 /* General - Registering New Post Thumbnails */
 	
 add_image_size( 'card-medium', 400, 300, true );
 add_image_size( 'card-initiative', 500, 128, true);
-
-/* General - Hide admin bar for users */
-
-add_action('after_setup_theme', 'remove_admin_bar');
-
-function remove_admin_bar() {
-  if (!current_user_can('administrator') && !is_admin()) {
-    show_admin_bar(false);
-  }
-}
 
 /* General - Remove Page Titles */
 
